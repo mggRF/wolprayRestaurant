@@ -5,18 +5,18 @@
 const ControladorBase = require("./ControladorBase");
 
 const MODELO = require("../modelos/poblacion");
-const TABLA = 'c_city';
-const SELECT_UNO = `SELECT * FROM ${TABLA} WHERE cityid = :id`
-const SELECT_SELECT = `SELECT cityid as id,cityName as opcion FROM ${TABLA} WHERE provinceid = :id`
+const TABLA = 'c_provinces';
+const SELECT_UNO = `SELECT * FROM ${TABLA} WHERE provinceid = :id`
+const SELECT_SELECT = `SELECT provinceid as id,provinceName as opcion FROM ${TABLA} WHERE stateid = :id`
 
-class ControladorPoblacion extends ControladorBase {
+class ControladorProvincia extends ControladorBase {
     constructor(){
         let config = {
             TABLA:TABLA,
             SELECT_UNO : SELECT_UNO,
             SELECT_SELECT: SELECT_SELECT,
             MODELO:MODELO,
-            campoId: 'cityid',
+            campoId: 'provinceid',
         }
         super(config);
     }
@@ -30,4 +30,4 @@ class ControladorPoblacion extends ControladorBase {
 
 
 
-module.exports = ControladorPoblacion;
+module.exports = ControladorProvincia;

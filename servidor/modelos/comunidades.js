@@ -4,10 +4,10 @@ class Comunidades {
     //  cpcoa_nombre;
     //  cpcoa_pais;
 
-     constructor(cpcoa_id, cpcoa_nombre, cpcoa_pais){
-         this.cpcoa_id = cpcoa_id;
-         this.cpcoa_nombre = cpcoa_nombre;
-         this.cpcoa_pais = cpcoa_pais;
+     constructor(stateid, stateName, countryid){
+         this.stateid = stateid;
+         this.stateName = stateName;
+         this.countryid = countryid;
      }
 
 }

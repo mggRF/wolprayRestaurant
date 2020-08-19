@@ -2,14 +2,15 @@
 
 var express = require('express');
 
-var ControladorPoblacion = require('../controladores/controladorPoblacion');
-let pobla = new ControladorPoblacion();
+const ControladorProvincia = require('../controladores/controladorProvincia');
+
+let provin = new ControladorProvincia();
 // Llamamos al router
 var rutas = express.Router();
 //var md_auth = require('../middlewares/authenticated');
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
-rutas.get('/', pobla.listado);
-rutas.get('/select/:id',pobla.leerSelect)
-rutas.get('/:id', pobla.leerUno);
+rutas.get('/', provin.listado);
+rutas.get('/select/:id',provin.leerSelect)
+rutas.get('/:id', provin.leerUno);
 // Exportamos la configuración
 module.exports = rutas;

@@ -5,9 +5,9 @@
 const ControladorBase = require("./ControladorBase");
 
 const MODELO = require("../modelos/paises");
-const TABLA = 'cp_pais';
-const SELECT_UNO = `SELECT * FROM ${TABLA} WHERE country_id = :id`;
-const SELECT_SELECT = `SELECT country_id as id,short_name as opcion FROM ${TABLA}`;
+const TABLA = 'c_country';
+const SELECT_UNO = `SELECT * FROM ${TABLA} WHERE countryId = :id`;
+const SELECT_SELECT = `SELECT countryId as id,countryName as opcion FROM ${TABLA}`;
 
 class ControladorPais extends ControladorBase {
     constructor(){
@@ -16,7 +16,7 @@ class ControladorPais extends ControladorBase {
             SELECT_UNO : SELECT_UNO,
             SELECT_SELECT: SELECT_SELECT,
             MODELO:MODELO,
-            campoId: 'country_id',
+            campoId: 'countryId',
         }
         super(config);
     }

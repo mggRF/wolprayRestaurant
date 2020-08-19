@@ -3,49 +3,88 @@
  * leertabla     - devuelve listado entero de la tabla indicada
  */
 const mysql = require('mysql');
+const util = require('util')
 
 class Conexion {
 
-     conexion() {
-        this.conn = mysql.createConnection({
+     constructor() {
+         this.pool = mysql.createPool({
+            connectionLimit : 10,
             host: 'localhost',
-            user: 'root',
-            password: 'garcia1',
-            database: 'contabilidadautonomos'
+            user: 'wolprayusr',
+            password: 'UsrWolpray',
+            database: 'wolpraydb_v01'
         });
-         this.conn.connect((err) => {
-            if (err) throw err;
-            console.log('Connected!');
-        });
-    }
-    
-
-    leerTabla(tabla) {
-        if (null == this.conn) this.conexion();
-        let sql = `SELECT * FROM ${tabla}`;
-        console.log(sql);
-        return new Promise((resolve, reject) => {
-            this.conn.query(sql, (err, datos) => {
-                if (err) {
-                    console.log(err);
-                    reject(err);
+        this.pool.getConnection((err, connection) => {
+            if (err) {
+                if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+                    console.error('Database connection was closed.')
                 }
-                resolve(datos);
-            })
-
-        });
-        
+                if (err.code === 'ER_CON_COUNT_ERROR') {
+                    console.error('Database has too many connections.')
+                }
+                if (err.code === 'ECONNREFUSED') {
+                    console.error('Database connection was refused.')
+                }
+            }
+            if (connection) connection.release()
+            return
+        })
+        this.pool.query = util.promisify(this.pool.query);
     }
-    leerSql(sql) {
-        if (null == this.conn) this.conexion();
-        
-        return new Promise((resolve, reject) => {
-            this.conn.query(sql, (err, datos) => {
-                if (err) reject(err);
-                resolve(datos);
-            })
 
+    async usePooledConnectionAsync(actionAsync) {
+        const conn = await new Promise((resolve, reject) => {
+            this.pool.getConnection((ex, conn) => {
+                if (ex) {
+                    reject(ex);
+                } else {
+                    resolve(conn);
+                }
+            });
         });
+        try {
+            return await actionAsync(conn);
+        } finally {
+            conn.release();
+        }
+    }
+
+    async leerTabla(tabla) {
+       
+        const result = await this.usePooledConnectionAsync(async conn => {
+            const rows = await new Promise((resolve, reject) => {
+                conn.query(`SELECT * FROM ${tabla}`, (ex, rows) => {
+                    if (ex) {
+                        reject(ex);
+                    } else {
+                        console.log("resolve",rows);
+                        resolve(rows);
+                    }
+                    
+                });
+            });          
+            return rows;
+        });
+        return result
+    };
+
+
+    async leerSql(sql) {
+        const result = await this.usePooledConnectionAsync(async conn => {
+            const rows = await new Promise((resolve, reject) => {
+                conn.query(sql, (ex, rows) => {
+                    if (ex) {
+                        reject(ex);
+                    } else {
+                        console.log("resolve",rows);
+                        resolve(rows);
+                    }
+                });
+            });
+            return rows;
+        });
+        return result;
 
     }
     // if (respuesta.isValid) {

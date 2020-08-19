@@ -6,7 +6,7 @@ class ControladorBase {
 
     constructor(config){
         this.config = config;
-        console.log('Constructor',config);
+        
         this.listado = this.listado.bind(this);
         this.leerUno = this.leerUno.bind(this);
         this.leerSelect = this.leerSelect.bind(this);
@@ -59,8 +59,11 @@ class ControladorBase {
     leerSelect(req,res){
         let id = req.params.id;
         let sql = this.config.SELECT_SELECT.replace(':id',id);
+        
+        
         conect.leerSql(sql)
         .then(dat => {
+            console.log("dat->",dat);
             let salida=ControladorBase.enviaDatos(dat,true);
             res.json(salida);
         })

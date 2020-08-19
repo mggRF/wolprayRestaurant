@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const configSec = require('./config');
+const { TOKEN_SECRET } = require('../Constantes/ConstantesSeguridad');
+
 class ControlTokem {
 
 
@@ -8,7 +9,7 @@ class ControlTokem {
             const payload = {
                 check: true
             };
-            const token = jwt.sign(payload, configSec.TOKEN_SECRET, {
+            const token = jwt.sign(payload, TOKEN_SECRET, {
                 expiresIn: 1440
             });
             res.json({
