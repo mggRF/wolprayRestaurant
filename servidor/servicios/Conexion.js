@@ -3,18 +3,13 @@
  * leertabla     - devuelve listado entero de la tabla indicada
  */
 const mysql = require('mysql');
-const util = require('util')
+const util = require('util');
+const CONFIGDB = require('../Constantes/ConstantesDataBase/configDB');
 
 class Conexion {
 
      constructor() {
-         this.pool = mysql.createPool({
-            connectionLimit : 10,
-            host: 'localhost',
-            user: 'wolprayusr',
-            password: 'UsrWolpray',
-            database: 'wolpraydb_v01'
-        });
+         this.pool = mysql.createPool(CONFIGDB);
         this.pool.getConnection((err, connection) => {
             if (err) {
                 if (err.code === 'PROTOCOL_CONNECTION_LOST') {
