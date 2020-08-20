@@ -3,6 +3,10 @@
 -- Host: localhost    Database: wolpraydb_v01
 -- ------------------------------------------------------
 -- Server version	8.0.18
+Create database wolpraydb_v01;
+use wolpraydb_v01;
+CREATE USER 'wolprayusr'@'%' IDENTIFIED BY 'UsrWolpray';
+GRANT ALL PRIVILEGES ON wolpraydb_v01.* TO 'wolprayusr'@'%';
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;

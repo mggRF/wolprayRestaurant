@@ -35,6 +35,6 @@ app.use('/', rGlobal);
 app.use(COMUNIDADES, rComunidades);
 app.use(PAISES, rPais);
 app.use(POBLACIONES, rPoblacion);
-app.use(PROVINCIAS, rProvincia);
+app.use(PROVINCIAS,Autorizado, rProvincia);
 // exportamos este módulo para poder usar la variable app fuera de este archivo
 module.exports = app;
