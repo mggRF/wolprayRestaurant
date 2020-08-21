@@ -1,7 +1,7 @@
 {
-    "name": "ej_sdac_react",
+    "name": "Wolpray v00",
     "version": "0.1.0",
-    "homepage": "./index.htm",
+    "homepage": "./index.html",
     "private": true,
     "dependencies": {
         "@testing-library/jest-dom": "^4.2.4",

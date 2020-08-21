@@ -6,12 +6,13 @@
 'use strict'
 
 const express = require('express');
+var cors = require('cors');
 const bodyParser = require('body-parser');
 const { COMUNIDADES, PAISES, POBLACIONES , PROVINCIAS} = require('./Constantes/ConstantesRutas');
 
 
 const app = express();
-
+app.use(cors());
 
 // Importamos las rutas
 const rGlobal = require('./rutas/rutaGlobal'); 
