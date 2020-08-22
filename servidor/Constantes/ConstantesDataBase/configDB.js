@@ -1,7 +1,7 @@
 module.exports = CONFIGDB = {
     connectionLimit: 10,
     host: 'localhost',
-    user: 'wolprayusr',
-    password: 'UsrWolpray',
+    user: 'root',//TODO
+    password: '',//TODO
     database: 'wolpraydb_v01'
 }

@@ -5,5 +5,6 @@ module.exports = {
     COMUNIDADES :'/' +  VERSION + '/' + 'states',
     PAISES: '/' +  VERSION + '/' + 'countrys',
     PROVINCIAS: '/' +  VERSION + '/' + 'provinces',
-    POBLACIONES: '/' +  VERSION + '/' + 'citys'
+    POBLACIONES: '/' +  VERSION + '/' + 'citys',
+    DRESSCODE: '/' +  VERSION + '/' + 'dresscode'
 }

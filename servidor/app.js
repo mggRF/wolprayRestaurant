@@ -8,7 +8,7 @@
 const express = require('express');
 var cors = require('cors');
 const bodyParser = require('body-parser');
-const { COMUNIDADES, PAISES, POBLACIONES , PROVINCIAS} = require('./Constantes/ConstantesRutas');
+const { COMUNIDADES, PAISES, POBLACIONES , PROVINCIAS, DRESSCODE} = require('./Constantes/ConstantesRutas');
 
 
 const app = express();
@@ -20,6 +20,7 @@ const rComunidades = require('./rutas/rutaComunidades');
 const rPais = require('./rutas/rutaPaises'); 
 const rPoblacion = require('./rutas/rutaPoblacion'); 
 const rProvincia = require('./rutas/rutaProvincias'); 
+const rDressCode = require('./rutas/dressCodeRoutes'); 
 const Autorizado = require('./Autentificacion/middelAut');
 
 
@@ -34,6 +35,7 @@ app.use(COMUNIDADES,Autorizado, rComunidades);
 app.use(PAISES,Autorizado, rPais);
 app.use(POBLACIONES,Autorizado, rPoblacion);
 app.use(PROVINCIAS,Autorizado, rProvincia);
+app.use(DRESSCODE,Autorizado, rDressCode);
 
 
 module.exports = app;
