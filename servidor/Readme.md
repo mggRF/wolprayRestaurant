@@ -1,19 +1,19 @@
 api wolpray
 
 
-Sistema de identificacion****************************
-/Login              Identifica al usurio y devuelve tokem
-/Logout             Cierra la sesion de usuario
+Sistema de identificación****************************
+/Login              Identifica al usuario y devuelve tokem
+/Logout             Cierra la sesión de usuario
 
-Area de mantenimiento----- IDENTIFICADO **********************
+Área de mantenimiento----- IDENTIFICADO **********************
 
-Paises--------------------------------------------------------
+Países--------------------------------------------------------
 
 /api_v00/countrys/          listado de todos los países
 /api_v00/countrys/:id       listado del país indicado por id
 /api_v00/countrys/select/   listado de todos los países con id y opción  ///No implementado
 
-ComunidadesAutonomas/estados----------------------------------
+Comunidades Autónomas/estados----------------------------------
 /api_v00/states/          listado de todos los estados/comunidades autónomas
 /api_v00/states/:id       listado del estado indicado por id
 /api_v00/states/select/   listado de todos los estados con id y opción del país indicado por id
