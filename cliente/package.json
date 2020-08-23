@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "name": "Wolpray_v00",
+=======
+    "name": "wolpray_v00",
+>>>>>>> f26884a0fc93cdad3d9f9054cd7073540911aabc
     "version": "0.1.0",
     "homepage": "./index.html",
     "private": true,

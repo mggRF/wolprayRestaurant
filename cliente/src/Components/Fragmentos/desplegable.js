@@ -28,11 +28,9 @@ export default class Desplegable extends Component {
             return
         }
         this.setState({id:this.props.depend});
-        console.log("monta",this.props.depend)
-        if (this.props.depend !== 0) {
+         if (this.props.depend !== 0) {
             AccesoAPI.leerDesplegables(this.props.table, this.props.depend)
                 .then(response => {
-                    console.log("Respuesta...", response);
                     if (response.Respuesta === "ok") {
                         this.setState({ datos: response.Datos })
                     }
@@ -57,14 +55,12 @@ export default class Desplegable extends Component {
         
         let items = [];
         items.push(<option key="0" value="0">Selecciona....</option>);
-        console.log("render desplegable",this.state.datos.length)
         if (this.state.datos.length > 0) {
             this.state.datos.forEach((valor, index) => {
                 items.push(<option key={index + 1} value={valor.id}>{valor.opcion}</option>);
             });
         }
         let nombreCampo=this.props.table+"selec";
-        console.log("label=",nombreCampo);
         return (
             <>
             <label htmlFor={nombreCampo}>{this.props.label}</label>

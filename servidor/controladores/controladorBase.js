@@ -24,6 +24,7 @@ class ControladorBase {
             Respuesta: error || 'ok',
             Datos: objeto
         };
+        console.log(error);
         if (error == null) {
             res.setHeader('Access-Control-Allow-Methods', 'HEAD,GET,POST,PUT,DELETE,OPTIONS');
             res.setHeader('Allow', 'HEAD,GET,POST,PUT,DELETE,OPTIONS');
