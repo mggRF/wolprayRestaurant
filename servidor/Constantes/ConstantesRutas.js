@@ -5,5 +5,7 @@ module.exports = {
     COMUNIDADES :'/' +  VERSION + '/' + 'states',
     PAISES: '/' +  VERSION + '/' + 'countrys',
     PROVINCIAS: '/' +  VERSION + '/' + 'provinces',
-    POBLACIONES: '/' +  VERSION + '/' + 'citys'
+    POBLACIONES: '/' +  VERSION + '/' + 'citys',
+    MUSICA: '/' +  VERSION + '/' + 'musics',
+    CLUBS: '/' +  VERSION + '/' + 'clubs',
 }
