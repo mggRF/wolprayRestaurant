@@ -4,7 +4,7 @@
  */
 const ControladorBase = require("./ControladorBase");
 
-const MODELO = require("../modelos/comunidades");
+const MODELO = require("../modelos/Comunidades");
 const TABLA = 'c_state';
 const SELECT_UNO = `SELECT * FROM ${TABLA} WHERE stateid = :id`;
 const SELECT_SELECT = `SELECT stateid as id,stateName as opcion FROM ${TABLA} WHERE countryid = :id`
@@ -22,7 +22,16 @@ class ControladorCCAA extends ControladorBase {
         super(config);
     }
 
+    hacerPut(){
+
+    }
     
+    hacerPost(req,res){
+
+    }
+
+    
+
 
 }
 

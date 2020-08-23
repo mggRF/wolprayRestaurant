@@ -11,5 +11,8 @@ var api = express.Router();
 api.get('/', cPais.listado);
 api.get('/select/:id',cPais.leerSelect)
 api.get('/:id', cPais.leerUno);
+api.delete('/:id')
+api.put('/:id')
+api.post('/')
 // Exportamos la configuración
 module.exports = api;

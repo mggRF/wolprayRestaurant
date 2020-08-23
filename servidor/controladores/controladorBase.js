@@ -12,7 +12,7 @@ class ControladorBase {
         this.leerSelect = this.leerSelect.bind(this);
     }
     /**
-     * Enviar datos a puesto
+     * Enviar datos a puesto //salida API
      * @param {} res : objeto response
      * @param {*} objeto  :datos a enviar o mensaje de error plano
      * @param {*} error  : En caso de error, objeto error

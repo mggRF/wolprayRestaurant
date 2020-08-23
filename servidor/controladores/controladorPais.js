@@ -4,7 +4,7 @@
  */
 const ControladorBase = require("./ControladorBase");
 
-const MODELO = require("../modelos/paises");
+const MODELO = require("../modelos/Paises");
 const TABLA = 'c_country';
 const SELECT_UNO = `SELECT * FROM ${TABLA} WHERE countryId = :id`;
 const SELECT_SELECT = `SELECT countryId as id,countryName as opcion FROM ${TABLA}`;

@@ -4,7 +4,7 @@
  */
 const ControladorBase = require("./ControladorBase");
 
-const MODELO = require("../modelos/poblacion");
+const MODELO = require("../modelos/Poblacion");
 const TABLA = 'c_city';
 const SELECT_UNO = `SELECT * FROM ${TABLA} WHERE cityid = :id`
 const SELECT_SELECT = `SELECT cityid as id,cityName as opcion FROM ${TABLA} WHERE provinceid = :id`
