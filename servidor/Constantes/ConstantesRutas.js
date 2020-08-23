@@ -6,10 +6,12 @@ module.exports = {
     PAISES: '/' +  VERSION + '/' + 'countrys',
     PROVINCIAS: '/' +  VERSION + '/' + 'provinces',
     POBLACIONES: '/' +  VERSION + '/' + 'citys',
-<<<<<<< HEAD
     MUSICA: '/' +  VERSION + '/' + 'musics',
     CLUBS: '/' +  VERSION + '/' + 'clubs',
-=======
-    DRESSCODE: '/' +  VERSION + '/' + 'dresscode'
->>>>>>> f26884a0fc93cdad3d9f9054cd7073540911aabc
+    DRESSCODE: '/' +  VERSION + '/' + 'dresscode',
+    USERS: '/' +  VERSION + '/' + 'users',
+    EVENTS: '/' +  VERSION + '/' + 'events',
+    SLOTS: '/' +  VERSION + '/' + 'slots',
+    ROLES: '/' +  VERSION + '/' + 'roles',
+    COMPANIES: '/' +  VERSION + '/' + 'companies',
 }

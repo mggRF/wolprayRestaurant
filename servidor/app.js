@@ -8,11 +8,8 @@
 const express = require('express');
 var cors = require('cors');
 const bodyParser = require('body-parser');
-<<<<<<< HEAD
-const { COMUNIDADES, PAISES, POBLACIONES , PROVINCIAS,MUSICA,CLUBS} = require('./Constantes/ConstantesRutas');
-=======
-const { COMUNIDADES, PAISES, POBLACIONES , PROVINCIAS, DRESSCODE} = require('./Constantes/ConstantesRutas');
->>>>>>> f26884a0fc93cdad3d9f9054cd7073540911aabc
+const { COMUNIDADES, PAISES, POBLACIONES , PROVINCIAS,MUSICA,CLUBS,DRESSCODE,EVENTS,USERS,SLOTS,ROLES,COMPANIES} = require('./Constantes/ConstantesRutas');
+
 
 
 const app = express();
@@ -23,15 +20,15 @@ const rGlobal = require('./rutas/rutaGlobal');
 const rComunidades = require('./rutas/rutaComunidades'); 
 const rPais = require('./rutas/rutaPaises'); 
 const rPoblacion = require('./rutas/rutaPoblacion'); 
-<<<<<<< HEAD
 const rProvincia = require('./rutas/rutaProvincias');
 const rMusic = require('./rutas/rutaMusic'); 
 const rClub = require('./rutas/rutaClubs');
-
-=======
-const rProvincia = require('./rutas/rutaProvincias'); 
+const rEvents = require('./rutas/rutaEvents');
+const rUsers = require('./rutas/rutaUsers');
+const rSlots = require('./rutas/rutaSlots');
+const rRoles = require('./rutas/rutaRoles');
+const rCompanies = require('./rutas/rutaCompanies');
 const rDressCode = require('./rutas/dressCodeRoutes'); 
->>>>>>> f26884a0fc93cdad3d9f9054cd7073540911aabc
 const Autorizado = require('./Autentificacion/middelAut');
 
 
@@ -46,12 +43,14 @@ app.use(COMUNIDADES,Autorizado, rComunidades);
 app.use(PAISES,Autorizado, rPais);
 app.use(POBLACIONES,Autorizado, rPoblacion);
 app.use(PROVINCIAS,Autorizado, rProvincia);
-<<<<<<< HEAD
 app.use(MUSICA,Autorizado, rMusic);
 app.use(CLUBS,Autorizado, rClub);
-=======
+app.use(EVENTS,Autorizado, rEvents);
+app.use(USERS,Autorizado, rUsers);
+app.use(SLOTS,Autorizado, rSlots);
+app.use(ROLES,Autorizado, rRoles);
+app.use(COMPANIES,Autorizado, rCompanies);
 app.use(DRESSCODE,Autorizado, rDressCode);
->>>>>>> f26884a0fc93cdad3d9f9054cd7073540911aabc
 
 
 module.exports = app;
