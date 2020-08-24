@@ -11,8 +11,8 @@ const QUERIES = {
     SELECT_SELECT: `SELECT roleid   as id,roleName  as opcion FROM ${TABLA} WHERE roleid   = :id`,
     SELECT_UNO: `SELECT * FROM ${TABLA} WHERE roleid   = :id`,
     INSERT: `INSERT INTO ${TABLA} SET ?`,
-    UPDATE: `UPDATE ${TABLA} SET ? WHERE dressCodeId = ?`,
-    DELETE: `DELETE FROM ${TABLA} WHERE dressCodeId = ?`
+    UPDATE: `UPDATE ${TABLA} SET ? WHERE roleid = ?`,
+    DELETE: `DELETE FROM ${TABLA} WHERE roleid = ?`
 }
 
 class ControladorRoles extends ControladorBase {

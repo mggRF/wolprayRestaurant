@@ -8,11 +8,11 @@ const MODELO = require("../modelos/slot");
 const TABLA = 'slots';
 
 const QUERIES = {
-    SELECT_SELECT: `SELECT slotid  as id,clubid  as opcion FROM ${TABLA} WHERE slotid  = :id`,
+    SELECT_SELECT: `SELECT slotid  as id,clubid  as opcion FROM ${TABLA} WHERE clubid  = :id`,
     SELECT_UNO: `SELECT * FROM ${TABLA} WHERE slotid  = :id`,
     INSERT: `INSERT INTO ${TABLA} SET ?`,
-    UPDATE: `UPDATE ${TABLA} SET ? WHERE dressCodeId = ?`,
-    DELETE: `DELETE FROM ${TABLA} WHERE dressCodeId = ?`
+    UPDATE: `UPDATE ${TABLA} SET ? WHERE slotid = ?`,
+    DELETE: `DELETE FROM ${TABLA} WHERE slotid = ?`
 }
 
 class ControladorSlot extends ControladorBase {

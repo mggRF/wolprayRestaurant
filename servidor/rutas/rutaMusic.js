@@ -10,5 +10,8 @@ var rutas = express.Router();
 rutas.get('/', music.listado);
 rutas.get('/select/:id',music.leerSelect)
 rutas.get('/:id', music.leerUno);
+rutas.post('/', music.updateTable);
+rutas.put('/:id', music.updateTable);
+rutas.delete('/:id', music.updateTable);
 // Exportamos la configuración
 module.exports = rutas;

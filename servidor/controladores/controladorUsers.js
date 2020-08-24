@@ -8,11 +8,11 @@ const MODELO = require("../modelos/users");
 const TABLA = 'users';
 
 const QUERIES = {
-    SELECT_SELECT: `SELECT userid  as id,userName  as opcion FROM ${TABLA} WHERE userid = :id`,
+    SELECT_SELECT: `SELECT userid  as id,userName  as opcion FROM ${TABLA} WHERE roleid = :id`,
     SELECT_UNO: `SELECT * FROM ${TABLA} WHERE userid  = :id`,
     INSERT: `INSERT INTO ${TABLA} SET ?`,
-    UPDATE: `UPDATE ${TABLA} SET ? WHERE dressCodeId = ?`,
-    DELETE: `DELETE FROM ${TABLA} WHERE dressCodeId = ?`
+    UPDATE: `UPDATE ${TABLA} SET ? WHERE userid = ?`,
+    DELETE: `DELETE FROM ${TABLA} WHERE userid = ?`
 }
 
 class ControladorUsers extends ControladorBase {
