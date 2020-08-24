@@ -11,5 +11,8 @@ var rutas = express.Router();
 rutas.get('/', companies.listado);
 rutas.get('/select/:id',companies.leerSelect)
 rutas.get('/:id', companies.leerUno);
+rutas.post('/', companies.updateTable);
+rutas.put('/:id', companies.updateTable);
+rutas.delete('/:id', companies.updateTable);
 // Exportamos la configuración
 module.exports = rutas;

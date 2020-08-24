@@ -34,3 +34,6 @@ npm-debug.log
 .env
 
 debug.log
+
+
+configDB.js

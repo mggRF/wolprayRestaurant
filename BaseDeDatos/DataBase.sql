@@ -582,6 +582,8 @@ CREATE TABLE `users_clubs` (
   CONSTRAINT `users_clubs_clubs_fk` FOREIGN KEY (`clubid`) REFERENCES `clubs` (`clubid`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `users_clubs_user_fk` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `users` ADD CONSTRAINT `user_company_fk` FOREIGN KEY (`companyid`) REFERENCES `companies`(`companyid`) ON DELETE CASCADE ON UPDATE CASCADE;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
