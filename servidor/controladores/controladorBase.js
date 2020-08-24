@@ -93,12 +93,9 @@ class ControladorBase {
 
 
     updateTable(req, res) {
-        //route: Route { path: '/', stack: [ [Layer] ], methods: { post: true } }
         const method = req.route.stack[0].method;
         const id = req.params.id;
         const body = req.body;
-        console.log("Estoy modificando datos");
-        console.log(this.config);
         const {QUERIES} = this.config
 
         switch (method.toLowerCase()) {
