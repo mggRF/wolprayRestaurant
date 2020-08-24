@@ -2,7 +2,7 @@
 
 var express = require('express');
 
-var ControladorEvents = require('../controladores/controladorEvents');
+var ControladorEvents = require('../controladores/ControladorEvents');
 let events = new ControladorEvents();
 // Llamamos al router
 var rutas = express.Router();

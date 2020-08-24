@@ -2,7 +2,7 @@
 
 var express = require('express');
 
-var DressCodeController = require('../controladores/controladorDressCode');
+var DressCodeController = require('../controladores/ControladorDressCode');
 let dressCode = new DressCodeController();
 // Llamamos al router
 var rutas = express.Router();

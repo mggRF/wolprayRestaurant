@@ -12,7 +12,7 @@ const TABLA = 'n_dresscode';
 
 const QUERIES = {
     SELECT_SELECT: `SELECT * FROM ${TABLA} WHERE dressCodeId = :id`,
-    SELECT_UNO: `SELECT * FROM ${TABLA} WHERE dressCodeId = :id`,
+    SELECT_UNO: `SELECT dressCodeId as id, dressCodeDescription as option FROM ${TABLA} WHERE dressCodeId = :id`,
     INSERT: `INSERT INTO ${TABLA} SET ?`,
     UPDATE: `UPDATE ${TABLA} SET ? WHERE dressCodeId = ?`,
     DELETE: `DELETE FROM ${TABLA} WHERE dressCodeId = ?`

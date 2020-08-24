@@ -2,7 +2,7 @@
 
 var express = require('express');
 
-var ControladorCCAA = require('../controladores/controladorCCAA');
+var ControladorCCAA = require('../controladores/ControladorCCAA');
 let ccaa = new ControladorCCAA();
 // Llamamos al router
 var rutas = express.Router();
