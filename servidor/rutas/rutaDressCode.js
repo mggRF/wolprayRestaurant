@@ -2,7 +2,7 @@
 
 var express = require('express');
 
-var DressCodeController = require('../controladores/dressCodeController');
+var DressCodeController = require('../controladores/controladorDressCode');
 let dressCode = new DressCodeController();
 // Llamamos al router
 var rutas = express.Router();
@@ -11,5 +11,8 @@ var rutas = express.Router();
 rutas.get('/', dressCode.listado);
 rutas.get('/select/:id',dressCode.leerSelect)
 rutas.get('/:id', dressCode.leerUno);
+rutas.post('/', dressCode.updateTable);
+rutas.put('/:id', dressCode.updateTable);
+rutas.delete('/:id', dressCode.updateTable);
 // Exportamos la configuración
 module.exports = rutas;

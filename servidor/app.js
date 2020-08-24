@@ -28,7 +28,7 @@ const rUsers = require('./rutas/rutaUsers');
 const rSlots = require('./rutas/rutaSlots');
 const rRoles = require('./rutas/rutaRoles');
 const rCompanies = require('./rutas/rutaCompanies');
-const rDressCode = require('./rutas/dressCodeRoutes'); 
+const rDressCode = require('./rutas/rutaDressCode'); 
 const Autorizado = require('./Autentificacion/middelAut');
 
 

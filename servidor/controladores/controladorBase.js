@@ -39,7 +39,7 @@ class ControladorBase {
     listado(req, res) {
         console.log("listado", this.config.TABLA);
         let salida = [];
-
+        
         conect.leerTabla(this.config.TABLA)
             .then(dat => {
                 dat.forEach(row => {
@@ -88,6 +88,7 @@ class ControladorBase {
             });
 
     }
+
 }
 
 
