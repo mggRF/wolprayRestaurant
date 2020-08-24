@@ -1,3 +1,5 @@
+
+'use strict';
 /**
  * Conexion -  Realizar conexion con base de datos
  * leertabla     - devuelve listado entero de la tabla indicada
@@ -82,6 +84,25 @@ class Conexion {
         return result;
 
     }
+
+    async modifyTable(sql, data){
+        const result = await this.usePooledConnectionAsync(async conn => {
+            const rows = await new Promise((resolve, reject) => {
+                conn.query(sql,data, (err) => {
+                    if (err) {
+                        reject(err);
+                        console.log('Ha ocurriso un error al tratar de insertar')
+                    } else {
+                        resolve('Se ha modificado la tabla correctamente');
+                    }
+                });
+            });
+            return rows;
+        });
+        return result;
+    } 
+
+    
     // if (respuesta.isValid) {
     //     return respuesta;
     // }else {
