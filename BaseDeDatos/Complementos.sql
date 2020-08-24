@@ -1,4 +1,8 @@
-Create database wolpraydb_v01;
-use wolpraydb_v01;
-CREATE USER 'wolprayusr'@'%' IDENTIFIED BY 'UsrWolpray';
-GRANT ALL PRIVILEGES ON wolpraydb_v01.* TO 'wolprayusr'@'%';
+Create database wolpraydb;
+use wolpraydb;
+
+CREATE USER 'wolprayusr'@'localhost' IDENTIFIED BY 'UsrWolpray';
+GRANT ALL PRIVILEGES ON wolpraydb.* TO 'wolprayusr'@'localhost';
+//ALTER USER 'wolprayusr'@'localhost' IDENTIFIED WITH mysql_native_password BY 'UsrWolpray';
+//ALTER USER 'wolprayusr'@'localhost' IDENTIFIED BY 'UsrWolpray';
+flush privileges;
