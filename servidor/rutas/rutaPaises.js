@@ -2,7 +2,7 @@
 
 var express = require('express');
 
-var ControladorPais = require('../controladores/controladorPais');
+var ControladorPais = require('../controladores/ControladorPais');
 let cPais = new ControladorPais();
 // Llamamos al router
 var api = express.Router();

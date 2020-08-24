@@ -1,7 +1,7 @@
 
 var express = require('express');
 
-var ControladorRoles = require('../controladores/controladorRoles');
+var ControladorRoles = require('../controladores/ControladorRoles');
 let roles = new ControladorRoles();
 // Llamamos al router
 var rutas = express.Router();

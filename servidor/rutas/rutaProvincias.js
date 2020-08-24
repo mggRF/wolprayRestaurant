@@ -2,7 +2,7 @@
 
 var express = require('express');
 
-const ControladorProvincia = require('../controladores/controladorProvincia');
+const ControladorProvincia = require('../controladores/ControladorProvincia');
 
 let provin = new ControladorProvincia();
 // Llamamos al router

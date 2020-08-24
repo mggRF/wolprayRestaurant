@@ -1,7 +1,7 @@
 
 var express = require('express');
 
-var ControladorMusic = require('../controladores/controladorMusic');
+var ControladorMusic = require('../controladores/ControladorMusic');
 let music = new ControladorMusic();
 // Llamamos al router
 var rutas = express.Router();

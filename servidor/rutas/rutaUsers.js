@@ -2,7 +2,7 @@
 
 var express = require('express');
 
-var ControladorUsers = require('../controladores/controladorUsers');
+var ControladorUsers = require('../controladores/ControladorUsers');
 let users = new ControladorUsers();
 // Llamamos al router
 var rutas = express.Router();
