@@ -106,4 +106,4 @@ dist
 
 # Database user
 
-servidor/Constantes/ConstantesDataBase/configDB.js
+configDB.js
