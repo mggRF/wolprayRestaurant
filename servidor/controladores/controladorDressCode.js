@@ -28,35 +28,6 @@ class DressCodeController extends ControladorBase {
         }
         super(config);
     }
-
-
-    updateTable(req, res) {
-        //route: Route { path: '/', stack: [ [Layer] ], methods: { post: true } }
-        const method = req.route.stack[0].method;
-        const id = req.params.id;
-        const body = req.body;
-
-        switch (method.toLowerCase()) {
-            case 'post':
-                DressCodeController.getValues([body], QUERIES.INSERT, res);
-                break;
-            case 'put':
-                DressCodeController.getValues([body, id],QUERIES.UPDATE, res);
-                break;
-            case 'delete':
-                DressCodeController.getValues([id], QUERIES.DELETE, res);
-                break;
-
-        }
-    }
-
-
-    static getValues(data, sql, res) {
-        conect.modifyTable(sql, data)
-            .then(value => {
-                ControladorBase.enviaDatos(res, value);
-            }).catch(err => ControladorBase.enviaDatos(res, 'Ha ocurrido un error al tratar de modificar la tabla', err));
-    }
 }
 
 module.exports = DressCodeController;

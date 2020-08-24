@@ -10,6 +10,7 @@ class ControladorBase {
         this.listado = this.listado.bind(this);
         this.leerUno = this.leerUno.bind(this);
         this.leerSelect = this.leerSelect.bind(this);
+        this.updateTable = this.updateTable.bind(this);
     }
     /**
      * Enviar datos a puesto //salida API
@@ -59,7 +60,7 @@ class ControladorBase {
 
     leerUno(req, res) {
         let id = req.params.id;
-        let sql = this.config.SELECT_UNO.replace(':id', id);
+        let sql = this.config.QUERIES.SELECT_UNO.replace(':id', id);
         conect.leerSql(sql)
             .then(dat => {
                 ControladorBase.enviaDatos(res, dat);
@@ -74,7 +75,7 @@ class ControladorBase {
 
     leerSelect(req, res) {
         let id = req.params.id;
-        let sql = this.config.SELECT_SELECT.replace(':id', id);
+        let sql = this.config.QUERIES.SELECT_SELECT.replace(':id', id);
 
 
         conect.leerSql(sql)
@@ -87,6 +88,38 @@ class ControladorBase {
 
             });
 
+    }
+
+
+
+    updateTable(req, res) {
+        //route: Route { path: '/', stack: [ [Layer] ], methods: { post: true } }
+        const method = req.route.stack[0].method;
+        const id = req.params.id;
+        const body = req.body;
+        console.log("Estoy modificando datos");
+        console.log(this.config);
+        const {QUERIES} = this.config
+
+        switch (method.toLowerCase()) {
+            case 'post':
+                ControladorBase.sendDataToTable([body], QUERIES.INSERT, res);
+                break;
+            case 'put':
+                ControladorBase.sendDataToTable([body, id],QUERIES.UPDATE, res);
+                break;
+            case 'delete':
+                ControladorBase.sendDataToTable([id], QUERIES.DELETE, res);
+                break;
+        }
+    }
+
+
+    static sendDataToTable(data, sql, res) {
+        conect.modifyTable(sql, data)
+            .then(value => {
+                ControladorBase.enviaDatos(res, value);
+            }).catch(err => ControladorBase.enviaDatos(res, 'Ha ocurrido un error al tratar de modificar la tabla', err));
     }
 
 }
