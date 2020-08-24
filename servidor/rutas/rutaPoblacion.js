@@ -2,7 +2,7 @@
 
 var express = require('express');
 
-var ControladorPoblacion = require('../controladores/controladorPoblacion');
+var ControladorPoblacion = require('../controladores/ControladorPoblacion');
 let pobla = new ControladorPoblacion();
 // Llamamos al router
 var rutas = express.Router();

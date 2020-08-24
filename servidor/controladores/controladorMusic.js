@@ -6,16 +6,21 @@ const ControladorBase = require("./ControladorBase");
 
 const MODELO = require("../modelos/nmusic");
 const TABLA = 'n_music';
-const SELECT_UNO = `SELECT * FROM ${TABLA} WHERE musicid = :id`;
-const SELECT_SELECT = `SELECT musicid as id,musicName as opcion FROM ${TABLA} WHERE musicid = :id`;
+
+const QUERIES = {
+    SELECT_SELECT: `SELECT musicid as id,musicName as opcion FROM ${TABLA} WHERE musicid = :id`,
+    SELECT_UNO: `SELECT * FROM ${TABLA} WHERE musicid = :id`,
+    INSERT: `INSERT INTO ${TABLA} SET ?`,
+    UPDATE: `UPDATE ${TABLA} SET ? WHERE dressCodeId = ?`,
+    DELETE: `DELETE FROM ${TABLA} WHERE dressCodeId = ?`
+}
 
 class ControladorMusic extends ControladorBase {
    
     constructor(){
         let config = {
             TABLA:TABLA,
-            SELECT_UNO : SELECT_UNO,
-            SELECT_SELECT: SELECT_SELECT,
+            QUERIES: QUERIES,
             MODELO:MODELO,
             campoId: 'musicid',
         }

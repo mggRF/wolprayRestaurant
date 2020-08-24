@@ -6,15 +6,20 @@ const ControladorBase = require("./ControladorBase");
 
 const MODELO = require("../modelos/Poblacion");
 const TABLA = 'c_city';
-const SELECT_UNO = `SELECT * FROM ${TABLA} WHERE cityid = :id`
-const SELECT_SELECT = `SELECT cityid as id,cityName as opcion FROM ${TABLA} WHERE provinceid = :id`
+
+const QUERIES = {
+    SELECT_SELECT: `SELECT cityid as id,cityName as opcion FROM ${TABLA} WHERE provinceid = :id`,
+    SELECT_UNO: `SELECT * FROM ${TABLA} WHERE dressCodeId = :id`,
+    INSERT: `INSERT INTO ${TABLA} SET ?`,
+    UPDATE: `UPDATE ${TABLA} SET ? WHERE dressCodeId = ?`,
+    DELETE: `DELETE FROM ${TABLA} WHERE dressCodeId = ?`
+}
 
 class ControladorPoblacion extends ControladorBase {
     constructor(){
         let config = {
             TABLA:TABLA,
-            SELECT_UNO : SELECT_UNO,
-            SELECT_SELECT: SELECT_SELECT,
+            QUERIES: QUERIES,
             MODELO:MODELO,
             campoId: 'cityid',
         }

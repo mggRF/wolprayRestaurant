@@ -2,9 +2,9 @@
 
 var express = require('express');
 
-const ControladorSlots = require('../controladores/controladorSlot');
+const ControladorSlot = require('../controladores/ControladorSlot');
 
-let slots = new ControladorSlots();
+let slots = new ControladorSlot();
 // Llamamos al router
 var rutas = express.Router();
 //var md_auth = require('../middlewares/authenticated');
