@@ -110,7 +110,7 @@ class ControladorBase {
                 break;
         }
     }
-
+ 
 
     static sendDataToTable(data, sql, res) {
         conect.modifyTable(sql, data)
