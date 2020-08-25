@@ -6,4 +6,12 @@ import PropTypes from 'prop-types'
 
 export default class  ControllerMusic extends Component {
   
+
+    render(){
+        return (
+            
+
+        )
+        
+    }
 }
