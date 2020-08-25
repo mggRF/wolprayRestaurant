@@ -9,7 +9,7 @@ const TABLA = 'clubs';
 
 const QUERIES = {
     SELECT_UNO: `SELECT * FROM ${TABLA} WHERE clubid  = :id`,
-    SELECT_SELECT: `SELECT clubid as id,clubName as opcion FROM ${TABLA} WHERE clubid = :id`,
+    SELECT_SELECT: `SELECT clubid as id,clubName as opcion FROM ${TABLA} WHERE cityid = :id`,
     INSERT: `INSERT INTO ${TABLA} SET ?`,
     UPDATE: `UPDATE ${TABLA} SET ? WHERE clubid = ?`,
     DELETE: `DELETE FROM ${TABLA} WHERE clubid = ?`
