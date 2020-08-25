@@ -6,7 +6,7 @@ const ControladorBase = require("./ControladorBase");
 
 const MODELO = require("../modelos/company");
 const TABLA = 'companies';
-
+ 
 const QUERIES = {
     SELECT_UNO: `SELECT * FROM ${TABLA} WHERE companyid   = :id`,
     SELECT_SELECT: `SELECT companyid  as id,companyName as opcion FROM ${TABLA} WHERE companyid  = :id`,

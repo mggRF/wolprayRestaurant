@@ -17,7 +17,7 @@ const QUERIES = {
 
 
 class ControladorClubs extends ControladorBase {
-   
+    
     constructor(){
         let config = {
             TABLA: TABLA,

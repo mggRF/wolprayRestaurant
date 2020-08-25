@@ -6,7 +6,7 @@ const ControladorBase = require("./ControladorBase");
 
 const MODELO = require("../modelos/Comunidades");
 const TABLA = 'c_state';
-
+ 
 const QUERIES = {
     SELECT_UNO: `SELECT * FROM ${TABLA} WHERE stateid = :id`,
     SELECT_SELECT: `SELECT stateid as id,stateName as opcion FROM ${TABLA} WHERE countryid = :id`,
