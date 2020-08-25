@@ -8,6 +8,6 @@ class Pais {
         this.countryId = countryId
         this.short_name=countryName;
     }
-
+ 
 }
 module.exports = Pais;

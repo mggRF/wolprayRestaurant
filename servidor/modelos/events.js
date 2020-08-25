@@ -14,6 +14,6 @@ class Events {
          this.event_minimunAge = event_minimunAge;
          this.event_imagePral = event_imagePral;
      }
-
+ 
 }
 module.exports = Events;

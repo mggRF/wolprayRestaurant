@@ -6,5 +6,5 @@ class DressCode {
          this.dressCodeDescription = dressCodeDescription;
      }
 
-}
+} 
 module.exports = DressCode;

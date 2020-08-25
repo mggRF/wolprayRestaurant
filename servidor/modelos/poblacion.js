@@ -7,7 +7,7 @@ class Poblacion {
 
     //latitude;
     //longitude;
-
+ 
     constructor(cityid, provinceid, cityName,  latitude, longitude) {
         this.cityid = cityid;
         this.provinceid = provinceid;

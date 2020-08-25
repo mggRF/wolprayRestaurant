@@ -14,6 +14,6 @@ class Users {
          this.roleid = roleid;
          this.companyid = companyid;
      }
-
+ 
 }
 module.exports = Users;

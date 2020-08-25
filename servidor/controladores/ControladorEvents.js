@@ -4,7 +4,7 @@
  */
 const ControladorBase = require("./ControladorBase");
 
-const MODELO = require("../modelos/events");
+const MODELO = require("../modelos/Events");
 const TABLA = 'events';
 
 const QUERIES = {

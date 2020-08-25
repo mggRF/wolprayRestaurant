@@ -4,7 +4,7 @@
  */
 const ControladorBase = require("./ControladorBase");
 
-const MODELO = require("../modelos/nmusic");
+const MODELO = require("../modelos/Nmusic");
 const TABLA = 'n_music';
 
 const QUERIES = {

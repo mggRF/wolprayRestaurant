@@ -1,7 +1,7 @@
 
 
 class Club {
-   
+    
      constructor(clubid, clubName,streetName,streetNumber,postal_code,cityid,description, clubPhone,dressCodeid,coverUrl,latitude,longitude,howToGetThere,entryCost,openSeason1,closingSeason1,openSeason2,closingSeason2,openSeason3,closingSeason3,accessAge,DiasAnticipacion,companyid,maxPeople){
          this.clubid = clubid;
          this.clubName = clubName;

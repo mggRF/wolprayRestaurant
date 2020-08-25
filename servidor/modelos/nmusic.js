@@ -7,6 +7,6 @@ class Nmusic {
          this.musicid = musicid;
          this.musicName = musicName;
      }
-
+ 
 }
 module.exports = Nmusic;

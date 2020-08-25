@@ -9,6 +9,6 @@ class Comunidades {
          this.stateName = stateName;
          this.countryid = countryid;
      }
-
+ 
 }
 module.exports = Comunidades;

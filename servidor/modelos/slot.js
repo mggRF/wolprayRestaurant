@@ -13,6 +13,6 @@ class Slot {
          this.maxPeople = maxPeople;
          this.listaVip = listaVip;
      }
-
+ 
 }
 module.exports = Slot;

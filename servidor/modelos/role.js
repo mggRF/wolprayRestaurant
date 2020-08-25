@@ -8,6 +8,6 @@ class Role {
          this.roleid = roleid;
          this.roleName = roleName;
      }
-
+ 
 }
 module.exports = Role;
