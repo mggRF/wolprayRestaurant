@@ -8,7 +8,7 @@ const MODELO = require("../modelos/Poblacion");
 const TABLA = 'c_city';
 
 const QUERIES = {
-    SELECT_SELECT: `SELECT cityid as id,cityName as opcion FROM ${TABLA} WHERE cityid = :id`,
+    SELECT_SELECT: `SELECT cityid as id,cityName as opcion FROM ${TABLA} WHERE provinceid  = :id`,
     SELECT_UNO: `SELECT * FROM ${TABLA} WHERE cityid = :id`,
     INSERT: `INSERT INTO ${TABLA} SET ?`,
     UPDATE: `UPDATE ${TABLA} SET ? WHERE cityid = ?`,
