@@ -12,7 +12,7 @@ function App() {
       <Header />
       <Rutas />
       <Footer/>
-      
+      <ControllerMusic/>
     </div>
     
   );

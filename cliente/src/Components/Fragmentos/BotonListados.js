@@ -3,21 +3,23 @@ import PropTypes from 'prop-types'
 
 export default class BotonListado extends Component {
 
-    render(){
-        return(
+    render() {
+        //console.log("En boton, props=>",this.props)
+        const clase = "btn " + this.props.clase;
+        return (
             <button type="button"
-        className="btn {this.props.clase}"
-        onClick={()=>this.props.funcion(this.props.tipo,this.props.id)}
-    >
-        {this.props.children}
-        </button>
-    
+                className={clase}
+                onClick={() => this.props.funcion(this.props.tipo, this.props.id)}
+            >
+                {this.props.children}
+            </button>
+
         )
     }
 }
-BotonListado.propTypes= {
+BotonListado.propTypes = {
     funcion: PropTypes.func.isRequired,
-    clase:PropTypes.string,
-    tipo:PropTypes.oneOf(['D','V','E','I']).isRequired,
-    id:PropTypes.number.isRequired
+    clase: PropTypes.string,
+    tipo: PropTypes.oneOf(['D', 'V', 'E', 'I']).isRequired,
+    id: PropTypes.number.isRequired
 }

@@ -14,7 +14,7 @@ export default class AccesoAPI {
   static async leerUNO(tabla,  id ) {
     let url2 = CONVERSOR[tabla];
     if (url2===null) url2=tabla;
-    let url = API_URL + url2;    
+    let url = API_URL + url2 + "/" + id;    
     console.log('leerUno url:',url);
     return this.accederApi(url);
   }
