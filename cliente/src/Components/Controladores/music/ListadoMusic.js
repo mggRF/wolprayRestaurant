@@ -46,10 +46,10 @@ export default class ListadoMusic extends Component {
         let item = [];
         {
             this.state.datos.forEach((valor, index) => item.push(
-                <tr>
+                <tr key={index}>
                     <td key={index} >{valor.musicid}</td>
                     <td>{valor.musicName}</td>
-                    <TresBotonesListado funcion={()=>this.props.trabajo}
+                    <TresBotonesListado funcion={this.props.trabajo}
                                         id={valor.musicid}/>
                 </tr>
 

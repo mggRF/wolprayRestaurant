@@ -6,8 +6,8 @@ export default class BotonListado extends Component {
     render(){
         return(
             <button type="button"
-        class="btn {this.props.clase}"
-        onclick={this.props.funcion(this.props.tipo,this.props.id)}
+        className="btn {this.props.clase}"
+        onClick={()=>this.props.funcion(this.props.tipo,this.props.id)}
     >
         {this.props.children}
         </button>
@@ -18,6 +18,6 @@ export default class BotonListado extends Component {
 BotonListado.propTypes= {
     funcion: PropTypes.func.isRequired,
     clase:PropTypes.string,
-    tipo:PropTypes.oneOf('D','V','E','I').isRequired,
+    tipo:PropTypes.oneOf(['D','V','E','I']).isRequired,
     id:PropTypes.number.isRequired
 }
