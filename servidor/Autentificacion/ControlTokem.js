@@ -7,7 +7,9 @@ class ControlTokem {
     login(req, res) {
         if (true) {
             const payload = {
-                check: true
+                id: '',
+                role: '',
+                name: '',
             };
             const token = jwt.sign(payload, TOKEN_SECRET, {
                 expiresIn: 1440
