@@ -42,3 +42,11 @@
     
     cursor: pointer;
 }
+.homepage{
+  text-align: center;
+  
+}
+.containermenu{
+  
+  border: gray 2px solid;
+}

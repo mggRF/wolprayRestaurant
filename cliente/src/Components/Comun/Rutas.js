@@ -26,7 +26,7 @@ export default class Rutas extends Component {
             <div className ="mr-auto"></div>
               <ul className="navbar-nav">
                 <div className="nav-item">
-                <Link to={HOME} className="nav-link rutas" >Inicio</Link>
+                <Link to={HOME} className="nav-link rutas" >Home</Link>
                 </div>
                 <div className="nav-item">
                 <Link to={MUSICA} className="nav-link rutas">Música</Link>

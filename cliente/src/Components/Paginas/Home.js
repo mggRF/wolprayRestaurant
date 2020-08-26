@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import BotonListado from '../Fragmentos/BotonListados'
+import BotonListado from '../Fragmentos/BotonListados';
+import '../../styles.css'
 
 
 
@@ -9,18 +10,29 @@ export default class Home extends Component{
     render(){
 
         return (
-            /*<div className="container first">
-               <div className = "row">
-                  <div className = "col-4"> <h3>MENÚ</h3></div>
-                  <div className = "col-8"> <h3>CONTENIDO</h3></div> 
-               </div>
-               <div className = "row">
-                  <div className = "col-4"> <BotonListado/>no se que es </div>
-                  <div className = "col-8"> <h3>CONTENIDO</h3></div> 
-               </div>
+            <div className="container homepage" >
+            <div className="container">
+             <h3>MENÚ</h3>
+            </div>
             
-            </div>*/
-            <div>home</div>
+               <div className = "row">
+               <div className = "col-4 containermenu">
+               <div > <h3>MENÚ</h3></div>
+               <div> <div>Dresscode</div> </div>
+               <div > <div>Empresas</div> </div>
+               
+               
+               </div>
+               <div className = "col-8 containermenu">
+               <div > <h3>CONTENIDO</h3></div> 
+              
+               
+               </div>
+                  
+               </div>
+               
+            </div>
+            
         )
     }
 }
