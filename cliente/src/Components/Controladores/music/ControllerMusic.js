@@ -23,15 +23,16 @@ export default class ControllerMusic extends Component {
     }
 
     trabajoSolicitado = (orden, id) => {
-        AccesoAPI.leerUNO('n_music', this.state.id)
+        //console.log("Controller, orden y id=>",orden,id)
+        AccesoAPI.leerUNO('n_music', id)
             .then(response => {
-                console.log("Respuesta=>", response);
+                //console.log("RespuestaUNO=>", response);
                 if (response.Respuesta = 'ok') {
                     this.setState({
-                        estadoActualizado: 1,       //pongo modo formulario
-                        ordem: orden,               //pongo lo que ha de hacer
+                        estadoActualizacion: 1,       //pongo modo formulario
+                        orden: orden,               //pongo lo que ha de hacer
                         id: id,                      //pongo sobre quien lo ha de hacer
-                        objeto: response.datos
+                        objeto: response.Datos[0]
                     });
                 } else {
                     this.setState({
@@ -44,13 +45,13 @@ export default class ControllerMusic extends Component {
 
     accionSolicitada = (music) => {
 
-        this.setState({ estadoActualizado: 0 });     //preparo para que se pueda volver a listar
+        this.setState({ estadoActualizacion: 0 });     //preparo para que se pueda volver a listar
         if (this.state.orden !== "V") {
-            this.setState({ estadoActualizado: 2 })
+            this.setState({ estadoActualizacion: 2 })
             AccesoAPI.enviarTodo('n_music', METODO[this.state.orden], music, music.id)
                 .then(response => {
                     console.log("Respuesta=>", response);
-                    this.setState({ estadoActualizado: 2 });
+                    this.setState({ estadoActualizacion: 2 });
                 })
 
         }
@@ -60,15 +61,17 @@ export default class ControllerMusic extends Component {
         if (this.state.estadoUsuario.role !== 9) {
             return <Redirect to="/login" />
         }
-        console.log('RENDER=>', this.state.estadoActualizado)
+        console.log('RENDER=>', this.state)
         //
         // se debe sacar mensaje de error, si esta en state
         //
         return (
             <>
-                <ListadoMusic usuario={this.state.usuario} trabajo={this.trabajoSolicitado} />
+                {(this.state.estadoActualizacion === 0) ?
+                    <ListadoMusic usuario={this.state.usuario} trabajo={this.trabajoSolicitado} />
+                    : ""}
                 {(this.state.estadoActualizacion === 1) ?
-                    <CtrlFormulario orden={this.state.orden} obj={this.state.objeto} />
+                    <CtrlFormulario orden={this.state.orden} obj={this.state.objeto} trabajo={this.accionSolicitada} />
                     : ""}
 
                 {(this.state.estadoActualizacion === 2) ? <h1>En proceso</h1> : ""}
