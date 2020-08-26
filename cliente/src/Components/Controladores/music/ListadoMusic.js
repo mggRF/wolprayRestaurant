@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { API_URL, MUSIC } from '../../Constantes';
-import { montaBotones } from '../../../Servicios/funcionesHTML';
+
 //import PropTypes from 'prop-types'
 import AccesoAPI from './../../../Servicios/AccesoAPI';
+import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
 
 
 
@@ -40,7 +41,20 @@ export default class ListadoMusic extends Component {
     render() {
 
 
+        console.log("RENDER=>", this.state.datos)
 
+        let item = [];
+        {
+            this.state.datos.forEach((valor, index) => item.push(
+                <tr>
+                    <td key={index} >{valor.musicid}</td>
+                    <td>{valor.musicName}</td>
+                    <TresBotonesListado funcion={()=>this.props.trabajo}
+                                        id={valor.musicid}/>
+                </tr>
+
+            ))
+        }
 
         return (
             <>
@@ -54,17 +68,7 @@ export default class ListadoMusic extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.datos.forEach((valor, index) => (
-
-                            <tr>
-                                <td key={index} >{valor.musicid.musicid}</td>
-                                <td>{valor.musicid.musicName}</td>
-                                {montaBotones(valor.musicid.musicid)}
-                            </tr>
-
-                        ))}
-
-
+                        {item}
                     </tbody>
 
                 </table>
