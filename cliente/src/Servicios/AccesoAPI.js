@@ -11,10 +11,20 @@ export default class AccesoAPI {
     return this.accederApi(url);
   }
 
+  static async leerUNO(tabla,  id ) {
+    let url2 = CONVERSOR[tabla];
+    if (url2===null) url2=tabla;
+    let url = API_URL + url2;    
+    console.log('leerUno url:',url);
+    return this.accederApi(url);
+  }
+
   static async enviarTodo(tabla, metodo, datos, id = null) {
-    let url = API_URL + CONVERSOR[tabla];
-    if (id !== null) url += id;
-    
+    let url2 = CONVERSOR[tabla];
+    if (url2===null) url2=tabla;
+    let url = API_URL + url2;
+    if (id !== null) url += id;    
+    console.log('enviarTodo url:',url);
     return this.accederApi(url, metodo, datos);
   }
   /*

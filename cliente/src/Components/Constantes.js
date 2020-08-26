@@ -22,6 +22,14 @@ module.exports = {
         c_state: 'states',
         c_city: 'citys',
         c_country: 'countrys',
-        c_provinces: 'provinces'
+        c_provinces: 'provinces',
+        n_categories:'categories',
+        n_dresscode:'dresscode',
+        n_music:'musics'
+    },
+    METODO: {
+        I:'POST',
+        E:'PUT',
+        D:'DELETE'
     }
 }
