@@ -25,7 +25,7 @@ class ControladorBase {
             Respuesta: error || 'ok',
             Datos: objeto
         };
-        console.log(error);
+        console.error(error);
         if (error == null) {
             res.setHeader('Access-Control-Allow-Methods', 'HEAD,GET,POST,PUT,DELETE,OPTIONS');
             res.setHeader('Allow', 'HEAD,GET,POST,PUT,DELETE,OPTIONS');
@@ -38,20 +38,23 @@ class ControladorBase {
     }
 
     listado(req, res) {
-        console.log("listado", this.config.TABLA);
+        //console.log("listado", this.config.TABLA);
         let salida = [];
         
         this.connect.leerTabla(this.config.TABLA)
             .then(dat => {
                 dat.forEach(row => {
-                    let ca = new this.config.MODELO(row);
-                    salida.push(ca);
+                    //console.log("row=>",row)
+                    // let ca = new this.config.MODELO(...row);
+                    // console.log("ca=>",ca)
+                    salida.push(row);
                 })
+                //console.log(salida)
                 ControladorBase.enviaDatos(res, salida);
 
             })
             .catch(err => {
-                console.log(err);
+                console.error(err);
                 ControladorBase.enviaDatos(res, "Error en lectura de tabla", err);
 
             });
@@ -80,7 +83,7 @@ class ControladorBase {
 
         this.connect.leerSql(sql)
             .then(dat => {
-                console.log("dat->", dat);
+                //console.log("dat->", dat);
                 ControladorBase.enviaDatos(res, dat);
             })
             .catch(err => {

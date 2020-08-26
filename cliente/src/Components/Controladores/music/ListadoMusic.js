@@ -12,13 +12,14 @@ export default class ListadoMusic extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            datos: "",
+            datos: [],
             error: ""
         }
     }
     leeTabla() {
         AccesoAPI.accederApi(API_URL + MUSIC)
             .then(response => {
+                console.log(response);
                 if (response.Respuesta === "ok") {
                     this.setState({ datos: response.Datos })
                 }
@@ -33,20 +34,14 @@ export default class ListadoMusic extends Component {
         this.leeTabla();
     }
 
-    
+
 
 
     render() {
 
-        let items = [];
 
-        if (this.state.datos.length > 0) {
-            this.state.datos.forEach((valor, index) => {
-                
-                    items.push(<tr><td key={index} >{valor.musicid}</td><td>{valor.musicName}</td> {montaBotones(valor.musicid)}</tr>);
-               
-            });
-        }
+
+
         return (
             <>
                 <h1>Listado Music</h1>
@@ -59,7 +54,17 @@ export default class ListadoMusic extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {items}
+                        {this.state.datos.forEach((valor, index) => (
+
+                            <tr>
+                                <td key={index} >{valor.musicid.musicid}</td>
+                                <td>{valor.musicid.musicName}</td>
+                                {montaBotones(valor.musicid.musicid)}
+                            </tr>
+
+                        ))}
+
+
                     </tbody>
 
                 </table>
