@@ -15,8 +15,11 @@
   .nav-link{
       color:black
   }
- 
+  .nav-link:hover{
+    cursor: default;
+}
 .navbar-brand{
+    cursor: default;
     color:black
   }
 .navbar-toggler{font-size: 40px;}
@@ -29,4 +32,13 @@
  .principal{
      margin-top: 80px;
  }
-
+ .rutas{
+    
+     text-transform: uppercase;
+     padding: 1.7rem;
+     color:black;
+ }
+ .rutas:hover{
+    
+    cursor: pointer;
+}
