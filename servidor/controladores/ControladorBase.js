@@ -40,6 +40,8 @@ class ControladorBase {
     listado(req, res) {
         //console.log("listado", this.config.TABLA);
         let salida = [];
+        const ids = req.session.userid;
+        const role = req.session.role;
         
         this.connect.leerTabla(this.config.TABLA)
             .then(dat => {
@@ -63,7 +65,10 @@ class ControladorBase {
 
     leerUno(req, res) {
         let id = req.params.id;
+
         let sql = this.config.QUERIES.SELECT_UNO.replace(':id', id);
+        
+       
         this.connect.leerSql(sql)
             .then(dat => {
                 ControladorBase.enviaDatos(res, dat);
@@ -79,6 +84,9 @@ class ControladorBase {
     leerSelect(req, res) {
         let id = req.params.id;
         let sql = this.config.QUERIES.SELECT_SELECT.replace(':id', id);
+        
+        const ids = req.session.userid;
+        const role = req.session.role;
 
 
         this.connect.leerSql(sql)
@@ -95,11 +103,16 @@ class ControladorBase {
 
 
 
+    
     updateTable(req, res) {
         const method = req.route.stack[0].method;
         const id = req.params.id;
         const body = req.body;
-        const {QUERIES} = this.config
+
+        //Datos de la sesión
+        const ids = req.session.userid;
+        const role = req.session.role;
+        const {QUERIES} = this.config;
 
         switch (method.toLowerCase()) {
             case 'post':
@@ -121,7 +134,6 @@ class ControladorBase {
                 ControladorBase.enviaDatos(res, value);
             }).catch(err => ControladorBase.enviaDatos(res, 'Ha ocurrido un error al tratar de modificar la tabla', err));
     }
-
 }
 
 

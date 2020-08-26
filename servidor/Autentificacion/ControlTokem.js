@@ -1,56 +1,53 @@
-const jwt = require('jsonwebtoken');
-const { TOKEN_SECRET } = require('../Constantes/ConstantesSeguridad');
-const moment = require('moment');
 var ControladorUsers = require('../controladores/ControladorUsers');
-let users = new ControladorUsers();
+const createToken = require('./service');
+let usersController = new ControladorUsers();
 
 class ControlTokem {
 
-
-
     login(req, res) {
-        if (!req.headers.authorization) {
-            return res.status(403).send({ message: 'No tienes autorización' });
-        }
-
         const email = req.body.email;
         const password = req.body.password;
+        if (email && password) {
+            usersController.userByEmail(email)
+                .then(dat => {
+                    if (dat.length > 0) {
+                        let user = dat[0];
+                        if (user != null) {
+                            if (password === user.password) {
+                                console.log('El usuario se ha conectado ccorrectamente');
 
-        if (ControlTokem.compruebaUsuario(email, password)) {
-            const payload = {
-                id: '',
-                role: '',
-                name: '',
-            };
-            const token = jwt.sign(payload, TOKEN_SECRET, {
-                expiresIn: 1440
-            });
-            res.json({
-                mensaje: 'Autenticación correcta',
-                token: token
-            });
+                                const token = createToken(user);
+                                req.session.userid = user.userid;
+                                req.session.role = user.roleid;
+                                res.json({
+                                    mensaje: 'Autenticación correcta',
+                                    token: token
+                                });
+                            } else {
+                                res.json({ mensaje: "Usuario o contraseña incorrectos" });
+                            }
+
+                        } else {
+                            res.json({ mensaje: "Usuario o contraseña incorrectos" });
+                        }
+                    }else{
+                        res.json({ mensaje: "Usuario o contraseña incorrectos" });
+                    }
+
+                })
+                .catch(err => {
+                    console.log('Ha ocurrido un error')
+                    console.log(err)
+                    res.json({ mensaje: err });
+                });
         } else {
-            res.json({ mensaje: "Usuario o contraseña incorrectos" })
+            res.json({ mensaje: "Error en los parámetros ingresados" });
         }
     }
+
+
     logout(req, res) {
 
-    }
-
-
-
-    static compruebaUsuario(email, pass) {
-        //comprueba si usuario y contraseña son validos en la base de datos y devuelve true
-        
-        users.userByEmail(email)
-            .then(dat => {
-                console.log(dat);
-                return true;
-            })
-            .catch(err => {
-                console.log(err);
-                return false;
-            });
     }
 }
 
