@@ -6,6 +6,7 @@ const ControladorBase = require("./ControladorBase");
 
 const MODELO = require("../modelos/Users");
 const TABLA = 'users';
+const SELECT_BY_MAIL = `SELECT * FROM ${TABLA} WHERE mail  = :email`
 
 const QUERIES = {
     SELECT_SELECT: `SELECT userid  as id,userName  as opcion FROM ${TABLA} WHERE roleid = :id`,
@@ -24,8 +25,20 @@ class ControladorUsers extends ControladorBase {
             campoId: 'userid',
         }
         super(config);
+        this.userByEmail = this.userByEmail.bind(this);
     }
     
+    async userByEmail(email){
+        const sql = SELECT_BY_MAIL.replace(':email',email);
+        console.log(sql)
+        this.connect.leerSql(sql).then( (data)=>{
+            console.log(data);
+        }).catch((err)=>{
+            console.log(err);
+        })
+       // return await this.connect.leerSql(sql);
+        
+    }
 
     
 }
