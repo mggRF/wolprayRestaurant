@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode> 
-    <Router  basename={'/interno'}>
+    <Router  >
     <Route path="/" component={App} />
     </Router>
   </React.StrictMode>,
