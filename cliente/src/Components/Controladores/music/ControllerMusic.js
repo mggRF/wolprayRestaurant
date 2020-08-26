@@ -25,7 +25,8 @@ export default class ControllerMusic extends Component {
             estadoActualizado: 1,       //pongo modo formulario
             ordem: orden,               //pongo lo que ha de hacer
             id: id                      //pongo sobre quien lo ha de hacer
-        })
+        });
+        console.log("Paso por trabajo solicitado")
 
     }
 
@@ -33,6 +34,7 @@ export default class ControllerMusic extends Component {
         if (this.state.estadoUsuario.role !== 9) {
             return <Redirect to="/login" />
         }
+        console.log('RENDER=>', this.state.estadoActualizado)
         return (
             <>
             <ListadoMusic usuario={this.state.usuario} trabajo={this.trabajoSolicitado} />

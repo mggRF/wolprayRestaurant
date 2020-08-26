@@ -7,22 +7,23 @@ import { VIE ,MOD,DEL} from '../Constantes'
 export default class TresBotonesListado extends Component {
 
     render() {
+        let funcion = this.props.funcion;
         return (
             <>
                 <td>
-                    <BotonListado funcion={this.props.funcion}
+                    <BotonListado funcion={funcion}
                         clase="btn-info"
                         tipo="V"
                         id={this.props.id}>
                         {VIE}
                     </BotonListado>
-                    <BotonListado funcion={this.props.funcion}
+                    <BotonListado funcion={funcion}
                         clase="btn-success"
                         tipo="E"
                         id={this.props.id}>
                         {MOD}
                     </BotonListado>
-                    <BotonListado funcion={this.props.funcion}
+                    <BotonListado funcion={funcion}
                         clase="btn-danger"
                         tipo="D"
                         id={this.props.id}>
