@@ -8,7 +8,7 @@ module.exports = {
     CLUBS: 'clubs',
     EVENTS: 'events',
     STATES: 'states',
-    MUSIC: 'music',
+    MUSIC: 'musics',
     STATES_SELECT: 'states/select/',
 
     LPPAGINA: "20",                             //lineas por pagina
@@ -23,6 +23,5 @@ module.exports = {
         c_city: 'citys',
         c_country: 'countrys',
         c_provinces: 'provinces'
-
     }
 }

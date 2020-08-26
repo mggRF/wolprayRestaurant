@@ -28,9 +28,9 @@ export default class ListadoMusic extends Component {
 
             })
     }
-    
+
     componentDidMount() {
-        this.leerTabla();
+        this.leeTabla();
     }
 
     
