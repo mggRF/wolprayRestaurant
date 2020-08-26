@@ -16,7 +16,6 @@ export default class AccesoAPI {
     if (id !== null) url += id;
     
     return this.accederApi(url, metodo, datos);
-
   }
   /*
   *  Metodo de acceso a la API. Comun......
