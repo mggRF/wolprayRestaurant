@@ -1,11 +1,11 @@
 
 const Conexion = require("../servicios/Conexion");
-const conect = new Conexion();
 class ControladorBase {
 
 
     constructor(config) {
         this.config = config;
+        this.connect = new Conexion();
 
         this.listado = this.listado.bind(this);
         this.leerUno = this.leerUno.bind(this);
@@ -41,7 +41,7 @@ class ControladorBase {
         console.log("listado", this.config.TABLA);
         let salida = [];
         
-        conect.leerTabla(this.config.TABLA)
+        this.connect.leerTabla(this.config.TABLA)
             .then(dat => {
                 dat.forEach(row => {
                     let ca = new this.config.MODELO(row);
@@ -61,7 +61,7 @@ class ControladorBase {
     leerUno(req, res) {
         let id = req.params.id;
         let sql = this.config.QUERIES.SELECT_UNO.replace(':id', id);
-        conect.leerSql(sql)
+        this.connect.leerSql(sql)
             .then(dat => {
                 ControladorBase.enviaDatos(res, dat);
 
@@ -78,7 +78,7 @@ class ControladorBase {
         let sql = this.config.QUERIES.SELECT_SELECT.replace(':id', id);
 
 
-        conect.leerSql(sql)
+        this.connect.leerSql(sql)
             .then(dat => {
                 console.log("dat->", dat);
                 ControladorBase.enviaDatos(res, dat);
@@ -113,7 +113,7 @@ class ControladorBase {
  
 
     static sendDataToTable(data, sql, res) {
-        conect.modifyTable(sql, data)
+        this.connect.modifyTable(sql, data)
             .then(value => {
                 ControladorBase.enviaDatos(res, value);
             }).catch(err => ControladorBase.enviaDatos(res, 'Ha ocurrido un error al tratar de modificar la tabla', err));
