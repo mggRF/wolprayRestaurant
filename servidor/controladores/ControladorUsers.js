@@ -31,12 +31,9 @@ class ControladorUsers extends ControladorBase {
     async userByEmail(email){
         const sql = SELECT_BY_MAIL.replace(':email',email);
         console.log(sql)
-        this.connect.leerSql(sql).then( (data)=>{
-            console.log(data);
-        }).catch((err)=>{
-            console.log(err);
-        })
-       // return await this.connect.leerSql(sql);
+        
+          
+       return await this.connect.leerSql(sql);
         
     }
 
