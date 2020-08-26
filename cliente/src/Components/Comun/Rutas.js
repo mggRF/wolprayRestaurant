@@ -12,6 +12,8 @@ export default class Rutas extends Component {
     render() {
         return (
             <>
+            <h3>enlace1</h3>
+            <h3>enlace2</h3>
             <Link to={`${process.env.REACT_APP_PUBLIC_URL}/`}>inicio</Link>
             <Link to={`${process.env.REACT_APP_PUBLIC_URL}/music`}>musica</Link>
             <Link to={`${process.env.REACT_APP_PUBLIC_URL}/clubs`}>clubs</Link>
