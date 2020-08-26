@@ -6,7 +6,7 @@ const ControladorBase = require("./ControladorBase");
 
 const MODELO = require("../modelos/Users");
 const TABLA = 'users';
-const SELECT_BY_MAIL = `SELECT * FROM ${TABLA} WHERE mail  = :email`
+const SELECT_BY_MAIL = `SELECT * FROM ${TABLA} WHERE mail  = ':email'`
 
 const QUERIES = {
     SELECT_SELECT: `SELECT userid  as id,userName  as opcion FROM ${TABLA} WHERE roleid = :id`,
