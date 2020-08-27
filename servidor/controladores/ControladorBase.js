@@ -11,6 +11,8 @@ class ControladorBase {
         this.leerUno = this.leerUno.bind(this);
         this.leerSelect = this.leerSelect.bind(this);
         this.updateTable = this.updateTable.bind(this);
+        this.sendDataToTable = this.sendDataToTable.bind(this);
+        this.enviaDatos = this.enviaDatos.bind(this);
     }
     /**
      * Enviar datos a puesto //salida API
@@ -19,7 +21,7 @@ class ControladorBase {
      * @param {*} error  : En caso de error, objeto error
      *                      
      */
-    static enviaDatos(res, objeto, error = null) {
+     enviaDatos(res, objeto, error = null) {
         let respuesta;
         respuesta = {
             Respuesta: error || 'ok',
@@ -52,12 +54,12 @@ class ControladorBase {
                     salida.push(row);
                 })
                 //console.log(salida)
-                ControladorBase.enviaDatos(res, salida);
+                this.enviaDatos(res, salida);
 
             })
             .catch(err => {
                 console.error(err);
-                ControladorBase.enviaDatos(res, "Error en lectura de tabla", err);
+                this.enviaDatos(res, "Error en lectura de tabla", err);
 
             });
 
@@ -71,11 +73,11 @@ class ControladorBase {
        
         this.connect.leerSql(sql)
             .then(dat => {
-                ControladorBase.enviaDatos(res, dat);
+                this.enviaDatos(res, dat);
 
             })
             .catch(err => {
-                ControladorBase.enviaDatos(res, "Error en Leer uno", err);
+                this.enviaDatos(res, "Error en Leer uno", err);
                 
             });
 
@@ -92,10 +94,10 @@ class ControladorBase {
         this.connect.leerSql(sql)
             .then(dat => {
                 //console.log("dat->", dat);
-                ControladorBase.enviaDatos(res, dat);
+                this.enviaDatos(res, dat);
             })
             .catch(err => {
-                ControladorBase.enviaDatos(res, "Error en leer SELECT", err);
+                this.enviaDatos(res, "Error en leer SELECT", err);
 
             });
 
@@ -116,23 +118,23 @@ class ControladorBase {
 
         switch (method.toLowerCase()) {
             case 'post':
-                ControladorBase.sendDataToTable([body], QUERIES.INSERT, res);
+                this.sendDataToTable([body], QUERIES.INSERT, res);
                 break;
             case 'put':
-                ControladorBase.sendDataToTable([body, id],QUERIES.UPDATE, res);
+                this.sendDataToTable([body, id],QUERIES.UPDATE, res);
                 break;
             case 'delete':
-                ControladorBase.sendDataToTable([id], QUERIES.DELETE, res);
+                this.sendDataToTable([id], QUERIES.DELETE, res);
                 break;
         }
     }
  
 
-    static sendDataToTable(data, sql, res) {
+     sendDataToTable(data, sql, res) {
         this.connect.modifyTable(sql, data)
             .then(value => {
-                ControladorBase.enviaDatos(res, value);
-            }).catch(err => ControladorBase.enviaDatos(res, 'Ha ocurrido un error al tratar de modificar la tabla', err));
+                this.enviaDatos(res, value);
+            }).catch(err => this.enviaDatos(res, 'Ha ocurrido un error al tratar de modificar la tabla', err));
     }
 }
 
