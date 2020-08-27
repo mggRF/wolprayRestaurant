@@ -7,6 +7,7 @@ import CtrlFormulario from './CtrlFormularioMusic';
 import { checkUsuario } from './../../../Servicios/funcionesSeguridad';
 import AccesoAPI from './../../../Servicios/AccesoAPI';
 import { METODO } from '../../Constantes';
+import FormularioMusic from './FormularioMusic';
 
 
 export default class ControllerMusic extends Component {
@@ -49,7 +50,6 @@ export default class ControllerMusic extends Component {
             this.setState({ estadoActualizacion: 2 })
             AccesoAPI.enviarTodo('n_music', METODO[this.state.orden], music, music.musicid)
                 .then(response => {
-                    console.log("Respuesta=>", response);
                     this.setState({ estadoActualizacion: 0 });
                 })
 
@@ -70,7 +70,9 @@ export default class ControllerMusic extends Component {
                     <ListadoMusic usuario={this.state.usuario} trabajo={this.trabajoSolicitado} />
                     : ""}
                 {(this.state.estadoActualizacion === 1) ?
-                    <CtrlFormulario orden={this.state.orden} obj={this.state.objeto} trabajo={this.accionSolicitada} />
+                    <CtrlFormulario orden={this.state.orden} obj={this.state.objeto} trabajo={this.accionSolicitada} 
+                    formulario={<FormularioMusic/>}/>
+ 
                     : ""}
 
                 {(this.state.estadoActualizacion === 2) ? <h1>En proceso</h1> : ""}
