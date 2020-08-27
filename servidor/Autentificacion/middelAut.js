@@ -24,6 +24,7 @@ Autorizado.use((req, res, next) => {
           const payload = decoded;
           
           if(payload.exp <= moment.unix()){
+            req.session.destroy();
             return res.status(401).send({Message: 'El token ha expirado'});
           }
           if(req.session.userid !== payload.sub){
