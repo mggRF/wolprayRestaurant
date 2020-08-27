@@ -47,7 +47,8 @@ class ControlTokem {
 
 
     logout(req, res) {
-
+        req.session.destroy();
+        res.json({ mensaje: "Se ha cerrado la sesión" });
     }
 }
 

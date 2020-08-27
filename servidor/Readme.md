@@ -9,6 +9,8 @@
 - /Login                      - Identifica al usuario y devuelve tokem.
 - /Logout                     - Cierra la sesión de usuario.
 
+###### IMPORTANTE: El token caduca cada 30 minutos.
+
 ## Área de mantenimiento----- IDENTIFICADO **********************
 
 ### Países--------------------------------------------------------
