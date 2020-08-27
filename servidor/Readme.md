@@ -18,15 +18,17 @@
 /api_v00/countrys/select/   listado de todos los países con id y opción.  ///No implementado
 
 # Comunidades Autónomas/estados----------------------------------
+
 /api_v00/states/            listado de todos los estados/comunidades autónomas.
 /api_v00/states/:id         listado del estado indicado por id.
 /api_v00/states/select/     listado de todos los estados con id y opción del país
                             indicado por id.
 
 # Provincias-----------------------------------------------------
-/api_v00/provinces/         listado de todas las provincias.
-/api_v00/provinces/:id      listado dela provincia indicado por id.
-/api_v00/provinces/select/  listado de todas las provincias con id y opción de la CCAA 
+
+- /api_v00/provinces/         listado de todas las provincias.
+- /api_v00/provinces/:id      listado dela provincia indicado por id.
+- /api_v00/provinces/select/  listado de todas las provincias con id y opción de la CCAA 
                             indicado por id.
 
 # Poblaciones----------------------------------------------------
