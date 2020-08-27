@@ -5,7 +5,7 @@
 
 ### Sistema de identificación
 
-- /Login                      Identifica al usuario y devuelve tokem.
+- /Login                      - Identifica al usuario y devuelve tokem.
 - /Logout                     Cierra la sesión de usuario.
 
 ## Área de mantenimiento----- IDENTIFICADO **********************
