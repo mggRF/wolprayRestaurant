@@ -12,10 +12,14 @@
 
 ### Países--------------------------------------------------------
 
-##### GETS
+##### GET
 - /api_v00/countrys/          - listado de todos los países.
 - /api_v00/countrys/:id       - listado del país indicado por id.
 - /api_v00/countrys/select/   - listado de todos los países con id y opción.  ///No implementado
+
+##### POST
+- /api_v00/countrys/          - Objeto country sin id. (El id es auto increment).
+
 
 ### Comunidades Autónomas/estados----------------------------------
 
