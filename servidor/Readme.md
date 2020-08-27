@@ -1,4 +1,6 @@
-#API wolpray
+# API wolpray
+
+
 
 
 Sistema de identificación****************************
@@ -7,7 +9,7 @@ Sistema de identificación****************************
 
 Área de mantenimiento----- IDENTIFICADO **********************
 
-Países--------------------------------------------------------
+# Países--------------------------------------------------------
 
 
 /api_v00/countrys/          listado de todos los países.
