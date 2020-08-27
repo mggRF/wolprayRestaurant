@@ -23,7 +23,7 @@ export default class AccesoAPI {
     let url2 = CONVERSOR[tabla];
     if (url2===null) url2=tabla;
     let url = API_URL + url2;
-    if (id !== null) url += id;    
+    if (id !== null) url += '/' +  id;    
     console.log('enviarTodo url:',url);
     return this.accederApi(url, metodo, datos);
   }

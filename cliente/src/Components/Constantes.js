@@ -31,5 +31,12 @@ module.exports = {
         I:'POST',
         E:'PUT',
         D:'DELETE'
+    },
+    LETRERO_BOTON:{
+        I:'Insertar',
+        E:'Modificar',
+        D:'Borrar',
+        V:'Cerrar'
+
     }
 }

@@ -1,47 +1,55 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import FormularioMusic from './FormularioMusic'
+import { LETRERO_BOTON } from '../../Constantes';
 
 
 
 
 export default class CtrlFormularioMusic extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
+        this.state = {
+            obj: this.props.obj
+        };
         this.recogeDatos = this.recogeDatos.bind(this);
         this.enSubmit = this.enSubmit.bind(this);
     }
     enSubmit() {
-        this.props.trabajo(this.state);
+        this.props.trabajo(this.state.obj);
     }
 
     recogeDatos = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
+        console.log(e.target.name)
+        let obj = this.state.obj;
+        obj[e.target.name] = e.target.value
+        this.setState({ obj: obj })
+        // this.setState({ [e.target.name]: e.target.value });
     }
-    componentDidMount(){
+    componentDidMount() {
         this.setState(this.props.obj);
     }
 
     render() {
-        
+
         return (
             <>
-                <FormularioMusic orden={this.props.orden} obj={this.props.obj} funcion={this.recogeDatos} />
+                <FormularioMusic orden={this.props.orden} obj={this.state.obj} funcion={this.recogeDatos} />
                 <button type="button"
                     className="btn btn-dark"
                     onClick={this.enSubmit}
                 >
-                Aceptar
+                    {LETRERO_BOTON[this.props.orden]}
                 </button>
-        
+
             </>
-            )
+        )
     }
 }
 
 CtrlFormularioMusic.propTypes = {
-                    orden:PropTypes.oneOf(['D','V','E','I']).isRequired,
-    obj:PropTypes.object,
-    trabajo:PropTypes.func
+    orden: PropTypes.oneOf(['D', 'V', 'E', 'I']).isRequired,
+    obj: PropTypes.object,
+    trabajo: PropTypes.func
 }

@@ -44,14 +44,13 @@ export default class ControllerMusic extends Component {
     }
 
     accionSolicitada = (music) => {
-
         this.setState({ estadoActualizacion: 0 });     //preparo para que se pueda volver a listar
         if (this.state.orden !== "V") {
             this.setState({ estadoActualizacion: 2 })
-            AccesoAPI.enviarTodo('n_music', METODO[this.state.orden], music, music.id)
+            AccesoAPI.enviarTodo('n_music', METODO[this.state.orden], music, music.musicid)
                 .then(response => {
                     console.log("Respuesta=>", response);
-                    this.setState({ estadoActualizacion: 2 });
+                    this.setState({ estadoActualizacion: 0 });
                 })
 
         }
