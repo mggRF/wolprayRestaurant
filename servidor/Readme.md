@@ -12,7 +12,7 @@
 
 ### Países--------------------------------------------------------
 
-
+##### GETS
 - /api_v00/countrys/          - listado de todos los países.
 - /api_v00/countrys/:id       - listado del país indicado por id.
 - /api_v00/countrys/select/   - listado de todos los países con id y opción.  ///No implementado
