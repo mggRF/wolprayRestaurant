@@ -11,9 +11,9 @@ function App() {
     <div className="container-fluid ">
      <div className="row">
        {<Header />}
-     <div className="col-12 container-fluid principal">
-       <Rutas />
-     </div>
+        <div className="col-12 container-fluid principal">
+          <Rutas />
+        </div>
 
      <Footer/>
      </div>

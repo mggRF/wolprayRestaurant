@@ -19,7 +19,7 @@ export default class Rutas extends Component {
         return (
             <div>
             <Router >
-            <nav className=" navbar-expand-lg navbar-light bg-light header2">
+            <nav className=" navbar-expand-lg navbar-light bg-light header2 sticky-top">
             
             
             <div className="collapse navbar-collapse" id="navbarNav">

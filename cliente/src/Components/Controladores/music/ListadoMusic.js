@@ -57,7 +57,7 @@ export default class ListadoMusic extends Component {
         }
 
         return (
-            <>
+            <div className="container">
                 <h1>Listado Music</h1>
                 <table>
                     <thead>
@@ -72,7 +72,7 @@ export default class ListadoMusic extends Component {
                     </tbody>
 
                 </table>
-            </>
+            </div>
         )
     }
 }
