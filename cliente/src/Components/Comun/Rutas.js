@@ -19,7 +19,7 @@ export default class Rutas extends Component {
         return (
             <div>
             <Router >
-            <nav className=" navbar-expand-lg navbar-light bg-light ">
+            <nav className=" navbar-expand-lg navbar-light bg-light header2 sticky-top">
             
             
             <div className="collapse navbar-collapse" id="navbarNav">
@@ -33,6 +33,18 @@ export default class Rutas extends Component {
                 </div>
                 <div className="nav-item">
                 <Link to={CLUBS} className="nav-link rutas">Clubs</Link>
+                </div>
+                <div className="nav-item">
+                <Link to={CLUBS} className="nav-link rutas">Dresscode</Link>
+                </div>
+                <div className="nav-item">
+                <Link to={CLUBS} className="nav-link rutas">Empresas</Link>
+                </div>
+                <div className="nav-item">
+                <Link to={CLUBS} className="nav-link rutas">Roles</Link>
+                </div>
+                <div className="nav-item">
+                <Link to={CLUBS} className="nav-link rutas">Usuarios</Link>
                 </div>
                 
               </ul>

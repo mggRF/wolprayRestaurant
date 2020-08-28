@@ -8,7 +8,7 @@ export default class  Footer extends Component {
     render(){
         return (
             <div className="container">
-            <footer className="page-footer font-small cyan darken-3 fixed-bottom">
+            <footer className="page-footer font-small cyan darken-3 ">
             
               
               <div className="container">
