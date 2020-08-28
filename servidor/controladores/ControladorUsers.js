@@ -3,7 +3,7 @@
  * recibe llamadas para editar, añadir, listar y borrar comunidades
  */
 const ControladorBase = require("./ControladorBase");
-
+const Presenta = require('../servicios/Presenta');
 const MODELO = require("../modelos/Users");
 const TABLA = 'users';
 const SELECT_BY_MAIL = `SELECT * FROM ${TABLA} WHERE mail  = ':email'`
@@ -30,7 +30,7 @@ class ControladorUsers extends ControladorBase {
     
     async userByEmail(email){
         const sql = SELECT_BY_MAIL.replace(':email',email);
-        console.log(sql)
+        Presenta.log(sql)
         
           
        return await this.connect.leerSql(sql);

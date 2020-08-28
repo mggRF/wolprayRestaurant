@@ -6,6 +6,7 @@
  */
 const mysql = require('mysql');
 const util = require('util');
+const Presenta = require('./Presenta');
 const CONFIGDB = require('../Constantes/ConstantesDataBase/configDB');
 
 class Conexion {
@@ -15,13 +16,13 @@ class Conexion {
         this.pool.getConnection((err, connection) => {
             if (err) {
                 if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-                    console.error('Database connection was closed.')
+                    Presenta.error('Database connection was closed.')
                 }
                 if (err.code === 'ER_CON_COUNT_ERROR') {
-                    console.error('Database has too many connections.')
+                    Presenta.error('Database has too many connections.')
                 }
                 if (err.code === 'ECONNREFUSED') {
-                    console.error('Database connection was refused.')
+                    Presenta.error('Database connection was refused.')
                 }
             }
             if (connection) connection.release()
@@ -55,7 +56,7 @@ class Conexion {
                     if (ex) {
                         reject(ex);
                     } else {
-                        console.log("resolve",rows);
+                        Presenta.log("resolve",rows);
                         resolve(rows);
                     }
                     
@@ -74,7 +75,7 @@ class Conexion {
                     if (ex) {
                         reject(ex);
                     } else {
-                        console.log("resolve",rows);
+                        Presenta.log("resolve",rows);
                         resolve(rows);
                     }
                 });
@@ -91,7 +92,7 @@ class Conexion {
                 conn.query(sql,data, (err) => {
                     if (err) {
                         reject(err);
-                        console.log('Ha ocurriso un error al tratar de insertar')
+                        Presenta.log('Ha ocurriso un error al tratar de insertar')
                     } else {
                         resolve('Se ha modificado la tabla correctamente');
                     }
