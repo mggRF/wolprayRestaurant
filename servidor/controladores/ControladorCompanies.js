@@ -6,9 +6,25 @@ const ControladorBase = require("./ControladorBase");
 
 const MODELO = require("../modelos/Company");
 const TABLA = 'companies';
+const selectUo = `select 
+                    ${TABLA}.*,
+                    users.userName, 
+                    c_city.cityName,
+                    c_provinces.provinceName,
+                    c_state.stateName,
+                    c_country.countryName
+
+                    from ${TABLA} 
+
+                        JOIN users ON users.userid = ${TABLA}.userid 
+                        JOIN c_city ON c_city.cityid = ${TABLA}.cityid 
+                        JOIN c_provinces on c_provinces.provinceid = c_city.provinceid
+                        JOIN c_state ON c_state.stateid = c_provinces.stateid
+                        JOIN c_country on c_country.countryId = c_state.countryid
+                    WHERE ${TABLA}.companyid = :id`
 
 const QUERIES = {
-    SELECT_UNO: `SELECT * FROM ${TABLA} WHERE companyid   = :id`,
+    SELECT_UNO: selectUo,
     SELECT_SELECT: `SELECT companyid  as id,companyName as opcion FROM ${TABLA} WHERE countryid  = :id`,
     INSERT: `INSERT INTO ${TABLA} SET ?`,
     UPDATE: `UPDATE ${TABLA} SET ? WHERE companyid = ?`,

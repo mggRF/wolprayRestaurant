@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Redirect } from "react-router-dom";
-import PropTypes from 'prop-types'
+
 
 import AccesoAPI from '../../Servicios/AccesoAPI';
 import { METODO } from '../Constantes';
@@ -10,10 +9,7 @@ import CtrlFormulario from './../../Servicios/CtrlFormulario';
 export default class ControllerBase extends Component {
 
 
-    constructor(props) {
-        super(props);
-
-    }
+    
 
     trabajoSolicitado = (orden, id) => {
         //console.log("Controller, orden y id=>",orden,id)
@@ -22,6 +18,7 @@ export default class ControllerBase extends Component {
                 //console.log("RespuestaUNO=>", response);
                 if (response.Respuesta = 'ok') {
                     console.log("leer uno es correcto y la variable orden contiene: ",orden)
+                if (response.Respuesta == 'ok') {
                     this.setState({
                         estadoActualizacion: 1,       //pongo modo formulario
                         orden: orden,               //pongo lo que ha de hacer
