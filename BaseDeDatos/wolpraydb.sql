@@ -6,6 +6,11 @@
 -- Tiempo de generación: 28-08-2020 a las 17:53:19
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.9
+Create database wolpraydb;
+use wolpraydb;
+DROP user 'wolprayusr';
+CREATE USER 'wolprayusr'@'localhost' IDENTIFIED BY  'UsrWolpray';
+GRANT ALL PRIVILEGES ON `wolpraydb`.* TO 'wolprayusr'@'localhost';
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
