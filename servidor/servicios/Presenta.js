@@ -6,7 +6,7 @@ class Presenta {
         console.log(...datos);
     }
     static error(...datos){
-        console.log(...datos);
+        console.error(...datos);
     }
 }
 module.exports = Presenta;
