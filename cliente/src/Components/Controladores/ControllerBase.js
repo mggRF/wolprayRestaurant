@@ -9,7 +9,7 @@ import CtrlFormulario from './../../Servicios/CtrlFormulario';
 export default class ControllerBase extends Component {
 
 
-    
+
 
     trabajoSolicitado = (orden, id) => {
         //console.log("Controller, orden y id=>",orden,id)
@@ -17,22 +17,24 @@ export default class ControllerBase extends Component {
             .then(response => {
                 //console.log("RespuestaUNO=>", response);
                 if (response.Respuesta = 'ok') {
-                    console.log("leer uno es correcto y la variable orden contiene: ",orden)
-                if (response.Respuesta == 'ok') {
-                    this.setState({
-                        estadoActualizacion: 1,       //pongo modo formulario
-                        orden: orden,               //pongo lo que ha de hacer
-                        id: id,                      //pongo sobre quien lo ha de hacer
-                        objeto: response.Datos[0]
-                    });
-                } else {
-                    this.setState({
-                        err: true,
-                        msjerr: response.Datos
-                    })
+                    console.log("leer uno es correcto y la variable orden contiene: ", orden)
+                    if (response.Respuesta == 'ok') {
+                        this.setState({
+                            estadoActualizacion: 1,       //pongo modo formulario
+                            orden: orden,               //pongo lo que ha de hacer
+                            id: id,                      //pongo sobre quien lo ha de hacer
+                            objeto: response.Datos[0]
+                        });
+                    } else {
+                        this.setState({
+                            err: true,
+                            msjerr: response.Datos
+                        })
+                    }
                 }
             })
     }
+
 
     accionSolicitada = (datos) => {
         this.setState({ estadoActualizacion: 0 });     //preparo para que se pueda volver a listar
@@ -67,7 +69,7 @@ export default class ControllerBase extends Component {
                     />
                     : ""}
 
-                {(this.state.estadoActualizacion === 2) ? 
+                {(this.state.estadoActualizacion === 2) ?
                     <h1>En proceso</h1> : ""}
 
 
