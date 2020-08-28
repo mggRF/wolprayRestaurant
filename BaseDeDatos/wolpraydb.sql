@@ -8,7 +8,7 @@
 -- Versión de PHP: 7.4.9
 Create database wolpraydb;
 use wolpraydb;
-DROP user 'wolprayusr';
+
 CREATE USER 'wolprayusr'@'localhost' IDENTIFIED BY  'UsrWolpray';
 GRANT ALL PRIVILEGES ON `wolpraydb`.* TO 'wolprayusr'@'localhost';
 
