@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { LETRERO_BOTON } from '../../Constantes';
+import { LETRERO_BOTON } from '../Components/Constantes';
+
 
 
 
@@ -48,7 +49,7 @@ export default class CtrlFormulario extends Component {
     }
 }
 
-CtrlFormularioMusic.propTypes = {
+CtrlFormulario.propTypes = {
     orden: PropTypes.oneOf(['D', 'V', 'E', 'I']).isRequired,
     obj: PropTypes.object,
     trabajo: PropTypes.func

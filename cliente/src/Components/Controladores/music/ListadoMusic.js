@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { API_URL, MUSIC } from '../../Constantes';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-//import PropTypes from 'prop-types'
+import { API_URL, MUSIC } from '../../Constantes';
 import AccesoAPI from './../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
 
@@ -75,4 +75,8 @@ export default class ListadoMusic extends Component {
             </>
         )
     }
+}
+ListadoMusic.propTypes = {
+    usuario: PropTypes.object,
+    trabajo: PropTypes.func
 }
