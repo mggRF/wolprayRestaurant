@@ -21,6 +21,7 @@ export default class ControllerBase extends Component {
             .then(response => {
                 //console.log("RespuestaUNO=>", response);
                 if (response.Respuesta = 'ok') {
+                    console.log("leer uno es correcto y la variable orden contiene: ",orden)
                     this.setState({
                         estadoActualizacion: 1,       //pongo modo formulario
                         orden: orden,               //pongo lo que ha de hacer
