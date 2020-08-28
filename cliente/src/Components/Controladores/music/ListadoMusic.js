@@ -45,39 +45,36 @@ export default class ListadoMusic extends Component {
         console.log("RENDER=>", this.state.datos)
 
         let item = [];
+        {
+            this.state.datos.forEach((valor, index) => item.push(
+                <tr key={index}>
+                    <td key={index} >{valor.musicid}</td>
+                    <td>{valor.musicName}</td>
+                    <TresBotonesListado funcion={this.props.trabajo}
+                                        id={valor.musicid}/>
+                </tr>
 
-        this.state.datos.forEach((valor, index) => item.push(
-            <tr key={index}>
-                <td key={index} >{valor.musicid}</td>
-                <td>{valor.musicName}</td>
-                <TresBotonesListado funcion={this.props.trabajo}
-                    id={valor.musicid} />
-            </tr>
-
-        ))
-
-
-
-
-
+            ))
+            }
+            
         return (
+            
+            <div className="container">
+            <h1>Listado Music</h1>
+            <table className ="table">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th></th><th></th><th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {item}
+                </tbody>
 
-            <div className="container" >
-                <h1>Listado Music</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>name</th>
-                            <th></th><th></th><th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {item}
-                    </tbody>
-
-                </table>
-            </div>
+            </table>
+        </div>
         )
     }
 }

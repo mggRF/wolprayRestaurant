@@ -9,6 +9,8 @@ module.exports = {
     EVENTS: 'events',
     STATES: 'states',
     MUSIC: 'musics',
+    COMPANIES:'companies',
+    DRESSCODE: 'dresscode',
     STATES_SELECT: 'states/select/',
 
     LPPAGINA: "20",                             //lineas por pagina

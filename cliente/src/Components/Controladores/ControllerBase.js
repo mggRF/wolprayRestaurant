@@ -16,6 +16,8 @@ export default class ControllerBase extends Component {
         AccesoAPI.leerUNO(this.TABLA, id)
             .then(response => {
                 //console.log("RespuestaUNO=>", response);
+                if (response.Respuesta = 'ok') {
+                    console.log("leer uno es correcto y la variable orden contiene: ",orden)
                 if (response.Respuesta == 'ok') {
                     this.setState({
                         estadoActualizacion: 1,       //pongo modo formulario

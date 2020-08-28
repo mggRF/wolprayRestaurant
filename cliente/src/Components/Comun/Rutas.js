@@ -5,10 +5,14 @@ import ControllerMusic from '../Controladores/music/ControllerMusic';
 import ControllerClub from '../Controladores/clubs/ControllerClub';
 import Home from '../Paginas/Home';
 import '../../styles.css'
+import ControllerCompanies from '../Controladores/companies/ControllerCompanies';
+import ControllerDresscode from '../Controladores/dresscode/ControllerDresscode';
 
 const HOME = "/";
 const MUSICA = "/music";
 const CLUBS = "/clubs";
+const COMPANIES = "/companies";
+const DRESSCODE = "/dresscode";
 
 
 export default class Rutas extends Component {
@@ -35,10 +39,10 @@ export default class Rutas extends Component {
                 <Link to={CLUBS} className="nav-link rutas">Clubs</Link>
                 </div>
                 <div className="nav-item">
-                <Link to={CLUBS} className="nav-link rutas">Dresscode</Link>
+                <Link to={DRESSCODE} className="nav-link rutas">Dresscode</Link>
                 </div>
                 <div className="nav-item">
-                <Link to={CLUBS} className="nav-link rutas">Empresas</Link>
+                <Link to={COMPANIES} className="nav-link rutas">Empresas</Link>
                 </div>
                 <div className="nav-item">
                 <Link to={CLUBS} className="nav-link rutas">Roles</Link>
@@ -54,6 +58,8 @@ export default class Rutas extends Component {
                         <Route exact path={HOME} component={Home} />
                         <Route path={MUSICA} component={ControllerMusic} />
                         <Route path={CLUBS} component={ControllerClub} />
+                        <Route path={COMPANIES} component={ControllerCompanies} />
+                        <Route path={DRESSCODE} component={ControllerDresscode} />
                     </Switch>
                 </Router>
 

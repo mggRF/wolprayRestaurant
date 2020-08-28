@@ -12,7 +12,9 @@ export default class AccesoAPI {
   }
 
   static async leerUNO(tabla,  id ) {
+    console.log('desde leerUNO de AccesoAPI')
     let url2 = CONVERSOR[tabla];
+    console.log(url2)
     if (url2===null) url2=tabla;
     let url = API_URL + url2 + "/" + id;    
     console.log('leerUno url:',url);
@@ -49,9 +51,12 @@ export default class AccesoAPI {
     }
     
     return await fetch(url, opciones)
+    
       .then(res => res.json())
       .then(
         results => {
+          console.log("desde accesoApi accederApi ")
+          console.log("es esto: ",results)
           return results;
         }
       )
