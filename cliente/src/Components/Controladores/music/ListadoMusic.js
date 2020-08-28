@@ -54,10 +54,9 @@ export default class ListadoMusic extends Component {
                 </tr>
 
             ))
-        }
-
-        return (
-            <div className="container">
+            }
+            
+            {/*<div className="container">
                 <h1>Listado Music</h1>
                 <table>
                     <thead>
@@ -73,6 +72,27 @@ export default class ListadoMusic extends Component {
 
                 </table>
             </div>
+        */}
+
+
+        return (
+            
+            <div className="container">
+            <h1>Listado Music</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th></th><th></th><th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {item}
+                </tbody>
+
+            </table>
+        </div>
         )
     }
 }
