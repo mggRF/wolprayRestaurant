@@ -32,26 +32,6 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `categories`
 --
 
-CREATE TABLE `categories` (
-  `categoryid` int(11) NOT NULL,
-  `categoryName` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `categories`
---
-
-INSERT INTO `categories` (`categoryid`, `categoryName`) VALUES
-(1, 'Chupito'),
-(2, 'Cerveza'),
-(3, 'Cocktail'),
-(4, 'Bebida energética'),
-(5, 'Refresco'),
-(6, 'Agua'),
-(7, 'Snack'),
-(8, 'Servicio'),
-(9, 'Botella'),
-(10, 'Copa');
 
 -- --------------------------------------------------------
 
@@ -8768,10 +8748,25 @@ INSERT INTO `events` (`eventid`, `clubid`, `eventName`, `eventDescription`, `eve
 --
 
 CREATE TABLE `n_category` (
-  `cateroryId` int(11) NOT NULL,
+  `categoryId` int(11) NOT NULL,
   `categoryName` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+
+
+
+
+INSERT INTO `n_category` (`categoryId`, `categoryName`) VALUES
+(1, 'Chupito'),
+(2, 'Cerveza'),
+(3, 'Cocktail'),
+(4, 'Bebida energética'),
+(5, 'Refresco'),
+(6, 'Agua'),
+(7, 'Snack'),
+(8, 'Servicio'),
+(9, 'Botella'),
+(10, 'Copa');
 -- --------------------------------------------------------
 
 --
