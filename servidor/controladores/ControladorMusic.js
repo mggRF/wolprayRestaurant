@@ -14,7 +14,7 @@ const QUERIES = {
     UPDATE: `UPDATE ${TABLA} SET ? WHERE musicid = ?`,
     DELETE: `DELETE FROM ${TABLA} WHERE musicid = ?`
 }
-
+ 
 class ControladorMusic extends ControladorBase {
    
     constructor(){
