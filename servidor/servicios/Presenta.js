@@ -22,7 +22,8 @@ class Presenta {
     }
 
     static isProd(){
-        return  false //(process.env.NODE_ENV === 'production'=
+        console.log ("NODE_ENV" , process.env.NODE_ENV)
+        return  (process.env.NODE_ENV === 'production')
     }
 }
 module.exports = Presenta;
