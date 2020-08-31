@@ -21,6 +21,11 @@ export default class ControllerMusic extends ControllerBase {
             id: "",
             estadoUsuario: checkUsuario(9)
         }
+        this.montaDatos = this.montaDatos.bind(this);
+    }
+
+    montadatos(datos){
+        return datos;
     }
 
     
