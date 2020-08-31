@@ -53,7 +53,7 @@ export default class ListadoMusic extends Component {
 
             <div className="container">
                 <h1>Listado Music</h1>
-                <BotonListado funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}/>
+                <BotonListado funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}>Insertar</BotonListado>
                 <table className="table">
                     <thead>
                         <tr>
