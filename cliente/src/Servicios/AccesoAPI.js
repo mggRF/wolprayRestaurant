@@ -15,7 +15,7 @@ export default class AccesoAPI {
     console.log('desde leerUNO de AccesoAPI')
     let url2 = CONVERSOR[tabla];
     console.log(url2)
-    if (url2===null) url2=tabla;
+    if (url2===null || url2===undefined) url2=tabla;
     let url = API_URL + url2 + "/" + id;    
     console.log('leerUno url:',url);
     return this.accederApi(url);
