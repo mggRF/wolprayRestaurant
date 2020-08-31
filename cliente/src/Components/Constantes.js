@@ -11,6 +11,7 @@ module.exports = {
     MUSIC: 'musics',
     COMPANIES:'companies',
     DRESSCODE: 'dresscode',
+    ROLE: 'roles',
     STATES_SELECT: 'states/select/',
 
     LPPAGINA: "20",                             //lineas por pagina
