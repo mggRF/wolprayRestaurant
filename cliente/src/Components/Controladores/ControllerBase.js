@@ -43,12 +43,16 @@ export default class ControllerBase extends Component {
             console.log('accionSolicitada=>',datos,
                                             this.getPropertyValue(datos, this.ID)  
                                             )
-            AccesoAPI.enviarTodo(this.TABLA, METODO[this.state.orden], datos, datos[this.ID])
+            let datosEnvio = this.montaDatos(datos)  ;                             
+            AccesoAPI.enviarTodo(this.TABLA, METODO[this.state.orden], datosEnvio, datosEnvio[this.ID])
                 .then(response => {
                     this.setState({ estadoActualizacion: 0 });
                 })
 
         }
+    }
+    montaDatos(datos){
+        return datos;
     }
 
     getPropertyValue(obj1, dataToRetrieve) {
