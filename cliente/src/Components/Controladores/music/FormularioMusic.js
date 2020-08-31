@@ -25,8 +25,8 @@ export default class FormularioMusic extends Component {
     }
 }
 FormularioMusic.defaultProps = {
-    orden: "E",
-    funcion: PropTypes.func
+    orden: "V"
+  
 }
 FormularioMusic.propTypes = {
     orden: PropTypes.oneOf(['D', 'V', 'E', 'I']),
