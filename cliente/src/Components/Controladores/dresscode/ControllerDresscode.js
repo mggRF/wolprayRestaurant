@@ -12,7 +12,7 @@ export default class  ControllerDresscode extends ControllerBase {
     constructor(props) {
         super(props);
         this.TABLA ='n_dresscode';
-        this.ID ='dressCodeId ';
+        this.ID ='dressCodeId';
         this.LISTADO = ListadoDresscode
         this.FORMULARIO = FormularioDresscode
         this.state = {
