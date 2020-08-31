@@ -40,6 +40,11 @@ export default class ControllerBase extends Component {
         this.setState({ estadoActualizacion: 0 });     //preparo para que se pueda volver a listar
         if (this.state.orden !== "V") {
             this.setState({ estadoActualizacion: 2 })
+            console.log('accionSolicitada=>',datos,
+                                            datos.dressCodeId, 
+                                            this.ID="dressCodeId",
+                                            this.getPropertyValue(datos, this.ID)  
+                                            )
             AccesoAPI.enviarTodo(this.TABLA, METODO[this.state.orden], datos, datos[this.ID])
                 .then(response => {
                     this.setState({ estadoActualizacion: 0 });
@@ -47,6 +52,14 @@ export default class ControllerBase extends Component {
 
         }
     }
+
+    getPropertyValue(obj1, dataToRetrieve) {
+        return dataToRetrieve
+          .split('.') // split string based on `.`
+          .reduce(function(o, k) {
+            return o && o[k]; // get inner property if `o` is defined else get `o` and return
+          }, obj1) // set initial value as object
+      }
 
     render() {
         const LISTADO = this.LISTADO;
