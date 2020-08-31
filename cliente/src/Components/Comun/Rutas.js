@@ -14,7 +14,7 @@ const MUSICA = "/music";
 const CLUBS = "/clubs";
 const COMPANIES = "/companies";
 const DRESSCODE = "/dresscode";
-const ROLES = "/roles";
+const ROLES = "/role";
 
 
 export default class Rutas extends Component {

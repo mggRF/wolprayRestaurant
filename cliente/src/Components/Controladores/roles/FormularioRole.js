@@ -12,7 +12,7 @@ export default class FormularioRole extends Component {
                 <input name="roleid" 
                     value={role.roleid} 
                     onChange={this.props.funcion} 
-                    readOnly="ON"/>
+                    readOnly="ON "/>
                 <label htmlFor="roleName">Name</label>
                 <input name="roleName" 
                     value={role.roleName} 
