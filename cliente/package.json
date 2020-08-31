@@ -1,7 +1,7 @@
 {
     "name": "wolpray_v00",
     "version": "0.1.0",
-    "homepage": "./index.html",
+    "homepage": "http://wolpray.es/interno/index.html",
     "private": true,
     "dependencies": {
         "@testing-library/jest-dom": "^4.2.4",
@@ -10,7 +10,7 @@
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "react-router-dom": "^5.2.0",
-        "react-scripts": "3.4.1"
+        "react-scripts": "^3.4.3"
     },
     "scripts": {
         "start": "react-scripts start",
@@ -32,5 +32,8 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "ftp-deploy": "^2.3.7"
     }
 }
