@@ -41,8 +41,6 @@ export default class ControllerBase extends Component {
         if (this.state.orden !== "V") {
             this.setState({ estadoActualizacion: 2 })
             console.log('accionSolicitada=>',datos,
-                                            datos.dressCodeId, 
-                                            this.ID="dressCodeId",
                                             this.getPropertyValue(datos, this.ID)  
                                             )
             AccesoAPI.enviarTodo(this.TABLA, METODO[this.state.orden], datos, datos[this.ID])

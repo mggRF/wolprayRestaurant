@@ -32,7 +32,7 @@ export default class CtrlFormulario extends Component {
 
         let orden=this.props.orden;
         let obj=this.state.obj;
-        
+        console.log("La orden", orden);
         return (
             <>
             {React.cloneElement(this.props.formulario,
