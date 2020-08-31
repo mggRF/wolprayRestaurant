@@ -14,7 +14,7 @@ export default class  ControllerClub extends ControllerBase {
         this.TABLA = 'clubs';
         this.ID = 'clubid';
         this.LISTADO = ListadoClubs
-        this.FORMULARIO = FormularioClub,
+        this.FORMULARIO = FormularioClub
         this.MODELO ={
          "clubid" : this.clubid,
          "clubName" : this.clubName,
