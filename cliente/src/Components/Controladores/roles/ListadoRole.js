@@ -9,7 +9,7 @@ import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
 
 
 
-export default class ListadoMusic extends Component {
+export default class ListadoRole extends Component {
 
     constructor(props) {
         super(props);
@@ -51,7 +51,7 @@ export default class ListadoMusic extends Component {
                     <td key={index} >{valor.roleid}</td>
                     <td>{valor.roleName}</td>
                     <TresBotonesListado funcion={this.props.trabajo}
-                                        id={valor.musicid}/>
+                                        id={valor.roleid}/>
                 </tr>
 
             ))
@@ -78,7 +78,7 @@ export default class ListadoMusic extends Component {
         )
     }
 }
-ListadoMusic.propTypes = {
+ListadoRole.propTypes = {
     usuario: PropTypes.object,
     trabajo: PropTypes.func
 }

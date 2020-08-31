@@ -1,5 +1,5 @@
 
-import Listado from './ListadoRole';
+import ListadoRole from './ListadoRole';
 
 import FormularioRole from './FormularioRole';
 import ControllerBase from './../ControllerBase';
@@ -13,7 +13,7 @@ export default class ControllerRole extends ControllerBase {
         super(props);
         this.TABLA = 'roles';
         this.ID = 'roleid';
-        this.LISTADO = Listado
+        this.LISTADO = ListadoRole
         this.FORMULARIO = FormularioRole
         this.state = {
             estadoActualizacion: 0,

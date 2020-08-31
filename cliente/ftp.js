@@ -3,13 +3,13 @@ var Deploy = require ('ftp-deploy');
 var ftpDeploy = new Deploy (); 
  
 var config = { 
-    host: "http://wolpray.es", 
-    user: USER_FTP, 
-    password : PASS_FTP, 
-    port: 21, 
-    localRoot: __dirname + '/ build', 
-    remoteRoot: '/home/wolpray/public_html/interno/', 
-    include: ['*'], 
+    host    : "51.210.241.194", 
+    user    : process.env.USER_FTP, 
+    password: process.env.PASS_FTP, 
+    port    : 21, 
+    localRoot   : __dirname + '/build', 
+    remoteRoot  : 'public_html/interno/', 
+    include     : ['*'], 
     deleteRemote: true 
 }
 ftpDeploy.deploy(config, function(err, res) {
