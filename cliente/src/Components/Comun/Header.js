@@ -20,13 +20,13 @@ export default class  Header extends Component {
                             <h6 className="nav-link" >Usuario:</h6>
                             </li>
                             <li className="nav-item">
-                            <h8 className="nav-link" >nombreusuario</h8>
+                            <h6 className="nav-link" >nombreusuario</h6>
                             </li>
                             <li className="nav-item ">
                             <h6 className="nav-link" >Rol:</h6>
                             </li>
                             <li className="nav-item ">
-                            <h8 className="nav-link" >Admin</h8>
+                            <h6 className="nav-link" >Admin</h6>
                             </li>
                             <div className="container">
                                 <button type="button" className="btn btn-primary logoutbutton">Logout</button>
