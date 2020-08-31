@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { API_URL, MUSIC } from '../../Constantes';
 import AccesoAPI from './../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
+import BotonListado from '../../Fragmentos/BotonListados';
 
 
 
@@ -52,6 +53,7 @@ export default class ListadoMusic extends Component {
 
             <div className="container">
                 <h1>Listado Music</h1>
+                <BotonListado funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}/>
                 <table className="table">
                     <thead>
                         <tr>
@@ -71,5 +73,6 @@ export default class ListadoMusic extends Component {
 }
 ListadoMusic.propTypes = {
     usuario: PropTypes.object,
-    trabajo: PropTypes.func
+    trabajo: PropTypes.func,
+    insertar: PropTypes.func
 }

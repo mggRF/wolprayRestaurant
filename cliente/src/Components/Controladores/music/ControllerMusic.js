@@ -15,6 +15,10 @@ export default class ControllerMusic extends ControllerBase {
         this.ID = 'musicid';
         this.LISTADO = Listado
         this.FORMULARIO = Formulario
+        this.MODELO = {
+            musicid:null,
+            musicName:""
+        }
         this.state = {
             estadoActualizacion: 0,
             orden: "",
@@ -24,9 +28,7 @@ export default class ControllerMusic extends ControllerBase {
         this.montaDatos = this.montaDatos.bind(this);
     }
 
-    montadatos(datos){
-        return datos;
-    }
+    
 
     
 }
