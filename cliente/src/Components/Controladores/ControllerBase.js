@@ -9,7 +9,14 @@ import CtrlFormulario from './../../Servicios/CtrlFormulario';
 export default class ControllerBase extends Component {
 
 
-
+    insertSolicitado = () => {
+        this.setState({
+            estadoActualizacion: 1,       //pongo modo formulario
+            orden: "I",               //pongo lo que ha de hacer
+            id: null,                      //pongo sobre quien lo ha de hacer
+            objeto: this.MODELO
+        });
+    }
 
     trabajoSolicitado = (orden, id) => {
         //console.log("Controller, orden y id=>",orden,id)
@@ -17,7 +24,7 @@ export default class ControllerBase extends Component {
             .then(response => {
                 //console.log("RespuestaUNO=>", response);
                 if (response.Respuesta = 'ok') {
-                    console.log("leer uno es correcto y la variable orden contiene: ", orden)
+                    console.log("leer uno ok.Orden: ", orden)
                     if (response.Respuesta == 'ok') {
                         this.setState({
                             estadoActualizacion: 1,       //pongo modo formulario
@@ -40,24 +47,32 @@ export default class ControllerBase extends Component {
         this.setState({ estadoActualizacion: 0 });     //preparo para que se pueda volver a listar
         if (this.state.orden !== "V") {
             this.setState({ estadoActualizacion: 2 })
-            console.log('accionSolicitada=>',datos,
-                                            this.getPropertyValue(datos, this.ID)  
-                                            )
-            AccesoAPI.enviarTodo(this.TABLA, METODO[this.state.orden], datos, datos[this.ID])
+            console.log('accionSolicitada=>', datos,
+                this.getPropertyValue(datos, this.ID)
+            )
+            let datosEnvio = this.montaDatos(datos);
+            AccesoAPI.enviarTodo(this.TABLA, METODO[this.state.orden], datosEnvio, datosEnvio[this.ID])
                 .then(response => {
                     this.setState({ estadoActualizacion: 0 });
                 })
 
         }
     }
+    montaDatos(datos) {
+        let salida = {};
+        for (let key in this.MODELO) {
+            salida[key] = datos[key];
+        }
+        return salida;
+    }
 
     getPropertyValue(obj1, dataToRetrieve) {
         return dataToRetrieve
-          .split('.') // split string based on `.`
-          .reduce(function(o, k) {
-            return o && o[k]; // get inner property if `o` is defined else get `o` and return
-          }, obj1) // set initial value as object
-      }
+            .split('.') // split string based on `.`
+            .reduce(function (o, k) {
+                return o && o[k]; // get inner property if `o` is defined else get `o` and return
+            }, obj1) // set initial value as object
+    }
 
     render() {
         const LISTADO = this.LISTADO;
@@ -70,7 +85,8 @@ export default class ControllerBase extends Component {
             <>
                 {(this.state.estadoActualizacion === 0) ?
                     <LISTADO usuario={this.state.usuario}
-                        trabajo={this.trabajoSolicitado} />
+                        trabajo={this.trabajoSolicitado}
+                        insertar={this.insertSolicitado} />
                     : ""}
                 {(this.state.estadoActualizacion === 1) ?
                     <CtrlFormulario orden={this.state.orden}
