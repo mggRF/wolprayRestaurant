@@ -64,7 +64,9 @@ export default class Desplegable extends Component {
         let nombreCampo = this.props.name;
         return (
             <>
-                <label htmlFor={nombreCampo}>{this.props.label}</label>
+                <label htmlFor={nombreCampo}>
+                    {this.props.label}
+                </label>
                 <select name={nombreCampo}
                     id={nombreCampo}
                     onChange={this.props.readValue}
