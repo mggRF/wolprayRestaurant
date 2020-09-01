@@ -14,4 +14,5 @@ module.exports = {
     SLOTS: '/' +  VERSION + '/' + 'slots',
     ROLES: '/' +  VERSION + '/' + 'roles',
     COMPANIES: '/' +  VERSION + '/' + 'companies',
+    PRODUCTS: '/' +  VERSION + '/' + 'products',
 }

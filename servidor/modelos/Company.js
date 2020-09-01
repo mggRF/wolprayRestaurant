@@ -4,7 +4,7 @@ class Company {
     //  cpcoa_nombre;
     //  cpcoa_pais;
 
-     constructor(companyid   ,companyName,companyAddress,countryid ,company_CIF ){
+     constructor(companyid ,companyName,companyAddress,countryid ,company_CIF ){
          this.companyid = companyid;
          this.companyName = companyName;
          this.companyAddress = companyAddress;

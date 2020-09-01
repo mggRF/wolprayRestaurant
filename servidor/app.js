@@ -11,8 +11,9 @@ const bodyParser = require('body-parser');
 var morgan = require('morgan');
 const compression = require('compression');
 const helmet = require('helmet');
+const fileUpload = require('express-fileupload');
 
-const { COMUNIDADES, PAISES, POBLACIONES, PROVINCIAS, MUSICA, CLUBS, DRESSCODE, EVENTS, USERS, SLOTS, ROLES, COMPANIES } = require('./Constantes/ConstantesRutas');
+const { COMUNIDADES, PAISES, POBLACIONES, PROVINCIAS, MUSICA, CLUBS, DRESSCODE, EVENTS, USERS, SLOTS, ROLES, COMPANIES, PRODUCTS } = require('./Constantes/ConstantesRutas');
 
 
 
@@ -35,14 +36,20 @@ const rSlots = require('./rutas/rutaSlots');
 const rRoles = require('./rutas/rutaRoles');
 const rCompanies = require('./rutas/rutaCompanies');
 const rDressCode = require('./rutas/rutaDressCode');
+const rProducts = require('./rutas/rutaProducts');
 const Autorizado = require('./Autentificacion/middelAut');
-
+const FileUpload = require('./middlewares/FileUpload')
 
 //cargar middlewares
 //Configuramos bodyParser para que convierta el body de nuestras peticiones a JSON
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(bodyParser.json());
+//Subida de imagenes
+app.use(fileUpload({
+    useTempFiles: true
+}));
+
 
 // Cargamos las rutas
 app.use('/', rGlobal);
@@ -52,12 +59,13 @@ app.use(POBLACIONES, Autorizado, rPoblacion);
 app.use(PROVINCIAS, Autorizado, rProvincia);
 app.use(MUSICA, Autorizado, rMusic);
 app.use(CLUBS, Autorizado, rClub);
-app.use(EVENTS, Autorizado, rEvents);
+app.use(EVENTS, Autorizado, FileUpload, rEvents);
 app.use(USERS, Autorizado, rUsers);
 app.use(SLOTS, Autorizado, rSlots);
 app.use(ROLES, Autorizado, rRoles);
 app.use(COMPANIES, Autorizado, rCompanies);
 app.use(DRESSCODE, Autorizado, rDressCode);
+app.use(PRODUCTS, Autorizado, FileUpload, rProducts);
 
 if (process.env.NODE_ENV == 'production') {
     // create a rotating write stream
