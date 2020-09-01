@@ -11,8 +11,13 @@ export default class  ControllerCompanies extends ControllerBase {
         super(props);
         this.TABLA = 'companies';
         this.ID = 'companyid';
-        this.LISTADO = ListadoCompanies
-        this.FORMULARIO = Formulario
+        this.LISTADO = ListadoCompanies;
+        this.FORMULARIO = Formulario;
+        this.MODELO = {
+            companyName:"",
+            companyAddress:"",
+            company_CIF:""
+        }
         this.state = {
             estadoActualizacion: 0,
             orden: "",

@@ -10,8 +10,11 @@ const selectUo = `select
                     ${TABLA}.*,
                     users.userName, 
                     c_city.cityName,
+                    c_provinces.provinceid,
                     c_provinces.provinceName,
+                    c_state.stateid,
                     c_state.stateName,
+                    c_country.countryId,
                     c_country.countryName
 
                     from ${TABLA} 

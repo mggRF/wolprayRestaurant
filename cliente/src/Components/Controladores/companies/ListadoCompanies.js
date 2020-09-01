@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+
+import swal from 'sweetalert'
 import { API_URL, COMPANIES } from '../../Constantes';
 import AccesoAPI from './../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
+import BotonListado from '../../Fragmentos/BotonListados';
+import { Alerts } from '../../Fragmentos/Alerts';
 
 export default class ListadoCompanies extends Component {
 
@@ -36,12 +40,19 @@ export default class ListadoCompanies extends Component {
 
 
 
+
     render() {
 
 
         console.log("RENDER=>", this.state.datos)
 
         let item = [];
+        let styleHeader = {
+            display: "flex",
+            flexDirection: "row",
+            width: "100%",
+            justifyContent: "space-around"
+        }
 
         this.state.datos.forEach((valor, index) => item.push(
             <tr key={index}>
@@ -57,7 +68,10 @@ export default class ListadoCompanies extends Component {
         return (
 
             <div className="container">
-                <h1>Listado Companies</h1>
+                <div style={styleHeader}>
+                    <h1>Listado Empresas</h1>
+                    <BotonListado funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}>Añadir club</BotonListado>
+                </div>
                 <table className="table">
                     <thead>
                         <tr>
