@@ -2,6 +2,7 @@ var express = require('express');
 
 var ControladorProducts = require('../controladores/ControladorProducts');
 let products = new ControladorProducts();
+const FileUpload = require('../middlewares/FileUpload');
 // Llamamos al router
 var rutas = express.Router();
 //var md_auth = require('../middlewares/authenticated');
@@ -9,7 +10,7 @@ var rutas = express.Router();
 rutas.get('/', products.listado);
 rutas.get('/select/:id',products.leerSelect)
 rutas.get('/:id', products.leerUno);
-rutas.post('/', products.updateTable);
+rutas.post('/',products.updateTable);
 rutas.put('/:id', products.updateTable);
 rutas.delete('/:id', products.updateTable);
 // Exportamos la configuración

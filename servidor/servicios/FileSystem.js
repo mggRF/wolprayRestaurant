@@ -5,11 +5,12 @@ const uniqid = require('uniqid');
 
 
 const FileSystem = {
-    guardarImagenTemporal: guardarImagenTemporal,
-    guardarImagenDelClub: guardarImagenDelClub
+    guardarImagenPrincipal: guardarImagenPrincipal,
+    guardarImagenDelClub: guardarImagenDelClub,
+    imagenesDeTempHaciaLaRutaFinal: imagenesDeTempHaciaLaRutaFinal
 }
 
-function guardarImagenTemporal(file, id, contentPath) {
+function guardarImagenPrincipal(file, id, contentPath) {
 
 
     return new Promise((resolve, reject) => {
@@ -20,14 +21,14 @@ function guardarImagenTemporal(file, id, contentPath) {
         //Nombre del archivo
         const nombreArr = file.name.split('.');
         const extension = nombreArr[nombreArr.length - 1];
-        const fileName = `principal.${extension}`;
+        const fileName = `${id}.${extension}`;
 
         //Mover a carpeta
         file.mv(`${pathFinal}/${fileName}`, err => {
             if (err) {
                 reject(err);
             } else {
-                resolve();
+                resolve(`${pathFinal}/${fileName}`);
             }
         });
 
@@ -35,17 +36,17 @@ function guardarImagenTemporal(file, id, contentPath) {
 }
 
 
-function guardarImagenDelClub(file, id,) {
+function guardarImagenDelClub(file, id) {
     return new Promise((resolve, reject) => {
-        const pathFinal = obtenerPath(id, contentPath);
+        const pathFinal = obtenerPath(id);
 
-        if (fs.existsSync(path)) {
+        if (fs.existsSync(pathFinal)) {
             const fileName = generarNombre(file.name);
             file.mv(`${pathFinal}/${fileName}`, err => {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve();
+                    resolve(fileName);
                 }
             });
         } else {
@@ -66,7 +67,7 @@ function generarNombre(nombreOriginal) {
 }
 
 function obtenerPath(id) {
-    const finalPathClub = path.resolve(__dirname, '../interno/', id + '/fotos');
+    return path.resolve(__dirname, '../interno/', '/clubs/'+id + '/fotos');
 }
 
 
@@ -89,7 +90,34 @@ function crearCarpetaDeContenido(id, contentPath) {
         }
     }
 
-    return pathTemp;
+    return finalPath;
+}
+
+function imagenesDeTempHaciaLaRutaFinal(id){
+    const pathContent = path.resolve(__dirname, '../interno/','/clubs' );
+    const pathTemp = pathContent + '/' + id+'/temp';
+    const finalPath = pathContent + '/' + id+'/fotos';
+
+    if(fs.existsSync(pathTemp)){
+        return [];
+    }
+
+    if(fs.existsSync(finalPath)){
+        fs.mkdirSync(finalPath)
+    }
+
+    const imagenesTemp = obtenerImagenesEnTemp(id, pathTemp);
+
+    imagenesTemp.forEach(imagen => {
+        fs.renameSync(`${pathTemp}/${imagen}`,`${finalPath}/${imagen}` );
+    });
+
+    return imagenesTemp;
+    
+}
+
+function obtenerImagenesEnTemp(id, contentPath){
+    return fs.readdirSync(contentPath) || [];
 }
 
 module.exports = FileSystem;

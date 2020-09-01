@@ -38,7 +38,7 @@ const rCompanies = require('./rutas/rutaCompanies');
 const rDressCode = require('./rutas/rutaDressCode');
 const rProducts = require('./rutas/rutaProducts');
 const Autorizado = require('./Autentificacion/middelAut');
-const FileUpload = require('./middlewares/FileUpload')
+
 
 //cargar middlewares
 //Configuramos bodyParser para que convierta el body de nuestras peticiones a JSON
@@ -59,13 +59,13 @@ app.use(POBLACIONES, Autorizado, rPoblacion);
 app.use(PROVINCIAS, Autorizado, rProvincia);
 app.use(MUSICA, Autorizado, rMusic);
 app.use(CLUBS, Autorizado, rClub);
-app.use(EVENTS, Autorizado, FileUpload, rEvents);
+app.use(EVENTS, Autorizado, rEvents);
 app.use(USERS, Autorizado, rUsers);
 app.use(SLOTS, Autorizado, rSlots);
 app.use(ROLES, Autorizado, rRoles);
 app.use(COMPANIES, Autorizado, rCompanies);
 app.use(DRESSCODE, Autorizado, rDressCode);
-app.use(PRODUCTS, Autorizado, FileUpload, rProducts);
+app.use(PRODUCTS, Autorizado, rProducts);
 
 if (process.env.NODE_ENV == 'production') {
     // create a rotating write stream

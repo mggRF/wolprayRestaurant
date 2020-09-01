@@ -67,7 +67,7 @@ class ControladorBase {
 
     leerUno(req, res) {
         let id = req.params.id;
-
+    
         let sql = this.config.QUERIES.SELECT_UNO.replace(':id', id);
         
        

@@ -4,6 +4,7 @@ var express = require('express');
 
 var ControladorEvents = require('../controladores/ControladorEvents');
 let events = new ControladorEvents();
+const FileUpload = require('../middlewares/FileUpload');
 // Llamamos al router
 var rutas = express.Router();
 //var md_auth = require('../middlewares/authenticated');

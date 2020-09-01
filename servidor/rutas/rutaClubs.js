@@ -4,6 +4,7 @@ var express = require('express');
 
 var ControladorClubs = require('../controladores/ControladorClubs');
 let clubs = new ControladorClubs();
+const FileUpload = require('../middlewares/FileUpload');
 // Llamamos al router
 var rutas = express.Router();
 //var md_auth = require('../middlewares/authenticated');
@@ -12,7 +13,9 @@ rutas.get('/', clubs.listado);
 rutas.get('/select/:id',clubs.leerSelect)
 rutas.get('/:id', clubs.leerUno);
 rutas.post('/', clubs.updateTable);
-rutas.put('/:clubid', clubs.updateTable);
+// rutas.post('/', FileUpload, clubs.updateTable);
+rutas.put('/:id', clubs.updateTable);
+// rutas.put('/:id',FileUpload, clubs.updateTable);
 rutas.delete('/:id', clubs.updateTable);
 // Exportamos la configuración
 module.exports = rutas;
