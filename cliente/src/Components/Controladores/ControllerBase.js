@@ -15,7 +15,7 @@ export default class ControllerBase extends Component {
             estadoActualizacion: 1,       //pongo modo formulario
             orden: "I",               //pongo lo que ha de hacer
             id: null,                      //pongo sobre quien lo ha de hacer
-            objeto: this.MODELO
+            objeto: Object.assign({}, this.MODELO)
         });
     }
 
