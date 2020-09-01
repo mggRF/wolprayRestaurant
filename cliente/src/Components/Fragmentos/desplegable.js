@@ -10,25 +10,25 @@ export default class Desplegable extends Component {
     state = {
         datos: [],
         error: "",
-        id:0
+        id: 0
     }
 
     componentDidUpdate() {
         this.monta();
     }
-    componentDidMount(){
+    componentDidMount() {
         this.monta();
     }
     // shouldComponentUpdate(nextProps, nextState){
     //     console.log("Update ",nextProps.depend,this.state.id)
     //     return nextProps.depend !== this.state.id;
     // }
-    monta(){
-        if (this.props.depend === this.state.id){
+    monta() {
+        if (this.props.depend === this.state.id) {
             return
         }
-        this.setState({id:this.props.depend});
-         if (this.props.depend !== 0) {
+        this.setState({ id: this.props.depend });
+        if (this.props.depend !== 0) {
             AccesoAPI.leerDesplegables(this.props.table, this.props.depend)
                 .then(response => {
                     if (response.Respuesta === "ok") {
@@ -52,7 +52,7 @@ export default class Desplegable extends Component {
 
 
     render() {
-        
+
         let items = [];
         items.push(<option key="0" value="0">Selecciona....</option>);
         if (this.state.datos.length > 0) {
@@ -60,13 +60,18 @@ export default class Desplegable extends Component {
                 items.push(<option key={index + 1} value={valor.id}>{valor.opcion}</option>);
             });
         }
-        let nombreCampo=this.props.table+"selec";
+
+        let nombreCampo = this.props.name;
         return (
             <>
-            <label htmlFor={nombreCampo}>{this.props.label}</label>
-            <select id={nombreCampo} onChange={this.props.readValue} value={this.props.value}>
-                {items}
-            </select>
+                <label htmlFor={nombreCampo}>{this.props.label}</label>
+                <select name={nombreCampo}
+                    id={nombreCampo}
+                    onChange={this.props.readValue}
+                    value={this.props.value}
+                >
+                    {items}
+                </select>
             </>
         )
 
@@ -80,6 +85,7 @@ Desplegable.propTypes = {
     label: PropTypes.string,
     table: PropTypes.string.isRequired,
     value: PropTypes.number,
-    depend: PropTypes.number
+    depend: PropTypes.number,
+    name: PropTypes.string.isRequired
 
 }

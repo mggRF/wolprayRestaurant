@@ -11,7 +11,7 @@ export default class FormularioCompanies extends Component {
     render() {
         let company = this.props.obj;
         let readonly = this.props.orden.includes(['D', 'V']) ? true : false
-
+        console.log("Company=>", company);
         return (
             <div>
                 {
@@ -41,9 +41,14 @@ export default class FormularioCompanies extends Component {
                 {
                     (company.stateid) ?
                         (<>
-                            <Desplegable label="Comunidad autonoma" readValue={this.props.funcion} table='c_state' value={Number.parseInt(company.stateid)} depend={company.countryId} />
-                            <Desplegable label="Provincia" readValue={this.props.funcion} table='c_provinces' value={Number.parseInt(company.provinceid)} depend={company.stateid} />
-                            <Desplegable label="Poblacion" readValue={this.props.funcion} table='c_city' value={Number.parseInt(company.countryId)} depend={company.provinceid} />
+                            <Desplegable label="Comunidad autonoma" 
+                                    readValue={this.props.funcion} 
+                                    table='c_state' 
+                                    value={Number.parseInt(company.stateid)} 
+                                    depend={company.countryId} 
+                                    name="stateid"/>
+                            <Desplegable label="Provincia" readValue={this.props.funcion} table='c_provinces' value={Number.parseInt(company.provinceid)} depend={company.stateid} name="provinceid"/>
+                            <Desplegable label="Poblacion" readValue={this.props.funcion} table='c_city' value={Number.parseInt(company.countryId)} depend={company.provinceid} name="countryId" />
                         </>): null
                 }
             </div>

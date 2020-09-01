@@ -22,7 +22,8 @@ export default class CtrlFormulario extends Component {
         let obj = this.state.obj;
         obj[e.target.name] = e.target.value
         this.setState({ obj: obj })
-        
+        console.log("recogeDatos", obj)
+        console.log("recogeDatosName", e.target.name)
     }
     componentDidMount() {
         this.setState(this.props.obj);
