@@ -1,7 +1,7 @@
 {
     "name": "wolpray_v00",
     "version": "0.1.0",
-    "homepage": "http://wolpray.es/interno/index.html",
+    "homepage": ".",
     "private": true,
     "dependencies": {
         "@testing-library/jest-dom": "^4.2.4",
