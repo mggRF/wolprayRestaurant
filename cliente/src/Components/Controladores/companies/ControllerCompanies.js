@@ -14,11 +14,10 @@ export default class  ControllerCompanies extends ControllerBase {
         this.LISTADO = ListadoCompanies;
         this.FORMULARIO = Formulario;
         this.MODELO = {
-            companyid:null,
-            userid:null,
+            companyid:0,
             companyName:"",
             companyAddress:"",
-            cityid: null,
+            cityid: 0,
             company_CIF:"",
         }
         this.state = {

@@ -8,7 +8,6 @@ const MODELO = require("../modelos/Company");
 const TABLA = 'companies';
 const selectUo = `select 
                     ${TABLA}.*,
-                    users.userName, 
                     c_city.cityName,
                     c_provinces.provinceid,
                     c_provinces.provinceName,
@@ -19,7 +18,6 @@ const selectUo = `select
 
                     from ${TABLA} 
 
-                        JOIN users ON users.userid = ${TABLA}.userid 
                         JOIN c_city ON c_city.cityid = ${TABLA}.cityid 
                         JOIN c_provinces on c_provinces.provinceid = c_city.provinceid
                         JOIN c_state ON c_state.stateid = c_provinces.stateid
