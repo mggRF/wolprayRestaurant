@@ -9,7 +9,7 @@ export default class AccesoAPI {
 
   static async leerDesplegables(tabla, precursor) {
     let url = API_URL + CONVERSOR[tabla] + "/select/"
-    if (precursor !== 'undefined') url += precursor;
+    if (!(precursor === 'undefined' || precursor===0)) url += precursor;
     return this.accederApi(url);
   }
 
@@ -25,9 +25,17 @@ export default class AccesoAPI {
   static async enviarTodo(tabla, metodo, datos, id = null) {
     let url2 = this.verificaTabla(tabla);
     let url = API_URL + url2;
-    if (id !== null) url += '/' + id;
-    console.log('enviarTodo url:', url);
-    return this.accederApi(url, metodo, datos);
+    switch (metodo) {
+      case 'POST':
+        return this.accederApi(url, metodo, datos);
+      case 'PUT':
+        url += '/' + id;
+        return this.accederApi(url, metodo, datos);
+      case 'DELETE':
+        url += '/' + id;
+        return this.accederApi(url, metodo, null);
+    }
+
   }
   /*
   *  Metodo de acceso a la API. Comun......

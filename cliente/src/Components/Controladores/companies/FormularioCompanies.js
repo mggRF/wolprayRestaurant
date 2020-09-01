@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { API_URL, COMPANIES } from '../../Constantes';
-import Desplegable from '../../Fragmentos/desplegable';
+import { InputComponent } from './InputComponent';
+import { DesplegableDireccion, Desplegables } from '../../Fragmentos/DesplegableDireccion';
 
 
 
@@ -10,57 +10,89 @@ export default class FormularioCompanies extends Component {
 
     render() {
         let company = this.props.obj;
-        let readonly = this.props.orden.includes(['D', 'V']) ? true : false
+        let readonly = false;
+        if (this.props.orden == 'D' || this.props.orden == 'V')
+            readonly = true
+        let title = '';
+        switch (this.props.orden) {
+            case 'I':
+                title = 'añadir';
+                break;
+            case 'E':
+                title = 'modificar';
+                break;
+            case 'E':
+                title = 'modificar';
+                break;
+            default:
+                title = 'Información sobre empresa';
+                break;
+        }
         console.log("Company=>", company);
+        console.log('El readonly es: ' + readonly)
         return (
             <div>
                 {
-                    (company.companyid) ?
-                        (<><label htmlFor="companyid">Id</label>
-                            <input name="companyid"
-                                value={company.companyid}
-                                onChange={this.props.funcion}
-                                readOnly="ON" /></>) : null
+                    (!readonly) ?
+                        (<h1>{'Formulario para ' + title}</h1>) :
+                        (<h1>{title}</h1>)
                 }
-                <label htmlFor="companyName">Nombre</label>
-                <input name="companyName"
-                    value={company.companyName}
-                    onChange={this.props.funcion}
-                    readOnly={readonly} />
-                <label htmlFor="companyAddress">Dirección</label>
-                <input name="companyAddress"
-                    value={company.companyAddress}
-                    onChange={this.props.funcion}
-                    readOnly={readonly} />
-                <label htmlFor="company_CIF">CIF</label>
-                <input name="company_CIF"
-                    value={company.company_CIF}
-                    onChange={this.props.funcion}
-                    readOnly={readonly} />
+                <br />
+                <form className="form-horizontal" >
+                    {
+                        (company.companyid) ?
+                            (<><InputComponent
+                                handleChange={this.props.funcion}
+                                name="companyid"
+                                label="ID"
+                                readOnly={true}
+                                value={company.companyid.toString()}
+                            /></>) : null
+                    }
 
-                {
-                    (company.stateid) ?
-                        (<>
-                            <Desplegable label="Comunidad autonoma" 
-                                    readValue={this.props.funcion} 
-                                    table='c_state' 
-                                    value={Number.parseInt(company.stateid)} 
-                                    depend={company.countryId} 
-                                    name="stateid"/>
-                            <Desplegable label="Provincia" 
-                                    readValue={this.props.funcion} 
-                                    table='c_provinces' 
-                                    value={Number(company.provinceid)} 
-                                    depend={Number(company.stateid)} 
-                                    name="provinceid"/>
-                            <Desplegable label="Poblacion" 
-                                    readValue={this.props.funcion} 
-                                    table='c_city' 
-                                    value={Number(company.citiid)} 
-                                    depend={Number(company.provinceid)} 
-                                    name="citiid" />
-                        </>): null
-                }
+                    <InputComponent
+                        handleChange={this.props.funcion}
+                        name="companyName"
+                        label="Nombre"
+                        readOnly={readonly}
+                        value={company.companyName}
+                    />
+
+                    <InputComponent
+                        handleChange={this.props.funcion}
+                        name="companyAddress"
+                        label="Dirección"
+                        readOnly={readonly}
+                        value={company.companyAddress}
+                    />
+                    <InputComponent
+                        handleChange={this.props.funcion}
+                        name="company_CIF"
+                        label="CIF"
+                        readOnly={readonly}
+                        value={company.company_CIF}
+                    />
+
+
+                    {
+                        (readonly) ?
+                            (<InputComponent
+                                handleChange={this.props.funcion}
+                                name="city"
+                                label="Ciudad"
+                                readOnly={readonly}
+                                value={company.cityName}
+                            />) :
+                            (<>
+                                <DesplegableDireccion
+                                    funcion={this.props.funcion}
+                                    valorCCAA={company.stateid}
+                                    valorProv={company.provinceid}
+                                    valorPobl={company.cityid}
+                                />
+                            </>)
+                    }
+                </form>
             </div>
         )
     }

@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 
 import AccesoAPI from '../../Servicios/AccesoAPI';
 import { METODO } from '../Constantes';
+import { Alerts } from '../Fragmentos/Alerts';
 import CtrlFormulario from './../../Servicios/CtrlFormulario';
 
 
@@ -14,7 +15,7 @@ export default class ControllerBase extends Component {
             estadoActualizacion: 1,       //pongo modo formulario
             orden: "I",               //pongo lo que ha de hacer
             id: null,                      //pongo sobre quien lo ha de hacer
-            objeto: this.MODELO
+            objeto: Object.assign({}, this.MODELO)
         });
     }
 
@@ -43,26 +44,42 @@ export default class ControllerBase extends Component {
     }
 
 
-    accionSolicitada = (datos) => {
-        this.setState({ estadoActualizacion: 0 });     //preparo para que se pueda volver a listar
+    accionSolicitada = async (datos) => {
         if (this.state.orden !== "V") {
-            this.setState({ estadoActualizacion: 2 })
-            console.log('accionSolicitada=>', datos,
-                this.getPropertyValue(datos, this.ID)
-            )
-            let datosEnvio = this.montaDatos(datos);
-            AccesoAPI.enviarTodo(this.TABLA, METODO[this.state.orden], datosEnvio, datosEnvio[this.ID])
-                .then(response => {
-                    this.setState({ estadoActualizacion: 0 });
-                })
+            await Alerts.questionMessage('¿Estás seguro de realizar esta operación?', '¡Atención!')
+                .then(res => {
+                    if (res) {
 
+                        this.setState({ estadoActualizacion: 2 })
+                        console.log('accionSolicitada=>', datos,
+                            this.getPropertyValue(datos, this.ID)
+                        )
+                        let datosEnvio = this.montaDatos(datos);
+                        AccesoAPI.enviarTodo(this.TABLA, METODO[this.state.orden], datosEnvio, datos[this.ID])
+                            .then(response => {
+                                console.log('Este es el id ', datosEnvio[this.ID])
+                                this.setState({ estadoActualizacion: 0 });
+                            }).catch(err => {
+                                console.log(err);
+                                Alerts.errorMessage('Ha ocurrido un error inesperado')
+                            });
+                    }
+                });
+
+        } else {
+            this.setState({ estadoActualizacion: 0 });
         }
     }
     montaDatos(datos) {
         let salida = {};
+        console.log('Este es el modelo: ', this.MODELO);
         for (let key in this.MODELO) {
-            salida[key] = datos[key];
+            if (!(key === this.ID && datos[key] === null)) {
+                
+                salida[key] = datos[key];
+            }
         }
+        console.log('Los datos recogidos: ', salida)
         return salida;
     }
 
@@ -82,7 +99,7 @@ export default class ControllerBase extends Component {
         // se debe sacar mensaje de error, si esta en state
         //
         return (
-            <>
+            <div className="container">
                 {(this.state.estadoActualizacion === 0) ?
                     <LISTADO usuario={this.state.usuario}
                         trabajo={this.trabajoSolicitado}
@@ -100,7 +117,7 @@ export default class ControllerBase extends Component {
                     <h1>En proceso</h1> : ""}
 
 
-            </>
+            </div>
         )
 
     }
