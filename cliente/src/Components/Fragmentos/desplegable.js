@@ -19,17 +19,27 @@ export default class Desplegable extends Component {
     componentDidMount() {
         this.monta();
     }
-    // shouldComponentUpdate(nextProps, nextState){
-    //     console.log("Update ",nextProps.depend,this.state.id)
-    //     return nextProps.depend !== this.state.id;
-    // }
     monta() {
         if (this.props.depend === this.state.id) {
             return
         }
-        this.setState({ id: this.props.depend });
-        if (this.props.depend !== 0) {
-            AccesoAPI.leerDesplegables(this.props.table, this.props.depend)
+        if(this.props.depend){
+
+            this.setState({ id: this.props.depend });
+            if (this.props.depend !== 0) {
+                AccesoAPI.leerDesplegables(this.props.table, this.props.depend)
+                    .then(response => {
+                        if (response.Respuesta === "ok") {
+                            this.setState({ datos: response.Datos })
+                        }
+                        else {
+                            this.setState({ error: response.Respuesta });
+                        }
+    
+                    })
+            } 
+        }else {
+            AccesoAPI.leerDesplegables('c_state', '209')
                 .then(response => {
                     if (response.Respuesta === "ok") {
                         this.setState({ datos: response.Datos })
@@ -39,12 +49,6 @@ export default class Desplegable extends Component {
                     }
 
                 })
-            // .catch(response => {
-            //     this.setState({
-            //         error: response.Respuesta,
-            //         datos: response.Datos
-            //     });
-            // });
         }
     }
 
@@ -55,6 +59,7 @@ export default class Desplegable extends Component {
 
         let items = [];
         items.push(<option key="0" value="0">Selecciona....</option>);
+        console.log(this.state.datos);
         if (this.state.datos.length > 0) {
             this.state.datos.forEach((valor, index) => {
                 items.push(<option key={index + 1} value={valor.id}>{valor.opcion}</option>);
@@ -63,18 +68,25 @@ export default class Desplegable extends Component {
 
         let nombreCampo = this.props.name;
         return (
-            <>
-                <label htmlFor={nombreCampo}>
-                    {this.props.label}
-                </label>
-                <select name={nombreCampo}
-                    id={nombreCampo}
-                    onChange={this.props.readValue}
-                    value={this.props.value}
-                >
-                    {items}
-                </select>
-            </>
+            <div className="form-group">
+                <div className="input-group">
+                    <label htmlFor={nombreCampo}
+                        className="control-label col-md-2"
+                    >
+                        {this.props.label}
+                    </label>
+                    <div className="col-md-10">
+                        <select name={nombreCampo}
+                            id={nombreCampo}
+                            className="form-control"
+                            onChange={this.props.readValue}
+                            value={this.props.value}
+                        >
+                            {items}
+                        </select>
+                    </div>
+                </div>
+            </div>
         )
 
     }
@@ -86,8 +98,6 @@ Desplegable.propTypes = {
     readValue: PropTypes.func,
     label: PropTypes.string,
     table: PropTypes.string.isRequired,
-    value: PropTypes.number,
-    depend: PropTypes.number,
     name: PropTypes.string.isRequired
 
 }

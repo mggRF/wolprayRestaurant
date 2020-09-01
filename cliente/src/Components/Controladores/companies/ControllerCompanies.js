@@ -14,9 +14,12 @@ export default class  ControllerCompanies extends ControllerBase {
         this.LISTADO = ListadoCompanies;
         this.FORMULARIO = Formulario;
         this.MODELO = {
+            companyid:null,
+            userid:null,
             companyName:"",
             companyAddress:"",
-            company_CIF:""
+            cityid: null,
+            company_CIF:"",
         }
         this.state = {
             estadoActualizacion: 0,
