@@ -47,8 +47,18 @@ export default class FormularioCompanies extends Component {
                                     value={Number.parseInt(company.stateid)} 
                                     depend={company.countryId} 
                                     name="stateid"/>
-                            <Desplegable label="Provincia" readValue={this.props.funcion} table='c_provinces' value={Number.parseInt(company.provinceid)} depend={company.stateid} name="provinceid"/>
-                            <Desplegable label="Poblacion" readValue={this.props.funcion} table='c_city' value={Number.parseInt(company.countryId)} depend={company.provinceid} name="countryId" />
+                            <Desplegable label="Provincia" 
+                                    readValue={this.props.funcion} 
+                                    table='c_provinces' 
+                                    value={Number(company.provinceid)} 
+                                    depend={Number(company.stateid)} 
+                                    name="provinceid"/>
+                            <Desplegable label="Poblacion" 
+                                    readValue={this.props.funcion} 
+                                    table='c_city' 
+                                    value={Number(company.citiid)} 
+                                    depend={Number(company.provinceid)} 
+                                    name="citiid" />
                         </>): null
                 }
             </div>
