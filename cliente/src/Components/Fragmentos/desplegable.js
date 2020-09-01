@@ -23,23 +23,10 @@ export default class Desplegable extends Component {
         if (this.props.depend === this.state.id) {
             return
         }
-        if(this.props.depend){
 
-            this.setState({ id: this.props.depend });
-            if (this.props.depend !== 0) {
-                AccesoAPI.leerDesplegables(this.props.table, this.props.depend)
-                    .then(response => {
-                        if (response.Respuesta === "ok") {
-                            this.setState({ datos: response.Datos })
-                        }
-                        else {
-                            this.setState({ error: response.Respuesta });
-                        }
-    
-                    })
-            } 
-        }else {
-            AccesoAPI.leerDesplegables('c_state', '209')
+        this.setState({ id: this.props.depend });
+        if (this.props.depend !== 0) {
+            AccesoAPI.leerDesplegables(this.props.table, this.props.depend)
                 .then(response => {
                     if (response.Respuesta === "ok") {
                         this.setState({ datos: response.Datos })
@@ -50,6 +37,7 @@ export default class Desplegable extends Component {
 
                 })
         }
+
     }
 
 
@@ -90,8 +78,6 @@ export default class Desplegable extends Component {
         )
 
     }
-
-
 }
 
 Desplegable.propTypes = {

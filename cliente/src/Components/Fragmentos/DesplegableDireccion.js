@@ -1,28 +1,37 @@
 import React from 'react'
 import Desplegable from './desplegable'
+import PropTypes from 'prop-types'
 
-export const DesplegableDireccion = (props) => {
+export const DesplegableDireccion = ({funcion, valorCCAA, valorProv, valorPobl, dependCountry = '209' }) => {
+
 
     return (
         <>
             <Desplegable label="Comunidad autonoma"
-                readValue={props.funcion}
+                readValue={funcion}
                 table='c_state'
-                value={props.valor1}
-                depend={props.depend1}
+                value={valorCCAA}
+                depend={dependCountry}
                 name="stateid" />
             <Desplegable label="Provincia"
-                readValue={props.funcion}
+                readValue={funcion}
                 table='c_provinces'
-                value={props.valor2}
-                depend={props.depend2}
+                value={valorProv}
+                depend={valorCCAA}
                 name="provinceid" />
             <Desplegable label="Poblacion"
-                readValue={props.funcion}
+                readValue={funcion}
                 table='c_city'
-                value={props.valor3}
-                depend={props.depend3}
+                value={valorPobl}
+                depend={valorProv}
                 name="cityid" />
         </>
     )
+}
+
+DesplegableDireccion.propTypes = {
+    funcion: PropTypes.func.isRequired, 
+    valorCCAA: PropTypes.string, 
+    valorProv: PropTypes.string, 
+    valorPobl: PropTypes.string, 
 }
