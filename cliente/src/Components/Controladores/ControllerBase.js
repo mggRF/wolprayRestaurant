@@ -44,18 +44,18 @@ export default class ControllerBase extends Component {
     }
 
 
-    accionSolicitada = async(datos) => {  
+    accionSolicitada = async (datos) => {
         if (this.state.orden !== "V") {
             await Alerts.questionMessage('¿Estás seguro de realizar esta operación?', '¡Atención!')
                 .then(res => {
                     if (res) {
-                        
+
                         this.setState({ estadoActualizacion: 2 })
                         console.log('accionSolicitada=>', datos,
                             this.getPropertyValue(datos, this.ID)
                         )
                         let datosEnvio = this.montaDatos(datos);
-                        AccesoAPI.enviarTodo(this.TABLA, METODO[this.state.orden], datosEnvio, datosEnvio[this.ID])
+                        AccesoAPI.enviarTodo(this.TABLA, METODO[this.state.orden], datosEnvio, datos[this.ID])
                             .then(response => {
                                 console.log('Este es el id ', datosEnvio[this.ID])
                                 this.setState({ estadoActualizacion: 0 });
@@ -66,17 +66,20 @@ export default class ControllerBase extends Component {
                     }
                 });
 
-        }else{
+        } else {
             this.setState({ estadoActualizacion: 0 });
         }
     }
     montaDatos(datos) {
         let salida = {};
-        console.log('Este es el modelo: ',this.MODELO);
+        console.log('Este es el modelo: ', this.MODELO);
         for (let key in this.MODELO) {
-            salida[key] = datos[key];
+            if (!(key === this.ID && datos[key] === null)) {
+                
+                salida[key] = datos[key];
+            }
         }
-        console.log('Los datos recogidos: ',salida)
+        console.log('Los datos recogidos: ', salida)
         return salida;
     }
 
@@ -96,7 +99,7 @@ export default class ControllerBase extends Component {
         // se debe sacar mensaje de error, si esta en state
         //
         return (
-            <div className = "container">
+            <div className="container">
                 {(this.state.estadoActualizacion === 0) ?
                     <LISTADO usuario={this.state.usuario}
                         trabajo={this.trabajoSolicitado}
