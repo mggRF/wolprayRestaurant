@@ -13,7 +13,7 @@ export const Alerts ={
     questionMessage:questionMessage
 }
 
-function warningMessage(msg, title = 'Cuidado'){
+function warningMessage(msg, title = '¡Atención!'){
     swal({
         title: title,
         text: msg,
@@ -23,7 +23,7 @@ function warningMessage(msg, title = 'Cuidado'){
     });
 }
 
-function successMessage(msg, title = 'Hecho'){
+function successMessage(msg, title = '¡Hecho!'){
     swal({
         title: title,
         text: msg,
@@ -32,7 +32,7 @@ function successMessage(msg, title = 'Hecho'){
         button: 'Aceptar'
     });
 }
-function infoMessage(msg, title = 'Hecho'){
+function infoMessage(msg, title = 'Información'){
     swal({
         title: title,
         text: msg,
@@ -42,7 +42,7 @@ function infoMessage(msg, title = 'Hecho'){
     });
 }
 
-function errorMessage(msg, title = 'Error'){
+function errorMessage(msg, title = 'Ha ocurrido un error'){
     swal({
         title: title,
         text: msg,
