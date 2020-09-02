@@ -21,6 +21,7 @@ class ControladorEvents extends ControladorBase {
             QUERIES: QUERIES,
             MODELO: MODELO,
             campoId: 'eventid',
+            carpetaImagenes:'events'
         }
         super(config);
     }
