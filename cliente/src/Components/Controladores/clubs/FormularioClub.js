@@ -4,14 +4,14 @@ import Imagen from '../../Fragmentos/Imagen';
 import { InputComponent } from '../companies/InputComponent';
 import { DesplegableDireccion } from '../../Fragmentos/DesplegableDireccion';
 import Desplegable from '../../Fragmentos/desplegable';
+import { TextAreaComponent } from './TextAreaComponent';
 
 export default class  FormularioClub extends Component {
     render() {
         let club = this.props.obj;
-        console.log("Desde formularioClub", club)
+        console.log("Desde formularioClub el music", club)
         let readonly = false;
         let direccion = club.streetName +" "+club.streetNumber+" "+club.postal_code +" "+club.cityName;
-        let dresscodeOpcion =0;
         if (this.props.orden == 'D' || this.props.orden == 'V') readonly = true
         
         return (
@@ -22,7 +22,7 @@ export default class  FormularioClub extends Component {
                     handleChange={this.props.funcion}
                     name="clubid"
                     label="ID"
-                    readOnly={readonly}
+                    readOnly={true}
                     value={club.clubid}/>
                 
                 <InputComponent name="clubName" 
@@ -32,19 +32,12 @@ export default class  FormularioClub extends Component {
                     readOnly={readonly}
                     value={club.clubName}/>
 
-                <InputComponent name="description" 
+                <TextAreaComponent name="description" 
                     handleChange={this.props.funcion}
                     name="description"
                     label="Descripción"
                     readOnly={readonly}
                     value={club.description}/>
-
-                <InputComponent name="Musica" 
-                    handleChange={this.props.funcion}
-                    name="Musica"
-                    label="Musica"
-                    readOnly={readonly}
-                    value={club.Musica}/>
 
                 
                 <InputComponent name="clubPhone" 
@@ -53,24 +46,18 @@ export default class  FormularioClub extends Component {
                     label="Teléfono"
                     readOnly={readonly}
                     value={club.clubPhone}/>
+                    {
+                        (!readonly) ?
 
-                <InputComponent name="dressCodeDescription" 
-                    handleChange={this.props.funcion}
-                    name="dressCodeDescription"
-                    label="Código de vestimenta"
-                    readOnly={readonly}
-                    value={club.dressCodeDescription}/>
-                
-                <InputComponent name="companyName" 
-                    handleChange={this.props.funcion}
-                    name="companyName"
-                    label="Empresa"
-                    readOnly={readonly}
-                    value={club.companyName}/>
+                        <Desplegable table ='companies' name='companyid'  label='Empresas:' value={club.companyid} readValue={this.props.funcion}/>
+                        :
+                        <InputComponent name="companyName" 
+                            handleChange={this.props.funcion}
+                            label="Empresa"
+                            readOnly={readonly}
+                            value={club.companyName}/>
+                    }
 
-                
-            
-                
                 
                 
             {
@@ -138,7 +125,6 @@ export default class  FormularioClub extends Component {
                     value={club.DiasAnticipacion}/>
                     {
                         (!readonly) ?
-
                         <Desplegable table ='n_music' name='music' label='Tipo de música' value={club.music} readValue={this.props.funcion}/>
                         :
                         <InputComponent name="music" 
@@ -149,7 +135,6 @@ export default class  FormularioClub extends Component {
                     }
                     {
                         (!readonly) ?
-
                         <Desplegable table ='n_dresscode' name='dressCodeid' label='Codigo de vestimenta' value={club.dressCodeid} readValue={this.props.funcion}/>
                         :
                         <InputComponent name="dressCodeid" 

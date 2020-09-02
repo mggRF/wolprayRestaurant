@@ -19,7 +19,7 @@ export default class ListadoClubs extends Component {
     leeTabla() {
         AccesoAPI.accederApi(API_URL + CLUBS)
             .then(response => {
-                console.log(response);
+                console.log("RESPONDE DESDE LISTADOCLUB", response);
                 if (response.Respuesta === "ok") {
                     this.setState({ datos: response.Datos })
                 }
@@ -58,8 +58,12 @@ export default class ListadoClubs extends Component {
         return (
             
             <div className="container">
-            <h1>Listado Clubs</h1>
-            <BotonListado funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}>Añadir club</BotonListado>
+            <div className = 'cabecera_controlador'>
+                <h1>Listado Clubs</h1>
+                <BotonListado funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}>Añadir club</BotonListado>
+            
+            </div>
+            
             <table className ="table">
                 <thead>
                     <tr>
