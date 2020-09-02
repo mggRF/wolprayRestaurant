@@ -9,7 +9,7 @@ export default class AccesoAPI {
 
   static async leerDesplegables(tabla, precursor) {
     let url = API_URL + CONVERSOR[tabla] + "/select/"
-    if (!(precursor === 'undefined' || precursor===0)) url += precursor;
+    if (!(precursor === undefined || precursor===0)) url += precursor;
     return this.accederApi(url);
   }
 

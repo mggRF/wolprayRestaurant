@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { API_URL, CLUBS } from '../../Constantes';
 import AccesoAPI from './../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
+import BotonListado from '../../Fragmentos/BotonListados';
 
 export default class ListadoClubs extends Component {
     
@@ -58,6 +59,7 @@ export default class ListadoClubs extends Component {
             
             <div className="container">
             <h1>Listado Clubs</h1>
+            <BotonListado funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}>Añadir club</BotonListado>
             <table className ="table">
                 <thead>
                     <tr>

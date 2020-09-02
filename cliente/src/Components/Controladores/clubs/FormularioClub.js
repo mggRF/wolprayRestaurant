@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Imagen from '../../Fragmentos/Imagen';
 import { InputComponent } from '../companies/InputComponent';
 import { DesplegableDireccion } from '../../Fragmentos/DesplegableDireccion';
+import Desplegable from '../../Fragmentos/desplegable';
 
 export default class  FormularioClub extends Component {
     render() {
@@ -134,13 +135,7 @@ export default class  FormularioClub extends Component {
                     label="Dias Anticipacion"
                     readOnly={readonly}
                     value={club.DiasAnticipacion}/>
-
-                <InputComponent name="DiasAnticipacion" 
-                    handleChange={this.props.funcion}
-                    name="DiasAnticipacion"
-                    label="Dias Anticipacion"
-                    readOnly={readonly}
-                    value={club.DiasAnticipacion}/>
+                <Desplegable table ='n_music' name='music' readValue={this.props.funcion}/>
 
                 <InputComponent name="entryCost" 
                     handleChange={this.props.funcion}
