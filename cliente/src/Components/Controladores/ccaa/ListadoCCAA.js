@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 
-import swal from 'sweetalert'
-import { API_URL, COMPANIES } from '../../Constantes';
+import { API_URL, STATES } from '../../Constantes';
 import AccesoAPI from './../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
 import BotonListado from '../../Fragmentos/BotonListados';
-import { Alerts } from '../../Fragmentos/Alerts';
 
-export default class ListadoCompanies extends Component {
+export default class ListadoCCAA extends Component {
 
 
     constructor(props) {
@@ -20,7 +18,7 @@ export default class ListadoCompanies extends Component {
         }
     }
     leeTabla() {
-        AccesoAPI.accederApi(API_URL + COMPANIES)
+        AccesoAPI.accederApi(API_URL + STATES)
             .then(response => {
                 console.log(response);
                 if (response.Respuesta === "ok") {
@@ -50,10 +48,11 @@ export default class ListadoCompanies extends Component {
 
         this.state.datos.forEach((valor, index) => item.push(
             <tr key={index}>
-                <td key={index} >{valor.companyid}</td>
-                <td>{valor.companyName}</td>
+                <td>{valor.stateid}</td>
+                <td>{valor.stateName}</td>
+                <td>{valor.countryName}</td>
                 <TresBotonesListado funcion={this.props.trabajo}
-                    id={valor.companyid} />
+                    id={valor.stateid} />
             </tr>
 
         ))
@@ -63,14 +62,14 @@ export default class ListadoCompanies extends Component {
 
             <div className="container">
                 <div className = 'cabecera_controlador'>
-                    <h1>Listado Empresas</h1>
-                    <BotonListado funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}>Añadir compañía</BotonListado>
+                    <h1>Listado de estados</h1>
+                    <BotonListado funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}>Añadir estado</BotonListado>
                 </div>
                 <table className="table">
                     <thead>
                         <tr>
                             <th>id</th>
-                            <th>name</th>
+                            <th>Nombre</th>
                             <th></th><th></th><th></th>
                         </tr>
                     </thead>
@@ -84,7 +83,7 @@ export default class ListadoCompanies extends Component {
     }
 
 }
-ListadoCompanies.propTypes = {
+ListadoCCAA.propTypes = {
     usuario: PropTypes.object,
     trabajo: PropTypes.func
 }

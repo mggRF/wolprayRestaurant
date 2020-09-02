@@ -9,6 +9,7 @@ import ControllerCompanies from '../Controladores/companies/ControllerCompanies'
 import ControllerDresscode from '../Controladores/dresscode/ControllerDresscode';
 import ControllerRole from '../Controladores/roles/ControllerRole';
 import ControllerUsers from '../Controladores/users/ControllerUsers';
+import ControllerCCAA from '../Controladores/ccaa/ControllerCCAA';
 
 const HOME = "/";
 const MUSICA = "/music";
@@ -17,6 +18,7 @@ const COMPANIES = "/companies";
 const DRESSCODE = "/dresscode";
 const ROLES = "/role";
 const USERS = "/users";
+const CCAA = "/states";
 
 
 export default class Rutas extends Component {
@@ -54,6 +56,9 @@ export default class Rutas extends Component {
                 <div className="nav-item">
                 <Link to={USERS} className="nav-link rutas">Usuarios</Link>
                 </div>
+                <div className="nav-item">
+                <Link to={CCAA} className="nav-link rutas">Comunidades autónomas</Link>
+                </div>
                 
               </ul>
             </div>
@@ -66,6 +71,7 @@ export default class Rutas extends Component {
                         <Route path={DRESSCODE} component={ControllerDresscode} />
                         <Route path={ROLES} component={ControllerRole} />
                         <Route path={USERS} component={ControllerUsers} />
+                        <Route path={CCAA} component={ControllerCCAA} />
                     </Switch>
                 </Router>
 

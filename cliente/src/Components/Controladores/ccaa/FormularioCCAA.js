@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { InputComponent } from './InputComponent';
-import { DesplegableDireccion } from '../../Fragmentos/DesplegableDireccion';
+import { InputComponent } from '../companies/InputComponent';
+import Desplegable from '../../Fragmentos/desplegable';
 
 
 
 
-export default class FormularioCompanies extends Component {
+export default class FormularioCCAA extends Component {
 
     render() {
-        let company = this.props.obj;
+        let CCAA = this.props.obj;
         let readonly = false;
         if (this.props.orden == 'D' || this.props.orden == 'V')
             readonly = true
@@ -28,8 +28,9 @@ export default class FormularioCompanies extends Component {
                 title = 'Información sobre empresa';
                 break;
         }
-        console.log("Company=>", company);
+        console.log("CCAA=>", CCAA);
         console.log('El readonly es: ' + readonly)
+        console.log('Este es el objeto: ', CCAA)
         return (
             <div>
                 {
@@ -40,57 +41,39 @@ export default class FormularioCompanies extends Component {
                 <br />
                 <form className="form-horizontal" >
                     {
-                        (company.companyid) ?
+                        (CCAA.stateid) ?
                             (<><InputComponent
                                 handleChange={this.props.funcion}
-                                name="companyid"
+                                name="stateid"
                                 label="ID"
                                 readOnly={true}
-                                value={company.companyid.toString()}
+                                value={CCAA.stateid.toString()}
                             /></>) : null
                     }
 
                     <InputComponent
                         handleChange={this.props.funcion}
-                        name="companyName"
+                        name="stateName"
                         label="Nombre"
                         readOnly={readonly}
-                        value={company.companyName}
+                        value={CCAA.stateName}
                     />
-
-                    <InputComponent
-                        handleChange={this.props.funcion}
-                        name="companyAddress"
-                        label="Dirección"
-                        readOnly={readonly}
-                        value={company.companyAddress}
-                    />
-                    <InputComponent
-                        handleChange={this.props.funcion}
-                        name="company_CIF"
-                        label="CIF"
-                        readOnly={readonly}
-                        value={company.company_CIF}
-                    />
-
 
                     {
                         (readonly) ?
                             (<InputComponent
                                 handleChange={this.props.funcion}
-                                name="city"
-                                label="Ciudad"
+                                namecountryName
+                                label="Pais"
                                 readOnly={readonly}
-                                value={company.cityName}
-                            />) :
-                            (<>
-                                <DesplegableDireccion
-                                    funcion={this.props.funcion}
-                                    valorCCAA={company.stateid}
-                                    valorProv={company.provinceid}
-                                    valorPobl={company.cityid}
-                                />
-                            </>)
+                                value={CCAA.countryName}
+                            />) : <Desplegable
+                                label='Pais:'
+                                readValue={this.props.funcion}
+                                table='c_country'
+                                value={CCAA.countryid}
+                                name='countryid'
+                            />
                     }
                 </form>
             </div>
@@ -98,11 +81,11 @@ export default class FormularioCompanies extends Component {
     }
 }
 
-FormularioCompanies.defaultProps = {
+FormularioCCAA.defaultProps = {
     orden: "V"
 }
 
-FormularioCompanies.propTypes = {
+FormularioCCAA.propTypes = {
     orden: PropTypes.oneOf(['D', 'V', 'E', 'I']).isRequired,
     obj: PropTypes.object,
     funcion: PropTypes.func

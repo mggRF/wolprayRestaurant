@@ -48,7 +48,7 @@ export default class ControllerBase extends Component {
         if (!orden) {
             orden = this.state.orden;
         }
-        if (orden !== "V") {
+        if (orden === "D") {
             await Alerts.questionMessage('¿Estás seguro de realizar esta operación?', '¡Atención!')
                 .then(res => {
                     if (res) {
@@ -71,6 +71,19 @@ export default class ControllerBase extends Component {
 
         } else {
             this.setState({ estadoActualizacion: 0 });
+            this.setState({ estadoActualizacion: 2 });
+                        console.log('accionSolicitada=>', datos,
+                            this.getPropertyValue(datos, this.ID)
+                        )
+                        let datosEnvio = this.montaDatos(datos);
+                        AccesoAPI.enviarTodo(this.TABLA, METODO[orden], datosEnvio, datos[this.ID])
+                            .then(response => {
+                                console.log('Este es el id ', datosEnvio[this.ID])
+                                this.setState({ estadoActualizacion: 0 });
+                            }).catch(err => {
+                                console.log(err);
+                                Alerts.errorMessage('Ha ocurrido un error inesperado')
+                            });
         }
     }
     montaDatos(datos) {
