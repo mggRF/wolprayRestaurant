@@ -83,10 +83,10 @@ class ControladorBase {
 
             });
     }
-
+ 
     async leerUno(req, res) {
-        
-        Presenta.log("contador leeruno" , valor);
+        // let valor = await this.leerCount()
+        // valor.then(Presenta.log("contador leeruno" , valor));
         let id = req.params.id;
 
         let sql = this.config.QUERIES.SELECT_UNO.replace(':id', id);
