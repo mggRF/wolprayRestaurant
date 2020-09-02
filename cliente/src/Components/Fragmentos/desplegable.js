@@ -25,7 +25,7 @@ export default class Desplegable extends Component {
         }
 
         this.setState({ id: this.props.depend });
-        if (this.props.depend !== 0) {
+
             AccesoAPI.leerDesplegables(this.props.table, this.props.depend)
                 .then(response => {
                     if (response.Respuesta === "ok") {
@@ -36,7 +36,6 @@ export default class Desplegable extends Component {
                     }
 
                 })
-        }
 
     }
 

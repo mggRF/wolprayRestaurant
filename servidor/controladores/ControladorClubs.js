@@ -6,6 +6,7 @@ const ControladorBase = require("./ControladorBase");
 
 const MODELO = require("../modelos/Club");
 const TABLA = 'clubs';
+const CARPETA = 'clubs';
 const selectUno  = `select  
                         ${TABLA}.*, 
                         n_dresscode.dressCodeId,
@@ -49,11 +50,14 @@ class ControladorClubs extends ControladorBase {
    
     constructor(){
         let config = {
+            CARPETA: {
+                CARPETA:CARPETA,
+                CAMPO:'coverUrl'
+            },
             TABLA: TABLA,
             QUERIES: QUERIES,
             MODELO: MODELO,
             campoId: 'clubid',
-            carpetaImagenes:'clubs'
         }
         super(config);
     }

@@ -2,9 +2,9 @@ import React from 'react'
 import Desplegable from './desplegable'
 import PropTypes from 'prop-types'
 
-export const DesplegableDireccion = ({funcion = 0, valorCCAA = 0, valorProv = 0, valorPobl= 0, dependCountry = '209' }) => {
+export const DesplegableDireccion = ({ funcion = 0, valorCCAA = 0, valorProv = 0, valorPobl = 0, dependCountry = '209' }) => {
 
-
+    const valorDress = 0;
     return (
         <>
             <Desplegable label="Comunidad autonoma"
@@ -25,13 +25,19 @@ export const DesplegableDireccion = ({funcion = 0, valorCCAA = 0, valorProv = 0,
                 value={valorPobl}
                 depend={valorProv}
                 name="cityid" />
+            <Desplegable label="Dresscode"
+                readValue={funcion}
+                table='n_dresscode'
+                value={valorDress}
+                depend={0}
+                name="dressccode" />
         </>
     )
 }
 
 DesplegableDireccion.propTypes = {
-    funcion: PropTypes.func.isRequired, 
-    valorCCAA: PropTypes.string, 
-    valorProv: PropTypes.string, 
-    valorPobl: PropTypes.string, 
+    funcion: PropTypes.func.isRequired,
+    valorCCAA: PropTypes.string,
+    valorProv: PropTypes.string,
+    valorPobl: PropTypes.string,
 }

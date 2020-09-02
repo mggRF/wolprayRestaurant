@@ -6,7 +6,6 @@
  */
 const ControladorBase = require("./ControladorBase");
 const Conexion = require("../servicios/Conexion");
-const conect = new Conexion();
 const MODELO = require("../modelos/DressCode");
 const TABLA = 'n_dresscode';
 
