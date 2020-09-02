@@ -17,6 +17,9 @@ export default class CtrlFormulario extends Component {
     enSubmit= () => {
         this.props.trabajo(this.state.obj);
     }
+    enCancel = () => {
+        this.props.trabajo(this.state.obj,"V");
+    }
 
     recogeDatos = (e) => {
         let obj = this.state.obj;
@@ -43,6 +46,13 @@ export default class CtrlFormulario extends Component {
                     onClick={this.enSubmit}
                 >
                     {LETRERO_BOTON[this.props.orden]}
+                </button>
+
+                <button type="button"
+                    className="btn btn-red"
+                    onClick={this.enCancel}
+                >
+                    Cancelar
                 </button>
 
             </>

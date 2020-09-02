@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import BotonListado from './BotonListados'
-import { VIE, MOD, DEL } from '../Constantes'
+import { VIE, MOD, DEL, COLORES } from '../Constantes'
 
 
 export default class TresBotonesListado extends Component {
@@ -12,21 +12,21 @@ export default class TresBotonesListado extends Component {
             <>
                 <td>
                     <BotonListado funcion={funcion}
-                        clase="btn-info"
+                        clase={COLORES.BTN_VER}
                         tipo="V"
                         id={this.props.id}>
                         {VIE}
                     </BotonListado>
                 </td><td>
                     <BotonListado funcion={funcion}
-                        clase="btn-success"
+                        clase={COLORES.BTN_EDIT}
                         tipo="E"
                         id={this.props.id}>
                         {MOD}
                     </BotonListado>
                 </td><td>
                     <BotonListado funcion={funcion}
-                        clase="btn-danger"
+                        clase={COLORES.BTN_DEL}
                         tipo="D"
                         id={this.props.id}>
                         {DEL}

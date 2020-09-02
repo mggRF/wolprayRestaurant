@@ -42,5 +42,12 @@ module.exports = {
         D:'Borrar',
         V:'Cerrar'
 
+    },
+    COLORES: {                      //indicar clase
+        BTN_VER:"btn-info",
+        BTN_EDIT:"btn-success",
+        BTN_DEL: "btn-danger",
+        BTN_INSERT: "btn-success"
+
     }
 }
