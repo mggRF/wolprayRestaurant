@@ -86,9 +86,9 @@ export default class FormularioCompanies extends Component {
                             (<>
                                 <DesplegableDireccion
                                     funcion={this.props.funcion}
-                                    valorCCAA={company.stateid}
-                                    valorProv={company.provinceid}
-                                    valorPobl={company.cityid}
+                                    valorCCAA={company.stateid.toString()}
+                                    valorProv={company.provinceid.toString()}
+                                    valorPobl={company.cityid.toString()}
                                 />
                             </>)
                     }

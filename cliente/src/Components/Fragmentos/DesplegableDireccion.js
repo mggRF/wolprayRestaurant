@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Desplegable from './desplegable'
 import PropTypes from 'prop-types'
 
 export const DesplegableDireccion = ({ funcion = 0, valorCCAA = 0, valorProv = 0, valorPobl = 0, dependCountry = '209' }) => {
 
-    const valorDress = 0;
     return (
         <>
             <Desplegable label="Comunidad autonoma"
@@ -19,6 +18,7 @@ export const DesplegableDireccion = ({ funcion = 0, valorCCAA = 0, valorProv = 0
                 value={valorProv}
                 depend={valorCCAA}
                 name="provinceid" />
+
             <Desplegable label="Poblacion"
                 readValue={funcion}
                 table='c_city'
