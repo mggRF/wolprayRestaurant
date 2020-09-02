@@ -8,7 +8,7 @@ var rutas = express.Router();
 //var md_auth = require('../middlewares/authenticated');
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
 rutas.get('/', music.listado);
-rutas.get('/select/:id',music.leerSelect)
+rutas.get('/select/',music.leerSelect)
 rutas.get('/:id', music.leerUno);
 rutas.post('/', music.updateTable);
 rutas.put('/:id', music.updateTable);
