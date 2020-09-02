@@ -69,8 +69,8 @@ class Conexion {
 
 
     async leerSql(sql) {
-        const result = await this.usePooledConnectionAsync(async conn => {
-            const rows = await new Promise((resolve, reject) => {
+        const result = await this.usePooledConnectionAsync( conn => {
+            const rows =  new Promise((resolve, reject) => {
                 conn.query(sql, (ex, rows) => {
                     if (ex) {
                         reject(ex);
