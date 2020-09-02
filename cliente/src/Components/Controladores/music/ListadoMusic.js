@@ -6,6 +6,8 @@ import AccesoAPI from './../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
 import BotonListado from '../../Fragmentos/BotonListados';
 
+import Paginacion from './../../../Servicios/Paginacion';
+
 
 
 
@@ -16,7 +18,8 @@ export default class ListadoMusic extends Component {
         super(props);
         this.state = {
             datos: [],
-            error: ""
+            error: "",
+            paging: {}
         }
     }
     leeTabla() {
@@ -32,8 +35,15 @@ export default class ListadoMusic extends Component {
 
             })
     }
+    pageHandler = (offset) => {
+        this.setState(({ paging }) => ({
+            paging: { ...paging, offset: offset }
+        }));
+        
+    }
 
     componentDidMount() {
+
         this.leeTabla();
     }
 
@@ -53,12 +63,12 @@ export default class ListadoMusic extends Component {
 
             <div className="container">
                 <h1>Listado Music</h1>
-                <BotonListado funcion={this.props.insertar} 
+                <BotonListado funcion={this.props.insertar}
                     clase={COLORES.BTN_INSERT}
-                    tipo="I" 
+                    tipo="I"
                     id={0}>
                     {LETRERO_BOTON.I}
-                    </BotonListado>
+                </BotonListado>
                 <table className="table">
                     <thead>
                         <tr>
@@ -72,6 +82,11 @@ export default class ListadoMusic extends Component {
                     </tbody>
 
                 </table>
+                <Paginacion
+                    paging={this.state.paging}
+                    pageHandler={this.pageHandler}
+                    file={MUSIC}>
+                </Paginacion>
             </div>
         )
     }

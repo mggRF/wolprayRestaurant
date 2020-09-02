@@ -68,124 +68,118 @@ class ControladorBase {
 
     }
 
+   
+       leerCount(req, res) {
 
-    leerCount() {
-        let sql = `SELECT COUNT(*) as contador FROM ${this.config.TABLA}`;
-        Presenta.log(sql)
-        let dat =  this.connect.leerSql(sql)
-            .then(dat => {
-                Presenta.log("contador " + this.config.TABLA + " ", dat[0].contador);
-                return dat[0].contador;
+            let sql = `SELECT COUNT(*) as contador FROM ${this.config.TABLA}`;
+            return  this.connect.leerSql(sql)
+                .then(dat => {
+                    this.enviaDatos(res, dat[0]);
+                })
+                .catch(err => {
+                    Presenta.log("Error en Contador", err);
+                });
 
-            })
-            .catch(err => {
-                Presenta.log( "Error en Leer uno", err);
-
-            });
-    }
- 
-    async leerUno(req, res) {
-        // let valor = await this.leerCount()
-        // valor.then(Presenta.log("contador leeruno" , valor));
-        let id = req.params.id;
-
-        let sql = this.config.QUERIES.SELECT_UNO.replace(':id', id);
-
-
-        this.connect.leerSql(sql)
-            .then(dat => {
-                this.enviaDatos(res, dat);
-
-            })
-            .catch(err => {
-                this.enviaDatos(res, "Error en Leer uno", err);
-
-            });
-
-    }
-
-    leerSelect(req, res) {
-        let id = req.params.id;
-        let sql = this.config.QUERIES.SELECT_SELECT.replace(':id', id);
-
-        const ids = req.session.userid;
-        const role = req.session.role;
-
-
-        this.connect.leerSql(sql)
-            .then(dat => {
-                //console.log("dat->", dat);
-                this.enviaDatos(res, dat);
-            })
-            .catch(err => {
-                this.enviaDatos(res, "Error en leer SELECT", err);
-
-            });
-
-    }
-
-    leerALL(req, res) {
-        let sql = this.config.QUERIES.SELECT_ALL;
-        let where = "";
-
-        const ids = req.session.userid;
-        const role = req.session.role;
-        //si existe :ids, añadir el usuario login
-        if (role < 9 && sql.include(':ids')) {
-            sql.replace(':ids', number(ids))
-        } else {
-            sql = sql.split('WHERE')[0];
         }
 
 
-        sql = sql + " LIMIT " + this.limite
-        this.connect.leerSql(sql)
-            .then(dat => {
-                //console.log("dat->", dat);
-                this.enviaDatos(res, dat);
-            })
-            .catch(err => {
-                this.enviaDatos(res, "Error en leer SELECT", err);
+ leerUno(req, res) {
+    let id = req.params.id;
+    let sql = this.config.QUERIES.SELECT_UNO.replace(':id', id);
+    this.connect.leerSql(sql)
+        .then(dat => {
+            this.enviaDatos(res, dat);
 
-            });
+        })
+        .catch(err => {
+            this.enviaDatos(res, "Error en Leer uno", err);
 
+        });
+
+}
+
+leerSelect(req, res) {
+    let id = req.params.id;
+    let sql = this.config.QUERIES.SELECT_SELECT.replace(':id', id);
+
+    const ids = req.session.userid;
+    const role = req.session.role;
+
+
+    this.connect.leerSql(sql)
+        .then(dat => {
+            //console.log("dat->", dat);
+            this.enviaDatos(res, dat);
+        })
+        .catch(err => {
+            this.enviaDatos(res, "Error en leer SELECT", err);
+
+        });
+
+}
+
+leerALL(req, res) {
+    let sql = this.config.QUERIES.SELECT_ALL;
+    let where = "";
+
+    const ids = req.session.userid;
+    const role = req.session.role;
+    //si existe :ids, añadir el usuario login
+    if (role < 9 && sql.include(':ids')) {
+        sql.replace(':ids', number(ids))
+    } else {
+        sql = sql.split('WHERE')[0];
     }
 
 
+    sql = sql + " LIMIT " + this.limite
+    this.connect.leerSql(sql)
+        .then(dat => {
+            //console.log("dat->", dat);
+            this.enviaDatos(res, dat);
+        })
+        .catch(err => {
+            this.enviaDatos(res, "Error en leer SELECT", err);
+
+        });
+
+}
 
 
 
 
-    updateTable(req, res) {
-        const method = req.route.stack[0].method;
-        const id = req.params.id;
-        const body = req.body;
 
-        //Datos de la sesión
-        const ids = req.session.userid;
-        const role = req.session.role;
-        const { QUERIES } = this.config;
 
-        switch (method.toLowerCase()) {
-            case 'post':
-                this.sendDataToTable([body], QUERIES.INSERT, res);
-                break;
-            case 'put':
-                this.sendDataToTable([body, id], QUERIES.UPDATE, res);
-                break;
-            case 'delete':
-                this.sendDataToTable([id], QUERIES.DELETE, res);
-                break;
-        }
+updateTable(req, res) {
+    const method = req.route.stack[0].method;
+    const id = req.params.id;
+    const body = req.body;
+
+    //Datos de la sesión
+    const ids = req.session.userid;
+    const role = req.session.role;
+    const { QUERIES } = this.config;
+
+    switch (method.toLowerCase()) {
+        case 'post':
+            this.sendDataToTable([body], QUERIES.INSERT, res);
+            break;
+        case 'put':
+            this.sendDataToTable([body, id], QUERIES.UPDATE, res);
+            break;
+        case 'delete':
+            this.sendDataToTable([id], QUERIES.DELETE, res);
+            break;
     }
+}
 
 
-    sendDataToTable(data, sql, res) {
-        this.connect.modifyTable(sql, data)
-            .then(value => {
-                this.enviaDatos(res, value);
-            }).catch(err => this.enviaDatos(res, 'Ha ocurrido un error al tratar de modificar la tabla', err));
-    }
+sendDataToTable(data, sql, res) {
+    this.connect.modifyTable(sql, data)
+        .then(value => {
+            this.enviaDatos(res, value);
+        }).catch(err => this.enviaDatos(res, 'Ha ocurrido un error al tratar de modificar la tabla', err));
+}
 }
 
 
