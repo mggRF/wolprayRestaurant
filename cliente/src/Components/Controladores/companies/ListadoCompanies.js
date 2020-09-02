@@ -47,12 +47,6 @@ export default class ListadoCompanies extends Component {
         console.log("RENDER=>", this.state.datos)
 
         let item = [];
-        let styleHeader = {
-            display: "flex",
-            flexDirection: "row",
-            width: "100%",
-            justifyContent: "space-around"
-        }
 
         this.state.datos.forEach((valor, index) => item.push(
             <tr key={index}>
@@ -68,7 +62,7 @@ export default class ListadoCompanies extends Component {
         return (
 
             <div className="container">
-                <div style={styleHeader}>
+                <div className = 'cabecera_controlador'>
                     <h1>Listado Empresas</h1>
                     <BotonListado funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}>Añadir club</BotonListado>
                 </div>

@@ -53,3 +53,10 @@
   
   border: gray 2px solid;
 }
+
+.cabecera_controlador{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+}
