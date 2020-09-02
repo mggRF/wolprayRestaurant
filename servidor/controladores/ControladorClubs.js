@@ -8,11 +8,17 @@ const MODELO = require("../modelos/Club");
 const TABLA = 'clubs';
 const selectUno  = `select  
                         ${TABLA}.*, 
+                        n_dresscode.dressCodeId,
                         n_dresscode.dressCodeDescription,
+                        companies.companyid,
                         companies.companyName,
+                        c_city.cityid,
                         c_city.cityName,
+                        c_provinces.provinceid,
                         c_provinces.provinceName,
+                        c_state.stateid,
                         c_state.stateName,
+                        c_country.countryId,
                         c_country.countryName,
                         GROUP_CONCAT(n_music.musicName) as Musica
 
@@ -47,6 +53,7 @@ class ControladorClubs extends ControladorBase {
             QUERIES: QUERIES,
             MODELO: MODELO,
             campoId: 'clubid',
+            carpetaImagenes:'clubs'
         }
         super(config);
     }
