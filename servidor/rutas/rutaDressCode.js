@@ -9,7 +9,7 @@ var rutas = express.Router();
 //var md_auth = require('../middlewares/authenticated');
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
 rutas.get('/', dressCode.listado);
-rutas.get('/select/:id',dressCode.leerSelect)
+rutas.get('/select/',dressCode.leerSelect)
 rutas.get('/:id', dressCode.leerUno);
 rutas.post('/', dressCode.updateTable);
 rutas.put('/:id', dressCode.updateTable);
