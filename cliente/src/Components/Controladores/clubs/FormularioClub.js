@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Imagen from '../../Fragmentos/Imagen';
 import { InputComponent } from '../companies/InputComponent';
+import { DesplegableDireccion } from '../../Fragmentos/DesplegableDireccion';
 
 export default class  FormularioClub extends Component {
     render() {
         let club = this.props.obj;
         console.log("Desde formularioClub", club)
-        let readonly = false
+        let readonly = false;
+        let direccion = club.streetName +" "+club.streetNumber+" "+club.postal_code +" "+club.cityName;
         if (this.props.orden == 'D' || this.props.orden == 'V') readonly = true
         
         return (
             <div>
+            <Imagen imageUrl={club.coverUrl} with={20} />
                 
                 <InputComponent name="clubid" 
                     handleChange={this.props.funcion}
@@ -64,65 +67,81 @@ export default class  FormularioClub extends Component {
                     value={club.companyName}/>
 
                 
-
-                <InputComponent name="postal_code" 
-                    handleChange={this.props.funcion}
-                    name="postal_code"
-                    label="Codigo postal"
-                    readOnly={readonly}
-                    value={club.postal_code}/>
-                <InputComponent name="stateName" 
-                    handleChange={this.props.funcion}
-                    name="stateName"
-                    label="Estado / Comunidad autónoma"
-                    readOnly={readonly}
-                    value={club.stateName}/>
-
-                <InputComponent name="provinceName" 
-                    handleChange={this.props.funcion}
-                    name="provinceName"
-                    label="Provincia"
-                    readOnly={readonly}
-                    value={club.provinceName}/>
-                    
-                <InputComponent name="cityName" 
-                    handleChange={this.props.funcion}
-                    name="cityName"
-                    label="Ciudad"
-                    readOnly={readonly}
-                    value={club.cityName}/>
+            
                 
-
-                <InputComponent name="streetName" 
+                
+                
+            {
+                (readonly) ?
+                <InputComponent name="direccion" 
                     handleChange={this.props.funcion}
-                    name="streetName"
-                    label="Nombre de la calle"
+                    name="direccion"
+                    label="Dirección"
                     readOnly={readonly}
-                    value={club.streetName}/>
-                <InputComponent name="streetNumber" 
+                    value={direccion}/>:null
+            }
+                {
+                    (!readonly) ?
+                    <InputComponent name="streetNumber" 
                     handleChange={this.props.funcion}
                     name="streetNumber"
                     label="Número de la calle"
                     readOnly={readonly}
-                    value={club.streetNumber}/>
+                    value={club.streetNumber}/>:null
+
+                }
+                {
+                    (!readonly) ?
+                    <InputComponent name="postal_code" 
+                        handleChange={this.props.funcion}
+                        name="postal_code"
+                        label="Codigo postal"
+                        readOnly={readonly}
+                        value={club.postal_code}/>: null
+                }
+                {
+                    (readonly) ?
+                    (<InputComponent name="cityName" 
+                        handleChange={this.props.funcion}
+                        name="cityName"
+                        label="Ciudad"
+                        readOnly={readonly}
+                        value={club.cityName}
+                        />)
+                        :
+                        (<><DesplegableDireccion
+                                    funcion={this.props.funcion}
+                                    valorCCAA={club.stateid}
+                                    valorProv={club.provinceid}
+                                    valorPobl={club.cityid}
+                                /></>)
+
+                }
+
+                
+                
+
                 <InputComponent name="accessAge" 
                     handleChange={this.props.funcion}
                     name="accessAge"
                     label="Edad mínima"
                     readOnly={readonly}
                     value={club.accessAge}/>
+
                 <InputComponent name="DiasAnticipacion" 
                     handleChange={this.props.funcion}
                     name="DiasAnticipacion"
                     label="Dias Anticipacion"
                     readOnly={readonly}
                     value={club.DiasAnticipacion}/>
+
                 <InputComponent name="DiasAnticipacion" 
                     handleChange={this.props.funcion}
                     name="DiasAnticipacion"
                     label="Dias Anticipacion"
                     readOnly={readonly}
                     value={club.DiasAnticipacion}/>
+
                 <InputComponent name="entryCost" 
                     handleChange={this.props.funcion}
                     name="entryCost"

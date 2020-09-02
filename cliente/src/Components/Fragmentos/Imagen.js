@@ -16,8 +16,12 @@ export default class Imagen extends Component {
     render() {//Components\Comun\images
         if(this.props.imageUrl != null){
             return (
-                <div className="img-rounded">
-                    <img src={this.props.imageUrl} alt ="No se ha encontrado la imagen" class="img-rounded"  /> 
+                <div className="img-rounded" >
+                    <img src={this.props.imageUrl} alt ="No se ha encontrado la imagen" width={this.props.with+'%'}  /> 
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
                 </div>
                 
                  
@@ -26,6 +30,10 @@ export default class Imagen extends Component {
             return (
                 <div className="img-rounded">
                     <img src={Noimage} alt ="No se ha encontrado la imagen"  /> 
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
                 </div>
                 
                  
@@ -36,6 +44,7 @@ export default class Imagen extends Component {
     }
 }
 Imagen.propTypes = {
-    imageUrl: PropTypes.string
+    imageUrl: PropTypes.string.isRequired,
+    with:PropTypes.number
 }
 
