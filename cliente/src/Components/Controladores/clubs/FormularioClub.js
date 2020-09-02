@@ -11,6 +11,7 @@ export default class  FormularioClub extends Component {
         console.log("Desde formularioClub", club)
         let readonly = false;
         let direccion = club.streetName +" "+club.streetNumber+" "+club.postal_code +" "+club.cityName;
+        let dresscodeOpcion =0;
         if (this.props.orden == 'D' || this.props.orden == 'V') readonly = true
         
         return (
@@ -138,12 +139,24 @@ export default class  FormularioClub extends Component {
                     {
                         (!readonly) ?
 
-                        <Desplegable table ='n_music' name='music' label='Tipo de música' readValue={this.props.funcion}/>:null
+                        <Desplegable table ='n_music' name='music' label='Tipo de música' value={club.music} readValue={this.props.funcion}/>
+                        :
+                        <InputComponent name="music" 
+                            handleChange={this.props.funcion}
+                            label="Tipo de música"
+                            readOnly={readonly}
+                            value={club.music}/>
                     }
                     {
                         (!readonly) ?
 
-                        <Desplegable table ='n_music' name='music' label='Tipo de música' readValue={this.props.funcion}/>:null
+                        <Desplegable table ='n_dresscode' name='dressCodeid' label='Codigo de vestimenta' value={club.dressCodeid} readValue={this.props.funcion}/>
+                        :
+                        <InputComponent name="dressCodeid" 
+                            handleChange={this.props.funcion}
+                            label="Codigo de vestimenta"
+                            readOnly={readonly}
+                            value={club.dressCodeid}/>
                     }
                 
 
