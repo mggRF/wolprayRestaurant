@@ -8,7 +8,7 @@ const MODELO = require("../modelos/Nmusic");
 const TABLA = 'n_music';
 
 const QUERIES = {
-    SELECT_SELECT: `SELECT musicid as id,musicName as opcion FROM ${TABLA} WHERE musicid = :id`,
+    SELECT_SELECT: `SELECT musicid as id,musicName as opcion FROM ${TABLA}`,
     SELECT_UNO: `SELECT * FROM ${TABLA} WHERE musicid = :id`,
     INSERT: `INSERT INTO ${TABLA} SET ?`,
     UPDATE: `UPDATE ${TABLA} SET ? WHERE musicid = ?`,
