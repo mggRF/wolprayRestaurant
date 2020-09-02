@@ -25,12 +25,6 @@ export const DesplegableDireccion = ({ funcion = 0, valorCCAA = 0, valorProv = 0
                 value={valorPobl}
                 depend={valorProv}
                 name="cityid" />
-            <Desplegable label="Dresscode"
-                readValue={funcion}
-                table='n_dresscode'
-                value={valorDress}
-                depend={0}
-                name="dressccode" />
         </>
     )
 }
