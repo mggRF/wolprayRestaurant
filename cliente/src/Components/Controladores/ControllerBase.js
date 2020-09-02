@@ -44,8 +44,11 @@ export default class ControllerBase extends Component {
     }
 
 
-    accionSolicitada = async (datos) => {
-        if (this.state.orden !== "V") {
+    accionSolicitada = async (datos,orden=null) => {
+        if (!orden) {
+            orden = this.state.orden;
+        }
+        if (orden !== "V") {
             await Alerts.questionMessage('¿Estás seguro de realizar esta operación?', '¡Atención!')
                 .then(res => {
                     if (res) {
@@ -55,7 +58,7 @@ export default class ControllerBase extends Component {
                             this.getPropertyValue(datos, this.ID)
                         )
                         let datosEnvio = this.montaDatos(datos);
-                        AccesoAPI.enviarTodo(this.TABLA, METODO[this.state.orden], datosEnvio, datos[this.ID])
+                        AccesoAPI.enviarTodo(this.TABLA, METODO[orden], datosEnvio, datos[this.ID])
                             .then(response => {
                                 console.log('Este es el id ', datosEnvio[this.ID])
                                 this.setState({ estadoActualizacion: 0 });
