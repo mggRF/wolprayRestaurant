@@ -16,6 +16,7 @@ module.exports = {
     STATES_SELECT: 'states/select/',
 
     LPPAGINA: "20",                             //lineas por pagina
+    
     INS: "Añadir",
     MOD: "Modificar",
     DEL: "Delete",

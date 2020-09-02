@@ -135,7 +135,17 @@ export default class  FormularioClub extends Component {
                     label="Dias Anticipacion"
                     readOnly={readonly}
                     value={club.DiasAnticipacion}/>
-                <Desplegable table ='n_music' name='music' readValue={this.props.funcion}/>
+                    {
+                        (!readonly) ?
+
+                        <Desplegable table ='n_music' name='music' label='Tipo de música' readValue={this.props.funcion}/>:null
+                    }
+                    {
+                        (!readonly) ?
+
+                        <Desplegable table ='n_music' name='music' label='Tipo de música' readValue={this.props.funcion}/>:null
+                    }
+                
 
                 <InputComponent name="entryCost" 
                     handleChange={this.props.funcion}

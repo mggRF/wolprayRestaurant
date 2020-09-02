@@ -1,5 +1,7 @@
 
 const Conexion = require("../servicios/Conexion");
+const { LPPAGINA } = require("../Constantes/ConstantesDataBase/ConstantesPaginacion");
+const Presenta = require("../servicios/Presenta");
 class ControladorBase {
 
 
@@ -13,6 +15,7 @@ class ControladorBase {
         this.updateTable = this.updateTable.bind(this);
         this.sendDataToTable = this.sendDataToTable.bind(this);
         this.enviaDatos = this.enviaDatos.bind(this);
+        this.limite = LPPAGINA
     }
     /**
      * Enviar datos a puesto //salida API
@@ -21,7 +24,7 @@ class ControladorBase {
      * @param {*} error  : En caso de error, objeto error
      *                      
      */
-     enviaDatos(res, objeto, error = null) {
+    enviaDatos(res, objeto, error = null) {
         let respuesta;
         respuesta = {
             Respuesta: error || 'ok',
@@ -44,7 +47,7 @@ class ControladorBase {
         let salida = [];
         const ids = req.session.userid;
         const role = req.session.role;
-        
+
         this.connect.leerTabla(this.config.TABLA)
             .then(dat => {
                 dat.forEach(row => {
@@ -65,12 +68,30 @@ class ControladorBase {
 
     }
 
-    leerUno(req, res) {
+
+    leerCount() {
+        let sql = `SELECT COUNT(*) as contador FROM ${this.config.TABLA}`;
+        Presenta.log(sql)
+        let dat =  this.connect.leerSql(sql)
+            .then(dat => {
+                Presenta.log("contador " + this.config.TABLA + " ", dat[0].contador);
+                return dat[0].contador;
+
+            })
+            .catch(err => {
+                Presenta.log( "Error en Leer uno", err);
+
+            });
+    }
+ 
+    async leerUno(req, res) {
+        // let valor = await this.leerCount()
+        // valor.then(Presenta.log("contador leeruno" , valor));
         let id = req.params.id;
-    
+
         let sql = this.config.QUERIES.SELECT_UNO.replace(':id', id);
-        
-       
+
+
         this.connect.leerSql(sql)
             .then(dat => {
                 this.enviaDatos(res, dat);
@@ -78,7 +99,7 @@ class ControladorBase {
             })
             .catch(err => {
                 this.enviaDatos(res, "Error en Leer uno", err);
-                
+
             });
 
     }
@@ -86,7 +107,7 @@ class ControladorBase {
     leerSelect(req, res) {
         let id = req.params.id;
         let sql = this.config.QUERIES.SELECT_SELECT.replace(':id', id);
-        
+
         const ids = req.session.userid;
         const role = req.session.role;
 
@@ -103,9 +124,38 @@ class ControladorBase {
 
     }
 
+    leerALL(req, res) {
+        let sql = this.config.QUERIES.SELECT_ALL;
+        let where = "";
+
+        const ids = req.session.userid;
+        const role = req.session.role;
+        //si existe :ids, añadir el usuario login
+        if (role < 9 && sql.include(':ids')) {
+            sql.replace(':ids', number(ids))
+        } else {
+            sql = sql.split('WHERE')[0];
+        }
 
 
-    
+        sql = sql + " LIMIT " + this.limite
+        this.connect.leerSql(sql)
+            .then(dat => {
+                //console.log("dat->", dat);
+                this.enviaDatos(res, dat);
+            })
+            .catch(err => {
+                this.enviaDatos(res, "Error en leer SELECT", err);
+
+            });
+
+    }
+
+
+
+
+
+
     updateTable(req, res) {
         const method = req.route.stack[0].method;
         const id = req.params.id;
@@ -114,23 +164,23 @@ class ControladorBase {
         //Datos de la sesión
         const ids = req.session.userid;
         const role = req.session.role;
-        const {QUERIES} = this.config;
+        const { QUERIES } = this.config;
 
         switch (method.toLowerCase()) {
             case 'post':
                 this.sendDataToTable([body], QUERIES.INSERT, res);
                 break;
             case 'put':
-                this.sendDataToTable([body, id],QUERIES.UPDATE, res);
+                this.sendDataToTable([body, id], QUERIES.UPDATE, res);
                 break;
             case 'delete':
                 this.sendDataToTable([id], QUERIES.DELETE, res);
                 break;
         }
     }
- 
 
-     sendDataToTable(data, sql, res) {
+
+    sendDataToTable(data, sql, res) {
         this.connect.modifyTable(sql, data)
             .then(value => {
                 this.enviaDatos(res, value);
