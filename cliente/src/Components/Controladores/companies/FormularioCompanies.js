@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { InputComponent } from './InputComponent';
 import { DesplegableDireccion } from '../../Fragmentos/DesplegableDireccion';
+import { InputComponent } from './InputComponent';
 
 
 
@@ -86,9 +86,9 @@ export default class FormularioCompanies extends Component {
                             (<>
                                 <DesplegableDireccion
                                     funcion={this.props.funcion}
-                                    valorCCAA={company.stateid.toString()}
-                                    valorProv={company.provinceid.toString()}
-                                    valorPobl={company.cityid.toString()}
+                                    valorCCAA={company.stateid}
+                                    valorProv={company.provinceid}
+                                    valorPobl={company.cityid}
                                 />
                             </>)
                     }

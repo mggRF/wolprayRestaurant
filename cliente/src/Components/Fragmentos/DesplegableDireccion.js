@@ -31,7 +31,7 @@ export const DesplegableDireccion = ({ funcion = 0, valorCCAA = 0, valorProv = 0
 
 DesplegableDireccion.propTypes = {
     funcion: PropTypes.func.isRequired,
-    valorCCAA: PropTypes.string,
-    valorProv: PropTypes.string,
-    valorPobl: PropTypes.string,
+    valorCCAA: PropTypes.number,
+    valorProv: PropTypes.number,
+    valorPobl: PropTypes.number,
 }

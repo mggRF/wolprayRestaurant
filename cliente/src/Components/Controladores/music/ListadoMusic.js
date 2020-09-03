@@ -7,9 +7,8 @@ import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
 import BotonListado from '../../Fragmentos/BotonListados';
 
 import Paginacion from './../../../Servicios/Paginacion';
-
-
-
+import GestorListado from './../../../Servicios/GestorListado';
+import { BotonCabecera } from './../../Fragmentos/BotonCabecera';
 
 
 export default class ListadoMusic extends Component {
@@ -19,11 +18,11 @@ export default class ListadoMusic extends Component {
         this.state = {
             datos: [],
             error: "",
-            paging: {}
         }
+        this.gl = new GestorListado(API_URL + MUSIC);
     }
     leeTabla() {
-        AccesoAPI.accederApi(API_URL + MUSIC)
+        AccesoAPI.accederApi(this.gl.terminaURLlistado())
             .then(response => {
                 console.log(response);
                 if (response.Respuesta === "ok") {
@@ -35,20 +34,24 @@ export default class ListadoMusic extends Component {
 
             })
     }
-    pageHandler = (offset) => {
-        this.setState(({ paging }) => ({
-            paging: { ...paging, offset: offset }
-        }));
-        
+
+
+
+    setSortedField = (clasi) => {
+        console.log("clasi ",clasi)
+        this.gl.setClasificador(clasi.nombre);
+        this.leeTabla();
     }
 
+    pageHandler = (ajuste) => {
+        this.gl.pageHandler(ajuste);
+        this.leeTabla();
+    }
     componentDidMount() {
-
         this.leeTabla();
     }
 
     render() {
-        console.log("RENDER=>", this.state.datos)
         let item = [];
         this.state.datos.forEach((valor, index) => item.push(
             <tr key={index}>
@@ -60,7 +63,6 @@ export default class ListadoMusic extends Component {
 
         ))
         return (
-
             <div className="container">
                 <h1>Listado Music</h1>
                 <BotonListado funcion={this.props.insertar}
@@ -72,20 +74,31 @@ export default class ListadoMusic extends Component {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>id</th>
-                            <th>name</th>
+                            <th>
+                                <BotonCabecera
+                                    name="id"
+                                    col="Identificador"
+                                    gestionClas={this.setSortedField}
+                                />
+                            </th>
+                            <th>
+                                <BotonCabecera
+                                    name="name"
+                                    col="name"
+                                    gestionClas={this.setSortedField}
+                                />
+                            </th>
                             <th></th><th></th><th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {item}
                     </tbody>
-
                 </table>
                 <Paginacion
                     paging={this.state.paging}
                     pageHandler={this.pageHandler}
-                    file={MUSIC}>
+                    tabla={MUSIC}>
                 </Paginacion>
             </div>
         )
