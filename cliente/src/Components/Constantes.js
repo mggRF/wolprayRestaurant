@@ -15,7 +15,7 @@ module.exports = {
     USERS: 'users',
     STATES_SELECT: 'states/select/',
 
-    LPPAGINA: "20",                             //lineas por pagina
+    LPPAGINA: "5",                             //lineas por pagina
     
     INS: "Añadir",
     MOD: "Modificar",
