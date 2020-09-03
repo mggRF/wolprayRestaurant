@@ -14,7 +14,9 @@ class ControladorBase {
         this.leerSelect = this.leerSelect.bind(this);
         this.updateTable = this.updateTable.bind(this);
         this.sendDataToTable = this.sendDataToTable.bind(this);
+        this.verificarMetodo = this.verificarMetodo.bind(this);
         this.enviaDatos = this.enviaDatos.bind(this);
+        this.recogerImagen = this.recogerImagen.bind(this);
         this.limite = LPPAGINA
     }
     /**
@@ -68,118 +70,169 @@ class ControladorBase {
 
     }
 
-   
-       leerCount(req, res) {
 
-            let sql = `SELECT COUNT(*) as contador FROM ${this.config.TABLA}`;
-            return  this.connect.leerSql(sql)
-                .then(dat => {
-                    this.enviaDatos(res, dat[0]);
-                })
-                .catch(err => {
-                    Presenta.log("Error en Contador", err);
-                });
+    leerCount(req, res) {
 
+        let sql = `SELECT COUNT(*) as contador FROM ${this.config.TABLA}`;
+        return this.connect.leerSql(sql)
+            .then(dat => {
+                this.enviaDatos(res, dat[0]);
+            })
+            .catch(err => {
+                Presenta.log("Error en Contador", err);
+            });
+
+    }
+
+
+    leerUno(req, res) {
+        let id = req.params.id;
+        let sql = this.config.QUERIES.SELECT_UNO.replace(':id', id);
+        this.connect.leerSql(sql)
+            .then(dat => {
+                this.enviaDatos(res, dat);
+
+            })
+            .catch(err => {
+                this.enviaDatos(res, "Error en Leer uno", err);
+
+            });
+
+    }
+
+    leerSelect(req, res) {
+        let id = req.params.id;
+        let sql = this.config.QUERIES.SELECT_SELECT.replace(':id', id);
+
+        const ids = req.session.userid;
+        const role = req.session.role;
+
+
+        this.connect.leerSql(sql)
+            .then(dat => {
+                //console.log("dat->", dat);
+                this.enviaDatos(res, dat);
+            })
+            .catch(err => {
+                this.enviaDatos(res, "Error en leer SELECT", err);
+
+            });
+
+    }
+
+    leerALL(req, res) {
+        let sql = this.config.QUERIES.SELECT_ALL;
+        let where = "";
+
+        const ids = req.session.userid;
+        const role = req.session.role;
+        //si existe :ids, añadir el usuario login
+        if (role < 9 && sql.include(':ids')) {
+            sql.replace(':ids', number(ids))
+        } else {
+            sql = sql.split('WHERE')[0];
         }
 
 
- leerUno(req, res) {
-    let id = req.params.id;
-    let sql = this.config.QUERIES.SELECT_UNO.replace(':id', id);
-    this.connect.leerSql(sql)
-        .then(dat => {
-            this.enviaDatos(res, dat);
+        sql = sql + " LIMIT " + this.limite
+        this.connect.leerSql(sql)
+            .then(dat => {
+                //console.log("dat->", dat);
+                this.enviaDatos(res, dat);
+            })
+            .catch(err => {
+                this.enviaDatos(res, "Error en leer SELECT", err);
 
-        })
-        .catch(err => {
-            this.enviaDatos(res, "Error en Leer uno", err);
+            });
 
-        });
-
-}
-
-leerSelect(req, res) {
-    let id = req.params.id;
-    let sql = this.config.QUERIES.SELECT_SELECT.replace(':id', id);
-
-    const ids = req.session.userid;
-    const role = req.session.role;
-
-
-    this.connect.leerSql(sql)
-        .then(dat => {
-            //console.log("dat->", dat);
-            this.enviaDatos(res, dat);
-        })
-        .catch(err => {
-            this.enviaDatos(res, "Error en leer SELECT", err);
-
-        });
-
-}
-
-leerALL(req, res) {
-    let sql = this.config.QUERIES.SELECT_ALL;
-    let where = "";
-
-    const ids = req.session.userid;
-    const role = req.session.role;
-    //si existe :ids, añadir el usuario login
-    if (role < 9 && sql.include(':ids')) {
-        sql.replace(':ids', number(ids))
-    } else {
-        sql = sql.split('WHERE')[0];
     }
 
 
-    sql = sql + " LIMIT " + this.limite
-    this.connect.leerSql(sql)
-        .then(dat => {
-            //console.log("dat->", dat);
-            this.enviaDatos(res, dat);
-        })
-        .catch(err => {
-            this.enviaDatos(res, "Error en leer SELECT", err);
+    verificarMetodo(req, res) {
+        const method = req.route.stack[0].method;
+        console.log('Estoy pasando po rverificar imagen')
+        console.log('el metodo es: ', method)
+        switch (method.toLowerCase()) {
+            case 'post':
+                if (req.files) {
+                    this.recogerImagen(req, res);
+                } else {
+                    return res.status(400).json({
+                        ok: false,
+                        Message: 'Es necesario subir una imagen'
+                    });
+                }
+                break;
+            case 'put':
+                if (req.files) {
+                    this.recogerImagen(req, res);
+                } else {
+                    this.updateTable(req, res);
+                }
+                break
+        }
 
+
+
+
+    }
+
+    updateTable(req, res) {
+        const method = req.route.stack[0].method;
+        const id = req.params.id;
+        const body = req.body;
+
+        //Datos de la sesión
+        const ids = req.session.userid;
+        const role = req.session.role;
+        const { QUERIES } = this.config;
+
+        switch (method.toLowerCase()) {
+            case 'post':
+                this.sendDataToTable([body], QUERIES.INSERT, res);
+                break;
+            case 'put':
+                this.sendDataToTable([body, id], QUERIES.UPDATE, res);
+                break;
+            case 'delete':
+                this.sendDataToTable([id], QUERIES.DELETE, res);
+                break;
+        }
+    }
+
+    recogerImagen(req, res) {
+
+        const campo = this.config.CARPETA.CAMPO;
+        const file = req.files[campo];
+        if (!file) {
+            return res.json({
+                ok: false,
+                Message: 'Ha ocurrido un fallo al tratar de recoger el campo: ' + campo
+            });
+        }
+
+        if(!file.mimetype.includes('image')){
+            return res.json({
+                ok: false,
+                Message: 'Lo que intenta subir no es una imagen'
+            });
+        }
+
+
+        return res.json({
+            ok: true,
+            file: file.mimetype
         });
 
-}
-
-
-
-
-
-
-updateTable(req, res) {
-    const method = req.route.stack[0].method;
-    const id = req.params.id;
-    const body = req.body;
-
-    //Datos de la sesión
-    const ids = req.session.userid;
-    const role = req.session.role;
-    const { QUERIES } = this.config;
-
-    switch (method.toLowerCase()) {
-        case 'post':
-            this.sendDataToTable([body], QUERIES.INSERT, res);
-            break;
-        case 'put':
-            this.sendDataToTable([body, id], QUERIES.UPDATE, res);
-            break;
-        case 'delete':
-            this.sendDataToTable([id], QUERIES.DELETE, res);
-            break;
     }
-}
 
 
-sendDataToTable(data, sql, res) {
-    this.connect.modifyTable(sql, data)
-        .then(value => {
-            this.enviaDatos(res, value);
-        }).catch(err => this.enviaDatos(res, 'Ha ocurrido un error al tratar de modificar la tabla', err));
-}
+    sendDataToTable(data, sql, res) {
+        this.connect.modifyTable(sql, data)
+            .then(value => {
+                this.enviaDatos(res, value);
+            }).catch(err => this.enviaDatos(res, 'Ha ocurrido un error al tratar de modificar la tabla', err));
+    }
 }
 
 

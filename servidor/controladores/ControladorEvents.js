@@ -6,7 +6,8 @@ const ControladorBase = require("./ControladorBase");
 
 const MODELO = require("../modelos/Events");
 const TABLA = 'events';
-
+const CARPETA = 'products';
+const CAMPO = 'event_imagePral';
 const QUERIES = {
     SELECT_UNO: `SELECT * FROM ${TABLA} WHERE eventid   = :id`,
     SELECT_SELECT: `SELECT eventid   as id,eventName  as opcion FROM ${TABLA} WHERE clubid  = :id`,
@@ -17,6 +18,10 @@ const QUERIES = {
 class ControladorEvents extends ControladorBase {
     constructor(){
         let config = {
+            CARPETA: {
+                CARPETA:CARPETA,
+                CAMPO:CAMPO
+            },
             TABLA: TABLA,
             QUERIES: QUERIES,
             MODELO: MODELO,
