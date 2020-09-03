@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const InputComponent = ({ value = '', name = '', label = '', handleChange, readOnly = true }) => {
+export const InputComponent = ({clase = '',tam='',step ='', type='default', value = '', name = '', label = '', handleChange, readOnly = true }) => {
 
     const onFocus = event => {
 
@@ -20,17 +20,23 @@ export const InputComponent = ({ value = '', name = '', label = '', handleChange
                         {
                             (name.length > 0) ?
                                 <input
-                                    className="form-control"
+                                    style={{with:tam}}
+                                    step ={step}
+                                    type = {type}
+                                    className={clase}
                                     name={name}
                                     value={value}
                                     onChange={handleChange}
                                     autoComplete="off"
-                                    className="form-control"
+                                   // className="form-control"
                                     disabled = {true} /> :
                                 <input name={name}
+                                    style={{with:tam}}
+                                    step ={step}
+                                    type = {type}
                                     autoComplete="off"
                                     value={value}
-                                    className="form-control"
+                                    className={clase}
                                     placeholder={'Ingresa el ' + name}
                                     disabled = {true}/>
                         }
@@ -47,9 +53,12 @@ export const InputComponent = ({ value = '', name = '', label = '', handleChange
                         htmlFor={name}>{label}:</label>
                     <div className="col-md-10">
                         <input name={name}
+                            style={{with:tam}}
+                            step ={step}
+                            type = {type}
                             value={value}
                             autoComplete="off"
-                            className="form-control"
+                            className={clase}
                             onFocus={onFocus}
                             onChange={handleChange}
                             readOnly={readOnly} />

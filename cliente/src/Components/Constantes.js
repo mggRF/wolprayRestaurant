@@ -30,7 +30,8 @@ module.exports = {
         c_provinces: 'provinces',
         n_categories:'categories',
         n_dresscode:'dresscode',
-        n_music:'musics'
+        n_music:'musics',
+        companies:'companies'
     },
     METODO: {
         I:'POST',
