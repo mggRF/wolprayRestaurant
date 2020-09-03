@@ -39,6 +39,7 @@ export default class ListadoMusic extends Component {
         this.setState(({ paging }) => ({
             paging: { ...paging, offset: offset }
         }));
+        console.log(this.state)
         
     }
 
@@ -85,7 +86,7 @@ export default class ListadoMusic extends Component {
                 <Paginacion
                     paging={this.state.paging}
                     pageHandler={this.pageHandler}
-                    file={MUSIC}>
+                    tabla={MUSIC}>
                 </Paginacion>
             </div>
         )

@@ -17,6 +17,7 @@ class ControladorBase {
         this.verificarMetodo = this.verificarMetodo.bind(this);
         this.enviaDatos = this.enviaDatos.bind(this);
         this.recogerImagen = this.recogerImagen.bind(this);
+        this.leerCount = this.leerCount.bind(this);
         this.limite = LPPAGINA
     }
     /**
@@ -72,8 +73,9 @@ class ControladorBase {
 
 
     leerCount(req, res) {
-
+//Atencion el sql ha de pasar por el sistema de añadir empresa/manager
         let sql = `SELECT COUNT(*) as contador FROM ${this.config.TABLA}`;
+        console.log("count0>",sql)
         return this.connect.leerSql(sql)
             .then(dat => {
                 this.enviaDatos(res, dat[0]);
