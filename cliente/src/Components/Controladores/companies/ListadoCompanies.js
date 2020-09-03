@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 
-import swal from 'sweetalert'
 import { API_URL, COMPANIES } from '../../Constantes';
 import AccesoAPI from './../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
 import BotonListado from '../../Fragmentos/BotonListados';
-import { Alerts } from '../../Fragmentos/Alerts';
 
 export default class ListadoCompanies extends Component {
 
@@ -63,14 +61,14 @@ export default class ListadoCompanies extends Component {
 
             <div className="container">
                 <div className = 'cabecera_controlador'>
-                    <h1>Listado Empresas</h1>
+                    <h1>Listado e   mpresas</h1>
                     <BotonListado funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}>Añadir compañía</BotonListado>
                 </div>
                 <table className="table">
                     <thead>
                         <tr>
                             <th>id</th>
-                            <th>name</th>
+                            <th>Nombre</th>
                             <th></th><th></th><th></th>
                         </tr>
                     </thead>
