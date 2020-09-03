@@ -26,7 +26,7 @@ const selectUo = `select
 
 const QUERIES = {
     SELECT_UNO: selectUo,
-    SELECT_SELECT: `SELECT companyid  as id,companyName as opcion FROM ${TABLA} WHERE countryid  = :id`,
+    SELECT_SELECT: `SELECT companyid  as id,companyName as opcion FROM ${TABLA}`,
     INSERT: `INSERT INTO ${TABLA} SET ?`,
     UPDATE: `UPDATE ${TABLA} SET ? WHERE companyid = ?`,
     DELETE: `DELETE FROM ${TABLA} WHERE companyid = ?`
