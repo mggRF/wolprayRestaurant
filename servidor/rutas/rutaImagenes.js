@@ -9,7 +9,7 @@ rutas.get('/uploads/:carpeta/:id/:img',(req, res) =>{
     const id = req.params.id;
     const img = req.params.img;
 
-    const pathFoto
+    //const pathFoto
 
     res.json({
         carpeta,
