@@ -47,6 +47,7 @@ class ControladorBase {
 
     listado(req, res) {
         //console.log("listado", this.config.TABLA);
+        this.conplementoSQL(req);
         let salida = [];
         const ids = req.session.userid;
         const role = req.session.role;
@@ -75,7 +76,6 @@ class ControladorBase {
     leerCount(req, res) {
         //Atencion el sql ha de pasar por el sistema de añadir empresa/manager
         let sql = `SELECT COUNT(*) as contador FROM ${this.config.TABLA}`;
-        console.log("count0>", sql)
         return this.connect.leerSql(sql)
             .then(dat => {
                 this.enviaDatos(res, dat[0]);
@@ -85,10 +85,37 @@ class ControladorBase {
             });
 
     }
+/**
+ * genera la clasificacion de la tabla, y los limites a listar (registros)
+ * utilizando parametros que llegan en al urj
+ * size=totalregistros,a partir de registro
+ * clasificador= nombre de campo y ASC/DESC segun se desee
+ * @param { } req 
+ */
+    conplementoSQL(req) {
+        let salida = "";
+        let size = req.query.size;
+        let clasi = req.query.clasificacion;
+        console.log("complementos", size, clasi)
+
+        if (clasi !== undefined) {
+            salida += "ORDER BY " + clasi.split(',').join(" ");
+        }
+
+        if (size !== undefined) {
+            salida += " LIMIT " + size.split(',')[0];
+            if (size.split(',')[1] !== undefined) {
+                salida += ", " + size.split(',')[1]
+            }
+        }
+        console.log("salida", salida)
+        return salida;
+    }
 
 
     leerUno(req, res) {
         let id = req.params.id;
+        if (id === "count") return this.leerCount(req,res);
         let sql = this.config.QUERIES.SELECT_UNO.replace(':id', id);
         this.connect.leerSql(sql)
             .then(dat => {
@@ -123,6 +150,7 @@ class ControladorBase {
     }
 
     leerALL(req, res) {
+        
         let sql = this.config.QUERIES.SELECT_ALL;
         let where = "";
 
@@ -136,7 +164,8 @@ class ControladorBase {
         }
 
 
-        sql = sql + " LIMIT " + this.limite
+        sql = sql + this.conplementoSQL(req);
+        console.log("sql---------->",sql)
         this.connect.leerSql(sql)
             .then(dat => {
                 //console.log("dat->", dat);

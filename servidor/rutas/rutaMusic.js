@@ -9,7 +9,6 @@ var rutas = express.Router();
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
 rutas.get('/', music.listado);
 rutas.get('/select/',music.leerSelect)
-rutas.get('/count', music.leerCount);
 rutas.get('/:id', music.leerUno);
 rutas.post('/', music.updateTable);
 rutas.put('/:id', music.updateTable);
