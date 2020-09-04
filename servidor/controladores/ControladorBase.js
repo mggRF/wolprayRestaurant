@@ -47,28 +47,30 @@ class ControladorBase {
 
     listado(req, res) {
         //console.log("listado", this.config.TABLA);
-        this.conplementoSQL(req);
-        let salida = [];
-        const ids = req.session.userid;
-        const role = req.session.role;
+        this.config.QUERIES.SELECT_ALL= "SELECT * FROM " + this.config.TABLA;
+        console.log("listado",this.config.QUERIES.SELECT_ALL)
+        return this.leerALL(req, res);
+        // let salida = [];
+        // const ids = req.session.userid;
+        // const role = req.session.role;
 
-        this.connect.leerTabla(this.config.TABLA)
-            .then(dat => {
-                dat.forEach(row => {
-                    //console.log("row=>",row)
-                    // let ca = new this.config.MODELO(...row);
-                    // console.log("ca=>",ca)
-                    salida.push(row);
-                })
-                //console.log(salida)
-                this.enviaDatos(res, salida);
+        // this.connect.leerTabla(this.config.TABLA)
+        //     .then(dat => {
+        //         dat.forEach(row => {
+        //             //console.log("row=>",row)
+        //             // let ca = new this.config.MODELO(...row);
+        //             // console.log("ca=>",ca)
+        //             salida.push(row);
+        //         })
+        //         //console.log(salida)
+        //         this.enviaDatos(res, salida);
 
-            })
-            .catch(err => {
-                console.error(err);
-                this.enviaDatos(res, "Error en lectura de tabla", err);
+        //     })
+        //     .catch(err => {
+        //         console.error(err);
+        //         this.enviaDatos(res, "Error en lectura de tabla", err);
 
-            });
+        //     });
 
     }
 
@@ -99,7 +101,7 @@ class ControladorBase {
         console.log("complementos", size, clasi)
 
         if (clasi !== undefined) {
-            salida += "ORDER BY " + clasi.split(',').join(" ");
+            salida += " ORDER BY " + clasi.split(',').join(" ");
         }
 
         if (size !== undefined) {

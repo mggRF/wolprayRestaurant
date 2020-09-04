@@ -76,14 +76,14 @@ export default class ListadoMusic extends Component {
                         <tr>
                             <th>
                                 <BotonCabecera
-                                    name="id"
+                                    name="musicid"
                                     col="Identificador"
                                     gestionClas={this.setSortedField}
                                 />
                             </th>
                             <th>
                                 <BotonCabecera
-                                    name="name"
+                                    name="musicName"
                                     col="name"
                                     gestionClas={this.setSortedField}
                                 />
