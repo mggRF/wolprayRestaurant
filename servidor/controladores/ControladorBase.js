@@ -47,8 +47,8 @@ class ControladorBase {
 
     listado(req, res) {
         //console.log("listado", this.config.TABLA);
-        this.config.QUERIES.SELECT_ALL= "SELECT * FROM " + this.config.TABLA;
-        console.log("listado",this.config.QUERIES.SELECT_ALL)
+        this.config.QUERIES.SELECT_ALL = "SELECT * FROM " + this.config.TABLA;
+        console.log("listado", this.config.QUERIES.SELECT_ALL)
         return this.leerALL(req, res);
         // let salida = [];
         // const ids = req.session.userid;
@@ -87,13 +87,13 @@ class ControladorBase {
             });
 
     }
-/**
- * genera la clasificacion de la tabla, y los limites a listar (registros)
- * utilizando parametros que llegan en al urj
- * size=totalregistros,a partir de registro
- * clasificador= nombre de campo y ASC/DESC segun se desee
- * @param { } req 
- */
+    /**
+     * genera la clasificacion de la tabla, y los limites a listar (registros)
+     * utilizando parametros que llegan en al urj
+     * size=totalregistros,a partir de registro
+     * clasificador= nombre de campo y ASC/DESC segun se desee
+     * @param { } req 
+     */
     conplementoSQL(req) {
         let salida = "";
         let size = req.query.size;
@@ -119,7 +119,7 @@ class ControladorBase {
 
     leerUno(req, res) {
         let id = req.params.id;
-        if (id === "count") return this.leerCount(req,res);
+        if (id === "count") return this.leerCount(req, res);
         let sql = this.config.QUERIES.SELECT_UNO.replace(':id', id);
         this.connect.leerSql(sql)
             .then(dat => {
@@ -154,7 +154,7 @@ class ControladorBase {
     }
 
     leerALL(req, res) {
-        
+
         let sql = this.config.QUERIES.SELECT_ALL;
         let where = "";
 
@@ -169,7 +169,7 @@ class ControladorBase {
 
 
         sql = sql + this.conplementoSQL(req);
-        console.log("sql---------->",sql)
+        console.log("sql---------->", sql)
         this.connect.leerSql(sql)
             .then(dat => {
                 //console.log("dat->", dat);
@@ -208,52 +208,61 @@ class ControladorBase {
     hacerPost(req, res) {
         const body = req.body;
 
-        const { CAMPO } = this.config.CARPETA;
-        console.log('El campo es: ', CAMPO)
-
 
         //Datos de la sesión
         const ids = req.session.userid;
         const role = req.session.role;
         const { QUERIES } = this.config;
 
-        if (!req.files) {
-            return res.status(400).json({
-                ok: false,
-                Message: 'Es obligatorio subir subir una imagen'
-            });
-        }
+        if (this.config.CARPETA) {
+            const { CAMPO } = this.config.CARPETA;
 
-        const file = req.files[CAMPO];
+            if (!req.files) {
+                return res.status(400).json({
+                    ok: false,
+                    Message: 'Es obligatorio subir subir una imagen'
+                });
+            }
 
-        if (!file) {
-            return res.status(400).json({
-                ok: false,
-                Message: 'Tienes un error en el nombre del campo, el nombre ha de ser: ' + CAMPO
-            });
-        }
+            const file = req.files[CAMPO];
 
-        if (!file.mimetype.includes('image')) {
-            return res.status(400).json({
-                ok: false,
-                Message: 'Lo que intenta subir no es una imagen'
-            });
-        }
+            if (!file) {
+                return res.status(400).json({
+                    ok: false,
+                    Message: 'Tienes un error en el nombre del campo, el nombre ha de ser: ' + CAMPO
+                });
+            }
+
+            if (!file.mimetype.includes('image')) {
+                return res.status(400).json({
+                    ok: false,
+                    Message: 'Lo que intenta subir no es una imagen'
+                });
+            }
 
 
 
-        req.body[CAMPO] = this.config.CARPETA.nombreFoto;
+            req.body[CAMPO] = this.config.CARPETA.nombreFoto;
 
-        this.sendDataToTable([body], QUERIES.INSERT, req, res)
-            .then(value => {
-                if (value.insertId) {
+            this.sendDataToTable([body], QUERIES.INSERT, req, res)
+                .then(value => {
+                    if (value.insertId) {
+                        console.log('Se han guardado los datos, el id es: ', value.insertId)
+                        this.recogerImagen(req, value.insertId)
+                            .then(response => {
+                                this.enviaDatos(res, 'Se han añadido correctamente los datos.');
+                            }).catch(err => this.enviaDatos(res, 'Ha ocurrido un error al tratar de subir la imagen', err));
+                    }
+                }).catch(err => this.enviaDatos(res, 'Ha ocurrido un error al tratar de añadir los datos', err));
+        } else {
+            this.sendDataToTable([body], QUERIES.INSERT, req, res)
+                .then(value => {
+
                     console.log('Se han guardado los datos, el id es: ', value.insertId)
-                    this.recogerImagen(req, value.insertId)
-                        .then(response => {
-                            this.enviaDatos(res, 'Se han añadido correctamente los datos.');
-                        }).catch(err => this.enviaDatos(res, 'Ha ocurrido un error al tratar de subir la imagen', err));
-                }
-            }).catch(err => this.enviaDatos(res, 'Ha ocurrido un error al tratar de añadir los datos', err));
+                    this.enviaDatos(res, 'Se han añadido correctamente los datos.');
+
+                }).catch(err => this.enviaDatos(res, 'Ha ocurrido un error al tratar de añadir los datos', err));
+        }
     }
 
     async hacerPut(req, res) {
