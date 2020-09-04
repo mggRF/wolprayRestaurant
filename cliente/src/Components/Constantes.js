@@ -21,8 +21,7 @@ module.exports = {
     MOD: "Modificar",
     DEL: "Delete",
     VIE: "VER",
-    TAG_PAGINACION: "paginas",                    // id en donde se hubican la paginacion
-    NOMBRE_FORMULARIO: "formularioMantenimiento",  //nombre formulario de mantenimiento
+    
     CONVERSOR: {
         c_state: 'states',
         c_city: 'citys',
@@ -30,8 +29,8 @@ module.exports = {
         c_provinces: 'provinces',
         n_categories:'categories',
         n_dresscode:'dresscode',
-        n_music:'musics',
-        companies:'companies'
+        n_music:'musics'
+        
     },
     METODO: {
         I:'POST',
