@@ -51,8 +51,9 @@ export default class Paginacion extends Component {
     };
 
     preparaPag= (offset) => {
-        let salida = "?size=" + this.state.lppagina +", "
-        salida += this.state.lppagina * offset
+        let salida = "?size=";
+        if (offset>0) salida += (this.state.lppagina * offset) +","
+        salida += this.state.lppagina 
         this.props.pageHandler(salida);
     }
 
@@ -64,7 +65,9 @@ export default class Paginacion extends Component {
                 if (response.Respuesta === "ok") {
                     let contador = response.Datos.contador;
                     let paginas = contador / this.state.lppagina;
-                    this.setState({ totalPaginas: paginas, });
+                    if (paginas !== Math.floor(paginas)) paginas++
+                    console.log("mates",paginas,Math.floor(paginas))
+                    this.setState({ totalPaginas: Math.floor(paginas), });
                 }
                 else {
                     this.setState({ error: response.Respuesta });
@@ -92,8 +95,8 @@ export default class Paginacion extends Component {
                 <button onClick={this.backHandler}> Anterior </button>
                 {pageNumbers.map(number => {
                     if (
-                        number >= parseInt(active) - 3 &&
-                        number <= parseInt(active) + 3
+                        number >= parseInt(active) - 5 &&
+                        number <= parseInt(active) + 5
                     ) {
                         return (
                             <button key={number} onClick={this.pagingHandler} id={number}>{number}</button>

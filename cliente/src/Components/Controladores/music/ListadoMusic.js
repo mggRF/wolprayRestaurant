@@ -38,7 +38,6 @@ export default class ListadoMusic extends Component {
 
 
     setSortedField = (clasi) => {
-        console.log("clasi ",clasi)
         this.gl.setClasificador(clasi.nombre);
         this.leeTabla();
     }

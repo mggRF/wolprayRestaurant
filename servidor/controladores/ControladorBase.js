@@ -105,9 +105,11 @@ class ControladorBase {
         }
 
         if (size !== undefined) {
-            salida += " LIMIT " + size.split(',')[0];
-            if (size.split(',')[1] !== undefined) {
-                salida += ", " + size.split(',')[1]
+            let valores = size.split(',')   // SI 2 offset y limit; si 1, limit
+            salida += " LIMIT ";
+            salida += valores[0]
+            if (valores.length > 1) {
+                salida += ", " + valores[1]
             }
         }
         console.log("salida", salida)
