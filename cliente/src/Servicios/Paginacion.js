@@ -8,25 +8,63 @@ export default class Paginacion extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            paging: {
-                offset: 0,
-                limit: 10,
-                totalPaginas:0,
-                lppagina:LPPAGINA
-
-            },
+            offset: 0,
+            limit: 10,
+            totalPaginas: 0,
+            lppagina: LPPAGINA,
             active: 0
         };
     }
 
+    componentDidMount() {
+        this.leerContador()
+    }
+    pagingHandler = (event) => {
+        let offset = parseInt(event.target.id);
+        this.setState({
+            active: offset
+        });
+        this.preparaPag(event.target.id - 1);
+        //this.props.pageHandler(event.target.id - 1);
+    };
+
+    nextHandler = () => {
+        let active = this.state.active;
+        if (active <= this.state.totalPaginas) {
+            this.setState({
+                active: active + 1
+            });
+            //this.props.pageHandler(active + 1);
+            this.preparaPag(active + 1);
+        }
+    };
+
+    backHandler = () => {
+        let active = this.state.active;
+        if (active > 0) {
+            this.setState({
+                active: active - 1
+            });
+            //this.props.pageHandler(active - 1);
+            this.preparaPag(active - 1);
+        }
+    };
+
+    preparaPag= (offset) => {
+        let salida = "?size=" + this.state.lppagina +", "
+        salida += this.state.lppagina * offset
+        this.props.pageHandler(salida);
+    }
+
+
+
     leerContador() {
         AccesoAPI.accederApi(API_URL + this.props.tabla + '/count')
             .then(response => {
-                console.log(response);
                 if (response.Respuesta === "ok") {
                     let contador = response.Datos.contador;
                     let paginas = contador / this.state.lppagina;
-                    this.setState({ totalPaginas: paginas ,});
+                    this.setState({ totalPaginas: paginas, });
                 }
                 else {
                     this.setState({ error: response.Respuesta });
@@ -34,15 +72,11 @@ export default class Paginacion extends Component {
 
             })
     }
-    componentDidMount(){
-        this.leerContador()
-    }
-
     buildComponent = () => {
         const { totalPaginas } = this.state;
         const pageNumbers = [];
         for (let i = 1; i <= totalPaginas; i++) {
-            pageNumbers.Push(i);
+            pageNumbers.push(i);
         }
         return (
             <div className="pull-right">
@@ -55,61 +89,37 @@ export default class Paginacion extends Component {
         let { active } = this.state;
         return (
             <>
-            {pageNumbers.map( number => {
+                <button onClick={this.backHandler}> Anterior </button>
+                {pageNumbers.map(number => {
                     if (
                         number >= parseInt(active) - 3 &&
                         number <= parseInt(active) + 3
                     ) {
                         return (
-                            <button onClick={this.pagingHandler}>{ number }</button>                
+                            <button key={number} onClick={this.pagingHandler} id={number}>{number}</button>
                         );
                     } else {
                         return null;
                     }
                 })
-            }
+                }
+                <button onClick={this.nextHandler}> Siguiente </button>
             </>
         )
 
-        ;
-    };
-    pagingHandler = (event) => {
-        let offset = parseInt(event.target.id);
-        this.setState({
-            active: offset
-        });
-        this.props.pageHandler(event.target.id - 1);
+            ;
     };
 
-    nextHandler = () => {
-        let active = this.state.active;
-        this.setState({
-            active: active + 1
-        });
-        this.props.pageHandler(active + 1);
-    };
-
-    backHandler = () => {
-        let active = this.state.active;
-        this.setState({
-            active: active - 1
-        });
-        this.props.pageHandler(active - 1);
-    };
-
-    
-
-    
 
     render() {
-        return this.buildComponent(this.props, this.state);
+        return this.buildComponent();
     }
 
 }
 Paginacion.propTypes =
 {
-    tabla:PropTypes.string,
+    tabla: PropTypes.string,
     paging: PropTypes.object,
     pageHandler: PropTypes.func
-    
+
 };

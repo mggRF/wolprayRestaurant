@@ -15,7 +15,7 @@ module.exports = {
     USERS: 'users',
     STATES_SELECT: 'states/select/',
 
-    LPPAGINA: "20",                             //lineas por pagina
+    LPPAGINA: "5",                             //lineas por pagina
     
     INS: "Añadir",
     MOD: "Modificar",
@@ -30,7 +30,8 @@ module.exports = {
         c_provinces: 'provinces',
         n_categories:'categories',
         n_dresscode:'dresscode',
-        n_music:'musics'
+        n_music:'musics',
+        companies:'companies'
     },
     METODO: {
         I:'POST',

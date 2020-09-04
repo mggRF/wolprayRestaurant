@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const TextAreaComponent = ({ value = '', name = '', label = '', handleChange, readOnly = true }) => {
+export const TextAreaComponent = ({clase='', value = '', name = '', label = '', handleChange, readOnly = true }) => {
 
     const onFocus = event => {
 
@@ -26,13 +26,13 @@ export const TextAreaComponent = ({ value = '', name = '', label = '', handleCha
                                     value={value}
                                     onChange={handleChange}
                                     autoComplete="off"
-                                    className="form-control"
+                                    className={clase}
                                     disabled = {true} /> :
                                 <textarea name={name}
                                     rows="5"
                                     autoComplete="off"
                                     value={value}
-                                    className="form-control"
+                                    className={clase}
                                     placeholder={'Ingresa el ' + name}
                                     disabled = {true}/>
                         }
@@ -52,7 +52,7 @@ export const TextAreaComponent = ({ value = '', name = '', label = '', handleCha
                             rows="5"
                             value={value}
                             autoComplete="off"
-                            className="form-control"
+                            className={clase}
                             onFocus={onFocus}
                             onChange={handleChange}
                             readOnly={readOnly} />
