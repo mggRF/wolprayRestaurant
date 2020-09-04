@@ -122,7 +122,6 @@ export default class Paginacion extends Component {
 Paginacion.propTypes =
 {
     tabla: PropTypes.string,
-    paging: PropTypes.object,
     pageHandler: PropTypes.func
 
 };

@@ -19,7 +19,8 @@ export default class ListadoMusic extends Component {
             datos: [],
             error: "",
         }
-        this.gl = new GestorListado(API_URL + MUSIC);
+        this.leeTabla= this.leeTabla.bind(this);
+        this.gl = new GestorListado(API_URL + MUSIC,this.leeTabla);
     }
     leeTabla() {
         AccesoAPI.accederApi(this.gl.terminaURLlistado())
@@ -36,16 +37,6 @@ export default class ListadoMusic extends Component {
     }
 
 
-
-    setSortedField = (clasi) => {
-        this.gl.setClasificador(clasi.nombre);
-        this.leeTabla();
-    }
-
-    pageHandler = (ajuste) => {
-        this.gl.pageHandler(ajuste);
-        this.leeTabla();
-    }
     componentDidMount() {
         this.leeTabla();
     }
@@ -77,14 +68,14 @@ export default class ListadoMusic extends Component {
                                 <BotonCabecera
                                     name="musicid"
                                     col="Identificador"
-                                    gestionClas={this.setSortedField}
+                                    gestionClas={this.gl.setSortedField}
                                 />
                             </th>
                             <th>
                                 <BotonCabecera
                                     name="musicName"
                                     col="name"
-                                    gestionClas={this.setSortedField}
+                                    gestionClas={this.gl.setSortedField}
                                 />
                             </th>
                             <th></th><th></th><th></th>
@@ -95,8 +86,7 @@ export default class ListadoMusic extends Component {
                     </tbody>
                 </table>
                 <Paginacion
-                    paging={this.state.paging}
-                    pageHandler={this.pageHandler}
+                    pageHandler={this.gl.pageHandler}
                     tabla={MUSIC}>
                 </Paginacion>
             </div>

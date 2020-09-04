@@ -5,11 +5,12 @@ import { LPPAGINA } from "../Components/Constantes";
 
 export default class GestorListado {
 
-    constructor(ruta) {
+    constructor(ruta,lector) {
         this.offset = "?size=" + LPPAGINA;   //lineas por página
         this.clasificador = "";              //columna por la que se desea clasificar
         this.clasSen = 1;                   //sentido clasificacion 1 ascendente -1 descendente
         this.ruta = ruta;                   //Ruta BASICA de llamada a la api
+        this.lector = lector;
     }
 
     terminaURLlistado = () => {
@@ -40,8 +41,16 @@ export default class GestorListado {
      * funcion para gestionar el movimiento de paginas
      * @param {numero de la pagina a mostrar} ajuste 
      */
+    // pageHandler = (ajuste) => {
+    //     this.offset = ajuste;
+
+    // }
+    setSortedField = (clasi) => {
+        this.setClasificador(clasi.nombre);
+        this.lector();
+    }
     pageHandler = (ajuste) => {
         this.offset = ajuste;
-
+        this.lector();
     }
 }
