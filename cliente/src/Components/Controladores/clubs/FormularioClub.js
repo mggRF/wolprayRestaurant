@@ -9,11 +9,18 @@ import SubirImagen from '../../Fragmentos/SubirImagen';
 import '../../../styles.css';
 
 export default class  FormularioClub extends Component {
-
+    
+    
+        añadirMusica(event){
+            
+            console.log();
+        }
    
     render() {
+        
+        let typemusicañadir = '';
         let club = this.props.obj;
-        console.log("Desde formularioClub el music", club)
+        let musicType=club.Musica +", "+typemusicañadir;
         let readonly = false;
         let direccion = club.streetName +" "+club.streetNumber+" "+club.postal_code +" "+club.cityName;
         if (this.props.orden == 'D' || this.props.orden == 'V') readonly = true
@@ -26,7 +33,11 @@ export default class  FormularioClub extends Component {
 
             }
 
-            <Imagen imageUrl={club.coverUrl} with={20} />
+            {(club.coverUrl === null)?
+                <Imagen imageUrl='' with={20} />
+            :
+                <Imagen imageUrl={club.coverUrl} with={20} />
+            }
             <div className='container'>
             <InputComponent name="clubid" 
                     handleChange={this.props.funcion}
@@ -41,20 +52,11 @@ export default class  FormularioClub extends Component {
             </div>
             
             <div className='container'>
-            <div className='row'>
+            <div className='row '>
             
                 {
-                    (readonly) ?
-                    <div className='col-4'>
-                    <InputComponent name="clubName" 
-                    handleChange={this.props.funcion}
-                    name="clubName"
-                    label="Nombre"
-                    readOnly={readonly}
-                    value={club.clubName}
-                    clase ='elementoFormularioClub'/>
-                    </div>
-                    :
+                    
+                    /*CLUBNAME*/ 
                     <div className='col-4'>
                     <InputComponent name="clubName" 
                     handleChange={this.props.funcion}
@@ -69,17 +71,9 @@ export default class  FormularioClub extends Component {
                 
                 
                 {
-                    (readonly) ?
-                    <div className='col-4'>
-                    <TextAreaComponent name="description" 
-                    handleChange={this.props.funcion}
-                    name="description"
-                    label="Descripción"
-                    readOnly={readonly}
-                    value={club.description}
-                    clase ='elementoFormularioClub'/>
-                    </div>
-                    :
+                    
+                   /*DECSRIPCION DEL CLUB */
+                    
                     <div className='col-4'>
                     <TextAreaComponent name="description" 
                     handleChange={this.props.funcion}
@@ -98,17 +92,7 @@ export default class  FormularioClub extends Component {
                 
                 
                 {
-                    (readonly) ?
-                    <div className='col-4'>
-                    <InputComponent name="clubPhone" 
-                    handleChange={this.props.funcion}
-                    name="clubPhone"
-                    label="Teléfono"
-                    readOnly={readonly}
-                    value={club.clubPhone}
-                    clase ='elementoFormularioClub'/>
-                    </div>
-                    :
+                    /*TELEFONO DEL CLUB */
                     <div className='col-4'>
                     <InputComponent name="clubPhone" 
                     handleChange={this.props.funcion}
@@ -121,12 +105,13 @@ export default class  FormularioClub extends Component {
                     </div>
                 }
                 
-                
-                    
+                </div>
+                <hr/>
+                <div className='row'>
 
                 
                 
-            {
+            {/*DIRECCION COMPLETA DEL CLUB */
                 (readonly) ?
                 <div className='col-4'>
                 <InputComponent name="direccion" 
@@ -143,6 +128,7 @@ export default class  FormularioClub extends Component {
                 
                 
                 {
+                    /*NUMERO DE LA DIRECCION DEL CLUB */
                     (!readonly) ?
                     <div className='col-4'>
                     <InputComponent name="streetNumber" 
@@ -158,6 +144,7 @@ export default class  FormularioClub extends Component {
                 
                 
                 {
+                    /*CODIGO POSTAL DEL CLUB */
                     (!readonly) ?
                     <div className='col-4'>
                     <InputComponent name="postal_code" 
@@ -170,25 +157,29 @@ export default class  FormularioClub extends Component {
                         />
                         </div>: null
                 }
+                {
+                    /*MOSTRAR TIPO DE MUSICA  DEL CLUB */
+                    (!readonly) ?
+                    <div className='col-4'>
+                    <TextAreaComponent name="Musica" 
+                        handleChange={this.props.funcion}
+                        name="Musica"
+                        label="Tipos de musica"
+                        clase ='elementoFormularioClub'
+                        readOnly={true}
+                        value={musicType}
+                        />
+                        </div>: null
+                }
                 
                 
+                </div>
                 
-
-                
+                <hr/>
+                <div className='row'>
                 
                 {
-                    (readonly) ?
-                    <div className='col-4'>
-                    <InputComponent name="accessAge" 
-                    handleChange={this.props.funcion}
-                    name="accessAge"
-                    label="Edad mínima"
-                    type='number'
-                    readOnly={readonly}
-                    value={club.accessAge}
-                    clase ='elementoFormularioClub'/>
-                    </div>
-                    :
+                    /*EDAD DE ACCESO AL CLUB */
                     <div className='col-4'>
                     <InputComponent name="accessAge" 
                     handleChange={this.props.funcion}
@@ -204,18 +195,7 @@ export default class  FormularioClub extends Component {
                 
                 
                 {
-                    (readonly) ?
-                    <div className='col-4'>
-                    <InputComponent name="DiasAnticipacion" 
-                    handleChange={this.props.funcion}
-                    name="DiasAnticipacion"
-                    label="Dias Anticipacion"
-                    type='number'
-                    readOnly={readonly}
-                    value={club.DiasAnticipacion}
-                    clase ='elementoFormularioClub'/>
-                    </div>
-                    :
+                    /*DIAS DE ANTICIPACION DEL CLUB */
                     <div className='col-4'>
                     <InputComponent name="DiasAnticipacion" 
                     handleChange={this.props.funcion}
@@ -235,13 +215,16 @@ export default class  FormularioClub extends Component {
 
                 
                     {
+                        
+                        /*TIPO DE MÚSICA DEL CLUB */
                         (!readonly) ?
                         <div className='col-4'>
-                        <Desplegable table ='n_music' name='music' label='Tipo de música' value={club.music} readValue={this.props.funcion}/>
+                        <Desplegable table ='n_music'  name='music' label='Tipo de música' value={club.music} readValue={this.props.funcion}/>
+                        
                         </div>
                         :
                         <div className='col-4'>
-                        <InputComponent name="music" 
+                        <InputComponent name="Musica" 
                             handleChange={this.props.funcion}
                             label="Tipo de música"
                             clase ='elementoFormularioClub'
@@ -251,8 +234,12 @@ export default class  FormularioClub extends Component {
                             </div>
                     }
                     
-                    
+                    </div>
+                    <hr/>
+
+                    <div className='row'>
                     {
+                        /*CODIGO DE VESTIMENTA DEL CLUB */
                         (!readonly) ?
                         <div className='col-4'>
                         <Desplegable table ='n_dresscode' name='dressCodeid' label='Codigo de vestimenta' value={club.dressCodeid} readValue={this.props.funcion}/>
@@ -270,17 +257,7 @@ export default class  FormularioClub extends Component {
                     
                     
                 {
-                    (readonly) ?
-                    <div className='col-4'>
-                    <InputComponent name="entryCost" 
-                    handleChange={this.props.funcion}
-                    name="entryCost"
-                    label="Coste de entrada"
-                    readOnly={readonly}
-                    value={club.entryCost}
-                    clase ='elementoFormularioClub'/>
-                    </div>
-                    :
+                    /*COSTO DE ENTRADA AL CLUB */
                     <div className='col-4'>
                     <InputComponent name="entryCost" 
                     handleChange={this.props.funcion}
@@ -296,18 +273,8 @@ export default class  FormularioClub extends Component {
 
                 
                 {
-                    (readonly) ?
-                    <div className='col-4'>
-                    <InputComponent name="maxPeople" 
-                    handleChange={this.props.funcion}
-                    name="maxPeople"
-                    type='number'
-                    label="Máximo de personas"
-                    readOnly={readonly}
-                    value={club.maxPeople}
-                    clase ='elementoFormularioClub'/>
-                    </div>
-                    :
+                    
+                    /*MAXIMO DE PERSONAS AL CLUB */
                     <div className='col-4'>
                     <InputComponent name="maxPeople" 
                     handleChange={this.props.funcion}
@@ -319,36 +286,16 @@ export default class  FormularioClub extends Component {
                     value={club.maxPeople}/>
                     </div>
                 }
-                
-                {
-                    (readonly) ?
-                    <div className='col-4'>
-                    <TextAreaComponent name="howToGetThere" 
-                    handleChange={this.props.funcion}
-                    
-                    label="Como llegar"
-                    readOnly={readonly}
-                    value={club.howToGetThere}
-                    clase ='elementoFormularioClub'/>
-                    </div>
-                    :
-                    <div className='col-4'>
-                    <TextAreaComponent name="howToGetThere" 
-                    handleChange={this.props.funcion}
-                    
-                    label="Como legar"
-                    clase ='elementoFormularioClub'
-                    readOnly={readonly}
-                    value={club.howToGetThere}/>
-                    </div>
-                }
-                
+                </div>
+                <hr/>
+                <div className='row'>
                 
                 
                 {<div className='row'>
                 
+
                 <label  id='sesionElement' htmlFor={club.openSeason1 }>Sesion de apertura 1:</label>
-                {
+                {/*TEMPORADAS DEL CLUB (PRINCIPIO)*/
                     (club.openSeason1 ===null)?
                     <input name="openSeason1"
                     id='sesionElement'
@@ -421,31 +368,24 @@ export default class  FormularioClub extends Component {
                 <label  id='sesionElement' htmlFor={club.closingSeason3 }>Sesion de cierre 3:</label>
                 {
                     (club.closingSeason3 ===null)?
-                    <input name="closingSeason2"
+                    <input name="closingSeason3"
                     id='sesionElement'
                     type ="date"
                     readOnly={readonly} />
                     :
-                    <input name="closingSeason2"
+                    <input name="closingSeason3"
                     type ="date" 
                     value={club.closingSeason3.split('T')[0]} 
                     readOnly={readonly} />
-                   
+                   /*TEMPORADAS DEL CLUB (FINAL)*/
                 }
                 </div>}
+                </div>
+                <hr/>
+                <div className='row'>
 
                 {
-                    (readonly) ?
-                    <div className='col-4'>
-                    <InputComponent name="latitude" 
-                    handleChange={this.props.funcion}
-                    name="latitude"
-                    label="Latitude"
-                    readOnly={readonly}
-                    value={club.latitude}
-                    clase ='elementoFormularioClub'/>
-                    </div>
-                    :
+                   /*LATITUD DEL CLUB */
                     <div className='col-4'>
                     <InputComponent name="latitude" 
                     handleChange={this.props.funcion}
@@ -460,18 +400,7 @@ export default class  FormularioClub extends Component {
                 
                 <div className='row'>
                 {
-                    (readonly) ?
-                    
-                    <div className='col-2'>
-                    <InputComponent name="latitude" 
-                    handleChange={this.props.funcion}
-                    name="latitude"
-                    label="Latitude"
-                    readOnly={readonly}
-                    value={club.latitude}
-                    clase ='elementoFormularioClub'/>
-                    </div>
-                    :
+                    /*LONGITUD DEL CLUB */
                     <div className='col-10'>
                     <InputComponent name="longitude" 
                     handleChange={this.props.funcion}
@@ -484,8 +413,9 @@ export default class  FormularioClub extends Component {
                     </div>
                     
                 }</div>
+                </div>
                 <div className='row'>
-                {
+                {/*CIUDAD DEL CLUB */
                     (readonly) ?
                     
                     (<div className='col-12'><InputComponent name="cityName" 
@@ -512,7 +442,7 @@ export default class  FormularioClub extends Component {
                 <div className='row'>
                 
                 
-                    {
+                    {/*EMPRESA DEL CLUB */
                         (!readonly) ?
                         <div className='col-12'>
                         <label>Empresas</label>
@@ -529,20 +459,23 @@ export default class  FormularioClub extends Component {
                             </div>
                     }
                     </div>
+                    {
+                        /*COMO LLEGAR AL CLUB */
+                        <div className='col-4'>
+                        <TextAreaComponent name="howToGetThere" 
+                        handleChange={this.props.funcion}
+                        
+                        label="Como legar"
+                        clase ='elementoFormularioClub'
+                        readOnly={readonly}
+                        value={club.howToGetThere}/>
+                        </div>
+                    }
                     
-                    </div>
+                    
                     </div>
             </div>
 
-            /*
-
-
-coverUrl: null
-howToGetThere: null
-latitude: null
-longitude: null
-
-            */ 
 
 
         )
