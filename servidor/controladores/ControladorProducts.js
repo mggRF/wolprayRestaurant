@@ -7,6 +7,7 @@ const ControladorBase = require("./ControladorBase");
 const MODELO = require("../modelos/Product");
 const TABLA = 'products';
 const CARPETA = 'products';
+const CAMPO = 'imageUrl';
 const selectUno  = `select 
                         ${TABLA}.*,
                         clubs.clubName,
@@ -33,8 +34,9 @@ class ControladorProducts extends ControladorBase {
     constructor(){
         let config = {
             CARPETA: {
-                CARPETA:CARPETA,
-                CAMPO:'imageUrl'
+                CARPETA,
+                CAMPO,
+                nombreFoto: 'principal.jpg'
             },
             TABLA: TABLA,
             QUERIES: QUERIES,

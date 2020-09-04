@@ -53,7 +53,8 @@ class ControladorClubs extends ControladorBase {
         let config = {
             CARPETA: {
                 CARPETA:CARPETA,
-                CAMPO:CAMPO
+                CAMPO:CAMPO,
+                nombreFoto: 'principal.jpg'
             },
             TABLA: TABLA,
             QUERIES: QUERIES,

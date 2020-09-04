@@ -89,12 +89,12 @@ class Conexion {
     async modifyTable(sql, data){
         const result = await this.usePooledConnectionAsync(async conn => {
             const rows = await new Promise((resolve, reject) => {
-                conn.query(sql,data, (err) => {
+                conn.query(sql,data, (err, result) => {
                     if (err) {
                         reject(err);
-                        Presenta.log('Ha ocurriso un error al tratar de insertar')
+                        Presenta.log('Ha ocurrido un error al tratar de modificar una tabla')
                     } else {
-                        resolve('Se ha modificado la tabla correctamente');
+                        resolve(result);
                     }
                 });
             });

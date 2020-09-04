@@ -1,20 +1,20 @@
-
 const Conexion = require("../servicios/Conexion");
 const { LPPAGINA } = require("../Constantes/ConstantesDataBase/ConstantesPaginacion");
 const Presenta = require("../servicios/Presenta");
+const FyleSystem = require('../modelos/FileSystem');
 class ControladorBase {
-
 
     constructor(config) {
         this.config = config;
         this.connect = new Conexion();
+        this.fileSystem = new FyleSystem(config);
+
 
         this.listado = this.listado.bind(this);
         this.leerUno = this.leerUno.bind(this);
         this.leerSelect = this.leerSelect.bind(this);
         this.updateTable = this.updateTable.bind(this);
         this.sendDataToTable = this.sendDataToTable.bind(this);
-        this.verificarMetodo = this.verificarMetodo.bind(this);
         this.enviaDatos = this.enviaDatos.bind(this);
         this.recogerImagen = this.recogerImagen.bind(this);
         this.leerCount = this.leerCount.bind(this);
@@ -73,9 +73,9 @@ class ControladorBase {
 
 
     leerCount(req, res) {
-//Atencion el sql ha de pasar por el sistema de añadir empresa/manager
+        //Atencion el sql ha de pasar por el sistema de añadir empresa/manager
         let sql = `SELECT COUNT(*) as contador FROM ${this.config.TABLA}`;
-        console.log("count0>",sql)
+        console.log("count0>", sql)
         return this.connect.leerSql(sql)
             .then(dat => {
                 this.enviaDatos(res, dat[0]);
@@ -150,39 +150,9 @@ class ControladorBase {
     }
 
 
-    verificarMetodo(req, res) {
-        const method = req.route.stack[0].method;
-        console.log('Estoy pasando po rverificar imagen')
-        console.log('el metodo es: ', method)
-        switch (method.toLowerCase()) {
-            case 'post':
-                if (req.files) {
-                    this.recogerImagen(req, res);
-                } else {
-                    return res.status(400).json({
-                        ok: false,
-                        Message: 'Es necesario subir una imagen'
-                    });
-                }
-                break;
-            case 'put':
-                if (req.files) {
-                    this.recogerImagen(req, res);
-                } else {
-                    this.updateTable(req, res);
-                }
-                break
-        }
-
-
-
-
-    }
-
     updateTable(req, res) {
-        const method = req.route.stack[0].method;
+        const { method } = req.route.stack[0];
         const id = req.params.id;
-        const body = req.body;
 
         //Datos de la sesión
         const ids = req.session.userid;
@@ -191,10 +161,10 @@ class ControladorBase {
 
         switch (method.toLowerCase()) {
             case 'post':
-                this.sendDataToTable([body], QUERIES.INSERT, res);
+                this.hacerPost(req, res);
                 break;
             case 'put':
-                this.sendDataToTable([body, id], QUERIES.UPDATE, res);
+                this.hacerPut(req, res);
                 break;
             case 'delete':
                 this.sendDataToTable([id], QUERIES.DELETE, res);
@@ -202,38 +172,106 @@ class ControladorBase {
         }
     }
 
-    recogerImagen(req, res) {
+    hacerPost(req, res) {
+        const body = req.body;
 
-        const campo = this.config.CARPETA.CAMPO;
-        const file = req.files[campo];
-        if (!file) {
-            return res.json({
+        const { CAMPO } = this.config.CARPETA;
+        console.log('El campo es: ', CAMPO)
+
+
+        //Datos de la sesión
+        const ids = req.session.userid;
+        const role = req.session.role;
+        const { QUERIES } = this.config;
+
+        if (!req.files) {
+            return res.status(400).json({
                 ok: false,
-                Message: 'Ha ocurrido un fallo al tratar de recoger el campo: ' + campo
+                Message: 'Es obligatorio subir subir una imagen'
             });
         }
 
-        if(!file.mimetype.includes('image')){
-            return res.json({
+        const file = req.files[CAMPO];
+
+        if (!file) {
+            return res.status(400).json({
+                ok: false,
+                Message: 'Tienes un error en el nombre del campo, el nombre ha de ser: ' + CAMPO
+            });
+        }
+
+        if (!file.mimetype.includes('image')) {
+            return res.status(400).json({
                 ok: false,
                 Message: 'Lo que intenta subir no es una imagen'
             });
         }
 
 
-        return res.json({
-            ok: true,
-            file: file.mimetype
-        });
+
+        req.body[CAMPO] = this.config.CARPETA.nombreFoto;
+
+        this.sendDataToTable([body], QUERIES.INSERT, req, res)
+            .then(value => {
+                if (value.insertId) {
+                    console.log('Se han guardado los datos, el id es: ', value.insertId)
+                    this.recogerImagen(req, value.insertId)
+                        .then(response => {
+                            this.enviaDatos(res, 'Se han añadido correctamente los datos.');
+                        }).catch(err => this.enviaDatos(res, 'Ha ocurrido un error al tratar de subir la imagen', err));
+                }
+            }).catch(err => this.enviaDatos(res, 'Ha ocurrido un error al tratar de añadir los datos', err));
+    }
+
+    async hacerPut(req, res) {
+        const id = req.params.id;
+        const body = req.body;
+
+        const { CAMPO } = this.config.CARPETA;
+        let file;
+
+        //Datos de la sesión
+        const ids = req.session.userid;
+        const role = req.session.role;
+        const { QUERIES } = this.config;
+
+        if (req.files) {
+            file = req.files[CAMPO];
+            if (!file) {
+                return res.status(400).json({
+                    ok: false,
+                    Message: 'Tienes un error en el nombre del campo, el nombre ha de ser: ' + this.config.CARPETA.CAMPO
+                });
+            }
+        }
+        if (file) {
+
+            await this.recogerImagen(req, id);
+
+        }
+
+
+
+        this.sendDataToTable([body, id], QUERIES.UPDATE)
+            .then(value => {
+                this.enviaDatos(res, value);
+            }).catch(err => this.enviaDatos(res, 'Ha ocurrido un error al tratar de modificar la tabla', err));
+    }
+
+    async recogerImagen(req, id) {
+        console.log('El id desde recoger imagen es: ', id)
+
+        const { CAMPO } = this.config.CARPETA;
+        const file = req.files[CAMPO];
+
+
+        return await this.fileSystem.guardarImagenTemporal(file, id);
 
     }
 
 
-    sendDataToTable(data, sql, res) {
-        this.connect.modifyTable(sql, data)
-            .then(value => {
-                this.enviaDatos(res, value);
-            }).catch(err => this.enviaDatos(res, 'Ha ocurrido un error al tratar de modificar la tabla', err));
+    async sendDataToTable(data, sql) {
+        return await this.connect.modifyTable(sql, data);
     }
 }
 

@@ -12,6 +12,7 @@ var morgan = require('morgan');
 const compression = require('compression');
 const helmet = require('helmet');
 const fileUpload = require('express-fileupload');
+const path = require('path');
 
 const { COMUNIDADES, PAISES, POBLACIONES, PROVINCIAS, MUSICA, CLUBS, DRESSCODE, EVENTS, USERS, SLOTS, ROLES, COMPANIES, PRODUCTS } = require('./Constantes/ConstantesRutas');
 

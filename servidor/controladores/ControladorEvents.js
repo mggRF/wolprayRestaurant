@@ -19,8 +19,9 @@ class ControladorEvents extends ControladorBase {
     constructor(){
         let config = {
             CARPETA: {
-                CARPETA:CARPETA,
-                CAMPO:CAMPO
+                CARPETA,
+                CAMPO,
+                nombreFoto: 'principal.jpg'
             },
             TABLA: TABLA,
             QUERIES: QUERIES,
