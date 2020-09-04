@@ -38,6 +38,7 @@ const rRoles = require('./rutas/rutaRoles');
 const rCompanies = require('./rutas/rutaCompanies');
 const rDressCode = require('./rutas/rutaDressCode');
 const rProducts = require('./rutas/rutaProducts');
+const rImagenes = require('./rutas/rutaImagenes');
 const Autorizado = require('./Autentificacion/middelAut');
 
 
@@ -67,6 +68,7 @@ app.use(ROLES, Autorizado, rRoles);
 app.use(COMPANIES, Autorizado, rCompanies);
 app.use(DRESSCODE, Autorizado, rDressCode);
 app.use(PRODUCTS, Autorizado, rProducts);
+app.use(Autorizado, rImagenes);
 
 if (process.env.NODE_ENV == 'production') {
     // create a rotating write stream
