@@ -44,6 +44,12 @@ class ControladorBase {
         }
     }
 
+    /**
+     * Lista todos los archivos de la base de datos.
+     * 
+     * @param {} req : objeto request.
+     * @param {} res : objeto response.
+     */
     listado(req, res) {
         this.config.QUERIES.SELECT_ALL = "SELECT * FROM " + this.config.TABLA;
 
@@ -73,6 +79,7 @@ class ControladorBase {
     }
 
 
+    
     leerCount(req, res) {
         //Atencion el sql ha de pasar por el sistema de añadir empresa/manager
         let sql = `SELECT COUNT(*) as contador FROM ${this.config.TABLA}`;
@@ -85,6 +92,8 @@ class ControladorBase {
             });
 
     }
+
+
     /**
      * genera la clasificacion de la tabla, y los limites a listar (registros)
      * utilizando parametros que llegan en al urj
@@ -115,6 +124,12 @@ class ControladorBase {
     }
 
 
+    /**
+     * Lista datos del objeto indexado.
+     * 
+     * @param {} req : objeto request.
+     * @param {} res : objeto response.
+     */
     leerUno(req, res) {
         let id = req.params.id;
         if (id === "count") return this.leerCount(req, res);
@@ -131,6 +146,12 @@ class ControladorBase {
 
     }
 
+    /**
+     * Lista lista objetos indexados de la base de datos en base a una referencia.
+     * 
+     * @param {} req : objeto request.
+     * @param {} res : objeto response.
+     */
     leerSelect(req, res) {
         let id = req.params.id;
         let sql = this.config.QUERIES.SELECT_SELECT.replace(':id', id);
@@ -181,6 +202,12 @@ class ControladorBase {
     }
 
 
+    /**
+     * Actualiza tablas en la base de datos.
+     * 
+     * @param {} req : objeto request.
+     * @param {} res : objeto response.
+     */
     updateTable(req, res) {
         const { method } = req.route.stack[0];
         const id = req.params.id;
@@ -206,6 +233,14 @@ class ControladorBase {
         }
     }
 
+
+    /**
+     * Elimina datos indexados en la base de datos y sus objetos.
+     * 
+     * @param {} res : objeto response.
+     * @param {} id : indice del objeto a eliminar.
+     * @param {} query : query para la base de datos.
+     */
     hacerDelete(res, id, query){
         if(this.config.CARPETA){
             if(this.fileSystem.eliminarCarpetaDeImagenes(id)){
@@ -220,6 +255,15 @@ class ControladorBase {
     }
 
 
+    /**
+     * Verifica si el objeto admite imagenes.
+     * 
+     * @param {} req : objeto request.
+     * 
+     * @returns null: si no admite imagenes
+     * @returns  -2  : si admite imágenes pero no se ah puesto el campo de recogida correctamente.
+     * @returns  -1  : si admite imágenes pero no se ha enviado.
+     */
     verificaImagen(req) {
 
         if (!this.config.CARPETA) {
@@ -248,6 +292,13 @@ class ControladorBase {
 
     }
 
+    /**
+     * Añade nuevos datos a la base de datos, guarda imádenes si las hay.
+     * 
+     * @param {} res : objeto response.
+     * @param {} req : objeto request.
+     * 
+     */
     hacerPost(req, res) {
         const body = req.body;
 
@@ -269,6 +320,7 @@ class ControladorBase {
                 this.enviaDatos(res, 'Es obligatorio subir subir una imagen', 400);
                 break;
             default:
+
                 const file = verifiImage;
 
                 this.sendDataToTable(res, [body], QUERIES.INSERT, 'post', file);
@@ -276,6 +328,14 @@ class ControladorBase {
         }
     }
 
+
+    /**
+     * Modifica datos indexados e la base de datos, modifica imágenes si las hay.
+     * 
+     * @param {} res : objeto response.
+     * @param {} req : objeto request.
+     * 
+     */
     async hacerPut(req, res) {
         const id = req.params.id;
         const body = req.body;
@@ -305,6 +365,15 @@ class ControladorBase {
     }
 
 
+    /**
+     * Añade nuevos datos a la base de datos, guarda imádenes si las hay.
+     * 
+     * @param {} res  : objeto response.
+     * @param {} data : Datos a enviar a la base de datos.
+     * @param {} sql  : Query para ejecutar en la base de datos.
+     * @param {} file : Archivo para crear o modificar si lo hay.
+     * 
+     */
     sendDataToTable(res, data, sql, file = null) {
 
         this.connect.modifyTable(sql, data)
