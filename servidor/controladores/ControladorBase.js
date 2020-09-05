@@ -198,12 +198,25 @@ class ControladorBase {
                 this.hacerPut(req, res);
                 break;
             case 'delete':
-                this.sendDataToTable(res, [id], QUERIES.DELETE);
+                this.hacerDelete(res, id, QUERIES.DELETE);
                 break;
             default:
                 this.enviaDatos(res, 'Esta acción no es válida', 400);
                 break;
         }
+    }
+
+    hacerDelete(res, id, query){
+        if(this.config.CARPETA){
+            if(this.fileSystem.eliminarCarpetaDeImagenes(id)){
+                console.log('Se eliminaron todas las imagenes de esta carpeta');
+            }else{
+                console.log('Esta carpeta no contiene imágenes');
+            }
+        }
+
+
+        this.sendDataToTable(res, [id],query);
     }
 
 
