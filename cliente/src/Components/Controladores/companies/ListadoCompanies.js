@@ -18,9 +18,10 @@ export default class ListadoCompanies extends Component {
         }
     }
     leeTabla() {
+        console.log('Voy a acceder a la api')
         AccesoAPI.accederApi(API_URL + COMPANIES)
             .then(response => {
-                console.log(response);
+                console.log('Desde listado companies: ',response);
                 if (response.Respuesta === "ok") {
                     this.setState({ datos: response.Datos })
                 }
@@ -28,10 +29,15 @@ export default class ListadoCompanies extends Component {
                     this.setState({ error: response.Respuesta });
                 }
 
+                console.log('El estate es: ', this.state)
+
+            }).catch(err => {
+                console.log('Ha ocurrido un error: ', err);
             })
     }
 
     componentDidMount() {
+        console.log('Did mount')
         this.leeTabla();
     }
 
@@ -59,24 +65,31 @@ export default class ListadoCompanies extends Component {
 
         return (
 
-            <div className="container">
-                <div className = 'cabecera_controlador'>
-                    <h1>Listado e   mpresas</h1>
-                    <BotonListado funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}>Añadir compañía</BotonListado>
-                </div>
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>Nombre</th>
-                            <th></th><th></th><th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {item}
-                    </tbody>
+            <div className="container-fluid">
+                <div className="row mb-5">
+                    <div className="col-xl-10 col-lg-9 col-md-8 ml-auto">
+                        <div className="row">
+                            <div className="col-12 cabecera_controlador">
 
-                </table>
+                                <h1>Listado de mpresas</h1>
+                                <BotonListado funcion={this.props.insertar} clase="btn btn-info btn-sm" tipo="I" id={0}>Añadir compañía</BotonListado>
+                            </div>
+                            <table className="table table-striped bg-light table-hover">
+                                <thead>
+                                    <tr className="text-mmuted">
+                                        <th>id</th>
+                                        <th>Nombre</th>
+                                        <th></th><th></th><th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {item}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

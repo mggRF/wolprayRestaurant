@@ -1,14 +1,12 @@
 import React from 'react';
-import Rutas from './Components/Comun/Rutas';
-import Footer from './Components/Comun/Footer';
+import { AppRouter } from './router/AppRouter';
 
 
 
 function App() {
   return (
     <>
-      <Rutas />
-      <Footer />
+      <AppRouter />
     </>
 
   );

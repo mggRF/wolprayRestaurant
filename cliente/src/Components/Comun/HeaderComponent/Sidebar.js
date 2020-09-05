@@ -8,7 +8,7 @@ export const Sidebar = ({ user, paths }) => {
 
     let items = [];
 
-    for(let k in paths){
+    for (let k in paths) {
         items.push(paths[k])
     }
 
@@ -18,7 +18,7 @@ export const Sidebar = ({ user, paths }) => {
                 <ImagenCabecera />
                 <div className="bottom-border"></div>
                 <NavbarNav
-                    path='/'
+                    path='/profile'
                     icon='fas fa-user'
                     title={user.userName}
                 />
@@ -28,18 +28,18 @@ export const Sidebar = ({ user, paths }) => {
                         items.map((value, i) => {
                             return (
                                 <NavbarNav
-                                    key = {i}
-                                    path = {value.path}
+                                    key={i}
+                                    path={value.path}
                                     icon={value.icon}
-                                    title= {value.title}
+                                    title={value.title}
                                 />
-                                
+
                             )
                         })
                     }
                     <div className="bottom-border mb-4 py-3"></div>
                     <NavbarNav
-                        path = '/'
+                        path='/logout'
                         icon='fas fa-sign-out-alt'
                         title='Cerrar sesión'
                     />

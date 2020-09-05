@@ -38,7 +38,7 @@ const paths = {
     CCAA : {
         title: 'Estados',
         path: '/states',
-        icon: 'fas fa-map-pin'
+        icon: 'fas fa-map-marker-alt'
     },
 };
 

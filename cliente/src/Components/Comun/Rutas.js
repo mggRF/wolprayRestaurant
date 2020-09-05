@@ -2,17 +2,11 @@ import React, { Component } from 'react';
 import Header from '../Comun/HeaderComponent/Header';
 //import PropTypes from 'prop-types'
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
-import ControllerMusic from '../Controladores/music/ControllerMusic';
-import ControllerClub from '../Controladores/clubs/ControllerClub';
-import Home from '../Paginas/Home';
-import ControllerCompanies from '../Controladores/companies/ControllerCompanies';
-import ControllerDresscode from '../Controladores/dresscode/ControllerDresscode';
-import ControllerRole from '../Controladores/roles/ControllerRole';
-import ControllerUsers from '../Controladores/users/ControllerUsers';
-import ControllerCCAA from '../Controladores/ccaa/ControllerCCAA';
+
 import { Sidebar } from './HeaderComponent/Sidebar';
 import paths from './Paths';
 import { DashboardRoutes } from './DashboardRoutes';
+import Footer from './Footer';
 
 
 export default class Rutas extends Component {
@@ -21,8 +15,6 @@ export default class Rutas extends Component {
 
 
   render() {
-
-    const { MUSICA, HOME, CCAA, CLUBS, COMPANIES, DRESSCODE, ROLES, USERS } = paths;
 
 
     const user = {
@@ -36,7 +28,7 @@ export default class Rutas extends Component {
       companyid: null
     }
     return (
-      <Router>
+      <>
         <div className="navbar navbar-expand-md navbar-light">
           <button
             className="navbar-toggler ml-auto mb-2 bg-light"
@@ -63,10 +55,11 @@ export default class Rutas extends Component {
             </div>
           </div>
         </div>
-          <div className="container section-container">
-            <DashboardRoutes/>
-          </div>
-      </Router>
+        <div className="container section-container">
+          <DashboardRoutes />
+          <Footer />
+        </div>
+      </>
     )
   }
 }

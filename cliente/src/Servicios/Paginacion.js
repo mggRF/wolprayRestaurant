@@ -50,10 +50,10 @@ export default class Paginacion extends Component {
         }
     };
 
-    preparaPag= (offset) => {
+    preparaPag = (offset) => {
         let salida = "?size=";
-        if (offset>0) salida += (this.state.lppagina * offset) +","
-        salida += this.state.lppagina 
+        if (offset > 0) salida += (this.state.lppagina * offset) + ","
+        salida += this.state.lppagina
         this.props.pageHandler(salida);
     }
 
@@ -66,7 +66,7 @@ export default class Paginacion extends Component {
                     let contador = response.Datos.contador;
                     let paginas = contador / this.state.lppagina;
                     if (paginas !== Math.floor(paginas)) paginas++
-                    console.log("mates",paginas,Math.floor(paginas))
+                    console.log("mates", paginas, Math.floor(paginas))
                     this.setState({ totalPaginas: Math.floor(paginas), });
                 }
                 else {
@@ -91,23 +91,36 @@ export default class Paginacion extends Component {
     renderPageNumbers = (pageNumbers, totalPaginas) => {
         let { active } = this.state;
         return (
-            <>
-                <button onClick={this.backHandler}> Anterior </button>
-                {pageNumbers.map(number => {
-                    if (
-                        number >= parseInt(active) - 5 &&
-                        number <= parseInt(active) + 5
-                    ) {
-                        return (
-                            <button key={number} onClick={this.pagingHandler} id={number}>{number}</button>
-                        );
-                    } else {
-                        return null;
+            <nav>
+                <ul className="pagination justify-content-center">
+                    <li className="page-item">
+                        <button style = {{cursor: 'pointer'}} className="page-link pu-2 px-3" onClick={this.backHandler}> Anterior </button>
+                    </li>
+                    {pageNumbers.map(number => {
+                        if (
+                            number >= parseInt(active) - 5 &&
+                            number <= parseInt(active) + 5
+                        ) {
+                            return (
+                                <li
+                                    className="page-item"
+                                    key={number}
+                                    id={number}
+                                >
+                                    <button onClick={this.pagingHandler} style = {{cursor: 'pointer'}} className="page-link pu-2 px-3">{number}</button>
+                                </li>
+
+                            );
+                        } else {
+                            return null;
+                        }
+                    })
                     }
-                })
-                }
-                <button onClick={this.nextHandler}> Siguiente </button>
-            </>
+                    <li className="page-item">
+                        <button style = {{cursor: 'pointer'}} className="page-link pu-2 px-3" onClick={this.nextHandler}> Siguiente</button>
+                    </li>
+                </ul>
+            </nav>
         )
 
             ;
