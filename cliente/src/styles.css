@@ -1,79 +1,78 @@
-
 #idDivSesionesOpertura {
-float: left;
-padding-top: 10%;
-padding-bottom: 10%;
-}
-.elementoFormularioClub{
-  float: left;
-  margin-left: 25%;
-  margin-right: auto;
-}
-#sesionElement{
-  margin: 3%;
-}
-.formularioclub{
-  float: left;
-}
-.navbar{
-    box-shadow: 0 2px 4px 0 rgba(0,0,0, 0.5);
-  }
-  .footer{
-    min-width: 100px;
-     background-color: wheat;
- }
- 
-  .header{
+    float: left;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    }
+    .elementoFormularioClub{
+      float: left;
+      margin-left: 25%;
+      margin-right: auto;
+    }
+    #sesionElement{
+      margin: 3%;
+    }
+    .formularioclub{
+      float: left;
+    }
+    .navbar{
+        box-shadow: 0 2px 4px 0 rgba(0,0,0, 0.5);
+      }
+      .footer{
+        min-width: 100px;
+         background-color: wheat;
+     }
+     
+      .header{
+        
+        color: white;
+        background-color:white;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0, 0.5);
+        min-width: 100px;
+      }
+      .nav-link{
+          color:black
+      }
+      .nav-link:hover{
+        cursor: default;
+    }
+    .navbar-brand{
+        cursor: default;
+        color:black
+      }
+    .navbar-toggler{font-size: 40px;}
+    .navbar-toggler:focus{outline:none}
     
-    color: white;
-    background-color:white;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0, 0.5);
-    min-width: 100px;
-  }
-  .nav-link{
-      color:black
-  }
-  .nav-link:hover{
-    cursor: default;
-}
-.navbar-brand{
-    cursor: default;
-    color:black
-  }
-.navbar-toggler{font-size: 40px;}
-.navbar-toggler:focus{outline:none}
-
- .logo-brand{
-   min-width: 160px;
-   max-width: 180px;
- }
- .principal{
-  text-align: left;
-     margin-top: 80px;
-     margin-bottom: 0px;
- }
- .rutas{
+     .logo-brand{
+       min-width: 160px;
+       max-width: 180px;
+     }
+     .principal{
+      text-align: left;
+         margin-top: 80px;
+         margin-bottom: 0px;
+     }
+     .rutas{
+        
+         text-transform: uppercase;
+         padding: 1.7rem;
+         color:black;
+     }
+     .rutas:hover{
+        
+        cursor: pointer;
+    }
+    .homepage{
+      text-align: center;
+      
+    }
+    .containermenu{
+      
+      border: gray 2px solid;
+    }
     
-     text-transform: uppercase;
-     padding: 1.7rem;
-     color:black;
- }
- .rutas:hover{
-    
-    cursor: pointer;
-}
-.homepage{
-  text-align: center;
-  
-}
-.containermenu{
-  
-  border: gray 2px solid;
-}
-
-.cabecera_controlador{
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-around;
-}
+    .cabecera_controlador{
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-around;
+    }

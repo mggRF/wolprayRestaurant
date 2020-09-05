@@ -29,9 +29,9 @@ export default class MontaCabecera extends Component {
 
         return (
             <>
-                {lista.map(elemento => {
+                {lista.map((elemento, i) => {
                     return (
-                        <th>
+                        <th key = {i}>
                         <BotonCabecera name={elemento[0]}
                             col={elemento[1]}
                             gestionClas={funcion}

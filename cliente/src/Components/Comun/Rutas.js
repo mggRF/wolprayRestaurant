@@ -1,81 +1,72 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import Header from '../Comun/HeaderComponent/Header';
 //import PropTypes from 'prop-types'
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 import ControllerMusic from '../Controladores/music/ControllerMusic';
 import ControllerClub from '../Controladores/clubs/ControllerClub';
 import Home from '../Paginas/Home';
-import '../../styles.css'
 import ControllerCompanies from '../Controladores/companies/ControllerCompanies';
 import ControllerDresscode from '../Controladores/dresscode/ControllerDresscode';
 import ControllerRole from '../Controladores/roles/ControllerRole';
 import ControllerUsers from '../Controladores/users/ControllerUsers';
 import ControllerCCAA from '../Controladores/ccaa/ControllerCCAA';
-
-const HOME = "/";
-const MUSICA = "/music";
-const CLUBS = "/clubs";
-const COMPANIES = "/companies";
-const DRESSCODE = "/dresscode";
-const ROLES = "/role";
-const USERS = "/users";
-const CCAA = "/states";
+import { Sidebar } from './HeaderComponent/Sidebar';
+import paths from './Paths';
+import { DashboardRoutes } from './DashboardRoutes';
 
 
 export default class Rutas extends Component {
 
 
-    render() {
 
-        return (
-            <div>
-            <Router >
-            <nav className=" navbar-expand-lg navbar-light bg-light header2 sticky-top">
-            
-            
-            <div className="collapse navbar-collapse" id="navbarNav">
-            <div className ="mr-auto"></div>
-              <ul className="navbar-nav">
-                <div className="nav-item">
-                <Link to={HOME} className="nav-link rutas" >Home</Link>
-                </div>
-                <div className="nav-item">
-                <Link to={MUSICA} className="nav-link rutas">Música</Link>
-                </div>
-                <div className="nav-item">
-                <Link to={CLUBS} className="nav-link rutas">Clubs</Link>
-                </div>
-                <div className="nav-item">
-                <Link to={DRESSCODE} className="nav-link rutas">Dresscode</Link>
-                </div>
-                <div className="nav-item">
-                <Link to={COMPANIES} className="nav-link rutas">Empresas</Link>
-                </div>
-                <div className="nav-item">
-                <Link to={ROLES} className="nav-link rutas">Roles</Link>
-                </div>
-                <div className="nav-item">
-                <Link to={USERS} className="nav-link rutas">Usuarios</Link>
-                </div>
-                <div className="nav-item">
-                <Link to={CCAA} className="nav-link rutas">Comunidades autónomas</Link>
-                </div>
-                
-              </ul>
-            </div>
-          </nav>
-                    <Switch>
-                        <Route exact path={HOME} component={Home} />
-                        <Route path={MUSICA} component={ControllerMusic} />
-                        <Route path={CLUBS} component={ControllerClub} />
-                        <Route path={COMPANIES} component={ControllerCompanies} />
-                        <Route path={DRESSCODE} component={ControllerDresscode} />
-                        <Route path={ROLES} component={ControllerRole} />
-                        <Route path={USERS} component={ControllerUsers} />
-                        <Route path={CCAA} component={ControllerCCAA} />
-                    </Switch>
-                </Router>
 
-            </div>
-        )
+  render() {
+
+    const { MUSICA, HOME, CCAA, CLUBS, COMPANIES, DRESSCODE, ROLES, USERS } = paths;
+
+
+    const user = {
+      userid: 1,
+      userName: "Lewis Méndez",
+      mail: "leinormendez@wolpray.com",
+      password: "1111",
+      userPhone: "666887755",
+      birthdate: "1990-08-18T22:00:00.000Z",
+      roleid: 2,
+      companyid: null
     }
+    return (
+      <Router>
+        <div className="navbar navbar-expand-md navbar-light">
+          <button
+            className="navbar-toggler ml-auto mb-2 bg-light"
+            type="button" data-toggle="collapse"
+            data-target="#myNavbar"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="myNavbar">
+            <div className="container-fluid">
+              <div className="row">
+
+                {/* Sidebar */}
+                <Sidebar
+                  paths={paths}
+                  user={user}
+                />
+                {/* end of sidebar */}
+
+                {/* end of top-nav */}
+                <Header />
+
+              </div>
+            </div>
+          </div>
+        </div>
+          <div className="container section-container">
+            <DashboardRoutes/>
+          </div>
+      </Router>
+    )
+  }
 }

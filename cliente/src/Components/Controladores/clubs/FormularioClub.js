@@ -6,7 +6,6 @@ import { DesplegableDireccion } from '../../Fragmentos/DesplegableDireccion';
 import Desplegable from '../../Fragmentos/desplegable';
 import { TextAreaComponent } from './TextAreaComponent';
 import SubirImagen from '../../Fragmentos/SubirImagen';
-import '../../../styles.css';
 
 export default class  FormularioClub extends Component {
     
