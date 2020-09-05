@@ -32,7 +32,7 @@ export default class FormularioCCAA extends Component {
         console.log('El readonly es: ' + readonly)
         console.log('Este es el objeto: ', CCAA)
         return (
-            <div>
+            <div className = "animate__animated animate__fadeIn">
                 {
                     (!readonly) ?
                         (<h1>{'Formulario para ' + title}</h1>) :

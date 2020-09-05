@@ -28,7 +28,7 @@ export default class FormularioCompanies extends Component {
         console.log("Company=>", company);
         console.log('El readonly es: ' + readonly)
         return (
-            <div className="container-fluid">
+            <div className="container-fluid animate__animated animate__fadeIn">
                 <div className="row mb-5">
                     <div className="col-xl-10 col-lg-9 col-md-8 ml-auto">
                         <div className="row">

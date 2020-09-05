@@ -57,7 +57,7 @@ export default class ListadoClubs extends Component {
             
         return (
             
-            <div className="container">
+            <div className="container animate__animated animate__fadeIn">
             <div className = 'cabecera_controlador'>
                 <h1>Listado Clubs</h1>
                 <BotonListado funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}>Añadir club</BotonListado>

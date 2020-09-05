@@ -11,7 +11,7 @@ export default class  FormularioDresscode extends Component {
         let readonly = this.props.orden.includes(['D', 'V']) ? true : false
 
         return (
-            <div>
+            <div className = "animate__animated animate__fadeIn">
                 <label htmlFor="dressCodeId">Id</label>
                 <input name="dressCodeId" 
                     value={dresscode.dressCodeId } 

@@ -7,7 +7,7 @@ export default class FormularioMusic extends Component {
         let readonly = this.props.orden.includes(['D', 'V']) ? true : false
 
         return (
-            <div>
+            <div className = "animate__animated animate__fadeIn">
                 <label htmlFor="musicid">Id</label>
                 <input name="musicid" 
                     value={music.musicid} 

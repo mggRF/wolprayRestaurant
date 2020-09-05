@@ -59,7 +59,7 @@ export default class ListadoRole extends Component {
             
         return (
             
-            <div className="container">
+            <div className="container animate__animated animate__fadeIn">
             <h1>Listado Roles</h1>
             <table className ="table">
                 <thead>

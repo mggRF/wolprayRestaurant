@@ -54,7 +54,7 @@ export default class ListadoMusic extends Component {
 
         ))
         return (
-            <div className="container">
+            <div className="container animate__animated animate__fadeIn">
                 <h1>Listado Music</h1>
                 <BotonListado funcion={this.props.insertar}
                     clase={COLORES.BTN_INSERT}

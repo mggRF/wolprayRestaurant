@@ -7,7 +7,7 @@ export default class FormularioRole extends Component {
         let readonly = this.props.orden.includes(['D', 'V']) ? true : false
 
         return (
-            <div>
+            <div className = "animate__animated animate__fadeIn">
                 <label htmlFor="roleid">Id</label>
                 <input name="roleid" 
                     value={role.roleid} 

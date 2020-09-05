@@ -29,7 +29,7 @@ export default class FormularioClub extends Component {
         if (this.props.orden == 'D' || this.props.orden == 'V') readonly = true
 
         return (
-            <div className='container'>
+            <div className='container animate__animated animate__fadeIn'>
 
                 {(!readonly) ?
                     <SubirImagen /> : null
