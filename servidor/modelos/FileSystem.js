@@ -88,6 +88,18 @@ class FileSystem {
     obtenerImagenesEnTemp(pathTemp){
         return fs.readdirSync(pathTemp) || [];
     }
+
+
+    eliminarCarpetaDeImagenes(id){
+        const rutaImages = path.resolve(__dirname, '../../uploads/', this.config.CARPETA.CARPETA, id);
+
+        if(fs.existsSync(rutaImages)){
+            fs.rmdirSync(rutaImages, {recursive: true});
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 
 module.exports = FileSystem;

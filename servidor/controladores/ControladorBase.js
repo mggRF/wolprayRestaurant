@@ -16,7 +16,7 @@ class ControladorBase {
         this.updateTable = this.updateTable.bind(this);
         this.sendDataToTable = this.sendDataToTable.bind(this);
         this.enviaDatos = this.enviaDatos.bind(this);
-        this.recogerImagen = this.recogerImagen.bind(this);
+        this.guardarImagen = this.guardarImagen.bind(this);
         this.leerCount = this.leerCount.bind(this);
         this.limite = LPPAGINA
     }
@@ -27,28 +27,32 @@ class ControladorBase {
      * @param {*} error  : En caso de error, objeto error
      *                      
      */
-    enviaDatos(res, objeto, error = null) {
+    enviaDatos(res, objeto, status = null) {
         let respuesta;
         respuesta = {
-            Respuesta: error || 'ok',
+            Ok: true,
             Datos: objeto
         };
-        console.error(error);
-        if (error == null) {
+        if (status == null) {
             res.setHeader('Access-Control-Allow-Methods', 'HEAD,GET,POST,PUT,DELETE,OPTIONS');
             res.setHeader('Allow', 'HEAD,GET,POST,PUT,DELETE,OPTIONS');
             res.json(respuesta);
         }
         else {
-            res.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .send({ error: error, message: objeto });
+            res.status(status)
+                .send({ Ok: false, Message: objeto });
         }
     }
 
+    /**
+     * Lista todos los archivos de la base de datos.
+     * 
+     * @param {} req : objeto request.
+     * @param {} res : objeto response.
+     */
     listado(req, res) {
-        //console.log("listado", this.config.TABLA);
         this.config.QUERIES.SELECT_ALL = "SELECT * FROM " + this.config.TABLA;
-        console.log("listado", this.config.QUERIES.SELECT_ALL)
+
         return this.leerALL(req, res);
         // let salida = [];
         // const ids = req.session.userid;
@@ -75,6 +79,7 @@ class ControladorBase {
     }
 
 
+    
     leerCount(req, res) {
         //Atencion el sql ha de pasar por el sistema de añadir empresa/manager
         let sql = `SELECT COUNT(*) as contador FROM ${this.config.TABLA}`;
@@ -87,6 +92,8 @@ class ControladorBase {
             });
 
     }
+
+
     /**
      * genera la clasificacion de la tabla, y los limites a listar (registros)
      * utilizando parametros que llegan en al urj
@@ -98,7 +105,7 @@ class ControladorBase {
         let salida = "";
         let size = req.query.size;
         let clasi = req.query.clasificacion;
-        console.log("complementos", size, clasi)
+        // console.log("complementos", size, clasi)
 
         if (clasi !== undefined) {
             salida += " ORDER BY " + clasi.split(',').join(" ");
@@ -112,11 +119,17 @@ class ControladorBase {
                 salida += ", " + valores[1]
             }
         }
-        console.log("salida", salida)
+        // console.log("salida", salida)
         return salida;
     }
 
 
+    /**
+     * Lista datos del objeto indexado.
+     * 
+     * @param {} req : objeto request.
+     * @param {} res : objeto response.
+     */
     leerUno(req, res) {
         let id = req.params.id;
         if (id === "count") return this.leerCount(req, res);
@@ -133,6 +146,12 @@ class ControladorBase {
 
     }
 
+    /**
+     * Lista lista objetos indexados de la base de datos en base a una referencia.
+     * 
+     * @param {} req : objeto request.
+     * @param {} res : objeto response.
+     */
     leerSelect(req, res) {
         let id = req.params.id;
         let sql = this.config.QUERIES.SELECT_SELECT.replace(':id', id);
@@ -169,7 +188,7 @@ class ControladorBase {
 
 
         sql = sql + this.conplementoSQL(req);
-        console.log("sql---------->", sql)
+        // console.log("sql---------->", sql)
         this.connect.leerSql(sql)
             .then(dat => {
                 //console.log("dat->", dat);
@@ -183,6 +202,12 @@ class ControladorBase {
     }
 
 
+    /**
+     * Actualiza tablas en la base de datos.
+     * 
+     * @param {} req : objeto request.
+     * @param {} res : objeto response.
+     */
     updateTable(req, res) {
         const { method } = req.route.stack[0];
         const id = req.params.id;
@@ -200,71 +225,117 @@ class ControladorBase {
                 this.hacerPut(req, res);
                 break;
             case 'delete':
-                this.sendDataToTable([id], QUERIES.DELETE, res);
+                this.hacerDelete(res, id, QUERIES.DELETE);
+                break;
+            default:
+                this.enviaDatos(res, 'Esta acción no es válida', 400);
                 break;
         }
     }
 
+
+    /**
+     * Elimina datos indexados en la base de datos y sus objetos.
+     * 
+     * @param {} res : objeto response.
+     * @param {} id : indice del objeto a eliminar.
+     * @param {} query : query para la base de datos.
+     */
+    hacerDelete(res, id, query){
+        if(this.config.CARPETA){
+            if(this.fileSystem.eliminarCarpetaDeImagenes(id)){
+                console.log('Se eliminaron todas las imagenes de esta carpeta');
+            }else{
+                console.log('Esta carpeta no contiene imágenes');
+            }
+        }
+
+
+        this.sendDataToTable(res, [id],query);
+    }
+
+
+    /**
+     * Verifica si el objeto admite imagenes.
+     * 
+     * @param {} req : objeto request.
+     * 
+     * @returns null: si no admite imagenes
+     * @returns  -2  : si admite imágenes pero no se ah puesto el campo de recogida correctamente.
+     * @returns  -1  : si admite imágenes pero no se ha enviado.
+     */
+    verificaImagen(req) {
+
+        if (!this.config.CARPETA) {
+            return null;
+        }
+
+        if (!req.files) {
+            return -2;
+        }
+
+        const { CAMPO } = this.config.CARPETA;
+
+        const file = req.files[CAMPO];
+
+        if (!file) {
+            return -1;
+        }
+
+
+        if (!file.mimetype.includes('image')) {
+            return 0;
+        }
+
+
+        return file;
+
+    }
+
+    /**
+     * Añade nuevos datos a la base de datos, guarda imádenes si las hay.
+     * 
+     * @param {} res : objeto response.
+     * @param {} req : objeto request.
+     * 
+     */
     hacerPost(req, res) {
         const body = req.body;
-
 
         //Datos de la sesión
         const ids = req.session.userid;
         const role = req.session.role;
         const { QUERIES } = this.config;
 
-        if (this.config.CARPETA) {
-            const { CAMPO } = this.config.CARPETA;
+        const verifiImage = this.verificaImagen(req);
 
-            if (!req.files) {
-                return res.status(400).json({
-                    ok: false,
-                    Message: 'Es obligatorio subir subir una imagen'
-                });
-            }
+        switch (verifiImage) {
+            case 0:
+                this.enviaDatos(res, 'Lo que intenta subir no es una imagen', 400);
+                break;
+            case -1:
+                this.enviaDatos(res, 'Tienes un error en el nombre del campo, el nombre ha de ser: ' + CAMPO, 400);
+                break;
+            case -2:
+                this.enviaDatos(res, 'Es obligatorio subir subir una imagen', 400);
+                break;
+            default:
 
-            const file = req.files[CAMPO];
+                const file = verifiImage;
 
-            if (!file) {
-                return res.status(400).json({
-                    ok: false,
-                    Message: 'Tienes un error en el nombre del campo, el nombre ha de ser: ' + CAMPO
-                });
-            }
-
-            if (!file.mimetype.includes('image')) {
-                return res.status(400).json({
-                    ok: false,
-                    Message: 'Lo que intenta subir no es una imagen'
-                });
-            }
-
-
-
-            req.body[CAMPO] = this.config.CARPETA.nombreFoto;
-
-            this.sendDataToTable([body], QUERIES.INSERT, req, res)
-                .then(value => {
-                    if (value.insertId) {
-                        console.log('Se han guardado los datos, el id es: ', value.insertId)
-                        this.recogerImagen(req, value.insertId)
-                            .then(response => {
-                                this.enviaDatos(res, 'Se han añadido correctamente los datos.');
-                            }).catch(err => this.enviaDatos(res, 'Ha ocurrido un error al tratar de subir la imagen', err));
-                    }
-                }).catch(err => this.enviaDatos(res, 'Ha ocurrido un error al tratar de añadir los datos', err));
-        } else {
-            this.sendDataToTable([body], QUERIES.INSERT, req, res)
-                .then(value => {
-
-                    console.log('Se han guardado los datos, el id es: ', value.insertId)
-                    this.enviaDatos(res, 'Se han añadido correctamente los datos.');
-
-                }).catch(err => this.enviaDatos(res, 'Ha ocurrido un error al tratar de añadir los datos', err));
+                this.sendDataToTable(res, [body], QUERIES.INSERT, 'post', file);
+                break;
         }
     }
 
+
+    /**
+     * Modifica datos indexados e la base de datos, modifica imágenes si las hay.
+     * 
+     * @param {} res : objeto response.
+     * @param {} req : objeto request.
+     * 
+     */
     async hacerPut(req, res) {
         const id = req.params.id;
         const body = req.body;
@@ -277,43 +348,46 @@ class ControladorBase {
         const role = req.session.role;
         const { QUERIES } = this.config;
 
-        if (req.files) {
-            file = req.files[CAMPO];
-            if (!file) {
-                return res.status(400).json({
-                    ok: false,
-                    Message: 'Tienes un error en el nombre del campo, el nombre ha de ser: ' + this.config.CARPETA.CAMPO
-                });
-            }
-        }
-        if (file) {
+        let verifiImage = this.verificaImagen(req);
 
-            await this.recogerImagen(req, id);
 
+        if (isNaN(verifiImage) && verifiImage !== null) {
+            this.fileSystem.guardarImagenTemporal(verifiImage, req.params.id);
         }
 
-
-
-        this.sendDataToTable([body, id], QUERIES.UPDATE)
-            .then(value => {
-                this.enviaDatos(res, value);
-            }).catch(err => this.enviaDatos(res, 'Ha ocurrido un error al tratar de modificar la tabla', err));
+        //res,data, sql, metodo, file = null
+        this.sendDataToTable(res, [body, id], QUERIES.UPDATE, verifiImage);
     }
 
-    async recogerImagen(req, id) {
-        console.log('El id desde recoger imagen es: ', id)
-
-        const { CAMPO } = this.config.CARPETA;
-        const file = req.files[CAMPO];
-
-
+    async guardarImagen(file, id) {
         return await this.fileSystem.guardarImagenTemporal(file, id);
 
     }
 
 
-    async sendDataToTable(data, sql) {
-        return await this.connect.modifyTable(sql, data);
+    /**
+     * Añade nuevos datos a la base de datos, guarda imádenes si las hay.
+     * 
+     * @param {} res  : objeto response.
+     * @param {} data : Datos a enviar a la base de datos.
+     * @param {} sql  : Query para ejecutar en la base de datos.
+     * @param {} file : Archivo para crear o modificar si lo hay.
+     * 
+     */
+    sendDataToTable(res, data, sql, file = null) {
+
+        this.connect.modifyTable(sql, data)
+            .then(value => {
+                if (value.insertId && file !== null) {
+                    this.guardarImagen(file, value.insertId)
+                        .then(response => {
+                            this.enviaDatos(res, 'Se ha modificado correctamente la tabla en la base de datos');
+
+                        }).catch(err => this.enviaDatos(res, err, 500));
+                } else {
+                    this.enviaDatos(res, 'Se ha modificado correctamente la tabla en la base de datos');
+                }
+            }).catch(err => this.enviaDatos(res, err, 500));
     }
 }
 
