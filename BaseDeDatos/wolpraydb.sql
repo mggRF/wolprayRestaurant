@@ -2,16 +2,12 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 28-08-2020 a las 17:53:19
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.4.9
-Create database wolpraydb;
-use wolpraydb;
+-- Host: localhost
+-- Generation Time: Sep 04, 2020 at 03:42 PM
+-- Server version: 8.0.21-0ubuntu0.20.04.4
+-- PHP Version: 7.4.3
 
-CREATE USER 'wolprayusr'@'localhost' IDENTIFIED BY  'UsrWolpray';
-GRANT ALL PRIVILEGES ON `wolpraydb`.* TO 'wolprayusr'@'localhost';
-
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -23,51 +19,48 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `wolpraydb`
+-- Database: `wolpraydb`
 --
+CREATE DATABASE IF NOT EXISTS `wolpraydb` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `wolpraydb`;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `categories`
---
-
-
--- --------------------------------------------------------
+-- CREATE USER IF NOT EXISTS 'wolprayusr'@'localhost' IDENTIFIED BY  'UsrWolpray';
+-- GRANT ALL PRIVILEGES ON `wolpraydb`.* TO 'wolprayusr'@'localhost';-- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `clubs`
+-- Table structure for table `clubs`
 --
 
+DROP TABLE IF EXISTS `clubs`;
 CREATE TABLE `clubs` (
-  `clubid` int(11) NOT NULL,
-  `clubName` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `streetName` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `streetNumber` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `postal_code` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cityid` int(11) NOT NULL,
-  `description` varchar(5000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `clubPhone` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dressCodeid` int(11) NOT NULL,
-  `coverUrl` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `clubid` int NOT NULL,
+  `clubName` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `streetName` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `streetNumber` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `postal_code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cityid` int NOT NULL,
+  `description` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `clubPhone` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dressCodeid` int NOT NULL,
+  `coverUrl` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `latitude` double DEFAULT NULL,
   `longitude` double DEFAULT NULL,
-  `howToGetThere` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `entryCost` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'En texto, p.ej. 30E diario, 50 sabado y domingo. Se utiliza en anuncio',
+  `howToGetThere` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `entryCost` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'En texto, p.ej. 30E diario, 50 sabado y domingo. Se utiliza en anuncio',
   `openSeason1` date DEFAULT NULL,
   `closingSeason1` date DEFAULT NULL,
   `openSeason2` date DEFAULT NULL,
   `closingSeason2` date DEFAULT NULL,
   `openSeason3` date DEFAULT NULL,
   `closingSeason3` date DEFAULT NULL,
-  `accessAge` int(11) DEFAULT NULL,
-  `DiasAnticipacion` int(11) DEFAULT NULL COMMENT 'dias maximo venta anticipada',
-  `companyid` int(11) DEFAULT NULL,
-  `maxPeople` int(11) DEFAULT NULL
+  `accessAge` int DEFAULT NULL,
+  `DiasAnticipacion` int DEFAULT NULL COMMENT 'dias maximo venta anticipada',
+  `companyid` int DEFAULT NULL,
+  `maxPeople` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Volcado de datos para la tabla `clubs`
+-- Dumping data for table `clubs`
 --
 
 INSERT INTO `clubs` (`clubid`, `clubName`, `streetName`, `streetNumber`, `postal_code`, `cityid`, `description`, `clubPhone`, `dressCodeid`, `coverUrl`, `latitude`, `longitude`, `howToGetThere`, `entryCost`, `openSeason1`, `closingSeason1`, `openSeason2`, `closingSeason2`, `openSeason3`, `closingSeason3`, `accessAge`, `DiasAnticipacion`, `companyid`, `maxPeople`) VALUES
@@ -89,16 +82,17 @@ INSERT INTO `clubs` (`clubid`, `clubName`, `streetName`, `streetNumber`, `postal
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `club_music`
+-- Table structure for table `club_music`
 --
 
+DROP TABLE IF EXISTS `club_music`;
 CREATE TABLE `club_music` (
-  `clubid` int(11) NOT NULL,
-  `musicid` int(11) NOT NULL
+  `clubid` int NOT NULL,
+  `musicid` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Volcado de datos para la tabla `club_music`
+-- Dumping data for table `club_music`
 --
 
 INSERT INTO `club_music` (`clubid`, `musicid`) VALUES
@@ -159,45 +153,46 @@ INSERT INTO `club_music` (`clubid`, `musicid`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `companies`
+-- Table structure for table `companies`
 --
 
+DROP TABLE IF EXISTS `companies`;
 CREATE TABLE `companies` (
-  `companyid` int(11) NOT NULL,
-  `userid` int(11) NOT NULL,
-  `companyName` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `companyAddress` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cityid` int(11) DEFAULT NULL,
-  `company_CIF` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `companyid` int NOT NULL,
+  `companyName` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `companyAddress` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cityid` int DEFAULT NULL,
+  `company_CIF` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Volcado de datos para la tabla `companies`
+-- Dumping data for table `companies`
 --
 
-INSERT INTO `companies` (`companyid`, `userid`, `companyName`, `companyAddress`, `cityid`, `company_CIF`) VALUES
-(1, 5, 'Discotecas Barcelona S.L', 'C/ Trafalgar, 20', 881, 'B68527891'),
-(2, 6, 'Ibex S.L', 'C/ Florida, 19', 881, 'B67896891'),
-(3, 7, 'Accenture S.L', 'C/ Teipei, 1', 881, 'B68579624'),
-(4, 8, 'Everis S.L', 'C/ Floridablanca, 18', 881, 'B68369258'),
-(5, 9, 'Tecno S.L', 'C/ Roser, 2', 881, 'B74185296');
+INSERT INTO `companies` (`companyid`, `companyName`, `companyAddress`, `cityid`, `company_CIF`) VALUES
+(1, 'Discotecas Barcelona S.L', 'C/ Trafalgar, 20', 881, 'B68527891'),
+(2, 'Ibex S.L', 'C/ Florida, 19', 881, 'B67896891'),
+(3, 'Accenture S.L', 'C/ Teipei, 1', 881, 'B68579624'),
+(4, 'Everis S.L', 'C/ Floridablanca, 18', 881, 'B68369258'),
+(5, 'Tecno S.L', 'C/ Roser, 2', 881, 'B74185296');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `c_city`
+-- Table structure for table `c_city`
 --
 
+DROP TABLE IF EXISTS `c_city`;
 CREATE TABLE `c_city` (
-  `cityid` int(11) NOT NULL COMMENT 'id poblacion',
-  `provinceid` int(11) NOT NULL COMMENT 'Código de provincia',
-  `cityName` varchar(100) COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Nombre de la poblacion',
+  `cityid` int NOT NULL COMMENT 'id poblacion',
+  `provinceid` int NOT NULL COMMENT 'Código de provincia',
+  `cityName` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Nombre de la poblacion',
   `latitude` double(12,9) NOT NULL COMMENT 'Latitud',
   `longitude` double(12,9) NOT NULL COMMENT 'Longitud'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `c_city`
+-- Dumping data for table `c_city`
 --
 
 INSERT INTO `c_city` (`cityid`, `provinceid`, `cityName`, `latitude`, `longitude`) VALUES
@@ -8337,16 +8332,17 @@ INSERT INTO `c_city` (`cityid`, `provinceid`, `cityName`, `latitude`, `longitude
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `c_country`
+-- Table structure for table `c_country`
 --
 
+DROP TABLE IF EXISTS `c_country`;
 CREATE TABLE `c_country` (
-  `countryId` int(11) NOT NULL,
-  `countryName` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
+  `countryId` int NOT NULL,
+  `countryName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Volcado de datos para la tabla `c_country`
+-- Dumping data for table `c_country`
 --
 
 INSERT INTO `c_country` (`countryId`, `countryName`) VALUES
@@ -8605,18 +8601,19 @@ INSERT INTO `c_country` (`countryId`, `countryName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `c_provinces`
+-- Table structure for table `c_provinces`
 --
 
+DROP TABLE IF EXISTS `c_provinces`;
 CREATE TABLE `c_provinces` (
-  `provinceid` int(11) NOT NULL COMMENT 'Identificador de la provincia.',
-  `provinceName` varchar(255) COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Nombre de la provincia.',
-  `stateid` int(11) NOT NULL COMMENT 'Identificador de la comunidad/ciudad autónoma.',
-  `provinceCapital` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL COMMENT 'Nombre de la capitalidad de la provincia.'
+  `provinceid` int NOT NULL COMMENT 'Identificador de la provincia.',
+  `provinceName` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Nombre de la provincia.',
+  `stateid` int NOT NULL COMMENT 'Identificador de la comunidad/ciudad autónoma.',
+  `provinceCapital` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL COMMENT 'Nombre de la capitalidad de la provincia.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci COMMENT='Tabla que contiene las denominaciones de las provincias españolas, junto a su código provincial y la comunidad autónoma a la que pertenecen.';
 
 --
--- Volcado de datos para la tabla `c_provinces`
+-- Dumping data for table `c_provinces`
 --
 
 INSERT INTO `c_provinces` (`provinceid`, `provinceName`, `stateid`, `provinceCapital`) VALUES
@@ -8676,17 +8673,18 @@ INSERT INTO `c_provinces` (`provinceid`, `provinceName`, `stateid`, `provinceCap
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `c_state`
+-- Table structure for table `c_state`
 --
 
+DROP TABLE IF EXISTS `c_state`;
 CREATE TABLE `c_state` (
-  `stateid` int(11) NOT NULL,
-  `stateName` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
-  `countryid` int(11) DEFAULT NULL
+  `stateid` int NOT NULL,
+  `stateName` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+  `countryid` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `c_state`
+-- Dumping data for table `c_state`
 --
 
 INSERT INTO `c_state` (`stateid`, `stateName`, `countryid`) VALUES
@@ -8713,22 +8711,23 @@ INSERT INTO `c_state` (`stateid`, `stateName`, `countryid`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `events`
+-- Table structure for table `events`
 --
 
+DROP TABLE IF EXISTS `events`;
 CREATE TABLE `events` (
-  `eventid` int(11) NOT NULL,
-  `clubid` int(11) DEFAULT NULL,
-  `eventName` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `eventDescription` varchar(5000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `eventid` int NOT NULL,
+  `clubid` int DEFAULT NULL,
+  `eventName` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `eventDescription` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `event_initDate` datetime DEFAULT NULL,
   `event_endDate` datetime DEFAULT NULL,
-  `event_minimunAge` int(11) DEFAULT NULL,
-  `event_imagePral` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Puede haber mas imagenes en la carpeta identificada con el numero'
+  `event_minimunAge` int DEFAULT NULL,
+  `event_imagePral` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Puede haber mas imagenes en la carpeta identificada con el numero'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Volcado de datos para la tabla `events`
+-- Dumping data for table `events`
 --
 
 INSERT INTO `events` (`eventid`, `clubid`, `eventName`, `eventDescription`, `event_initDate`, `event_endDate`, `event_minimunAge`, `event_imagePral`) VALUES
@@ -8744,106 +8743,115 @@ INSERT INTO `events` (`eventid`, `clubid`, `eventName`, `eventDescription`, `eve
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `n_category`
+-- Table structure for table `n_category`
 --
 
+DROP TABLE IF EXISTS `n_category`;
 CREATE TABLE `n_category` (
-  `categoryId` int(11) NOT NULL,
-  `categoryName` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
+  `categoryId` int NOT NULL,
+  `categoryName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `categoryDescription` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `n_category`
+--
 
+INSERT INTO `n_category` (`categoryId`, `categoryName`, `categoryDescription`) VALUES
+(1, 'Chupito', NULL),
+(2, 'Cerveza', NULL),
+(3, 'Cocktail', NULL),
+(4, 'Bebida energética', NULL),
+(5, 'Refresco', NULL),
+(6, 'Agua', NULL),
+(7, 'Snack', NULL),
+(8, 'Servicio', NULL),
+(9, 'Botella', NULL),
+(10, 'Copa', NULL);
 
-
-
-INSERT INTO `n_category` (`categoryId`, `categoryName`) VALUES
-(1, 'Chupito'),
-(2, 'Cerveza'),
-(3, 'Cocktail'),
-(4, 'Bebida energética'),
-(5, 'Refresco'),
-(6, 'Agua'),
-(7, 'Snack'),
-(8, 'Servicio'),
-(9, 'Botella'),
-(10, 'Copa');
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `n_dresscode`
+-- Table structure for table `n_dresscode`
 --
 
+DROP TABLE IF EXISTS `n_dresscode`;
 CREATE TABLE `n_dresscode` (
-  `dressCodeId` int(11) NOT NULL,
-  `dressCodeDescription` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `dressCodeId` int NOT NULL,
+  `dressCodeName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dressCodeDescription` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Volcado de datos para la tabla `n_dresscode`
+-- Dumping data for table `n_dresscode`
 --
 
-INSERT INTO `n_dresscode` (`dressCodeId`, `dressCodeDescription`) VALUES
-(1, 'Elegante'),
-(2, 'Arreglado'),
-(3, 'Casual');
+INSERT INTO `n_dresscode` (`dressCodeId`, `dressCodeName`, `dressCodeDescription`) VALUES
+(1, 'Elegante', 'Elegante'),
+(2, 'Arreglado', 'Arreglado'),
+(3, 'Casual', 'Casual');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `n_music`
+-- Table structure for table `n_music`
 --
 
+DROP TABLE IF EXISTS `n_music`;
 CREATE TABLE `n_music` (
-  `musicid` int(11) NOT NULL,
-  `musicName` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
+  `musicid` int NOT NULL,
+  `musicName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `musicDescription` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Volcado de datos para la tabla `n_music`
+-- Dumping data for table `n_music`
 --
 
-INSERT INTO `n_music` (`musicid`, `musicName`) VALUES
-(1, 'Reggaeton '),
-(2, 'House Comercial'),
-(3, 'Top Hits'),
-(4, 'Deep House'),
-(5, 'Tech House'),
-(6, 'Hip Hop'),
-(7, 'R&B'),
-(8, 'Pop'),
-(9, 'Electrónica'),
-(10, 'Techno'),
-(11, 'Bachata'),
-(12, 'Salsa '),
-(13, 'EDM'),
-(14, 'Variada');
+INSERT INTO `n_music` (`musicid`, `musicName`, `musicDescription`) VALUES
+(1, 'Reggaeton ', NULL),
+(2, 'House Comercial', NULL),
+(3, 'Top Hits', NULL),
+(4, 'Deep House', NULL),
+(5, 'Tech House', NULL),
+(6, 'Hip Hop', NULL),
+(7, 'R&B', NULL),
+(8, 'Pop', NULL),
+(9, 'Electrónica', NULL),
+(10, 'Techno', NULL),
+(11, 'Bachata', NULL),
+(12, 'Salsa ', NULL),
+(13, 'EDM', NULL),
+(14, 'Variada', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `products`
+-- Table structure for table `products`
 --
 
+DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
-  `productid` bigint(20) NOT NULL,
-  `clubid` bigint(20) DEFAULT NULL,
+  `productid` bigint NOT NULL,
+  `clubid` bigint DEFAULT NULL,
   `productName` varchar(45) NOT NULL,
   `description` varchar(300) NOT NULL,
   `price` double NOT NULL,
   `imageUrl` varchar(300) DEFAULT NULL,
-  `categoryid` int(11) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 0
+  `categoryid` int NOT NULL,
+  `status` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `promotes`
+-- Table structure for table `promotes`
 --
 
+DROP TABLE IF EXISTS `promotes`;
 CREATE TABLE `promotes` (
-  `productid` bigint(20) NOT NULL,
-  `promotionid` bigint(20) NOT NULL,
+  `productid` bigint NOT NULL,
+  `promotionid` bigint NOT NULL,
   `discount` double NOT NULL,
   `startDate` datetime NOT NULL,
   `endDate` datetime NOT NULL
@@ -8852,71 +8860,78 @@ CREATE TABLE `promotes` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `promotions`
+-- Table structure for table `promotions`
 --
 
+DROP TABLE IF EXISTS `promotions`;
 CREATE TABLE `promotions` (
-  `promotionid` bigint(20) NOT NULL,
-  `clubid` int(11) DEFAULT NULL,
-  `promotionName` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `promotionDescription` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `coverUrl` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `promotionid` bigint NOT NULL,
+  `clubid` int NOT NULL,
+  `promotionName` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `promotionDescription` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `coverUrl` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `reservations`
+-- Table structure for table `reservations`
 --
 
+DROP TABLE IF EXISTS `reservations`;
 CREATE TABLE `reservations` (
-  `reservid` int(11) NOT NULL,
-  `clubid` int(11) DEFAULT NULL,
-  `userid` int(11) DEFAULT NULL,
-  `n_people` int(11) DEFAULT NULL,
-  `notes` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reservid` int NOT NULL,
+  `clubid` int NOT NULL,
+  `userid` int DEFAULT NULL,
+  `n_people` int DEFAULT NULL,
+  `notes` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `state` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `state` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `roles`
+-- Table structure for table `roles`
 --
 
+DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
-  `roleid` int(11) NOT NULL,
-  `roleName` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `roleid` int NOT NULL,
+  `roleName` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `roleDescription` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Volcado de datos para la tabla `roles`
+-- Dumping data for table `roles`
 --
 
-INSERT INTO `roles` (`roleid`, `roleName`) VALUES
-(1, 'Client'),
-(2, 'Admin'),
-(3, 'Manager');
+INSERT INTO `roles` (`roleid`, `roleName`, `roleDescription`) VALUES
+(1, 'Client', ''),
+(3, 'Gestor club', ''),
+(5, 'Manager', 'Mantenimiento informacion de club, eventos, productos, slots (si es para un club, ha de ser los suyos,)'),
+(7, 'Gestor empresa', 'Acceso a todas las tablas relacionadas con la empresa'),
+(9, 'Administrador', 'Acceso a todas las tablas de la base de datos');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `slots`
+-- Table structure for table `slots`
 --
 
+DROP TABLE IF EXISTS `slots`;
 CREATE TABLE `slots` (
-  `slotid` int(11) NOT NULL,
-  `clubid` int(11) NOT NULL,
+  `slotid` int NOT NULL,
+  `clubid` int NOT NULL,
   `opening_time` time DEFAULT NULL,
   `closing_time` time DEFAULT NULL,
   `day` date NOT NULL COMMENT 'Fecha de slot\n',
-  `maxPeople` int(11) DEFAULT NULL,
-  `listaVip` tinyint(4) DEFAULT NULL COMMENT '0-sin lista vip\n1-con lista vip'
+  `maxPeople` int DEFAULT NULL,
+  `listaVip` tinyint DEFAULT NULL COMMENT '0-sin lista vip\n1-con lista vip'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `slots`
+-- Dumping data for table `slots`
 --
 
 INSERT INTO `slots` (`slotid`, `clubid`, `opening_time`, `closing_time`, `day`, `maxPeople`, `listaVip`) VALUES
@@ -11647,638 +11662,115 @@ INSERT INTO `slots` (`slotid`, `clubid`, `opening_time`, `closing_time`, `day`, 
 (2723, 13, '23:00:00', '06:00:00', '2020-12-03', 500, 1),
 (2724, 13, '23:00:00', '06:00:00', '2020-12-04', 500, 1),
 (2725, 13, '23:00:00', '06:00:00', '2020-12-05', 500, 1);
-INSERT INTO `slots` (`slotid`, `clubid`, `opening_time`, `closing_time`, `day`, `maxPeople`, `listaVip`) VALUES
-(2726, 13, '23:00:00', '06:00:00', '2020-12-06', 500, 1),
-(2727, 13, '23:00:00', '06:00:00', '2020-12-10', 500, 1),
-(2728, 13, '23:00:00', '06:00:00', '2020-12-11', 500, 1),
-(2729, 13, '23:00:00', '06:00:00', '2020-12-12', 500, 1),
-(2730, 13, '23:00:00', '06:00:00', '2020-12-13', 500, 1),
-(2731, 13, '23:00:00', '06:00:00', '2020-12-17', 500, 1),
-(2732, 13, '23:00:00', '06:00:00', '2020-12-18', 500, 1),
-(2733, 13, '23:00:00', '06:00:00', '2020-12-19', 500, 1),
-(2734, 13, '23:00:00', '06:00:00', '2020-12-20', 500, 1),
-(2735, 13, '23:00:00', '06:00:00', '2020-12-24', 500, 1),
-(2736, 13, '23:00:00', '06:00:00', '2020-12-25', 500, 1),
-(2737, 13, '23:00:00', '06:00:00', '2020-12-26', 500, 1),
-(2738, 13, '23:00:00', '06:00:00', '2020-12-27', 500, 1),
-(2739, 13, '23:00:00', '06:00:00', '2020-12-31', 500, 1),
-(2740, 14, '23:00:00', '06:00:00', '2020-01-02', 500, 1),
-(2741, 14, '23:00:00', '06:00:00', '2020-01-03', 500, 1),
-(2742, 14, '23:00:00', '06:00:00', '2020-01-04', 500, 1),
-(2743, 14, '23:00:00', '06:00:00', '2020-01-05', 500, 1),
-(2744, 14, '23:00:00', '06:00:00', '2020-01-09', 500, 1),
-(2745, 14, '23:00:00', '06:00:00', '2020-01-10', 500, 1),
-(2746, 14, '23:00:00', '06:00:00', '2020-01-11', 500, 1),
-(2747, 14, '23:00:00', '06:00:00', '2020-01-12', 500, 1),
-(2748, 14, '23:00:00', '06:00:00', '2020-01-16', 500, 1),
-(2749, 14, '23:00:00', '06:00:00', '2020-01-17', 500, 1),
-(2750, 14, '23:00:00', '06:00:00', '2020-01-18', 500, 1),
-(2751, 14, '23:00:00', '06:00:00', '2020-01-19', 500, 1),
-(2752, 14, '23:00:00', '06:00:00', '2020-01-23', 500, 1),
-(2753, 14, '23:00:00', '06:00:00', '2020-01-24', 500, 1),
-(2754, 14, '23:00:00', '06:00:00', '2020-01-25', 500, 1),
-(2755, 14, '23:00:00', '06:00:00', '2020-01-26', 500, 1),
-(2756, 14, '23:00:00', '06:00:00', '2020-01-30', 500, 1),
-(2757, 14, '23:00:00', '06:00:00', '2020-01-31', 500, 1),
-(2758, 14, '23:00:00', '06:00:00', '2020-02-01', 500, 1),
-(2759, 14, '23:00:00', '06:00:00', '2020-02-02', 500, 1),
-(2760, 14, '23:00:00', '06:00:00', '2020-02-06', 500, 1),
-(2761, 14, '23:00:00', '06:00:00', '2020-02-07', 500, 1),
-(2762, 14, '23:00:00', '06:00:00', '2020-02-08', 500, 1),
-(2763, 14, '23:00:00', '06:00:00', '2020-02-09', 500, 1),
-(2764, 14, '23:00:00', '06:00:00', '2020-02-13', 500, 1),
-(2765, 14, '23:00:00', '06:00:00', '2020-02-14', 500, 1),
-(2766, 14, '23:00:00', '06:00:00', '2020-02-15', 500, 1),
-(2767, 14, '23:00:00', '06:00:00', '2020-02-16', 500, 1),
-(2768, 14, '23:00:00', '06:00:00', '2020-02-20', 500, 1),
-(2769, 14, '23:00:00', '06:00:00', '2020-02-21', 500, 1),
-(2770, 14, '23:00:00', '06:00:00', '2020-02-22', 500, 1),
-(2771, 14, '23:00:00', '06:00:00', '2020-02-23', 500, 1),
-(2772, 14, '23:00:00', '06:00:00', '2020-02-27', 500, 1),
-(2773, 14, '23:00:00', '06:00:00', '2020-02-28', 500, 1),
-(2774, 14, '23:00:00', '06:00:00', '2020-02-29', 500, 1),
-(2775, 14, '23:00:00', '06:00:00', '2020-03-01', 500, 1),
-(2776, 14, '23:00:00', '06:00:00', '2020-03-05', 500, 1),
-(2777, 14, '23:00:00', '06:00:00', '2020-03-06', 500, 1),
-(2778, 14, '23:00:00', '06:00:00', '2020-03-07', 500, 1),
-(2779, 14, '23:00:00', '06:00:00', '2020-03-08', 500, 1),
-(2780, 14, '23:00:00', '06:00:00', '2020-03-12', 500, 1),
-(2781, 14, '23:00:00', '06:00:00', '2020-03-13', 500, 1),
-(2782, 14, '23:00:00', '06:00:00', '2020-03-14', 500, 1),
-(2783, 14, '23:00:00', '06:00:00', '2020-03-15', 500, 1),
-(2784, 14, '23:00:00', '06:00:00', '2020-03-19', 500, 1),
-(2785, 14, '23:00:00', '06:00:00', '2020-03-20', 500, 1),
-(2786, 14, '23:00:00', '06:00:00', '2020-03-21', 500, 1),
-(2787, 14, '23:00:00', '06:00:00', '2020-03-22', 500, 1),
-(2788, 14, '23:00:00', '06:00:00', '2020-03-26', 500, 1),
-(2789, 14, '23:00:00', '06:00:00', '2020-03-27', 500, 1),
-(2790, 14, '23:00:00', '06:00:00', '2020-03-28', 500, 1),
-(2791, 14, '23:00:00', '06:00:00', '2020-03-29', 500, 1),
-(2792, 14, '23:00:00', '06:00:00', '2020-04-02', 500, 1),
-(2793, 14, '23:00:00', '06:00:00', '2020-04-03', 500, 1),
-(2794, 14, '23:00:00', '06:00:00', '2020-04-04', 500, 1),
-(2795, 14, '23:00:00', '06:00:00', '2020-04-05', 500, 1),
-(2796, 14, '23:00:00', '06:00:00', '2020-04-09', 500, 1),
-(2797, 14, '23:00:00', '06:00:00', '2020-04-10', 500, 1),
-(2798, 14, '23:00:00', '06:00:00', '2020-04-11', 500, 1),
-(2799, 14, '23:00:00', '06:00:00', '2020-04-12', 500, 1),
-(2800, 14, '23:00:00', '06:00:00', '2020-04-16', 500, 1),
-(2801, 14, '23:00:00', '06:00:00', '2020-04-17', 500, 1),
-(2802, 14, '23:00:00', '06:00:00', '2020-04-18', 500, 1),
-(2803, 14, '23:00:00', '06:00:00', '2020-04-19', 500, 1),
-(2804, 14, '23:00:00', '06:00:00', '2020-04-23', 500, 1),
-(2805, 14, '23:00:00', '06:00:00', '2020-04-24', 500, 1),
-(2806, 14, '23:00:00', '06:00:00', '2020-04-25', 500, 1),
-(2807, 14, '23:00:00', '06:00:00', '2020-04-26', 500, 1),
-(2808, 14, '23:00:00', '06:00:00', '2020-04-30', 500, 1),
-(2809, 14, '23:00:00', '06:00:00', '2020-05-01', 500, 1),
-(2810, 14, '23:00:00', '06:00:00', '2020-05-02', 500, 1),
-(2811, 14, '23:00:00', '06:00:00', '2020-05-03', 500, 1),
-(2812, 14, '23:00:00', '06:00:00', '2020-05-07', 500, 1),
-(2813, 14, '23:00:00', '06:00:00', '2020-05-08', 500, 1),
-(2814, 14, '23:00:00', '06:00:00', '2020-05-09', 500, 1),
-(2815, 14, '23:00:00', '06:00:00', '2020-05-10', 500, 1),
-(2816, 14, '23:00:00', '06:00:00', '2020-05-14', 500, 1),
-(2817, 14, '23:00:00', '06:00:00', '2020-05-15', 500, 1),
-(2818, 14, '23:00:00', '06:00:00', '2020-05-16', 500, 1),
-(2819, 14, '23:00:00', '06:00:00', '2020-05-17', 500, 1),
-(2820, 14, '23:00:00', '06:00:00', '2020-05-21', 500, 1),
-(2821, 14, '23:00:00', '06:00:00', '2020-05-22', 500, 1),
-(2822, 14, '23:00:00', '06:00:00', '2020-05-23', 500, 1),
-(2823, 14, '23:00:00', '06:00:00', '2020-05-24', 500, 1),
-(2824, 14, '23:00:00', '06:00:00', '2020-05-28', 500, 1),
-(2825, 14, '23:00:00', '06:00:00', '2020-05-29', 500, 1),
-(2826, 14, '23:00:00', '06:00:00', '2020-05-30', 500, 1),
-(2827, 14, '23:00:00', '06:00:00', '2020-05-31', 500, 1),
-(2828, 14, '23:00:00', '06:00:00', '2020-06-04', 500, 1),
-(2829, 14, '23:00:00', '06:00:00', '2020-06-05', 500, 1),
-(2830, 14, '23:00:00', '06:00:00', '2020-06-06', 500, 1),
-(2831, 14, '23:00:00', '06:00:00', '2020-06-07', 500, 1),
-(2832, 14, '23:00:00', '06:00:00', '2020-06-11', 500, 1),
-(2833, 14, '23:00:00', '06:00:00', '2020-06-12', 500, 1),
-(2834, 14, '23:00:00', '06:00:00', '2020-06-13', 500, 1),
-(2835, 14, '23:00:00', '06:00:00', '2020-06-14', 500, 1),
-(2836, 14, '23:00:00', '06:00:00', '2020-06-18', 500, 1),
-(2837, 14, '23:00:00', '06:00:00', '2020-06-19', 500, 1),
-(2838, 14, '23:00:00', '06:00:00', '2020-06-20', 500, 1),
-(2839, 14, '23:00:00', '06:00:00', '2020-06-21', 500, 1),
-(2840, 14, '23:00:00', '06:00:00', '2020-06-25', 500, 1),
-(2841, 14, '23:00:00', '06:00:00', '2020-06-26', 500, 1),
-(2842, 14, '23:00:00', '06:00:00', '2020-06-27', 500, 1),
-(2843, 14, '23:00:00', '06:00:00', '2020-06-28', 500, 1),
-(2844, 14, '23:00:00', '06:00:00', '2020-07-02', 500, 1),
-(2845, 14, '23:00:00', '06:00:00', '2020-07-03', 500, 1),
-(2846, 14, '23:00:00', '06:00:00', '2020-07-04', 500, 1),
-(2847, 14, '23:00:00', '06:00:00', '2020-07-05', 500, 1),
-(2848, 14, '23:00:00', '06:00:00', '2020-07-09', 500, 1),
-(2849, 14, '23:00:00', '06:00:00', '2020-07-10', 500, 1),
-(2850, 14, '23:00:00', '06:00:00', '2020-07-11', 500, 1),
-(2851, 14, '23:00:00', '06:00:00', '2020-07-12', 500, 1),
-(2852, 14, '23:00:00', '06:00:00', '2020-07-16', 500, 1),
-(2853, 14, '23:00:00', '06:00:00', '2020-07-17', 500, 1),
-(2854, 14, '23:00:00', '06:00:00', '2020-07-18', 500, 1),
-(2855, 14, '23:00:00', '06:00:00', '2020-07-19', 500, 1),
-(2856, 14, '23:00:00', '06:00:00', '2020-07-23', 500, 1),
-(2857, 14, '23:00:00', '06:00:00', '2020-07-24', 500, 1),
-(2858, 14, '23:00:00', '06:00:00', '2020-07-25', 500, 1),
-(2859, 14, '23:00:00', '06:00:00', '2020-07-26', 500, 1),
-(2860, 14, '23:00:00', '06:00:00', '2020-07-30', 500, 1),
-(2861, 14, '23:00:00', '06:00:00', '2020-07-31', 500, 1),
-(2862, 14, '23:00:00', '06:00:00', '2020-08-01', 500, 1),
-(2863, 14, '23:00:00', '06:00:00', '2020-08-02', 500, 1),
-(2864, 14, '23:00:00', '06:00:00', '2020-08-06', 500, 1),
-(2865, 14, '23:00:00', '06:00:00', '2020-08-07', 500, 1),
-(2866, 14, '23:00:00', '06:00:00', '2020-08-08', 500, 1),
-(2867, 14, '23:00:00', '06:00:00', '2020-08-09', 500, 1),
-(2868, 14, '23:00:00', '06:00:00', '2020-08-13', 500, 1),
-(2869, 14, '23:00:00', '06:00:00', '2020-08-14', 500, 1),
-(2870, 14, '23:00:00', '06:00:00', '2020-08-15', 500, 1),
-(2871, 14, '23:00:00', '06:00:00', '2020-08-16', 500, 1),
-(2872, 14, '23:00:00', '06:00:00', '2020-08-20', 500, 1),
-(2873, 14, '23:00:00', '06:00:00', '2020-08-21', 500, 1),
-(2874, 14, '23:00:00', '06:00:00', '2020-08-22', 500, 1),
-(2875, 14, '23:00:00', '06:00:00', '2020-08-23', 500, 1),
-(2876, 14, '23:00:00', '06:00:00', '2020-08-27', 500, 1),
-(2877, 14, '23:00:00', '06:00:00', '2020-08-28', 500, 1),
-(2878, 14, '23:00:00', '06:00:00', '2020-08-29', 500, 1),
-(2879, 14, '23:00:00', '06:00:00', '2020-08-30', 500, 1),
-(2880, 14, '23:00:00', '06:00:00', '2020-09-03', 500, 1),
-(2881, 14, '23:00:00', '06:00:00', '2020-09-04', 500, 1),
-(2882, 14, '23:00:00', '06:00:00', '2020-09-05', 500, 1),
-(2883, 14, '23:00:00', '06:00:00', '2020-09-06', 500, 1),
-(2884, 14, '23:00:00', '06:00:00', '2020-09-10', 500, 1),
-(2885, 14, '23:00:00', '06:00:00', '2020-09-11', 500, 1),
-(2886, 14, '23:00:00', '06:00:00', '2020-09-12', 500, 1),
-(2887, 14, '23:00:00', '06:00:00', '2020-09-13', 500, 1),
-(2888, 14, '23:00:00', '06:00:00', '2020-09-17', 500, 1),
-(2889, 14, '23:00:00', '06:00:00', '2020-09-18', 500, 1),
-(2890, 14, '23:00:00', '06:00:00', '2020-09-19', 500, 1),
-(2891, 14, '23:00:00', '06:00:00', '2020-09-20', 500, 1),
-(2892, 14, '23:00:00', '06:00:00', '2020-09-24', 500, 1),
-(2893, 14, '23:00:00', '06:00:00', '2020-09-25', 500, 1),
-(2894, 14, '23:00:00', '06:00:00', '2020-09-26', 500, 1),
-(2895, 14, '23:00:00', '06:00:00', '2020-09-27', 500, 1),
-(2896, 14, '23:00:00', '06:00:00', '2020-10-01', 500, 1),
-(2897, 14, '23:00:00', '06:00:00', '2020-10-02', 500, 1),
-(2898, 14, '23:00:00', '06:00:00', '2020-10-03', 500, 1),
-(2899, 14, '23:00:00', '06:00:00', '2020-10-04', 500, 1),
-(2900, 14, '23:00:00', '06:00:00', '2020-10-08', 500, 1),
-(2901, 14, '23:00:00', '06:00:00', '2020-10-09', 500, 1),
-(2902, 14, '23:00:00', '06:00:00', '2020-10-10', 500, 1),
-(2903, 14, '23:00:00', '06:00:00', '2020-10-11', 500, 1),
-(2904, 14, '23:00:00', '06:00:00', '2020-10-15', 500, 1),
-(2905, 14, '23:00:00', '06:00:00', '2020-10-16', 500, 1),
-(2906, 14, '23:00:00', '06:00:00', '2020-10-17', 500, 1),
-(2907, 14, '23:00:00', '06:00:00', '2020-10-18', 500, 1),
-(2908, 14, '23:00:00', '06:00:00', '2020-10-22', 500, 1),
-(2909, 14, '23:00:00', '06:00:00', '2020-10-23', 500, 1),
-(2910, 14, '23:00:00', '06:00:00', '2020-10-24', 500, 1),
-(2911, 14, '23:00:00', '06:00:00', '2020-10-25', 500, 1),
-(2912, 14, '23:00:00', '06:00:00', '2020-10-29', 500, 1),
-(2913, 14, '23:00:00', '06:00:00', '2020-10-30', 500, 1),
-(2914, 14, '23:00:00', '06:00:00', '2020-10-31', 500, 1),
-(2915, 14, '23:00:00', '06:00:00', '2020-11-01', 500, 1),
-(2916, 14, '23:00:00', '06:00:00', '2020-11-05', 500, 1),
-(2917, 14, '23:00:00', '06:00:00', '2020-11-06', 500, 1),
-(2918, 14, '23:00:00', '06:00:00', '2020-11-07', 500, 1),
-(2919, 14, '23:00:00', '06:00:00', '2020-11-08', 500, 1),
-(2920, 14, '23:00:00', '06:00:00', '2020-11-12', 500, 1),
-(2921, 14, '23:00:00', '06:00:00', '2020-11-13', 500, 1),
-(2922, 14, '23:00:00', '06:00:00', '2020-11-14', 500, 1),
-(2923, 14, '23:00:00', '06:00:00', '2020-11-15', 500, 1),
-(2924, 14, '23:00:00', '06:00:00', '2020-11-19', 500, 1),
-(2925, 14, '23:00:00', '06:00:00', '2020-11-20', 500, 1),
-(2926, 14, '23:00:00', '06:00:00', '2020-11-21', 500, 1),
-(2927, 14, '23:00:00', '06:00:00', '2020-11-22', 500, 1),
-(2928, 14, '23:00:00', '06:00:00', '2020-11-26', 500, 1),
-(2929, 14, '23:00:00', '06:00:00', '2020-11-27', 500, 1),
-(2930, 14, '23:00:00', '06:00:00', '2020-11-28', 500, 1),
-(2931, 14, '23:00:00', '06:00:00', '2020-11-29', 500, 1),
-(2932, 14, '23:00:00', '06:00:00', '2020-12-03', 500, 1),
-(2933, 14, '23:00:00', '06:00:00', '2020-12-04', 500, 1),
-(2934, 14, '23:00:00', '06:00:00', '2020-12-05', 500, 1),
-(2935, 14, '23:00:00', '06:00:00', '2020-12-06', 500, 1),
-(2936, 14, '23:00:00', '06:00:00', '2020-12-10', 500, 1),
-(2937, 14, '23:00:00', '06:00:00', '2020-12-11', 500, 1),
-(2938, 14, '23:00:00', '06:00:00', '2020-12-12', 500, 1),
-(2939, 14, '23:00:00', '06:00:00', '2020-12-13', 500, 1),
-(2940, 14, '23:00:00', '06:00:00', '2020-12-17', 500, 1),
-(2941, 14, '23:00:00', '06:00:00', '2020-12-18', 500, 1),
-(2942, 14, '23:00:00', '06:00:00', '2020-12-19', 500, 1),
-(2943, 14, '23:00:00', '06:00:00', '2020-12-20', 500, 1),
-(2944, 14, '23:00:00', '06:00:00', '2020-12-24', 500, 1),
-(2945, 14, '23:00:00', '06:00:00', '2020-12-25', 500, 1),
-(2946, 14, '23:00:00', '06:00:00', '2020-12-26', 500, 1),
-(2947, 14, '23:00:00', '06:00:00', '2020-12-27', 500, 1),
-(2948, 14, '23:00:00', '06:00:00', '2020-12-31', 500, 1);
-
--- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `users`
---
-
-CREATE TABLE `users` (
-  `userid` int(11) NOT NULL,
-  `userName` varchar(250) NOT NULL,
-  `mail` varchar(250) NOT NULL,
-  `password` varchar(250) NOT NULL,
-  `userPhone` varchar(250) NOT NULL,
-  `birthdate` date NOT NULL,
-  `roleid` int(11) NOT NULL,
-  `companyid` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `users`
---
-
-INSERT INTO `users` (`userid`, `userName`, `mail`, `password`, `userPhone`, `birthdate`, `roleid`, `companyid`) VALUES
-(1, 'Leynor Méndez', 'leinormendez@wolpray.com', '1111', '666887755', '1990-08-19', 2, NULL),
-(2, 'Lewis Méndez', 'lewismendez@wolpray.com', '2222', '658855555', '1990-08-19', 2, NULL),
-(3, 'Miguel Profe', 'miguel@wolpray.com', '1111', '632444444', '1980-08-19', 2, NULL),
-(4, 'Jaume Quintana Méndez', 'jaumequintana@wolpray.com', '1111', '633224477', '1997-08-19', 2, NULL),
-(5, 'Juan Mendoza', 'Juan@gmail.com', '1111', '663187755', '1990-08-19', 3, 1),
-(6, 'Alex Reynoso', 'Alex@gmail.com', '1111', '6668879755', '1990-08-19', 3, 1),
-(7, 'Ramon Craig', 'Ramon@gmail.com', '1111', '666797755', '1990-08-19', 3, 2),
-(8, 'John Lenon', 'John@gmail.com', '1111', '666886455', '1990-08-19', 3, 2),
-(9, 'Pedro Sánchez', 'Pedro@gmail.com', '1111', '668287755', '1990-08-19', 3, 3),
-(10, 'Juan Carlos Borbón', 'JuanCarlos@gmail.com', '1111', '666831755', '1990-08-19', 3, 3),
-(11, 'Jota Benitez', 'Jota@gmail.com', '1111', '666898755', '1990-08-19', 3, 4),
-(12, 'Mariano Rajoy', 'Mariano@gmail.com', '1111', '666815955', '1990-08-19', 3, 4),
-(13, 'Felipe González', 'Felipe@gmail.com', '1111', '666835755', '1990-08-19', 3, 5),
-(14, 'Daddy Yankee', 'Daddy@gmail.com', '1111', '666894355', '1990-08-19', 3, 5),
-(15, 'Bad Bunny', 'Bad@gmail.com', '1111', '666369855', '1990-08-19', 3, 1),
-(16, 'Ozuna Reynoso', 'Ozuna@gmail.com', '1111', '666163755', '1990-08-19', 3, 1),
-(17, 'Julio Cesar', 'Julio@gmail.com', '1111', '666874155', '1990-08-19', 3, 2),
-(18, 'Francisca Sena', 'Francisca@gmail.com', '1111', '661727755', '1990-08-19', 3, 2);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `users_clubs`
---
-
-CREATE TABLE `users_clubs` (
-  `userid` int(11) DEFAULT NULL,
-  `clubid` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `users_clubs`
---
-
-INSERT INTO `users_clubs` (`userid`, `clubid`) VALUES
-(5, 1),
-(5, 6),
-(5, 10),
-(6, 1),
-(6, 6),
-(6, 10),
-(7, 2),
-(7, 7),
-(7, 11),
-(8, 2),
-(8, 7),
-(8, 11),
-(9, 3),
-(9, 8),
-(9, 12),
-(10, 3),
-(10, 8),
-(10, 12),
-(11, 4),
-(11, 9),
-(11, 13),
-(12, 4),
-(12, 9),
-(12, 13),
-(14, 5),
-(14, 14),
-(15, 1),
-(15, 6),
-(15, 10),
-(17, 2),
-(17, 7),
-(17, 11),
-(16, 1),
-(16, 6),
-(16, 10),
-(18, 2),
-(18, 7),
-(18, 11);
-
---
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `categories`
---
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`categoryid`);
-
---
--- Indices de la tabla `clubs`
+-- Indexes for table `clubs`
 --
 ALTER TABLE `clubs`
-  ADD PRIMARY KEY (`clubid`),
-  ADD KEY `cityid` (`cityid`),
-  ADD KEY `clubs_dressCodeid_fk` (`dressCodeid`),
-  ADD KEY `clubs_companyid_fk` (`companyid`);
+  ADD PRIMARY KEY (`clubid`);
 
 --
--- Indices de la tabla `club_music`
+-- Indexes for table `club_music`
 --
 ALTER TABLE `club_music`
   ADD PRIMARY KEY (`clubid`,`musicid`),
-  ADD KEY `musicid` (`musicid`);
+  ADD KEY `clubid` (`clubid`);
 
 --
--- Indices de la tabla `companies`
+-- Indexes for table `companies`
 --
 ALTER TABLE `companies`
-  ADD PRIMARY KEY (`companyid`),
-  ADD KEY `comp_user_fk` (`userid`),
-  ADD KEY `comp_country_fk` (`cityid`);
+  ADD PRIMARY KEY (`companyid`);
 
 --
--- Indices de la tabla `c_city`
+-- Indexes for table `c_city`
 --
 ALTER TABLE `c_city`
-  ADD PRIMARY KEY (`cityid`),
-  ADD KEY `ix_provinciaid` (`provinceid`) USING BTREE;
+  ADD PRIMARY KEY (`cityid`);
 
 --
--- Indices de la tabla `c_country`
+-- Indexes for table `c_country`
 --
 ALTER TABLE `c_country`
   ADD PRIMARY KEY (`countryId`);
 
 --
--- Indices de la tabla `c_provinces`
+-- Indexes for table `c_provinces`
 --
 ALTER TABLE `c_provinces`
-  ADD PRIMARY KEY (`provinceid`),
-  ADD KEY `prov_state_fk` (`stateid`);
+  ADD PRIMARY KEY (`provinceid`);
 
 --
--- Indices de la tabla `c_state`
+-- Indexes for table `c_state`
 --
 ALTER TABLE `c_state`
-  ADD PRIMARY KEY (`stateid`),
-  ADD KEY `FK_cp_comunidades_cp_pais` (`countryid`);
+  ADD PRIMARY KEY (`stateid`);
 
 --
--- Indices de la tabla `events`
+-- Indexes for table `events`
 --
 ALTER TABLE `events`
-  ADD PRIMARY KEY (`eventid`),
-  ADD KEY `event_club_fk` (`clubid`);
+  ADD PRIMARY KEY (`eventid`);
 
 --
--- Indices de la tabla `n_category`
+-- Indexes for table `n_category`
 --
 ALTER TABLE `n_category`
-  ADD PRIMARY KEY (`cateroryId`);
+  ADD PRIMARY KEY (`categoryId`);
 
 --
--- Indices de la tabla `n_dresscode`
+-- Indexes for table `n_dresscode`
 --
 ALTER TABLE `n_dresscode`
   ADD PRIMARY KEY (`dressCodeId`);
 
 --
--- Indices de la tabla `n_music`
+-- Indexes for table `n_music`
 --
 ALTER TABLE `n_music`
   ADD PRIMARY KEY (`musicid`);
 
 --
--- Indices de la tabla `products`
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`productid`),
-  ADD KEY `clubid` (`clubid`),
-  ADD KEY `clubid_2` (`clubid`),
-  ADD KEY `prod_categoy_fk` (`categoryid`);
+  ADD PRIMARY KEY (`productid`);
 
 --
--- Indices de la tabla `promotes`
+-- Indexes for table `promotes`
 --
 ALTER TABLE `promotes`
-  ADD KEY `productid` (`productid`),
-  ADD KEY `promotionid` (`promotionid`);
+  ADD PRIMARY KEY (`productid`);
 
 --
--- Indices de la tabla `promotions`
+-- Indexes for table `promotions`
 --
 ALTER TABLE `promotions`
-  ADD PRIMARY KEY (`promotionid`),
-  ADD KEY `clubid` (`clubid`),
-  ADD KEY `clubid_2` (`clubid`);
+  ADD PRIMARY KEY (`promotionid`,`clubid`);
 
 --
--- Indices de la tabla `reservations`
+-- Indexes for table `reservations`
 --
 ALTER TABLE `reservations`
-  ADD PRIMARY KEY (`reservid`),
-  ADD KEY `clubid` (`clubid`),
-  ADD KEY `userid` (`userid`);
+  ADD PRIMARY KEY (`reservid`,`clubid`);
 
 --
--- Indices de la tabla `roles`
+-- Indexes for table `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`roleid`);
 
 --
--- Indices de la tabla `slots`
+-- Indexes for table `slots`
 --
 ALTER TABLE `slots`
-  ADD PRIMARY KEY (`slotid`),
+  ADD PRIMARY KEY (`slotid`,`clubid`),
   ADD KEY `clubid` (`clubid`);
-
---
--- Indices de la tabla `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`userid`),
-  ADD UNIQUE KEY `username` (`userName`),
-  ADD UNIQUE KEY `mail` (`mail`),
-  ADD KEY `user_role_fk` (`roleid`);
-
---
--- Indices de la tabla `users_clubs`
---
-ALTER TABLE `users_clubs`
-  ADD KEY `userid` (`userid`),
-  ADD KEY `clubid` (`clubid`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `categories`
---
-ALTER TABLE `categories`
-  MODIFY `categoryid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT de la tabla `companies`
---
-ALTER TABLE `companies`
-  MODIFY `companyid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT de la tabla `c_city`
---
-ALTER TABLE `c_city`
-  MODIFY `cityid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id poblacion', AUTO_INCREMENT=8125;
-
---
--- AUTO_INCREMENT de la tabla `c_provinces`
---
-ALTER TABLE `c_provinces`
-  MODIFY `provinceid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la provincia.', AUTO_INCREMENT=53;
-
---
--- AUTO_INCREMENT de la tabla `c_state`
---
-ALTER TABLE `c_state`
-  MODIFY `stateid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
-
---
--- AUTO_INCREMENT de la tabla `n_category`
---
-ALTER TABLE `n_category`
-  MODIFY `cateroryId` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `n_dresscode`
---
-ALTER TABLE `n_dresscode`
-  MODIFY `dressCodeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de la tabla `n_music`
---
-ALTER TABLE `n_music`
-  MODIFY `musicid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT de la tabla `reservations`
---
-ALTER TABLE `reservations`
-  MODIFY `reservid` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `slots`
---
-ALTER TABLE `slots`
-  MODIFY `slotid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2949;
-
---
--- AUTO_INCREMENT de la tabla `users`
---
-ALTER TABLE `users`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `clubs`
---
-ALTER TABLE `clubs`
-  ADD CONSTRAINT `clubs_cityid_fk` FOREIGN KEY (`cityid`) REFERENCES `c_city` (`cityid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `clubs_companyid_fk` FOREIGN KEY (`companyid`) REFERENCES `companies` (`companyid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `clubs_dressCodeid_fk` FOREIGN KEY (`dressCodeid`) REFERENCES `n_dresscode` (`dressCodeId`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `club_music`
---
-ALTER TABLE `club_music`
-  ADD CONSTRAINT `club_music_ibfk_1` FOREIGN KEY (`clubid`) REFERENCES `clubs` (`clubid`),
-  ADD CONSTRAINT `club_music_musicid_fk` FOREIGN KEY (`musicid`) REFERENCES `n_music` (`musicid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `companies`
---
-ALTER TABLE `companies`
-  ADD CONSTRAINT `comp_city_fk` FOREIGN KEY (`cityid`) REFERENCES `c_city` (`cityid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `comp_user_fk` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `c_city`
---
-ALTER TABLE `c_city`
-  ADD CONSTRAINT `city_province_fk` FOREIGN KEY (`provinceid`) REFERENCES `c_provinces` (`provinceid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `c_provinces`
---
-ALTER TABLE `c_provinces`
-  ADD CONSTRAINT `prov_state_fk` FOREIGN KEY (`stateid`) REFERENCES `c_state` (`stateid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `c_state`
---
-ALTER TABLE `c_state`
-  ADD CONSTRAINT `state_count_fk` FOREIGN KEY (`countryid`) REFERENCES `c_country` (`countryId`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `events`
---
-ALTER TABLE `events`
-  ADD CONSTRAINT `event_club_fk` FOREIGN KEY (`clubid`) REFERENCES `clubs` (`clubid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `products`
---
-ALTER TABLE `products`
-  ADD CONSTRAINT `prod_categoy_fk` FOREIGN KEY (`categoryid`) REFERENCES `categories` (`categoryid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `promotes`
---
-ALTER TABLE `promotes`
-  ADD CONSTRAINT `promote_product_fk` FOREIGN KEY (`productid`) REFERENCES `products` (`productid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `promote_promotion_fk` FOREIGN KEY (`promotionid`) REFERENCES `promotions` (`promotionid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `promotions`
---
-ALTER TABLE `promotions`
-  ADD CONSTRAINT `promotions_club_fk` FOREIGN KEY (`clubid`) REFERENCES `clubs` (`clubid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `reservations`
---
-ALTER TABLE `reservations`
-  ADD CONSTRAINT `reservation_club_fk` FOREIGN KEY (`clubid`) REFERENCES `clubs` (`clubid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `reservation_user_fk` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `slots`
---
-ALTER TABLE `slots`
-  ADD CONSTRAINT `slot_club_fk` FOREIGN KEY (`clubid`) REFERENCES `clubs` (`clubid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `user_role_fk` FOREIGN KEY (`roleid`) REFERENCES `roles` (`roleid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `users_clubs`
---
-ALTER TABLE `users_clubs`
-  ADD CONSTRAINT `users_clubs_clubs_fk` FOREIGN KEY (`clubid`) REFERENCES `clubs` (`clubid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `users_clubs_user_fk` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

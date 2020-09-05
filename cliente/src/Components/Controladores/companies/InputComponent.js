@@ -19,6 +19,7 @@ export const InputComponent = ({clase = '',tam='',step ='', type='default', valu
                     <div className="col-md-10">
                         {
                             (name.length > 0) ?
+                            
                                 <input
                                     style={{with:tam}}
                                     step ={step}

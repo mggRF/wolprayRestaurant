@@ -8,7 +8,7 @@ export default class AccesoAPI {
 
 
   static async leerDesplegables(tabla, precursor) {
-    let url = API_URL + CONVERSOR[tabla] + "/select/"
+    let url = API_URL + this.verificaTabla(tabla) + "/select/"
     if (!(precursor === undefined || precursor===0)) url += precursor;
     return this.accederApi(url);
   }
@@ -16,7 +16,6 @@ export default class AccesoAPI {
   static async leerUNO(tabla, id) {
     console.log('desde leerUNO de AccesoAPI')
     let url2 = this.verificaTabla(tabla);
-    console.log(url2)
     let url = API_URL + url2 + "/" + id;
     console.log('leerUno url:', url);
     return this.accederApi(url);

@@ -9,6 +9,7 @@ import BotonListado from '../../Fragmentos/BotonListados';
 import Paginacion from './../../../Servicios/Paginacion';
 import GestorListado from './../../../Servicios/GestorListado';
 import { BotonCabecera } from './../../Fragmentos/BotonCabecera';
+import MontaCabecera from '../../Fragmentos/MontaCabecera';
 
 
 export default class ListadoMusic extends Component {
@@ -19,8 +20,8 @@ export default class ListadoMusic extends Component {
             datos: [],
             error: "",
         }
-        this.leeTabla= this.leeTabla.bind(this);
-        this.gl = new GestorListado(API_URL + MUSIC,this.leeTabla);
+        this.leeTabla = this.leeTabla.bind(this);
+        this.gl = new GestorListado(API_URL + MUSIC, this.leeTabla);
     }
     leeTabla() {
         AccesoAPI.accederApi(this.gl.terminaURLlistado())
@@ -64,20 +65,13 @@ export default class ListadoMusic extends Component {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>
-                                <BotonCabecera
-                                    name="musicid"
-                                    col="Identificador"
-                                    gestionClas={this.gl.setSortedField}
-                                />
-                            </th>
-                            <th>
-                                <BotonCabecera
-                                    name="musicName"
-                                    col="name"
-                                    gestionClas={this.gl.setSortedField}
-                                />
-                            </th>
+                            <MontaCabecera separador='th'
+                                funcion={this.gl.setSortedField}
+                                lista={[
+                                    ['musicid', 'Identificador'],
+                                    ['musicName', 'name']
+                                ]} />
+
                             <th></th><th></th><th></th>
                         </tr>
                     </thead>
