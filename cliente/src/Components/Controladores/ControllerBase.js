@@ -24,9 +24,7 @@ export default class ControllerBase extends Component {
         AccesoAPI.leerUNO(this.TABLA, id)
             .then(response => {
                 //console.log("RespuestaUNO=>", response);
-                if (response.Respuesta = 'ok') {
-                    console.log("leer uno ok.Orden: ", orden)
-                    if (response.Respuesta == 'ok') {
+                    if (response.Ok) {
                         this.setState({
                             estadoActualizacion: 1,       //pongo modo formulario
                             orden: orden,               //pongo lo que ha de hacer
@@ -39,7 +37,6 @@ export default class ControllerBase extends Component {
                             msjerr: response.Datos
                         })
                     }
-                }
             })
     }
 

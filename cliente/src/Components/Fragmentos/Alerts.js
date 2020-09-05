@@ -2,9 +2,6 @@
 import swal from 'sweetalert';
 
 
-
-
-
 export const Alerts ={
     warningMessage:warningMessage,
     successMessage:successMessage,

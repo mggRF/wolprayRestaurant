@@ -62,7 +62,7 @@ export default class Paginacion extends Component {
     leerContador() {
         AccesoAPI.accederApi(API_URL + this.props.tabla + '/count')
             .then(response => {
-                if (response.Respuesta === "ok") {
+                if (response.Ok) {
                     let contador = response.Datos.contador;
                     let paginas = contador / this.state.lppagina;
                     if (paginas !== Math.floor(paginas)) paginas++
@@ -70,7 +70,7 @@ export default class Paginacion extends Component {
                     this.setState({ totalPaginas: Math.floor(paginas), });
                 }
                 else {
-                    this.setState({ error: response.Respuesta });
+                    this.setState({ error: response.Datos });
                 }
 
             })

@@ -55,7 +55,7 @@ export default class Rutas extends Component {
             </div>
           </div>
         </div>
-        <div className="container section-container">
+        <div className="section-container container">
           <DashboardRoutes />
           <Footer />
         </div>

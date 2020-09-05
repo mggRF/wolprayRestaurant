@@ -20,11 +20,11 @@ export default class ListadoClubs extends Component {
         AccesoAPI.accederApi(API_URL + CLUBS)
             .then(response => {
                 console.log("RESPONDE DESDE LISTADOCLUB", response);
-                if (response.Respuesta === "ok") {
+                if (response.Ok) {
                     this.setState({ datos: response.Datos })
                 }
                 else {
-                    this.setState({ error: response.Respuesta });
+                    this.setState({ error: response.Datos });
                 }
 
             })

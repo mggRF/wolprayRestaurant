@@ -22,11 +22,12 @@ export default class ListadoCompanies extends Component {
         AccesoAPI.accederApi(API_URL + COMPANIES)
             .then(response => {
                 console.log('Desde listado companies: ',response);
-                if (response.Respuesta === "ok") {
+                if (response.Ok) {
+                    console.log('La respuesta es ok')
                     this.setState({ datos: response.Datos })
                 }
                 else {
-                    this.setState({ error: response.Respuesta });
+                    this.setState({ error: response.Datos });
                 }
 
                 console.log('El estate es: ', this.state)

@@ -21,7 +21,7 @@ export default class ListadoCCAA extends Component {
         AccesoAPI.accederApi(API_URL + STATES)
             .then(response => {
                 console.log(response);
-                if (response.Respuesta === "ok") {
+                if (response.Ok) {
                     this.setState({ datos: response.Datos })
                 }
                 else {

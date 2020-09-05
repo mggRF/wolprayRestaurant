@@ -31,14 +31,14 @@ export default class MontaCabecera extends Component {
             <>
                 {lista.map((elemento, i) => {
                     return (
-                        <th key = {i}>
-                        <BotonCabecera name={elemento[0]}
-                            col={elemento[1]}
-                            gestionClas={funcion}
-                        />
+                        <th key={i}>
+                            <BotonCabecera name={elemento[0]}
+                                col={elemento[1]}
+                                gestionClas={funcion}
+                            />
                         </th>
                     )
-                    
+
                 })}
             </>
         )

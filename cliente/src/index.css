@@ -1,3 +1,9 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+       box-sizing: border-box;
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: #eee;
@@ -119,6 +125,52 @@ body {
   transform: translateY(-1px);
 }
 
+.section-container{
+  min-height: calc(100vh -100px-100px);
+}
+
+.footer-nav{
+  position:  sticky;
+  clear: both;
+  color: rgb(37, 45, 161);
+  bottom: 0;
+  z-index: 99999;
+  width: 100%;
+  font-size: 12px;
+  font-weight: bolder;
+  text-align: center;
+  margin:0px auto;
+  margin-top: 20px;
+  overflow-y: auto;
+  padding: 20px;
+  
+}
+
+.cabecera_controlador{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.elementoFormularioClub{
+  float: left;
+  margin-left: 25%;
+  margin-right: auto;
+}
+
+
+.homepage{
+  text-align: center;
+  
+}
+.containermenu{
+  
+  border: gray 2px solid;
+}
+
+
+
 @media(max-width: 768px) {
   .sidebar{
     position: static;
@@ -128,4 +180,6 @@ body {
     position: static;
   }
 }
+
+
 /* End of navbar */

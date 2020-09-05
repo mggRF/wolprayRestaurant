@@ -27,11 +27,11 @@ export default class ListadoMusic extends Component {
         AccesoAPI.accederApi(this.gl.terminaURLlistado())
             .then(response => {
                 console.log(response);
-                if (response.Respuesta === "ok") {
+                if (response.Ok) {
                     this.setState({ datos: response.Datos })
                 }
                 else {
-                    this.setState({ error: response.Respuesta });
+                    this.setState({ error: response.Datos });
                 }
 
             })
