@@ -27,7 +27,7 @@ export default class Rutas extends Component {
 
     const user = {
       userid: 1,
-      userName: "Lewis Méndez",
+      userName: "Usuario logeado",
       mail: "leinormendez@wolpray.com",
       password: "1111",
       userPhone: "666887755",
