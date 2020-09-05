@@ -13,15 +13,23 @@ const compression = require('compression');
 const helmet = require('helmet');
 const fileUpload = require('express-fileupload');
 const path = require('path');
+const formData = require("express-form-data");
+const os = require('os');
 
 const { COMUNIDADES, PAISES, POBLACIONES, PROVINCIAS, MUSICA, CLUBS, DRESSCODE, EVENTS, USERS, SLOTS, ROLES, COMPANIES, PRODUCTS } = require('./Constantes/ConstantesRutas');
 
 
 
+const options = {
+    uploadDir: os.tmpdir(),
+    autoClean: true
+  };
+
 const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(compression()); //Compress all routes
+
 
 // Importamos las rutas
 const rGlobal = require('./rutas/rutaGlobal');
@@ -44,9 +52,14 @@ const Autorizado = require('./Autentificacion/middelAut');
 
 //cargar middlewares
 //Configuramos bodyParser para que convierta el body de nuestras peticiones a JSON
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+// app.use(formData.parse(options));
+// app.use(formData.format());
+// app.use(formData.stream());
+// app.use(formData.union());
 //Subida de imagenes
 app.use(fileUpload({
     useTempFiles: true
