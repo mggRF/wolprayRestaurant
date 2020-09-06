@@ -28,7 +28,7 @@ export default class Desplegable extends Component {
 
             AccesoAPI.leerDesplegables(this.props.table, this.props.depend)
                 .then(response => {
-                    if (response.Respuesta === "ok") {
+                    if (response.Ok) {
                         this.setState({ datos: response.Datos })
                     }
                     else {
