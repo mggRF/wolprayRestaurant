@@ -23,9 +23,9 @@ export default class MontaCabecera extends Component {
     render() {
         let funcion = this.props.funcion;
         let lista = this.props.lista;
-        let sep = this.props.separador;
-        let sepi = (sep !== "") ? '<' + sep + '>' : "";
-        let sepf = (sep !== "") ? '</' + sep + '>' : "";
+        // let sep = this.props.separador;
+        // let sepi = (sep !== "") ? '<' + sep + '>' : "";
+        // let sepf = (sep !== "") ? '</' + sep + '>' : "";
 
         return (
             <>

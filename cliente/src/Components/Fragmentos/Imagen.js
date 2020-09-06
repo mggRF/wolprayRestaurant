@@ -4,14 +4,6 @@ import Noimage from '../Comun/images/noimage.jpg';
 
 
 export default class Imagen extends Component {
-    constructor(props) {
-        super(props);
-        
-
-        
-       
-    }
-    
 
     render() {//Components\Comun\images
         if(this.props.imageUrl != null){

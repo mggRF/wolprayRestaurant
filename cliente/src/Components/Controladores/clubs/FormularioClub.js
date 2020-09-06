@@ -26,7 +26,7 @@ export default class FormularioClub extends Component {
         }
         let readonly = false;
         let direccion = club.streetName + " " + club.streetNumber + " " + club.postal_code + " " + club.cityName;
-        if (this.props.orden == 'D' || this.props.orden == 'V') readonly = true
+        if (this.props.orden === 'D' || this.props.orden === 'V') readonly = true
 
         return (
             <div className='container animate__animated animate__fadeIn'>

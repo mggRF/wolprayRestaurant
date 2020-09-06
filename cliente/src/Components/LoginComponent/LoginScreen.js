@@ -41,7 +41,7 @@ export default class LoginScreen extends Component {
             <form className="login-bx mt-5 animate__animated animate__fadeIn" onSubmit={this.onSubmitInput}>
                 <h1>Login</h1>
                 <div className="bximg">
-                    <img src={themeLogo} />
+                    <img src={themeLogo} alt = 'Logo' />
                 </div>
 
                 <div className="txtb">

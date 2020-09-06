@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import ControllerMusic from '../Controladores/music/ControllerMusic';
 import ControllerClub from '../Controladores/clubs/ControllerClub';
 import Home from '../Paginas/Home';

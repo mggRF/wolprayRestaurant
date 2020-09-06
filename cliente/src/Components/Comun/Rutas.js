@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import Header from '../Comun/HeaderComponent/Header';
-//import PropTypes from 'prop-types'
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 
 import { Sidebar } from './HeaderComponent/Sidebar';
 import paths from './Paths';
 import { DashboardRoutes } from './DashboardRoutes';
-import Footer from './Footer';
 
 
 export default class Rutas extends Component {
@@ -57,7 +54,7 @@ export default class Rutas extends Component {
         </div>
         <div className="section-container container">
           <DashboardRoutes />
-          <Footer />
+          
         </div>
       </>
     )

@@ -11,15 +11,12 @@ export default class FormularioCCAA extends Component {
     render() {
         let CCAA = this.props.obj;
         let readonly = false;
-        if (this.props.orden == 'D' || this.props.orden == 'V')
+        if (this.props.orden === 'D' || this.props.orden === 'V')
             readonly = true
         let title = '';
         switch (this.props.orden) {
             case 'I':
                 title = 'añadir';
-                break;
-            case 'E':
-                title = 'modificar';
                 break;
             case 'E':
                 title = 'modificar';

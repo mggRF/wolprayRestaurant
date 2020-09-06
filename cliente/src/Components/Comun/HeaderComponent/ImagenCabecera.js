@@ -13,6 +13,7 @@ export const ImagenCabecera = () => {
                     width: 200,
                     padding: 20,
                 }}
+                alt = 'Imagen cabecera'
                 className="mx-auto py-3 animate__animated animate__fadeInLeft"
                 src={Logo}
             />

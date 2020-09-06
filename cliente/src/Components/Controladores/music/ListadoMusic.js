@@ -8,7 +8,6 @@ import BotonListado from '../../Fragmentos/BotonListados';
 
 import Paginacion from './../../../Servicios/Paginacion';
 import GestorListado from './../../../Servicios/GestorListado';
-import { BotonCabecera } from './../../Fragmentos/BotonCabecera';
 import MontaCabecera from '../../Fragmentos/MontaCabecera';
 
 
