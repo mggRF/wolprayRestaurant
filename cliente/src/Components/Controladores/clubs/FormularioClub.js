@@ -490,3 +490,4 @@ FormularioClub.propTypes = {
     obj: PropTypes.object,
     funcion: PropTypes.func
 }
+
