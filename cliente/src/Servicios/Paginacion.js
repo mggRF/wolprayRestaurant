@@ -91,10 +91,15 @@ export default class Paginacion extends Component {
     renderPageNumbers = (pageNumbers, totalPaginas) => {
         let { active } = this.state;
         return (
-            <nav className = "animate__animated animate__flipInX">
+            <nav className="animate__animated animate__flipInX">
                 <ul className="pagination justify-content-center">
                     <li className="page-item">
-                        <button style = {{cursor: 'pointer'}} className="page-link pu-2 px-3" onClick={this.backHandler}> Anterior </button>
+                        <button style={{ cursor: 'pointer' }}
+                            className="page-link pu-2 px-3"
+                            onClick={this.backHandler}
+                        >
+                            Anterior
+                            </button>
                     </li>
                     {pageNumbers.map(number => {
                         if (
@@ -105,9 +110,15 @@ export default class Paginacion extends Component {
                                 <li
                                     className="page-item"
                                     key={number}
-                                    id={number}
+                                    
                                 >
-                                    <button onClick={this.pagingHandler} style = {{cursor: 'pointer'}} className="page-link pu-2 px-3">{number}</button>
+                                    <button onClick={this.pagingHandler}
+                                        style={{ cursor: 'pointer' }}
+                                        className="page-link pu-2 px-3"
+                                        id={number}
+                                    >
+                                        {number}
+                                    </button>
                                 </li>
 
                             );
@@ -117,7 +128,12 @@ export default class Paginacion extends Component {
                     })
                     }
                     <li className="page-item">
-                        <button style = {{cursor: 'pointer'}} className="page-link pu-2 px-3" onClick={this.nextHandler}> Siguiente</button>
+                        <button style={{ cursor: 'pointer' }}
+                            className="page-link pu-2 px-3"
+                            onClick={this.nextHandler}
+                        >
+                            Siguiente
+                         </button>
                     </li>
                 </ul>
             </nav>
