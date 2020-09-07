@@ -6,6 +6,7 @@ import { DesplegableDireccion } from '../../Fragmentos/DesplegableDireccion';
 import Desplegable from '../../Fragmentos/desplegable';
 import { TextAreaComponent } from './TextAreaComponent';
 import SubirImagen from '../../Fragmentos/SubirImagen';
+import ListaCheckBox from '../../Fragmentos/ListaCheckBox';
 
 export default class FormularioClub extends Component {
 
@@ -162,9 +163,9 @@ export default class FormularioClub extends Component {
                         }
                         {
                             /*MOSTRAR TIPO DE MUSICA  DEL CLUB */
-                            (!readonly) ?
+                            
                                 <div className='col-4'>
-                                    <TextAreaComponent name="Musica"
+                                    <ListaCheckBox name="Musica"
                                         handleChange={this.props.funcion}
                                         name="Musica"
                                         label="Tipos de musica"
@@ -172,7 +173,7 @@ export default class FormularioClub extends Component {
                                         readOnly={true}
                                         value={musicType}
                                     />
-                                </div> : null
+                                </div> 
                         }
 
 
