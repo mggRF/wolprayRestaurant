@@ -1,10 +1,18 @@
 //******* Area de control *******************
-const API_BASE = "http://localhost:3800/";   //direccion base
+const API_BASE_DEVELOPPER = "http://localhost:3800/";   //direccion base
+const API_BASE_PRODUCTION = "http://wolpray.es:3800/";   //direccion base
 
 const VERSION_API = "api_v00";
 
+const variable_url = () => {
+    if (process.env.NODE_ENV === 'production') {
+        return API_BASE_PRODUCTION;
+    } else {
+        return API_BASE_DEVELOPPER;
+    }
+}
 module.exports = {
-    API_URL: API_BASE + VERSION_API + '/',
+    API_URL: variable_url()  + VERSION_API + '/',
     CLUBS: 'clubs',
     EVENTS: 'events',
     STATES: 'states',
