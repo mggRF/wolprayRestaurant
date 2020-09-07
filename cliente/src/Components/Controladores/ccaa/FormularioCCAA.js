@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { InputComponent } from '../companies/InputComponent';
+import { InputComponent } from '../../Fragmentos/InputComponent';
 import Desplegable from '../../Fragmentos/desplegable';
 
 

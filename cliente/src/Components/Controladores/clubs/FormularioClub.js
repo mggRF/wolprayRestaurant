@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Imagen from '../../Fragmentos/Imagen';
-import { InputComponent } from '../companies/InputComponent';
+import { InputComponent } from '../../Fragmentos/InputComponent';
 import { DesplegableDireccion } from '../../Fragmentos/DesplegableDireccion';
 import Desplegable from '../../Fragmentos/desplegable';
 import { TextAreaComponent } from './TextAreaComponent';
