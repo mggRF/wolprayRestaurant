@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from "prop-types";
-import AccesoAPI from '../Servicios/AccesoAPI';
-import Checkbox from '../Components/Fragmentos/Checkbox';
+import AccesoAPI from '../../Servicios/AccesoAPI';
+import Checkbox from './Checkbox';
 
 /**
  * Presenta una lista de checkbox del fichero indicado por 
