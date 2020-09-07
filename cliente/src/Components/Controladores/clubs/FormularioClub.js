@@ -10,21 +10,29 @@ import ListaCheckBox from '../../Fragmentos/ListaCheckBox';
 
 export default class FormularioClub extends Component {
 
+    
+    constructor(props){
+    super(props);
+        this.anadirMusica = this.anadirMusica.bind(this);
+    
+    }
 
-    añadirMusica(event) {
+    anadirMusica(musicsId) {
+       let e ={
+           target:{
+                name:'musicsUpdate',
+                value:musicsId.join(',')
+                }
 
-        console.log();
+        }
+        this.props.funcion(e);
+        console.log("DESDE añadir musica", e)
+
+        console.log(musicsId);
     }
 
     render() {
-
-        let typemusicañadir = '';
         let club = this.props.obj;
-        let musicType;
-        if (club.Musica) {
-
-            musicType = club.Musica + ", " + typemusicañadir;
-        }
         let readonly = false;
         let direccion = club.streetName + " " + club.streetNumber + " " + club.postal_code + " " + club.cityName;
         if (this.props.orden === 'D' || this.props.orden === 'V') readonly = true
@@ -163,15 +171,26 @@ export default class FormularioClub extends Component {
                         }
                         {
                             /*MOSTRAR TIPO DE MUSICA  DEL CLUB */
-                            
+
+                            /*readValue: PropTypes.func,
+    
+    
+    
+    activos:PropTypes.string* */
+                            /**
+ * Presenta una lista de checkbox del fichero indicado por 
+ * table : nombre de la tabla de donde sale la lista
+ * readValue: funcion que recibe el array con los ids activos
+ * label:legend del fieldset  
+ * name: Sin usar de momento,
+ * activos:String con todos los elementos activos separados por ','
+ */
                                 <div className='col-4'>
                                     <ListaCheckBox name="Musica"
-                                        handleChange={this.props.funcion}
-                                        name="Musica"
+                                        table='n_music'
+                                        readValue={this.anadirMusica}
                                         label="Tipos de musica"
-                                        clase='elementoFormularioClub'
-                                        readOnly={true}
-                                        value={musicType}
+                                        activos={club.Musica}
                                     />
                                 </div> 
                         }
@@ -489,6 +508,6 @@ export default class FormularioClub extends Component {
 FormularioClub.propTypes = {
     orden: PropTypes.oneOf(['D', 'V', 'E', 'I']).isRequired,
     obj: PropTypes.object,
-    funcion: PropTypes.func
+    funcion: PropTypes.func,
 }
 
