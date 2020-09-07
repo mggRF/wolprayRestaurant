@@ -8,6 +8,7 @@ module.exports = {
     CLUBS: 'clubs',
     EVENTS: 'events',
     STATES: 'states',
+    PROVINCES: 'provinces',
     MUSIC: 'musics',
     COMPANIES:'companies',
     DRESSCODE: 'dresscode',

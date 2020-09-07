@@ -40,6 +40,11 @@ const paths = {
         path: '/states',
         icon: 'fas fa-map-marker-alt'
     },
+    PROVINCE : {
+        title: 'Provincias',
+        path: '/provinces',
+        icon: 'fas fa-map-marker'
+    },
 };
 
 module.exports = paths;

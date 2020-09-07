@@ -9,13 +9,15 @@ import ControllerDresscode from '../Controladores/dresscode/ControllerDresscode'
 import ControllerRole from '../Controladores/roles/ControllerRole';
 import ControllerUsers from '../Controladores/users/ControllerUsers';
 import ControllerCCAA from '../Controladores/ccaa/ControllerCCAA';
+import ControllerProvince from '../Controladores/province/ControllerProvince';
+
 
 import paths from './Paths';
 
 export const DashboardRoutes = () => {
 
 
-    const { MUSICA, HOME, CCAA, CLUBS, COMPANIES, DRESSCODE, ROLES, USERS } = paths;
+    const { MUSICA, HOME, CCAA, CLUBS, COMPANIES, DRESSCODE, ROLES, USERS , PROVINCE} = paths;
 
     return (
         <>
@@ -28,6 +30,7 @@ export const DashboardRoutes = () => {
                 <Route exact path={ROLES.path} component={ControllerRole} />
                 <Route exact path={USERS.path} component={ControllerUsers} />
                 <Route exact path={CCAA.path} component={ControllerCCAA} />
+                <Route exact path={PROVINCE.path} component={ControllerProvince} />
 
                 <Redirect to={HOME.path} />
             </Switch>
