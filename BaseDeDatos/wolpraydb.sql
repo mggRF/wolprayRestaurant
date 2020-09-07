@@ -3,11 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 04, 2020 at 03:42 PM
+-- Generation Time: Sep 07, 2020 at 07:48 AM
 -- Server version: 8.0.21-0ubuntu0.20.04.4
 -- PHP Version: 7.4.3
 
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -27,11 +26,12 @@ USE `wolpraydb`;
 -- CREATE USER IF NOT EXISTS 'wolprayusr'@'localhost' IDENTIFIED BY  'UsrWolpray';
 -- GRANT ALL PRIVILEGES ON `wolpraydb`.* TO 'wolprayusr'@'localhost';-- --------------------------------------------------------
 
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `clubs`
 --
 
-DROP TABLE IF EXISTS `clubs`;
 CREATE TABLE `clubs` (
   `clubid` int NOT NULL,
   `clubName` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -85,7 +85,6 @@ INSERT INTO `clubs` (`clubid`, `clubName`, `streetName`, `streetNumber`, `postal
 -- Table structure for table `club_music`
 --
 
-DROP TABLE IF EXISTS `club_music`;
 CREATE TABLE `club_music` (
   `clubid` int NOT NULL,
   `musicid` int NOT NULL
@@ -156,7 +155,6 @@ INSERT INTO `club_music` (`clubid`, `musicid`) VALUES
 -- Table structure for table `companies`
 --
 
-DROP TABLE IF EXISTS `companies`;
 CREATE TABLE `companies` (
   `companyid` int NOT NULL,
   `companyName` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -182,7 +180,6 @@ INSERT INTO `companies` (`companyid`, `companyName`, `companyAddress`, `cityid`,
 -- Table structure for table `c_city`
 --
 
-DROP TABLE IF EXISTS `c_city`;
 CREATE TABLE `c_city` (
   `cityid` int NOT NULL COMMENT 'id poblacion',
   `provinceid` int NOT NULL COMMENT 'Código de provincia',
@@ -8335,7 +8332,6 @@ INSERT INTO `c_city` (`cityid`, `provinceid`, `cityName`, `latitude`, `longitude
 -- Table structure for table `c_country`
 --
 
-DROP TABLE IF EXISTS `c_country`;
 CREATE TABLE `c_country` (
   `countryId` int NOT NULL,
   `countryName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
@@ -8604,7 +8600,6 @@ INSERT INTO `c_country` (`countryId`, `countryName`) VALUES
 -- Table structure for table `c_provinces`
 --
 
-DROP TABLE IF EXISTS `c_provinces`;
 CREATE TABLE `c_provinces` (
   `provinceid` int NOT NULL COMMENT 'Identificador de la provincia.',
   `provinceName` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Nombre de la provincia.',
@@ -8676,7 +8671,6 @@ INSERT INTO `c_provinces` (`provinceid`, `provinceName`, `stateid`, `provinceCap
 -- Table structure for table `c_state`
 --
 
-DROP TABLE IF EXISTS `c_state`;
 CREATE TABLE `c_state` (
   `stateid` int NOT NULL,
   `stateName` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
@@ -8714,7 +8708,6 @@ INSERT INTO `c_state` (`stateid`, `stateName`, `countryid`) VALUES
 -- Table structure for table `events`
 --
 
-DROP TABLE IF EXISTS `events`;
 CREATE TABLE `events` (
   `eventid` int NOT NULL,
   `clubid` int DEFAULT NULL,
@@ -8746,7 +8739,6 @@ INSERT INTO `events` (`eventid`, `clubid`, `eventName`, `eventDescription`, `eve
 -- Table structure for table `n_category`
 --
 
-DROP TABLE IF EXISTS `n_category`;
 CREATE TABLE `n_category` (
   `categoryId` int NOT NULL,
   `categoryName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -8775,7 +8767,6 @@ INSERT INTO `n_category` (`categoryId`, `categoryName`, `categoryDescription`) V
 -- Table structure for table `n_dresscode`
 --
 
-DROP TABLE IF EXISTS `n_dresscode`;
 CREATE TABLE `n_dresscode` (
   `dressCodeId` int NOT NULL,
   `dressCodeName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -8797,7 +8788,6 @@ INSERT INTO `n_dresscode` (`dressCodeId`, `dressCodeName`, `dressCodeDescription
 -- Table structure for table `n_music`
 --
 
-DROP TABLE IF EXISTS `n_music`;
 CREATE TABLE `n_music` (
   `musicid` int NOT NULL,
   `musicName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -8830,7 +8820,6 @@ INSERT INTO `n_music` (`musicid`, `musicName`, `musicDescription`) VALUES
 -- Table structure for table `products`
 --
 
-DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `productid` bigint NOT NULL,
   `clubid` bigint DEFAULT NULL,
@@ -8842,13 +8831,118 @@ CREATE TABLE `products` (
   `status` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`productid`, `clubid`, `productName`, `description`, `price`, `imageUrl`, `categoryid`, `status`) VALUES
+(1, 1, 'Martini', 'Most drinkers, excluding beer and whiskey, often order martini when looking for a simple, familiar drink.', 15, NULL, 3, 1),
+(2, 1, 'Manhattan', 'It is fun and sweet, although you must take care of the alcoholic state of the girls who sit at your bar, otherwise you will end up being a caretaker.', 20, NULL, 3, 1),
+(3, 1, 'The Old Fashioned', 'This classic drink is one of the basic ones associated with movie scenes where gangsters play life in poker and prop their glass with a drink on the felt. Perhaps, this is another stigmatization. A drink of men and friends.', 20, NULL, 3, 1),
+(4, 1, 'The Sidecar', 'It is intended for a rather casual audience, seeking to test your talents as a bartender. It is a somewhat more sour drink that is produced with a base of Brandy and Cointreau.', 20, NULL, 3, 1),
+(5, 1, 'Daiquiri', 'It is ideal for drinking on the beach as it is closely associated with vacation spots. With different fruits you will make all tastes.', 25, NULL, 3, 1),
+(6, 2, 'Mojito', 'This drink is a very popular drink of Cuban origin. To prepare, gently squeeze lemon juice, sugar and mint leaves with a \"mess.\" Add white rum with a little soda water, and fill the glass with ice. There are many variations, such as apple and berry mojitos, that use flavored liqueurs.', 25, NULL, 3, 1),
+(7, 2, 'Cosmopolitan', 'The «cosmopolitan» are a vodka cocktail based on Triple Sec (an orange-flavored liqueur), cranberry juice and lemon juice. They are served in martini glasses, sometimes with a lemon wedge for garnish.', 20, NULL, 3, 1),
+(8, 2, 'Margarita', 'There are many variations, but a classic margarita has tequila, Triple Sec, and lime or lemon juice.', 25, NULL, 3, 1),
+(9, 2, 'Mai Tai', 'It is a sweet cocktail in combination of white rum, dark rum, «curaçao» orange, pineapple juice, sugar syrup and lemon juice.', 20, NULL, 3, 1),
+(10, 2, 'Caipirinha', 'The main ingredient of this famous Brazilian drink is cachaça, a spirit similar to rum that is made from fermented sugar cane. It is a simple cocktail: a lime is cut into pieces and added in a glass with the sugar. The crushed ice is added to the glass and then the cachaça is poured.', 25, NULL, 3, 1),
+(11, 2, 'Daiquiri', 'Strawberry, banana, and melon daiquiris are very popular, as are frozen daiquiris where the glass is filled with crushed ice. The original recipe is simply white rum, sugar syrup, and lemon juice combined in a cocktail shaker and poured into a chilled martini glass.', 25, NULL, 3, 1),
+(12, 2, 'Piña Colada', 'Pina colada is the national drink of Puerto Rico. Contains white rum, coconut, cream and pineapple juice. It is served in a large glass with crushed ice.', 20, NULL, 3, 1),
+(13, 4, 'Long Island Ice Tea', 'Vodka, tequila, gin, rum, triple sec, and a little coke are poured into a cocktail shaker and mixed thoroughly before pouring into a tall glass. Sometimes sugar syrup or \"sweet and sour mix\" (a mixture of lemon juice and sugar) is also added.', 25, NULL, 3, 1),
+(14, 4, 'White Russian', 'Vodka, coffee liquor such as Tia Maria, and Bailey mix together. Ice can be added. This drink is so named because its main ingredient is vodka, although it is believed to have originated in the USA.', 20, NULL, 3, 1),
+(15, 4, 'Blue Hawaii', 'Although the combination of ingredients has evolved, Blue Hawaii maintains rum as a base drink and the classic umbrella as garnish.', 25, NULL, 3, 1),
+(16, 5, 'Coco Loco', 'A refreshing summer cocktail with a lot of flavor to the fruit of the palm tree.', 30, NULL, 3, 1),
+(17, 5, 'Oceans', 'Its first steps are taken in the 1930s. The cocktail was invented by Ernest Raymond Beaumont-Gannt at Hollywood s Don Beachcomber Restaurant. The Zombie became popular soon after, in the following decade.', 25, NULL, 3, 1),
+(18, 5, 'Tom Collins', 'Tom Collins appeared in Thomas s The Bartender s Guide in 1876, and soon after was a popular cocktail in the USA.', 20, NULL, 3, 1),
+(19, 5, 'Negroni', 'When Christmas arrives, the smallest of the house think of the gifts and the oldest of the food they should prepare for their guests. An original and simple way to start those evenings is with an aperitif cocktail. Like the Negroni.', 20, NULL, 3, 1),
+(21, 3, 'Gin&Tonic', 'This classic cocktail was created by British soldiers, during their occupation of India, who combined with a little breast milk (colloquially called London Dry Gin) their daily ration of quinine (to fight malaria) and lime ( to prevent scurvy).', 20, NULL, 3, 1),
+(22, 3, 'Sea Breeze', 'The Sea Breeze was born at the time of the American prohibition, back in the 20s and 30s, with a totally different recipe from the one it currently has, since it was made from gin and grenadine.', 20, NULL, 3, 1),
+(23, 3, 'Farnell', 'Phrases that start with \"there is nothing better\" are usually topical and repetitive, but not false. And, friends, there is nothing better than having a fresh cocktail on a terrace next to the beach. Or in the pool', 20, NULL, 3, 1),
+(24, 3, 'Godfather', 'Although for them you must have a solid palate, because the combination of flavors is packaging.', 20, NULL, 3, 1),
+(35, 1, 'Red Bull', 'Energy drink', 5, NULL, 4, 1),
+(36, 2, 'Red Bull', 'Energy drink', 5, NULL, 4, 1),
+(37, 3, 'Red Bull', 'Energy drink', 5, NULL, 4, 1),
+(38, 4, 'Red Bull', 'Energy drink', 5, NULL, 4, 1),
+(39, 5, 'Red Bull', 'Energy drink', 5, NULL, 4, 1),
+(40, 1, 'Coca Cola', 'Soda and refreshing drink', 5, NULL, 4, 1),
+(41, 2, 'Coca Cola', 'Soda and refreshing drink', 5, NULL, 4, 1),
+(42, 3, 'Coca Cola', 'Soda and refreshing drink', 5, NULL, 4, 1),
+(43, 4, 'Coca Cola', 'Soda and refreshing drink', 5, NULL, 4, 1),
+(44, 5, 'Coca Cola', 'Soda and refreshing drink', 5, NULL, 4, 1),
+(45, 1, 'Water', 'Water', 3, NULL, 4, 1),
+(46, 2, 'Water', 'Water', 3, NULL, 4, 1),
+(47, 3, 'Water', 'Water', 3, NULL, 4, 1),
+(48, 4, 'Water', 'Water', 3, NULL, 4, 1),
+(49, 5, 'Water', 'Water', 3, NULL, 4, 1),
+(50, 1, 'JOHNNIE WALKER RED LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 50, NULL, 9, 1),
+(51, 1, 'JOHNNIE WALKER BLUE LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 80, NULL, 9, 1),
+(52, 1, 'JOHNNIE WALKER BLACK LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 70, NULL, 9, 1),
+(53, 1, 'JOHNNIE WALKER GREEN LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 90, NULL, 9, 1),
+(54, 1, 'JOHNNIE WALKER GOLD LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 120, NULL, 9, 1),
+(55, 1, 'JOHNNIE WALKER SILVER LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 100, NULL, 9, 1),
+(56, 2, 'JOHNNIE WALKER RED LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 50, NULL, 9, 1),
+(57, 2, 'JOHNNIE WALKER BLUE LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 80, NULL, 9, 1),
+(58, 2, 'JOHNNIE WALKER BLACK LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 70, NULL, 9, 1),
+(59, 2, 'JOHNNIE WALKER GREEN LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 90, NULL, 9, 1),
+(60, 2, 'JOHNNIE WALKER GOLD LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 120, NULL, 9, 1),
+(61, 2, 'JOHNNIE WALKER SILVER LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 100, NULL, 9, 1),
+(62, 3, 'JOHNNIE WALKER RED LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 50, NULL, 9, 1),
+(63, 3, 'JOHNNIE WALKER BLUE LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 80, NULL, 9, 1),
+(64, 3, 'JOHNNIE WALKER BLACK LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 70, NULL, 9, 1),
+(65, 3, 'JOHNNIE WALKER GREEN LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 90, NULL, 9, 1),
+(66, 3, 'JOHNNIE WALKER GOLD LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 120, NULL, 9, 1),
+(67, 3, 'JOHNNIE WALKER SILVER LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 100, NULL, 9, 1),
+(68, 4, 'JOHNNIE WALKER RED LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 50, NULL, 9, 1),
+(69, 4, 'JOHNNIE WALKER BLUE LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 80, NULL, 9, 1),
+(70, 4, 'JOHNNIE WALKER BLACK LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 70, NULL, 9, 1),
+(71, 4, 'JOHNNIE WALKER GREEN LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 90, NULL, 9, 1),
+(72, 4, 'JOHNNIE WALKER GOLD LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 120, NULL, 9, 1),
+(73, 4, 'JOHNNIE WALKER SILVER LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 100, NULL, 9, 1),
+(74, 5, 'JOHNNIE WALKER RED LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 50, NULL, 9, 1),
+(75, 5, 'JOHNNIE WALKER BLUE LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 80, NULL, 9, 1),
+(76, 5, 'JOHNNIE WALKER BLACK LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 70, NULL, 9, 1),
+(77, 5, 'JOHNNIE WALKER GREEN LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 90, NULL, 9, 1),
+(78, 5, 'JOHNNIE WALKER GOLD LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 120, NULL, 9, 1),
+(79, 5, 'JOHNNIE WALKER SILVER LABEL', 'Johnnie Walker is a brand of Scotch whiskey', 100, NULL, 9, 1),
+(80, 1, 'Red Label Service', 'Johnnie Walker with refreshing drink to choose', 100, NULL, 8, 1),
+(81, 1, 'Blue Label Service', 'Johnnie Walker with refreshing drink to choose', 130, NULL, 8, 1),
+(82, 1, 'Black Label Service', 'Johnnie Walker with refreshing drink to choose', 120, NULL, 8, 1),
+(83, 1, 'Green Label Service', 'Johnnie Walker with refreshing drink to choose', 140, NULL, 8, 1),
+(84, 1, 'Gold Label Service', 'Johnnie Walker with refreshing drink to choose', 220, NULL, 8, 1),
+(85, 1, 'Silver Label Service', 'Johnnie Walker with refreshing drink to choose', 200, NULL, 8, 1),
+(86, 2, 'Red Label Service', 'Johnnie Walker with refreshing drink to choose', 100, NULL, 8, 1),
+(87, 2, 'Blue Label Service', 'Johnnie Walker with refreshing drink to choose', 130, NULL, 8, 1),
+(88, 2, 'Black Label Service', 'Johnnie Walker with refreshing drink to choose', 120, NULL, 8, 1),
+(89, 2, 'Green Label Service', 'Johnnie Walker with refreshing drink to choose', 140, NULL, 8, 1),
+(90, 2, 'Gold Label Service', 'Johnnie Walker with refreshing drink to choose', 220, NULL, 8, 1),
+(91, 2, 'Silver Label Service', 'Johnnie Walker with refreshing drink to choose', 200, NULL, 8, 1),
+(92, 3, 'Red Label Service', 'Johnnie Walker with refreshing drink to choose', 100, NULL, 8, 1),
+(93, 3, 'Blue Label Service', 'Johnnie Walker with refreshing drink to choose', 130, NULL, 8, 1),
+(94, 3, 'Black Label Service', 'Johnnie Walker with refreshing drink to choose', 120, NULL, 8, 1),
+(95, 3, 'Green Label Service', 'Johnnie Walker with refreshing drink to choose', 140, NULL, 8, 1),
+(96, 3, 'Gold Label Service', 'Johnnie Walker with refreshing drink to choose', 220, NULL, 8, 1),
+(97, 3, 'Silver Label Service', 'Johnnie Walker with refreshing drink to choose', 200, NULL, 8, 1),
+(98, 4, 'Red Label Service', 'Johnnie Walker with refreshing drink to choose', 100, NULL, 8, 1),
+(99, 4, 'Blue Label Service', 'Johnnie Walker with refreshing drink to choose', 130, NULL, 8, 1),
+(100, 4, 'Black Label Service', 'Johnnie Walker with refreshing drink to choose', 120, NULL, 8, 1),
+(101, 4, 'Green Label Service', 'Johnnie Walker with refreshing drink to choose', 140, NULL, 8, 1),
+(102, 4, 'Gold Label Service', 'Johnnie Walker with refreshing drink to choose', 220, NULL, 8, 1),
+(103, 4, 'Silver Label Service', 'Johnnie Walker with refreshing drink to choose', 200, NULL, 8, 1),
+(104, 5, 'Red Label Service', 'Johnnie Walker with refreshing drink to choose', 100, NULL, 8, 1),
+(105, 5, 'Blue Label Service', 'Johnnie Walker with refreshing drink to choose', 130, NULL, 8, 1),
+(106, 5, 'Black Label Service', 'Johnnie Walker with refreshing drink to choose', 120, NULL, 8, 1),
+(107, 5, 'Green Label Service', 'Johnnie Walker with refreshing drink to choose', 140, NULL, 8, 1),
+(108, 5, 'Gold Label Service', 'Johnnie Walker with refreshing drink to choose', 220, NULL, 8, 1),
+(109, 5, 'Silver Label Service', 'Johnnie Walker with refreshing drink to choose', 200, NULL, 8, 1),
+(110, 6, 'Heineken', 'Es una cerveza única, y desde 1873 hasta la fecha conserva la misma calidad, principios e ingredientes. ... La familia Heineken entró al negocio de la cerveza y comenzaron a fermentarla en tanques horizontales, lo cual ayudaba a que ésta fuera más clara y pura.', 5, NULL, 2, 1),
+(111, 1, 'Estrella Damm', 'Es una cerveza tipo lager elaborada con malta de cebada, arroz y lúpulo, siguiendo la receta original desde su fundación, en 1876. Cuenta con un grado de alcohol de 5,4% y se recomienda consumirla entre 5º y 7 °C.', 5, NULL, 2, 1);
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `promotes`
 --
 
-DROP TABLE IF EXISTS `promotes`;
 CREATE TABLE `promotes` (
   `productid` bigint NOT NULL,
   `promotionid` bigint NOT NULL,
@@ -8863,7 +8957,6 @@ CREATE TABLE `promotes` (
 -- Table structure for table `promotions`
 --
 
-DROP TABLE IF EXISTS `promotions`;
 CREATE TABLE `promotions` (
   `promotionid` bigint NOT NULL,
   `clubid` int NOT NULL,
@@ -8878,7 +8971,6 @@ CREATE TABLE `promotions` (
 -- Table structure for table `reservations`
 --
 
-DROP TABLE IF EXISTS `reservations`;
 CREATE TABLE `reservations` (
   `reservid` int NOT NULL,
   `clubid` int NOT NULL,
@@ -8895,7 +8987,6 @@ CREATE TABLE `reservations` (
 -- Table structure for table `roles`
 --
 
-DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
   `roleid` int NOT NULL,
   `roleName` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -8919,7 +9010,6 @@ INSERT INTO `roles` (`roleid`, `roleName`, `roleDescription`) VALUES
 -- Table structure for table `slots`
 --
 
-DROP TABLE IF EXISTS `slots`;
 CREATE TABLE `slots` (
   `slotid` int NOT NULL,
   `clubid` int NOT NULL,
@@ -11663,6 +11753,47 @@ INSERT INTO `slots` (`slotid`, `clubid`, `opening_time`, `closing_time`, `day`, 
 (2724, 13, '23:00:00', '06:00:00', '2020-12-04', 500, 1),
 (2725, 13, '23:00:00', '06:00:00', '2020-12-05', 500, 1);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `userid` int NOT NULL,
+  `userName` varchar(250) NOT NULL,
+  `mail` varchar(250) NOT NULL,
+  `password` varchar(250) NOT NULL,
+  `userPhone` varchar(250) NOT NULL,
+  `birthdate` date NOT NULL,
+  `roleid` int NOT NULL,
+  `companyid` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`userid`, `userName`, `mail`, `password`, `userPhone`, `birthdate`, `roleid`, `companyid`) VALUES
+(1, 'Leynor Méndez', 'leinormendez@wolpray.com', '1111', '666887755', '1990-08-19', 9, NULL),
+(2, 'Lewis Méndez', 'lewismendez@wolpray.com', '2222', '658855555', '1990-08-19', 9, NULL),
+(3, 'Miguel Profe', 'miguel@wolpray.com', '1111', '632444444', '1980-08-19', 9, NULL),
+(4, 'Jaume Quintana Méndez', 'jaumequintana@wolpray.com', '1111', '633224477', '1997-08-19', 9, NULL),
+(5, 'Juan Mendoza', 'Juan@gmail.com', '1111', '663187755', '1990-08-19', 5, NULL),
+(6, 'Alex Reynoso', 'Alex@gmail.com', '1111', '6668879755', '1990-08-19', 5, NULL),
+(7, 'Ramon Craig', 'Ramon@gmail.com', '1111', '666797755', '1990-08-19', 5, NULL),
+(8, 'John Lenon', 'John@gmail.com', '1111', '666886455', '1990-08-19', 5, NULL),
+(9, 'Pedro Sánchez', 'Pedro@gmail.com', '1111', '668287755', '1990-08-19', 5, NULL),
+(10, 'Juan Carlos Borbón', 'JuanCarlos@gmail.com', '1111', '666831755', '1990-08-19', 5, NULL),
+(11, 'Jota Benitez', 'Jota@gmail.com', '1111', '666898755', '1990-08-19', 5, NULL),
+(12, 'Mariano Rajoy', 'Mariano@gmail.com', '1111', '666815955', '1990-08-19', 5, NULL),
+(13, 'Felipe González', 'Felipe@gmail.com', '1111', '666835755', '1990-08-19', 3, NULL),
+(14, 'Daddy Yankee', 'Daddy@gmail.com', '1111', '666894355', '1990-08-19', 5, NULL),
+(15, 'Bad Bunny', 'Bad@gmail.com', '1111', '666369855', '1990-08-19', 5, NULL),
+(16, 'Ozuna Reynoso', 'Ozuna@gmail.com', '1111', '666163755', '1990-08-19', 5, NULL),
+(17, 'Julio Cesar', 'Julio@gmail.com', '1111', '666874155', '1990-08-19', 5, NULL),
+(18, 'Francisca Sena', 'Francisca@gmail.com', '1111', '661727755', '1990-08-19', 5, NULL);
+
 --
 -- Indexes for dumped tables
 --
@@ -11738,7 +11869,10 @@ ALTER TABLE `n_music`
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`productid`);
+  ADD PRIMARY KEY (`productid`),
+  ADD KEY `clubid` (`clubid`),
+  ADD KEY `clubid_2` (`clubid`),
+  ADD KEY `prod_categoy_fk` (`categoryid`);
 
 --
 -- Indexes for table `promotes`
@@ -11770,7 +11904,47 @@ ALTER TABLE `roles`
 ALTER TABLE `slots`
   ADD PRIMARY KEY (`slotid`,`clubid`),
   ADD KEY `clubid` (`clubid`);
-SET FOREIGN_KEY_CHECKS=1;
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`userid`),
+  ADD UNIQUE KEY `username` (`userName`),
+  ADD UNIQUE KEY `mail` (`mail`),
+  ADD KEY `user_role_fk` (`roleid`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `productid` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `userid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `prod_categoy_fk` FOREIGN KEY (`categoryid`) REFERENCES `n_category` (`categoryId`);
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `user_role_fk` FOREIGN KEY (`roleid`) REFERENCES `roles` (`roleid`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
