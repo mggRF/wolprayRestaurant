@@ -1,0 +1,36 @@
+{
+    "apps": [{
+        "name": "API",
+        "script": "index.js",
+        "version": "0.0.1",
+        "watch": true,
+        "env": {
+            "NODE_ENV": "development"
+        },
+        "env_production": {
+            "NODE_ENV": "production",
+            "PORT": 3800,
+        },
+        "env_stage": {
+            "NODE_ENV": "stage",
+            "PORT": 3900,
+        }
+    }],
+    "deploy": {
+        "production": {
+            "user": "wolpray",
+            "host": "51.210.241.194",
+            "ref": "origin/master",
+            "repo": "https://github.com/mggRF/servidor.git",
+            "path": "/home/wolpraynode/servidor",
+            "ssh_options": "StrictHostKeyChecking=no",
+            "post-deploy": ". ~/.bash_profile && npm install && pm2 startOrRestart ecosystem.config.json --env production",
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "env_production": {
+                "NODE_ENV": "production"
+            }
+        }
+    }
+}
