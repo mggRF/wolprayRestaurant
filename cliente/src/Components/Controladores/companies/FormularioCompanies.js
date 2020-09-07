@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DesplegableDireccion } from '../../Fragmentos/DesplegableDireccion';
-import { InputComponent } from './InputComponent';
+import { InputComponent } from '../../Fragmentos/InputComponent';
 
 
 
