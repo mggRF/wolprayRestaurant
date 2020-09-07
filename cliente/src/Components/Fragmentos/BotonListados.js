@@ -8,7 +8,7 @@ export default class BotonListado extends Component {
         const clase = "btn " + this.props.clase;
         return (
             <button type="button"
-                className={clase}
+                className={clase + ' animate__animated animate__zoomIn'}
                 onClick={() => this.props.funcion(this.props.tipo, this.props.id)}
             >
                 {this.props.children}

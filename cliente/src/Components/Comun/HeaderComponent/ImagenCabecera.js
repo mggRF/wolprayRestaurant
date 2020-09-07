@@ -14,7 +14,7 @@ export const ImagenCabecera = () => {
                     padding: 20,
                 }}
                 alt = 'Imagen cabecera'
-                className="mx-auto py-3 animate__animated animate__fadeInLeft"
+                className="mx-auto py-3 animate__animated animate__jackInTheBox"
                 src={Logo}
             />
         </Link>

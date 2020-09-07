@@ -13,7 +13,7 @@ export const NavbarNav = ({ title = '', icon = 'fa-home', path}) => {
 
         <li className="nav-item" >
             <NavLink to={path} style = {{cursor: 'pointer'}} activeClassName="active" className="nav-link text-white p-3 mb-2 sidebar-link animate__animated animate__fadeInLeft">
-                <i className={className}></i>
+                <i className={className} ></i>
                 {title}
             </NavLink>
         </li>

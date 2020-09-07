@@ -91,7 +91,7 @@ export default class Paginacion extends Component {
     renderPageNumbers = (pageNumbers, totalPaginas) => {
         let { active } = this.state;
         return (
-            <nav>
+            <nav className = "animate__animated animate__flipInX">
                 <ul className="pagination justify-content-center">
                     <li className="page-item">
                         <button style = {{cursor: 'pointer'}} className="page-link pu-2 px-3" onClick={this.backHandler}> Anterior </button>
