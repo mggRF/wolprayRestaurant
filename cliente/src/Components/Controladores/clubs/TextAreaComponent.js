@@ -20,7 +20,7 @@ export const TextAreaComponent = ({clase='', value = '', name = '', label = '', 
                         {
                             (name.length > 0) ?
                                 <textarea 
-                                    className="form-control"
+                                    
                                     rows="5"
                                     name={name}
                                     value={value}

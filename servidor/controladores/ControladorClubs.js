@@ -8,7 +8,7 @@ const MODELO = require("../modelos/Club");
 const TABLA = 'clubs';
 const CARPETA = 'clubs';
 const CAMPO = 'coverUrl';
-const selectUno  = `select  
+const selectUno = `select  
                         ${TABLA}.*, 
                         n_dresscode.dressCodeId,
                         n_dresscode.dressCodeDescription,
@@ -48,12 +48,12 @@ const QUERIES = {
 
 
 class ControladorClubs extends ControladorBase {
-   
-    constructor(){
+
+    constructor() {
         let config = {
             CARPETA: {
-                CARPETA:CARPETA,
-                CAMPO:CAMPO,
+                CARPETA: CARPETA,
+                CAMPO: CAMPO,
                 nombreFoto: 'principal.jpg'
             },
             TABLA: TABLA,
@@ -64,7 +64,31 @@ class ControladorClubs extends ControladorBase {
         super(config);
     }
 
-    
+    updateTable(req, res) {
+        const {
+            method
+        } = req.route.stack[0];
+        if (method.toLowerCase() === "put") {
+            let id = req.params.id;
+            let sql = 'DELETE  FROM club_music WHERE clubid = ?';
+            let sqlInsert = 'INSERT INTO club_music SET ? '
+            let musicsUpdates = req.body.musicsUpdate.split(',');
+            for(let ids in musicsUpdates){
+                let clubmusicjsn = {
+                    clubid:id,
+                    musicid: ids
+                }
+                super.sendDataToTable(res,[id],sql)
+                super.sendDataToTable(res,[clubmusicjsn,id],sqlInsert)
+            }
+            
+            //super.updateTable(req, res);
+        }
+
+        /**GUARDAR musicsUpdate EN OTRO CAMPO Y QUITARLO DEL REQUEST QUE HA LLEGADO*/
+    }
+
+
 
 }
 

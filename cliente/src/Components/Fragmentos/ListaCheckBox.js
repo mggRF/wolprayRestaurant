@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from "prop-types";
-import AccesoAPI from '../Servicios/AccesoAPI';
-import Checkbox from '../Components/Fragmentos/Checkbox';
+import AccesoAPI from '../../Servicios/AccesoAPI';
+import Checkbox from './Checkbox';
 
 /**
  * Presenta una lista de checkbox del fichero indicado por 
@@ -51,7 +51,7 @@ export default class ListaCheckBox extends Component {
         let salida=[];
         AccesoAPI.leerDesplegables(this.props.table, 0)
             .then(response => {
-                if (response.Respuesta === "ok") {
+                if (response.Ok) {
                     const activosAjustados = this.props.activos.trim()
                     response.Datos.forEach(obj => {
                         let isChecked = (activosAjustados + ",").indexOf(obj.opcion.trim() + ",") >= 0;
@@ -75,7 +75,7 @@ export default class ListaCheckBox extends Component {
     }
 
     montaCheckBox = (lista) => {
-        console.log("montaCheckBox", lista)
+        console.log("montaCheckBox desde ches", lista)
 
         return (
             <>
@@ -119,7 +119,7 @@ ListaCheckBox.defaultProps = {
     table: 'n_music',
     name: 'pruebas',
     label: 'Tipos de musica',
-    activos: 'Salsa,Variada'
+    activos: ''
 };
 
 ListaCheckBox.propTypes = {

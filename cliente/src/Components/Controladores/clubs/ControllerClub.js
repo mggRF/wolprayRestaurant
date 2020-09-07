@@ -15,6 +15,7 @@ export default class  ControllerClub extends ControllerBase {
         this.LISTADO = ListadoClubs
         this.FORMULARIO = FormularioClub
         this.MODELO ={
+         musicsUpdate:"",
          clubid : "",
          clubName : "",
          streetName : "",
