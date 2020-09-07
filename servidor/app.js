@@ -13,17 +13,10 @@ const compression = require('compression');
 const helmet = require('helmet');
 const fileUpload = require('express-fileupload');
 const path = require('path');
-const formData = require("express-form-data");
-const os = require('os');
+
 
 const { COMUNIDADES, PAISES, POBLACIONES, PROVINCIAS, MUSICA, CLUBS, DRESSCODE, EVENTS, USERS, SLOTS, ROLES, COMPANIES, PRODUCTS } = require('./Constantes/ConstantesRutas');
 
-
-
-const options = {
-    uploadDir: os.tmpdir(),
-    autoClean: true
-  };
 
 const app = express();
 app.use(helmet());
