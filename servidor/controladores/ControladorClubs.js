@@ -64,26 +64,27 @@ class ControladorClubs extends ControladorBase {
         super(config);
     }
 
-     updateTable(req, res) {
+    updateTable(req, res) {
         const {
             method
         } = req.route.stack[0];
-        if (method.toLowerCase() === "put") {
+        if (method.toLowerCase() === "put") { //<- luego, repetimos para insert y delete....
             let id = req.params.id;
             let sqlDelete = 'DELETE  FROM club_music WHERE clubid = ?';
             let sqlInsert = 'INSERT INTO club_music (clubid, musicid) VALUES (?,?) '
             let musicsUpdates = req.body.musicsUpdate.split(',');
-            const redult1=   super.sendDataToTable([id],sqlDelete);
-            
-            musicsUpdates.map(value => {
-                let clubmusicjsn = [id, value];
+            super.sendDataToTable([id], sqlDelete)
+                .then(result1 => {
 
-                console.log('Los datos para sql: ', clubmusicjsn);
-                const redult2=  super.sendDataToTable(clubmusicjsn,sqlInsert)
-                console.log("ESTE ES EL INSERT", redult2)
-            });
-            
-            
+                    musicsUpdates.map(value => {
+                        let clubmusicjsn = [id, value];
+
+                        console.log('Los datos para sql: ', clubmusicjsn);
+                        super.sendDataToTable(clubmusicjsn, sqlInsert) //es promesa
+                        .this(result2 => {console.log("ESTE ES EL INSERT", redult2)})
+                    });
+                })
+
             delete req.body['musicsUpdate'];
             super.updateTable(req, res);
         }
