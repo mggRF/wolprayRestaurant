@@ -22,6 +22,7 @@ module.exports = {
     DRESSCODE: 'dresscode',
     ROLE: 'roles',
     USERS: 'users',
+    CITYS: 'citys',
     STATES_SELECT: 'states/select/',
 
     LPPAGINA: "5",                             //lineas por pagina

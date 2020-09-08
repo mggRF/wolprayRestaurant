@@ -30,7 +30,7 @@ class FileSystem {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve();
+                    resolve('Se ha añadido correctamente la imagen');
                 }
             });
 
