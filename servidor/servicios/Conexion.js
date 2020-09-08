@@ -75,7 +75,7 @@ class Conexion {
                     if (ex) {
                         reject(ex);
                     } else {
-                        Presenta.log("resolve",rows);
+                        //Presenta.log("resolve",rows);
                         resolve(rows);
                     }
                 });
