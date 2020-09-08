@@ -64,25 +64,31 @@ class ControladorClubs extends ControladorBase {
         super(config);
     }
 
-    async updateTable(req, res) {
+     updateTable(req, res) {
         const {
             method
         } = req.route.stack[0];
         if (method.toLowerCase() === "put") {
             let id = req.params.id;
             let sqlDelete = 'DELETE  FROM club_music WHERE clubid = ?';
-            let sqlInsert = 'INSERT INTO club_music (clubid, musicid) VALUES (?) '
+            let sqlInsert = 'INSERT INTO club_music (clubid, musicid) VALUES (?,?) '
             let musicsUpdates = req.body.musicsUpdate.split(',');
-            const redult1= await  super.sendDataToTable([id],sqlDelete)
-            console.log("ESTE ES EL DELETE", redult1)
-            let clubmusicjsn=[];
-            for(let ids in musicsUpdates){
-                clubmusicjsn.push(id)
-                clubmusicjsn.push(ids)
-                
-            }
-            const redult2= await  super.sendDataToTable(clubmusicjsn,sqlInsert)
-            console.log("ESTE ES EL INSERT", redult2)
+            const redult1=   super.sendDataToTable([id],sqlDelete);
+            
+            musicsUpdates.map(value => {
+                let clubmusicjsn = [id, value];
+
+                console.log('Los datos para sql: ', clubmusicjsn);
+                const redult2=  super.sendDataToTable(clubmusicjsn,sqlInsert)
+                console.log("ESTE ES EL INSERT", redult2)
+            });
+            // for(let ids in musicsUpdates){
+            //     console.log('El ids es: ', ids)
+            //     clubmusicjsn.push(id)
+            //     clubmusicjsn.push(ids)
+            //     const redult2=  super.sendDataToTable(clubmusicjsn,sqlInsert)
+            //     console.log("ESTE ES EL INSERT", redult2)
+            // }
             
             
             //super.updateTable(req, res);

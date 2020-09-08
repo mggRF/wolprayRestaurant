@@ -367,16 +367,20 @@ class ControladorBase {
      */
     sendDataToTable(data, sql, file = null) {
 
+        console.log('Data => ', data)
         this.connect.modifyTable(sql, data)
             .then(value => {
+                
                 if (value.insertId && file !== null) {
                     this.guardarImagen(file, value.insertId)
                         .then(response => {
+                            console.log('OK => ',response)
                             return {
                                 Ok: true,
                                 Data: 'Se ha modificado correctamente la tabla en la base de datos. ' + response
                             }
                         }).catch(err => {
+                            console.log('Error=> ',err)
                             return {
                                 Ok: false,
                                 Data: err,
@@ -384,12 +388,14 @@ class ControladorBase {
                             }
                         });
                 } else {
+                    console.log('OK => ',value);
                     return {
                         Ok: true,
                         Data: 'Se ha modificado correctamente la tabla en la base de datos'
                     }
                 }
             }).catch(err => {
+                console.log('ERROR => ',err);
                 return {
                     OK: false,
                     Data: err,
