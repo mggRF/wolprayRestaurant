@@ -1,5 +1,7 @@
 const Conexion = require("../servicios/Conexion");
-const { LPPAGINA } = require("../Constantes/ConstantesDataBase/ConstantesPaginacion");
+const {
+    LPPAGINA
+} = require("../Constantes/ConstantesDataBase/ConstantesPaginacion");
 const Presenta = require("../servicios/Presenta");
 const FyleSystem = require('../modelos/FileSystem');
 class ControladorBase {
@@ -36,10 +38,12 @@ class ControladorBase {
             res.setHeader('Access-Control-Allow-Methods', 'HEAD,GET,POST,PUT,DELETE,OPTIONS');
             res.setHeader('Allow', 'HEAD,GET,POST,PUT,DELETE,OPTIONS');
             res.json(respuesta);
-        }
-        else {
+        } else {
             res.status(status)
-                .send({ Ok: false, Message: objeto });
+                .send({
+                    Ok: false,
+                    Message: objeto
+                });
         }
     }
 
@@ -111,7 +115,7 @@ class ControladorBase {
         }
 
         if (size !== undefined) {
-            let valores = size.split(',')   // SI 2 offset y limit; si 1, limit
+            let valores = size.split(',') // SI 2 offset y limit; si 1, limit
             salida += " LIMIT ";
             salida += valores[0]
             if (valores.length > 1) {
@@ -208,7 +212,9 @@ class ControladorBase {
      * @param {} res : objeto response.
      */
     updateTable(req, res) {
-        const { method } = req.route.stack[0];
+        const {
+            method
+        } = req.route.stack[0];
         const id = req.params.id;
         const body = req.body;
 
@@ -217,7 +223,9 @@ class ControladorBase {
         //Datos de la sesión
         const ids = req.session.userid;
         const role = req.session.role;
-        const { QUERIES } = this.config;
+        const {
+            QUERIES
+        } = this.config;
 
         switch (method.toLowerCase()) {
             case 'post':
@@ -283,7 +291,9 @@ class ControladorBase {
             return -2;
         }
 
-        const { CAMPO } = this.config.CARPETA;
+        const {
+            CAMPO
+        } = this.config.CARPETA;
 
         const file = req.files[CAMPO];
 
@@ -309,7 +319,9 @@ class ControladorBase {
      * 
      */
     hacerPost(body, file, res) {
-        const { QUERIES } = this.config;
+        const {
+            QUERIES
+        } = this.config;
 
         switch (file) {
             case 0:
@@ -344,15 +356,33 @@ class ControladorBase {
      */
     async hacerPut(id, body, file, res) {
 
-        const { QUERIES } = this.config;
+        const {
+            QUERIES
+        } = this.config;
 
 
         if (isNaN(file) && file !== null) {
             this.fileSystem.guardarImagenTemporal(file, req.params.id);
         }
 
+
         //res,data, sql, metodo, file = null
-        this.sendDataToTable(res, [body, id], QUERIES.UPDATE);
+        this.sendDataToTable([body, id], QUERIES.UPDATE)
+        .then(result =>{
+            console.log(result)
+                this.enviaDatos(res, result.Data);
+        }).catch(err=>{
+            console.log(err)
+            this.enviaDatos(res, err.Data, err.Status);
+        })
+        
+        /*if (result.Ok) {
+            console.log(result);
+            this.enviaDatos(res, result.Data);
+        } else {
+            console.log(result);
+            this.enviaDatos(res, result.Data, result.Status);
+        }*/
     }
 
 
@@ -365,10 +395,52 @@ class ControladorBase {
      * @param {} file : Archivo para crear o modificar si lo hay.
      * 
      */
-    sendDataToTable(data, sql, file = null) {
+    async sendDataToTable(data, sql, file = null) {
+        const result = await new Promise((resolve, reject) => {
+            this.connect.modifyTable(sql, data)
+                .then(value => {
 
-        console.log('Data => ', data)
-        this.connect.modifyTable(sql, data)
+                    if (value.insertId && file !== null) {
+                        this.guardarImagen(file, value.insertId)
+                            .then(response => {
+                                console.log('OK => ', response)
+                                resolve ({
+                                    Ok: true,
+                                    Data: 'Se ha modificado correctamente la tabla en la base de datos. ' + response
+                                })
+                            }).catch(err => {
+                                console.log('Error=> ', err)
+                                reject( {
+                                    Ok: false,
+                                    Data: err,
+                                    Status: 500
+                                })
+                            });
+                    } else {
+                        console.log('OK => ', value);
+                        resolve( {
+                            Ok: true,
+                            Data: 'Se ha modificado correctamente la tabla en la base de datos'
+                        })
+                    }
+                }).catch(err => {
+                    console.log('ERROR => ', err);
+                    reject( {
+                        OK: false,
+                        Data: err,
+                        Status: 500
+                    })
+                });
+        });
+
+        return result;
+    }
+}
+
+
+module.exports = ControladorBase
+/**
+ * this.connect.modifyTable(sql, data)
             .then(value => {
                 
                 if (value.insertId && file !== null) {
@@ -402,8 +474,7 @@ class ControladorBase {
                     Status: 500
                 }
             });
-    }
-}
-
-
-module.exports = ControladorBase
+ * 
+ * 
+ * 
+ */

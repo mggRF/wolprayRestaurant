@@ -170,27 +170,22 @@ export default class FormularioClub extends Component {
                                 </div> : null
                         }
                         {
-                            /*MOSTRAR TIPO DE MUSICA  DEL CLUB */
-
-                            /*readValue: PropTypes.func,
-    
-    
-    
-    activos:PropTypes.string* */
-                            /**
- * Presenta una lista de checkbox del fichero indicado por 
- * table : nombre de la tabla de donde sale la lista
- * readValue: funcion que recibe el array con los ids activos
- * label:legend del fieldset  
- * name: Sin usar de momento,
- * activos:String con todos los elementos activos separados por ','
- */
-                                <div className='col-4'>
+                            (club.Musica)?
+                            <div className='col-4'>
                                     <ListaCheckBox name="Musica"
                                         table='n_music'
                                         readValue={this.anadirMusica}
                                         label="Tipos de musica"
                                         activos={club.Musica}
+                                    />
+                                </div>
+                                :
+                                <div className='col-4'>
+                                    <ListaCheckBox name="Musica"
+                                        table='n_music'
+                                        readValue={this.anadirMusica}
+                                        label="Tipos de musica"
+                                        activos=""
                                     />
                                 </div> 
                         }

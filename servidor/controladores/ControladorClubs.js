@@ -82,16 +82,10 @@ class ControladorClubs extends ControladorBase {
                 const redult2=  super.sendDataToTable(clubmusicjsn,sqlInsert)
                 console.log("ESTE ES EL INSERT", redult2)
             });
-            // for(let ids in musicsUpdates){
-            //     console.log('El ids es: ', ids)
-            //     clubmusicjsn.push(id)
-            //     clubmusicjsn.push(ids)
-            //     const redult2=  super.sendDataToTable(clubmusicjsn,sqlInsert)
-            //     console.log("ESTE ES EL INSERT", redult2)
-            // }
             
             
-            //super.updateTable(req, res);
+            delete req.body['musicsUpdate'];
+            super.updateTable(req, res);
         }
 
         /**GUARDAR musicsUpdate EN OTRO CAMPO Y QUITARLO DEL REQUEST QUE HA LLEGADO*/
