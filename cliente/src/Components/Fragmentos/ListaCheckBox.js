@@ -18,11 +18,9 @@ export default class ListaCheckBox extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             datos: []
         }
-
         this.handleChange = this.handleChange.bind(this);
         
     }
@@ -52,7 +50,7 @@ export default class ListaCheckBox extends Component {
         AccesoAPI.leerDesplegables(this.props.table, 0)
             .then(response => {
                 if (response.Ok) {
-                    const activosAjustados = this.props.activos.trim()
+                    const activosAjustados = (this.props.activos.split(",").map(x=>x.trim()).join(','));
                     response.Datos.forEach(obj => {
                         let isChecked = (activosAjustados + ",").indexOf(obj.opcion.trim() + ",") >= 0;
                         resp.push({
@@ -75,8 +73,6 @@ export default class ListaCheckBox extends Component {
     }
 
     montaCheckBox = (lista) => {
-        console.log("montaCheckBox desde ches", lista)
-
         return (
             <>
                 {lista.map(ele => {
@@ -101,11 +97,9 @@ export default class ListaCheckBox extends Component {
 
        // let nombreCampo = this.props.name;
         let contenido = this.state.datos;
-        console.log("render", contenido)
         return (
             <fieldset className="fieldSetCheckBox">
                 <legend>{this.props.label}</legend>
-
                 {(contenido && contenido.length > 0) ?
                     this.montaCheckBox(contenido)
                     : ""
