@@ -99,7 +99,7 @@ export default class ListaCheckBox extends Component {
     }
     render() {
 
-        let nombreCampo = this.props.name;
+       // let nombreCampo = this.props.name;
         let contenido = this.state.datos;
         console.log("render", contenido)
         return (

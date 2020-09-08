@@ -43,6 +43,7 @@ export default class ListadoClubs extends Component {
         console.log("RENDER=>", this.state.datos)
 
         let item = [];
+        
         {
             this.state.datos.forEach((valor, index) => item.push(
                 <tr key={index}>

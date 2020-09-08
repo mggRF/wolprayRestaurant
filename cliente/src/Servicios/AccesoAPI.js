@@ -33,6 +33,8 @@ export default class AccesoAPI {
       case 'DELETE':
         url += '/' + id;
         return this.accederApi(url, metodo, null);
+        default:
+          break;
     }
 
   }

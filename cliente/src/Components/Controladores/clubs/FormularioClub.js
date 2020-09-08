@@ -53,7 +53,7 @@ export default class FormularioClub extends Component {
                 <div className='container'>
                     <InputComponent name="clubid"
                         handleChange={this.props.funcion}
-                        name="clubid"
+                        
                         label="ID"
                         readOnly={true}
                         value={club.clubid}
@@ -72,7 +72,7 @@ export default class FormularioClub extends Component {
                             <div className='col-4'>
                                 <InputComponent name="clubName"
                                     handleChange={this.props.funcion}
-                                    name="clubName"
+                                    
                                     label="Nombre"
                                     clase='elementoFormularioClub'
                                     readOnly={readonly}
@@ -89,7 +89,7 @@ export default class FormularioClub extends Component {
                             <div className='col-4'>
                                 <TextAreaComponent name="description"
                                     handleChange={this.props.funcion}
-                                    name="description"
+                                    
                                     label="Descripción"
                                     clase='elementoFormularioClub'
                                     readOnly={readonly}
@@ -108,7 +108,7 @@ export default class FormularioClub extends Component {
                             <div className='col-4'>
                                 <InputComponent name="clubPhone"
                                     handleChange={this.props.funcion}
-                                    name="clubPhone"
+                                    
                                     label="Teléfono"
                                     clase='elementoFormularioClub'
                                     readOnly={readonly}
@@ -128,7 +128,7 @@ export default class FormularioClub extends Component {
                                 <div className='col-4'>
                                     <InputComponent name="direccion"
                                         handleChange={this.props.funcion}
-                                        name="direccion"
+                                       
                                         label="Dirección"
                                         readOnly={readonly}
                                         value={direccion}
@@ -145,7 +145,7 @@ export default class FormularioClub extends Component {
                                 <div className='col-4'>
                                     <InputComponent name="streetNumber"
                                         handleChange={this.props.funcion}
-                                        name="streetNumber"
+                                        
                                         label="Número de la calle"
                                         clase='elementoFormularioClub'
                                         readOnly={readonly}
@@ -161,7 +161,7 @@ export default class FormularioClub extends Component {
                                 <div className='col-4'>
                                     <InputComponent name="postal_code"
                                         handleChange={this.props.funcion}
-                                        name="postal_code"
+                                        
                                         label="Codigo postal"
                                         clase='elementoFormularioClub'
                                         readOnly={readonly}
@@ -201,7 +201,7 @@ export default class FormularioClub extends Component {
                             <div className='col-4'>
                                 <InputComponent name="accessAge"
                                     handleChange={this.props.funcion}
-                                    name="accessAge"
+                                    
                                     label="Edad mínima"
                                     clase='elementoFormularioClub'
                                     type='number'
@@ -217,7 +217,7 @@ export default class FormularioClub extends Component {
                             <div className='col-4'>
                                 <InputComponent name="DiasAnticipacion"
                                     handleChange={this.props.funcion}
-                                    name="DiasAnticipacion"
+                                   
                                     label="Dias Anticipacion"
                                     clase='elementoFormularioClub'
                                     type='number'
@@ -248,7 +248,7 @@ export default class FormularioClub extends Component {
                                         clase='elementoFormularioClub'
                                         readOnly={readonly}
                                         value={club.Musica}
-                                        clase='elementoFormularioClub' />
+                                         />
                                 </div>
                         }
 
@@ -279,7 +279,7 @@ export default class FormularioClub extends Component {
                             <div className='col-4'>
                                 <InputComponent name="entryCost"
                                     handleChange={this.props.funcion}
-                                    name="entryCost"
+                                    
                                     clase='elementoFormularioClub'
                                     label="Coste de entrada"
                                     readOnly={readonly}
@@ -296,7 +296,7 @@ export default class FormularioClub extends Component {
                             <div className='col-4'>
                                 <InputComponent name="maxPeople"
                                     handleChange={this.props.funcion}
-                                    name="maxPeople"
+                                   
                                     type='number'
                                     clase='elementoFormularioClub'
                                     label="Máximo de personas"
@@ -407,7 +407,7 @@ export default class FormularioClub extends Component {
                             <div className='col-4'>
                                 <InputComponent name="latitude"
                                     handleChange={this.props.funcion}
-                                    name="latitude"
+                                    
                                     label="Latitude"
                                     clase='elementoFormularioClub'
                                     readOnly={readonly}
@@ -422,7 +422,7 @@ export default class FormularioClub extends Component {
                                 <div className='col-10'>
                                     <InputComponent name="longitude"
                                         handleChange={this.props.funcion}
-                                        name="longitude"
+                                        
                                         label="Longitude"
                                         clase='elementoFormularioClub'
                                         readOnly={readonly}
@@ -438,7 +438,7 @@ export default class FormularioClub extends Component {
 
                                 (<div className='col-12'><InputComponent name="cityName"
                                     handleChange={this.props.funcion}
-                                    name="cityName"
+                                    
                                     label="Ciudad"
                                     readOnly={readonly}
                                     value={club.cityName}
