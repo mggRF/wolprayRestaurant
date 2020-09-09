@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { TextAreaComponent } from '../../Fragmentos/TextAreaComponent';
+import { InputComponent } from '../../Fragmentos/InputComponent';
 
 export default class FormularioRole extends Component {
     render() {
@@ -7,17 +9,34 @@ export default class FormularioRole extends Component {
         let readonly = this.props.orden.includes(['D', 'V']) ? true : false
 
         return (
-            <div className = "animate__animated animate__fadeIn">
+            <div className="get_in_touch animate__animated animate__fadeIn">
+                <h1 className="title">Rol</h1>
                 <label htmlFor="roleid">Id</label>
-                <input name="roleid" 
-                    value={role.roleid} 
-                    onChange={this.props.funcion} 
-                    readOnly="ON "/>
-                <label htmlFor="roleName">Name</label>
-                <input name="roleName" 
-                    value={role.roleName} 
-                    onChange={this.props.funcion} 
-                    readOnly={readonly} />
+                <div className="container">
+                    <form className="formulario row">
+                        {
+                            (role.roleid) ?
+                                <InputComponent name="musicid"
+                                    handleChange={this.props.funcion}
+
+                                    label="ID"
+                                    readOnly={true}
+                                    value={role.roleid} /> : null
+                        }
+                        <InputComponent name="roleName"
+                            handleChange={this.props.funcion}
+                            label="Nombre"
+                            readOnly={readonly}
+                            value={role.roleName}
+                        />
+                        <TextAreaComponent name="roleDescription"
+                            handleChange={this.props.funcion}
+                            label="Descripción"
+                            readOnly={readonly}
+                            value={role.roleDescription}
+                        />
+                    </form>
+                </div>
             </div>
 
 

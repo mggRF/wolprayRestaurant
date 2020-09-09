@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { TextAreaComponent } from '../../Fragmentos/TextAreaComponent';
+import { InputComponent } from '../../Fragmentos/InputComponent';
 
 export default class FormularioMusic extends Component {
     render() {
@@ -7,17 +9,34 @@ export default class FormularioMusic extends Component {
         let readonly = this.props.orden.includes(['D', 'V']) ? true : false
 
         return (
-            <div className = "animate__animated animate__fadeIn">
-                <label htmlFor="musicid">Id</label>
-                <input name="musicid" 
-                    value={music.musicid} 
-                    onChange={this.props.funcion} 
-                    readOnly="ON "/>
-                <label htmlFor="musicName">Name</label>
-                <input name="musicName" 
-                    value={music.musicName} 
-                    onChange={this.props.funcion} 
-                    readOnly={readonly} />
+            <div className="get_in_touch animate__animated animate__fadeIn">
+                <h1 className="title">Música</h1>
+                <div className="container">
+                    <form className="formulario row">
+                        {
+                            (music.musicid) ?
+                                <InputComponent name="musicid"
+                                    handleChange={this.props.funcion}
+
+                                    label="ID"
+                                    readOnly={true}
+                                    value={music.musicid} /> : null
+                        }
+                        <InputComponent name="musicName"
+                            handleChange={this.props.funcion}
+                            label="Nombre"
+                            readOnly={readonly}
+                            value={music.musicName}
+                        />
+                        <TextAreaComponent name="musicDescription"
+                            handleChange={this.props.funcion}
+                            label="Descripción"
+                            readOnly={readonly}
+                            value={music.musicDescription}
+                        />
+                    </form>
+
+                </div>
             </div>
 
 
@@ -26,7 +45,7 @@ export default class FormularioMusic extends Component {
 }
 FormularioMusic.defaultProps = {
     orden: "V"
-  
+
 }
 FormularioMusic.propTypes = {
     orden: PropTypes.oneOf(['D', 'V', 'E', 'I']),
