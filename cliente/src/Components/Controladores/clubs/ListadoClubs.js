@@ -56,12 +56,19 @@ export default class ListadoClubs extends Component {
                 <tr key={index}>
                     <td key={index} >{valor.clubid}</td>
                     <td>{valor.clubName}</td>
+                    <td>{valor.clubPhone}</td>
+                    <td>{valor.dressCodeid}</td>
+                    <td>{valor.streetName}</td>
+                    <td>{valor.streetNumber}</td>
+                    <td>{valor.postal_code}</td>
+                    <td>{valor.cityid}</td>
+                    <td>{valor.companyid}</td>
                     <TresBotonesListado funcion={this.props.trabajo}
                                         id={valor.clubid}/>
                 </tr>
 
             ))
-            
+           
             
         return (
             
@@ -79,7 +86,14 @@ export default class ListadoClubs extends Component {
                     funcion={this.gl.setSortedField}
                     lista={[
                         ['clubid', 'Identificador'],
-                        ['clubid', 'name']
+                        ['clubName', 'name'],
+                        ['clubPhone', 'Phone'],
+                        ['dressCodeid', 'Codigo Vestimenta'],
+                        ['streetName', 'Calle'],
+                        ['streetNumber', 'Número de calle'],
+                        ['postal_code', 'Código Postal'],
+                        ['cityid', 'ID Ciudad'],
+                        ['companyid', 'ID Empresa'],
                     ]} />
                     <th></th><th></th><th></th>
                     </tr>
