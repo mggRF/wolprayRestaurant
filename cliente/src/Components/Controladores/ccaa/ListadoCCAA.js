@@ -7,6 +7,10 @@ import AccesoAPI from './../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
 import BotonListado from '../../Fragmentos/BotonListados';
 
+import Paginacion from './../../../Servicios/Paginacion';
+import GestorListado from './../../../Servicios/GestorListado';
+import MontaCabecera from '../../Fragmentos/MontaCabecera';
+
 export default class ListadoCCAA extends Component {
 
 
@@ -16,9 +20,12 @@ export default class ListadoCCAA extends Component {
             datos: [],
             error: ""
         }
+
+        this.leeTabla = this.leeTabla.bind(this);
+        this.gl = new GestorListado(API_URL + STATES, this.leeTabla);
     }
     leeTabla() {
-        AccesoAPI.accederApi(API_URL + STATES)
+        AccesoAPI.accederApi(this.gl.terminaURLlistado())
             .then(response => {
                 console.log(response);
                 if (response.Ok) {
@@ -68,9 +75,13 @@ export default class ListadoCCAA extends Component {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>id</th>
-                            <th>Nombre</th>
-                            <th></th><th></th><th></th>
+                        <MontaCabecera separador='th'
+                        funcion={this.gl.setSortedField}
+                        lista={[
+                            ['stateid', 'Identificador'],
+                            ['stateName', 'name']
+                        ]} />
+                        <th></th><th></th><th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,6 +89,10 @@ export default class ListadoCCAA extends Component {
                     </tbody>
 
                 </table>
+                <Paginacion
+                    pageHandler={this.gl.pageHandler}
+                    tabla={STATES}>
+            </Paginacion>
             </div>
         )
     }

@@ -5,6 +5,10 @@ import { API_URL, DRESSCODE } from '../../Constantes';
 import AccesoAPI from './../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
 
+import Paginacion from './../../../Servicios/Paginacion';
+import GestorListado from './../../../Servicios/GestorListado';
+import MontaCabecera from '../../Fragmentos/MontaCabecera';
+
 export default class ListadoDresscode extends Component {
     
 
@@ -14,11 +18,12 @@ export default class ListadoDresscode extends Component {
             datos: [],
             error: ""
         }
+        this.leeTabla = this.leeTabla.bind(this);
+        this.gl = new GestorListado(API_URL + DRESSCODE, this.leeTabla);
     }
     leeTabla() {
-        AccesoAPI.accederApi(API_URL + DRESSCODE)
+        AccesoAPI.accederApi(this.gl.terminaURLlistado())
             .then(response => {
-                console.log("desde dresscode")
                 console.log(response);
                 if (response.Ok) {
                     this.setState({ datos: response.Datos })
@@ -38,10 +43,6 @@ export default class ListadoDresscode extends Component {
 
 
     render() {
-
-
-        console.log("RENDER=>", this.state.datos)
-
         let item = [];
         
             this.state.datos.forEach((valor, index) => item.push(
@@ -62,16 +63,23 @@ export default class ListadoDresscode extends Component {
             <table className ="table">
                 <thead>
                     <tr>
-                        <th>id</th>
-                        <th>name</th>
+                        <MontaCabecera separador='th'
+                        funcion={this.gl.setSortedField}
+                        lista={[
+                            ['dressCodeId', 'Identificador'],
+                            ['dressCodeDescription', 'name']
+                        ]} />
                         <th></th><th></th><th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {item}
                 </tbody>
-
             </table>
+            <Paginacion
+                    pageHandler={this.gl.pageHandler}
+                    tabla={DRESSCODE}>
+            </Paginacion>
         </div>
         )
     }
