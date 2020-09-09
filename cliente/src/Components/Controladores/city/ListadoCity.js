@@ -24,7 +24,7 @@ export default class ListadoCity extends Component {
         this.gl = new GestorListado(API_URL + CITYS, this.leeTabla);
     }
     leeTabla() {
-        AccesoAPI.accederApi(API_URL + CITYS)
+        AccesoAPI.accederApi(this.gl.terminaURLlistado())
             .then(response => {
                 console.log(response);
                 if (response.Ok) {
