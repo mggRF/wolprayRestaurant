@@ -27,7 +27,7 @@ export default class FormularioProvince extends Component {
         console.log('El readonly es: ' + readonly)
         console.log('Este es el objeto: ', Province)
         return (
-            <div className="get_in_touch animate__animated animate__fadeIn">
+            <section className="get_in_touch animate__animated animate__fadeIn">
                 {
                     (!readonly) ?
                         (<h1 className="title">{'Formulario para ' + title}</h1>) :
@@ -71,7 +71,7 @@ export default class FormularioProvince extends Component {
                         }
                     </form>
                 </div>
-            </div>
+            </section>
         )
     }
 }

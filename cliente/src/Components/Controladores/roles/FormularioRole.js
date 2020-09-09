@@ -6,10 +6,11 @@ import { InputComponent } from '../../Fragmentos/InputComponent';
 export default class FormularioRole extends Component {
     render() {
         let role = this.props.obj;
-        let readonly = this.props.orden.includes(['D', 'V']) ? true : false
-
+        let readonly = false;
+        if (this.props.orden === 'D' || this.props.orden === 'V')
+            readonly = true
         return (
-            <div className="get_in_touch animate__animated animate__fadeIn">
+            <section className="get_in_touch animate__animated animate__fadeIn">
                 <h1 className="title">Rol</h1>
                 <label htmlFor="roleid">Id</label>
                 <div className="container">
@@ -37,7 +38,7 @@ export default class FormularioRole extends Component {
                         />
                     </form>
                 </div>
-            </div>
+            </section>
 
 
         )

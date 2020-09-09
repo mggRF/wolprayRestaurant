@@ -1,47 +1,55 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { InputComponent } from '../../Fragmentos/InputComponent';
 
 export default class FormularioUsers extends Component {
     render() {
         let user = this.props.obj;
         let readonly = this.props.orden.includes(['D', 'V']) ? true : false
-            console.log("Desde formulario users esta es la fecha", user.birthdate.split('T')[0])
+        console.log("Desde formulario users esta es la fecha", user.birthdate.split('T')[0])
         return (
-            <div>
-                <label htmlFor="userid">Id</label>
-                <input name="userid" 
-                    value={user.userid} 
-                    onChange={this.props.funcion} 
-                    readOnly="ON "/>
-                <label htmlFor="userName">Name</label>
-                <input name="userName" 
-                    value={user.userName} 
-                    onChange={this.props.funcion} 
-                    readOnly={readonly} />
+            <section className="get_in_touch animate__animated animate__fadeIn">
+                <h1 className="title">Usuario</h1>
+                <div className="container">
+                    <form className="formulario row">
+                        {
+                            (user.userid) ?
+                                <InputComponent name="userid"
+                                    handleChange={this.props.funcion}
 
-                <label htmlFor="mail">Mail</label>
-                <input name="mail" 
-                    value={user.mail} 
-                    onChange={this.props.funcion} 
-                    readOnly={readonly} />
-
-                <label htmlFor="userPhone">Phone</label>
-                <input name="userPhone" 
-                    value={user.userPhone} 
-                    onChange={this.props.funcion} 
-                    readOnly={readonly} />
-                <label htmlFor="birthdate">Birthdate</label>
-                <input name="birthdate"
-                    type ="date" 
-                    value={user.birthdate.split('T')[0]}
-                    onChange={this.props.funcion} 
-                    readOnly={readonly} />
-                <label htmlFor="roleid">Role id: </label>
-                <input name="roleid" 
-                    value={user.roleid} 
-                    onChange={this.props.funcion} 
-                    readOnly={readonly} />
-            </div>
+                                    label="ID"
+                                    readOnly={true}
+                                    value={user.userid} /> : null
+                        }
+                        <InputComponent name="mail"
+                            handleChange={this.props.funcion}
+                            label="Correo electrónico"
+                            readOnly={readonly}
+                            value={user.mail}
+                        />
+                        {
+                            (user.password)?
+                            <InputComponent name="password"
+                            handleChange={this.props.funcion}
+                            label="Contraseña"
+                            readOnly={readonly}
+                        />:null
+                        }
+                        <InputComponent name="userPhone"
+                            handleChange={this.props.funcion}
+                            label="teléfono"
+                            readOnly={readonly}
+                            value={user.userPhone}
+                        />
+                        <InputComponent name="birthdate"
+                            handleChange={this.props.funcion}
+                            label="Fecha de nacimiento"
+                            readOnly={readonly}
+                            value={user.birthdate}
+                        />
+                    </form>
+                </div>
+            </section>
 
 
         )

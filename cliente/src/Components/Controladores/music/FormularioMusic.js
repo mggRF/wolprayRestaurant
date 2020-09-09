@@ -9,7 +9,7 @@ export default class FormularioMusic extends Component {
         let readonly = this.props.orden.includes(['D', 'V']) ? true : false
 
         return (
-            <div className="get_in_touch animate__animated animate__fadeIn">
+            <section className="get_in_touch animate__animated animate__fadeIn">
                 <h1 className="title">Música</h1>
                 <div className="container">
                     <form className="formulario row">
@@ -37,7 +37,7 @@ export default class FormularioMusic extends Component {
                     </form>
 
                 </div>
-            </div>
+            </section>
 
 
         )

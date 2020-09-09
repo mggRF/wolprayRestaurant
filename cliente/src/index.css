@@ -160,15 +160,14 @@ body {
   
 }
 .containermenu{
-  
   border: gray 2px solid;
 }
 
 .get_in_touch{
-  max-width: 800px;
-  margin: 50px auto;
+  max-width: 1000px;
+  margin: 20px auto;
   position: relative;
-  padding: 30px;
+  padding: 0px;
 }
 .get_in_touch .title{
   text-transform: uppercase;
