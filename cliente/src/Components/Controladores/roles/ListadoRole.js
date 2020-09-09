@@ -45,7 +45,7 @@ export default class ListadoRole extends Component {
         console.log("RENDER=>", this.state.datos)
 
         let item = [];
-        {
+        
             this.state.datos.forEach((valor, index) => item.push(
                 <tr key={index}>
                     <td key={index} >{valor.roleid}</td>
@@ -55,7 +55,7 @@ export default class ListadoRole extends Component {
                 </tr>
 
             ))
-            }
+            
             
         return (
             
