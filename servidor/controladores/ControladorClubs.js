@@ -83,7 +83,7 @@ class ControladorClubs extends ControladorBase {
                     });
                     salida = salida.substring(0, salida.length - 1)
                     console.log('sql: ', salida);
-                    const result2 = super.sendDataToTable('[]', salida) //es promesa
+                    super.sendDataToTable([], salida) //es promesa
                         .then(result2 => console.log("ESTE ES EL INSERT", result2))
                         .catch(err => console.error(err));
                 }
