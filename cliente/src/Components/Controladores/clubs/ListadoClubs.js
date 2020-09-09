@@ -57,10 +57,7 @@ export default class ListadoClubs extends Component {
                     <td key={index} >{valor.clubid}</td>
                     <td>{valor.clubName}</td>
                     <td>{valor.clubPhone}</td>
-                    <td>{valor.dressCodeid}</td>
-                    <td>{valor.streetName}</td>
-                    <td>{valor.streetNumber}</td>
-                    <td>{valor.postal_code}</td>
+                    <td>{valor.streetName}, {valor.streetNumber}</td>
                     <td>{valor.cityid}</td>
                     <td>{valor.companyid}</td>
                     <TresBotonesListado funcion={this.props.trabajo}
@@ -88,10 +85,7 @@ export default class ListadoClubs extends Component {
                         ['clubid', 'Identificador'],
                         ['clubName', 'name'],
                         ['clubPhone', 'Phone'],
-                        ['dressCodeid', 'Codigo Vestimenta'],
-                        ['streetName', 'Calle'],
-                        ['streetNumber', 'Número de calle'],
-                        ['postal_code', 'Código Postal'],
+                        ['streetName', 'Dirección'],
                         ['cityid', 'ID Ciudad'],
                         ['companyid', 'ID Empresa'],
                     ]} />
