@@ -8,6 +8,10 @@ import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
 import BotonListado from '../../Fragmentos/BotonListados';
 
  
+import Paginacion from './../../../Servicios/Paginacion';
+import GestorListado from './../../../Servicios/GestorListado';
+import MontaCabecera from '../../Fragmentos/MontaCabecera';
+
 export default class ListadoProvince extends Component {
     constructor(props) {
         super(props);
@@ -15,9 +19,12 @@ export default class ListadoProvince extends Component {
             datos: [],
             error: ""
         }
+
+        this.leeTabla = this.leeTabla.bind(this);
+        this.gl = new GestorListado(API_URL + PROVINCES, this.leeTabla);
     }
     leeTabla() {
-        AccesoAPI.accederApi(API_URL + PROVINCES)
+        AccesoAPI.accederApi(this.gl.terminaURLlistado())
             .then(response => {
                 console.log(response);
                 if (response.Ok) {
@@ -64,9 +71,13 @@ export default class ListadoProvince extends Component {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>id</th>
-                            <th>Nombre</th>
-                            <th></th><th></th><th></th>
+                        <MontaCabecera separador='th'
+                        funcion={this.gl.setSortedField}
+                        lista={[
+                            ['provinceid', 'Identificador'],
+                            ['provinceName', 'name']
+                        ]} />
+                        <th></th><th></th><th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,6 +85,10 @@ export default class ListadoProvince extends Component {
                     </tbody>
 
                 </table>
+                <Paginacion
+                    pageHandler={this.gl.pageHandler}
+                    tabla={PROVINCES}>
+            </Paginacion>
             </div>
         )
     }

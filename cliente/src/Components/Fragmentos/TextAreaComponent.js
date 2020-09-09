@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const InputComponent = ({ clase = 'input-text', tam = '', step = '', type = 'default', value = '', name = '', label = '', handleChange, readOnly = true }) => {
+export const TextAreaComponent = ({ clase = '', value = '', name = '', label = '', handleChange, readOnly = true }) => {
 
     const onFocus = event => {
 
@@ -13,51 +13,44 @@ export const InputComponent = ({ clase = 'input-text', tam = '', step = '', type
 
     if (readOnly) {
         return (
-            <div className="form-field col-lg-6">
-                <label className="label" htmlFor={name}><h3>{label}:</h3></label>
-
+            <div className="form-field form-group col-lg-10 break">
+                <label className="label" htmlFor={name}><h3>{label}:</h3></label><br/>
                 {
                     (name.length > 0) ?
+                        <textarea
 
-                        <input
-                            style={{ with: tam }}
-                            step={step}
-                            type={type}
-                            className={clase}
+                            rows="5"
                             name={name}
                             value={value}
                             onChange={handleChange}
                             autoComplete="off"
-                            // className="form-control"
+                            className="form-control"
                             disabled={true} /> :
-                        <input name={name}
-                            style={{ with: tam }}
-                            step={step}
-                            type={type}
+                        <textarea name={name}
+                            rows="5"
                             autoComplete="off"
                             value={value}
                             className={clase}
                             placeholder={'Ingresa el ' + name}
                             disabled={true} />
                 }
-
             </div>
+
+
         )
     } else {
         return (
-            <div className="form-field col-lg-6">
+            <div className="form-field form-group col-lg-10 break">
 
                 <label
                     className="label"
                     htmlFor={name}><h3>{label}:</h3></label>
 
-                <input name={name}
-                    style={{ with: tam }}
-                    step={step}
-                    type={type}
+                <textarea name={name}
+                    rows="5"
                     value={value}
                     autoComplete="off"
-                    className={clase}
+                    className= 'form-control'
                     onFocus={onFocus}
                     onChange={handleChange}
                     readOnly={readOnly} />
@@ -66,6 +59,6 @@ export const InputComponent = ({ clase = 'input-text', tam = '', step = '', type
     }
 }
 
-InputComponent.propTypes = {
+TextAreaComponent.propTypes = {
     handleChange: PropTypes.func.isRequired
 }

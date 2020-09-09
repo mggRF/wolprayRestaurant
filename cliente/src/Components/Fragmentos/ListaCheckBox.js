@@ -22,9 +22,9 @@ export default class ListaCheckBox extends Component {
             datos: []
         }
         this.handleChange = this.handleChange.bind(this);
-        
+
     }
-    componentDidMount(){
+    componentDidMount() {
         this.monta();
     }
 
@@ -32,7 +32,7 @@ export default class ListaCheckBox extends Component {
         const item = e.target.name;
         const isChecked = e.target.checked;
         const estado = this.state.datos;
-        let salida=[];
+        let salida = [];
         estado.forEach(ele => {
             if (ele.op === item) {
                 ele.isChecked = isChecked;
@@ -46,11 +46,11 @@ export default class ListaCheckBox extends Component {
 
     monta() {
         let resp = [];
-        let salida=[];
+        let salida = [];
         AccesoAPI.leerDesplegables(this.props.table, 0)
             .then(response => {
                 if (response.Ok) {
-                    const activosAjustados = (this.props.activos.split(",").map(x=>x.trim()).join(','));
+                    const activosAjustados = (this.props.activos.split(",").map(x => x.trim()).join(','));
                     response.Datos.forEach(obj => {
                         let isChecked = (activosAjustados + ",").indexOf(obj.opcion.trim() + ",") >= 0;
                         resp.push({
@@ -78,15 +78,15 @@ export default class ListaCheckBox extends Component {
                 {lista.map(ele => {
 
                     return (
-                        <>
-                            <label key={ele.id}>
+                        <div className="checkbox">
+                            <label className="label" key={ele.id}>
                                 <Checkbox name={ele.op}
                                     checked={ele.isChecked}
                                     onChange={this.handleChange} />
                                     &nbsp;
-                                {ele.op}
-                            </label><br />
-                        </>
+                                {ele.op + ':'}
+                            </label>
+                        </div>
                     )
 
                 })}
@@ -95,7 +95,7 @@ export default class ListaCheckBox extends Component {
     }
     render() {
 
-       // let nombreCampo = this.props.name;
+        // let nombreCampo = this.props.name;
         let contenido = this.state.datos;
         return (
             <fieldset className="fieldSetCheckBox">
@@ -121,6 +121,6 @@ ListaCheckBox.propTypes = {
     label: PropTypes.string,
     table: PropTypes.string,
     name: PropTypes.string,
-    activos:PropTypes.string
+    activos: PropTypes.string
 
 }

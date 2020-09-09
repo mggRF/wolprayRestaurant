@@ -7,6 +7,10 @@ import AccesoAPI from './../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
 import BotonListado from '../../Fragmentos/BotonListados';
 
+import Paginacion from './../../../Servicios/Paginacion';
+import GestorListado from './../../../Servicios/GestorListado';
+import MontaCabecera from '../../Fragmentos/MontaCabecera';
+
 export default class ListadoCompanies extends Component {
 
 
@@ -16,10 +20,12 @@ export default class ListadoCompanies extends Component {
             datos: [],
             error: ""
         }
+        this.leeTabla = this.leeTabla.bind(this);
+        this.gl = new GestorListado(API_URL + COMPANIES, this.leeTabla);
     }
     leeTabla() {
         console.log('Voy a acceder a la api')
-        AccesoAPI.accederApi(API_URL + COMPANIES)
+        AccesoAPI.accederApi(this.gl.terminaURLlistado())
             .then(response => {
                 console.log('Desde listado companies: ',response);
                 if (response.Ok) {
@@ -78,15 +84,23 @@ export default class ListadoCompanies extends Component {
                             <table className="table table-striped bg-light table-hover">
                                 <thead>
                                     <tr className="text-mmuted">
-                                        <th>id</th>
-                                        <th>Nombre</th>
-                                        <th></th><th></th><th></th>
+                                    <MontaCabecera separador='th'
+                                    funcion={this.gl.setSortedField}
+                                    lista={[
+                                        ['companyid', 'Identificador'],
+                                        ['companyName', 'name']
+                                    ]} />
+                                    <th></th><th></th><th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {item}
                                 </tbody>
                             </table>
+                            <Paginacion
+                                pageHandler={this.gl.pageHandler}
+                                tabla={COMPANIES}>
+                            </Paginacion>
 
                         </div>
                     </div>

@@ -20,58 +20,58 @@ export default class FormularioProvince extends Component {
                 title = 'modificar';
                 break;
             default:
-                title = 'Información sobre empresa';
+                title = 'Información sobre el estado';
                 break;
         }
         console.log("Province=>", Province);
         console.log('El readonly es: ' + readonly)
         console.log('Este es el objeto: ', Province)
         return (
-            <div className="animate__animated animate__fadeIn">
+            <section className="get_in_touch animate__animated animate__fadeIn">
                 {
                     (!readonly) ?
-                        (<h1>{'Formulario para ' + title}</h1>) :
-                        (<h1>{title}</h1>)
+                        (<h1 className="title">{'Formulario para ' + title}</h1>) :
+                        (<h1 className="title">{title}</h1>)
                 }
                 <br />
-                <form className="form-horizontal" >
+                <div className="container">
+                    <form className="formulario row" >
+                        <><InputComponent
+                            handleChange={this.props.funcion}
+                            name="provinceid"
+                            label="ID"
+                            readOnly={true}
+                            value={Province.provinceid.toString()}
+                        /></>
 
+                        <InputComponent
+                            handleChange={this.props.funcion}
+                            name="provinceName"
+                            label="Nombre"
+                            readOnly={readonly}
+                            value={Province.provinceName}
+                        />
 
-                    <><InputComponent
-                        handleChange={this.props.funcion}
-                        name="provinceid"
-                        label="ID"
-                        readOnly={true}
-                        value={Province.provinceid.toString()}
-                    /></>
-
-                    <InputComponent
-                        handleChange={this.props.funcion}
-                        name="provinceName"
-                        label="Nombre"
-                        readOnly={readonly}
-                        value={Province.provinceName}
-                    />
-
-                    {
-                        (readonly) ?
-                            (<InputComponent
-                                handleChange={this.props.funcion}
-                                namecountryName
-                                label="Estado"
-                                readOnly={readonly}
-                                value={Province.provinceCapital}
-                            />) : <Desplegable
-                                depend='209'
-                                label='Estado:'
-                                readValue={this.props.funcion}
-                                table='c_state'
-                                value={Province.stateid}
-                                name='stateid'
-                            />
-                    }
-                </form>
-            </div>
+                        {
+                            (readonly) ?
+                                (<InputComponent
+                                    handleChange={this.props.funcion}
+                                    namecountryName
+                                    label="Estado"
+                                    readOnly={readonly}
+                                    value={Province.provinceCapital}
+                                />) : <Desplegable
+                                    depend='209'
+                                    label='Estado:'
+                                    readValue={this.props.funcion}
+                                    table='c_state'
+                                    value={Province.stateid}
+                                    name='stateid'
+                                />
+                        }
+                    </form>
+                </div>
+            </section>
         )
     }
 }
