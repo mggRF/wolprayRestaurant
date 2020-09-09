@@ -11,6 +11,10 @@ export const InputComponent = ({ clase = 'input-text', tam = '', step = '', type
 
     };
 
+    if(value === null || value === undefined){
+        value = '';
+    }
+
     if (readOnly) {
         return (
             <div className="form-field col-lg-6">

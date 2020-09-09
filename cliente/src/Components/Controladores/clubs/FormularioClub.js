@@ -155,7 +155,6 @@ export default class FormularioClub extends Component {
 
                             <InputComponent name="accessAge"
                                 handleChange={this.props.funcion}
-
                                 label="Edad mínima"
                                 type='number'
                                 readOnly={readonly}
