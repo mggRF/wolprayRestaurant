@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 export const TextAreaComponent = ({ clase = '', value = '', name = '', label = '', handleChange, readOnly = true }) => {
 
+    if(value === null || value === undefined){
+        value = '';
+    }
     const onFocus = event => {
 
         if (event.target.autocomplete) {

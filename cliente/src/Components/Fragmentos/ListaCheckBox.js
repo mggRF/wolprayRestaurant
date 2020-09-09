@@ -78,8 +78,8 @@ export default class ListaCheckBox extends Component {
                 {lista.map(ele => {
 
                     return (
-                        <div className="checkbox">
-                            <label className="label" key={ele.id}>
+                        <div className="checkbox" key={ele.id}>
+                            <label className="label" >
                                 <Checkbox name={ele.op}
                                     checked={ele.isChecked}
                                     onChange={this.handleChange} />
