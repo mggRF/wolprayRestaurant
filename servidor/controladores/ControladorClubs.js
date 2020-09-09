@@ -68,32 +68,34 @@ class ControladorClubs extends ControladorBase {
         const {
             method
         } = req.route.stack[0];
-        if (method.toLowerCase() === "put") { //<- luego, repetimos para insert y delete....
-            let id = req.params.id;
-            let sqlDelete = 'DELETE  FROM club_music WHERE clubid = ?';
-            let sqlInsert = 'INSERT INTO club_music (clubid, musicid) VALUES  '
-            let musicsUpdates = req.body.musicsUpdate.split(',');
-            super.sendDataToTable([id], sqlDelete)
-                .then(result1 => console.log("borrado", result1))
-                .then(() => {
+        //       if (method.toLowerCase() === "put") { //<- luego, repetimos para insert y delete....
+        let id = req.params.id;
+        let sqlDelete = 'DELETE  FROM club_music WHERE clubid = ?';
+        let sqlInsert = 'INSERT INTO club_music (clubid, musicid) VALUES  '
+        let musicsUpdates = req.body.musicsUpdate.split(',');
+        super.sendDataToTable([id], sqlDelete)
+            .then(result1 => console.log("borrado", result1))
+            .then(() => {
+                if (method.toLowerCase() === "put") {
                     let salida = sqlInsert;
                     musicsUpdates.map(value => {
                         salida += "(" + id + "," + value + "),";
                     });
-                    salida = salida.substring(0, salida.length - 1) 
+                    salida = salida.substring(0, salida.length - 1)
                     console.log('sql: ', salida);
-                    const result2 =  super.sendDataToTable('[]', salida) //es promesa
-                        .then( result2 => console.log("ESTE ES EL INSERT", result2) )
+                    const result2 = super.sendDataToTable('[]', salida) //es promesa
+                        .then(result2 => console.log("ESTE ES EL INSERT", result2))
                         .catch(err => console.error(err));
-                })
+                }
+            })
 
 
-            delete req.body['musicsUpdate'];
-            super.updateTable(req, res);
-        }
-
-        /**GUARDAR musicsUpdate EN OTRO CAMPO Y QUITARLO DEL REQUEST QUE HA LLEGADO*/
+        delete req.body['musicsUpdate'];
+        super.updateTable(req, res);
     }
+
+    /**GUARDAR musicsUpdate EN OTRO CAMPO Y QUITARLO DEL REQUEST QUE HA LLEGADO*/
+    //   }
 
 
 
