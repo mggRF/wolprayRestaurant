@@ -76,7 +76,7 @@ class ControladorClubs extends ControladorBase {
         super.sendDataToTable([id], sqlDelete)
             .then(result1 => console.log("borrado", result1))
             .then(() => {
-                if (method.toLowerCase() === "put") {
+                if (method.toLowerCase() !== "delete") {
                     let salida = sqlInsert;
                     musicsUpdates.map(value => {
                         salida += "(" + id + "," + value + "),";

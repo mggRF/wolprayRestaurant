@@ -6,6 +6,10 @@ import AccesoAPI from './../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
 import BotonListado from '../../Fragmentos/BotonListados';
 
+import Paginacion from './../../../Servicios/Paginacion';
+import GestorListado from './../../../Servicios/GestorListado';
+import MontaCabecera from '../../Fragmentos/MontaCabecera';
+
 export default class ListadoClubs extends Component {
     
 
@@ -15,9 +19,12 @@ export default class ListadoClubs extends Component {
             datos: [],
             error: ""
         }
+
+        this.leeTabla = this.leeTabla.bind(this);
+        this.gl = new GestorListado(API_URL + CLUBS, this.leeTabla);
     }
     leeTabla() {
-        AccesoAPI.accederApi(API_URL + CLUBS)
+        AccesoAPI.accederApi(this.gl.terminaURLlistado())
             .then(response => {
                 console.log("RESPONDE DESDE LISTADOCLUB", response);
                 if (response.Ok) {
@@ -68,9 +75,13 @@ export default class ListadoClubs extends Component {
             <table className ="table">
                 <thead>
                     <tr>
-                        <th>id</th>
-                        <th>name</th>
-                        <th></th><th></th><th></th>
+                    <MontaCabecera separador='th'
+                    funcion={this.gl.setSortedField}
+                    lista={[
+                        ['clubid', 'Identificador'],
+                        ['clubid', 'name']
+                    ]} />
+                    <th></th><th></th><th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,6 +89,10 @@ export default class ListadoClubs extends Component {
                 </tbody>
 
             </table>
+            <Paginacion
+                    pageHandler={this.gl.pageHandler}
+                    tabla={CLUBS}>
+            </Paginacion>
         </div>
         )
     }
