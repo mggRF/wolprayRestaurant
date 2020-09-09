@@ -2,6 +2,7 @@ import React, { Component }  from 'react';
 import ButtonComponent from '../Comun/buttonComponent/ButtonComponent';
 import themeLogo from '../Comun/images/logowolpray.png';
 import './login.css';
+import { Link} from "react-router-dom";
 
 export default class LoginScreen extends Component {
     constructor(props) {
@@ -71,9 +72,10 @@ export default class LoginScreen extends Component {
                 </div>
 
                 <div className="bottom-text">
-                    ¿Aún no eres parte de nosotros? <a href="#">¡Contáctanos!</a>
+                    ¿Aún no eres parte de nosotros? <Link to = '/register'>¡Contáctanos!</Link>
                 </div>
             </form>
+            
 
 
             {/* <PieDePagina /> */}
