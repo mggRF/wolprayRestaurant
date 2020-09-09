@@ -43,7 +43,7 @@ export default class ListadoDresscode extends Component {
         console.log("RENDER=>", this.state.datos)
 
         let item = [];
-        {
+        
             this.state.datos.forEach((valor, index) => item.push(
                 <tr key={index}>
                     <td key={index} >{valor.dressCodeId}</td>
@@ -53,7 +53,7 @@ export default class ListadoDresscode extends Component {
                 </tr>
 
             ))
-            }
+            
             
         return (
             

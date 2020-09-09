@@ -44,7 +44,7 @@ export default class ListadoClubs extends Component {
 
         let item = [];
         
-        {
+        
             this.state.datos.forEach((valor, index) => item.push(
                 <tr key={index}>
                     <td key={index} >{valor.clubid}</td>
@@ -54,7 +54,7 @@ export default class ListadoClubs extends Component {
                 </tr>
 
             ))
-            }
+            
             
         return (
             
