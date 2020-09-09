@@ -29,51 +29,53 @@ export default class FormularioCCAA extends Component {
         console.log('El readonly es: ' + readonly)
         console.log('Este es el objeto: ', CCAA)
         return (
-            <div className = "animate__animated animate__fadeIn">
+            <section className="get_in_touch animate__animated animate__fadeIn">
                 {
                     (!readonly) ?
                         (<h1>{'Formulario para ' + title}</h1>) :
                         (<h1>{title}</h1>)
                 }
                 <br />
-                <form className="form-horizontal" >
-                    {
-                        (CCAA.stateid) ?
-                            (<><InputComponent
-                                handleChange={this.props.funcion}
-                                name="stateid"
-                                label="ID"
-                                readOnly={true}
-                                value={CCAA.stateid.toString()}
-                            /></>) : null
-                    }
+                <div className = "container">
+                    <form className="formulario row" >
+                        {
+                            (CCAA.stateid) ?
+                                (<><InputComponent
+                                    handleChange={this.props.funcion}
+                                    name="stateid"
+                                    label="ID"
+                                    readOnly={true}
+                                    value={CCAA.stateid.toString()}
+                                /></>) : null
+                        }
 
-                    <InputComponent
-                        handleChange={this.props.funcion}
-                        name="stateName"
-                        label="Nombre"
-                        readOnly={readonly}
-                        value={CCAA.stateName}
-                    />
+                        <InputComponent
+                            handleChange={this.props.funcion}
+                            name="stateName"
+                            label="Nombre"
+                            readOnly={readonly}
+                            value={CCAA.stateName}
+                        />
 
-                    {
-                        (readonly) ?
-                            (<InputComponent
-                                handleChange={this.props.funcion}
-                                namecountryName
-                                label="Pais"
-                                readOnly={readonly}
-                                value={CCAA.countryName}
-                            />) : <Desplegable
-                                label='Pais:'
-                                readValue={this.props.funcion}
-                                table='c_country'
-                                value={CCAA.countryid}
-                                name='countryid'
-                            />
-                    }
-                </form>
-            </div>
+                        {
+                            (readonly) ?
+                                (<InputComponent
+                                    handleChange={this.props.funcion}
+                                    namecountryName
+                                    label="Pais"
+                                    readOnly={readonly}
+                                    value={CCAA.countryName}
+                                />) : <Desplegable
+                                    label='Pais:'
+                                    readValue={this.props.funcion}
+                                    table='c_country'
+                                    value={CCAA.countryid}
+                                    name='countryid'
+                                />
+                        }
+                    </form>
+                </div>
+            </section>
         )
     }
 }

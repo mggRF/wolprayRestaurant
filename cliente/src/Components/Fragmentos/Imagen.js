@@ -6,7 +6,7 @@ import Noimage from '../Comun/images/noimage.jpg';
 export default class Imagen extends Component {
 
     render() {//Components\Comun\images
-        if(this.props.imageUrl != null){
+        if(this.props.imageUrl !== null && this.props.imageUrl !== undefined ){
             return (
                 <div className="img-rounded" >
                     <img src={this.props.imageUrl} alt ="No se ha encontrado la imagen" width={this.props.with+'%'}  /> 
@@ -22,10 +22,6 @@ export default class Imagen extends Component {
             return (
                 <div className="img-rounded">
                     <img src={Noimage} alt ="No se ha encontrado la imagen"  /> 
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
                 </div>
                 
                  

@@ -14,11 +14,11 @@ export default class CtrlFormulario extends Component {
             obj: this.props.obj
         };
     }
-    enSubmit= () => {
+    enSubmit = () => {
         this.props.trabajo(this.state.obj);
     }
     enCancel = () => {
-        this.props.trabajo(this.state.obj,"V");
+        this.props.trabajo(this.state.obj, "V");
     }
 
     recogeDatos = (e) => {
@@ -34,26 +34,28 @@ export default class CtrlFormulario extends Component {
 
     render() {
 
-        let orden=this.props.orden;
-        let obj=this.state.obj;
+        let orden = this.props.orden;
+        let obj = this.state.obj;
         console.log("La orden", orden);
         return (
             <>
-            {React.cloneElement(this.props.formulario,
-               {orden: orden, obj:obj, funcion:this.recogeDatos }) }
-                <button type="button"
-                    className="btn btn-dark"
-                    onClick={this.enSubmit}
-                >
-                    {LETRERO_BOTON[this.props.orden]}
-                </button>
+                {React.cloneElement(this.props.formulario,
+                    { orden: orden, obj: obj, funcion: this.recogeDatos })}
+                <div className = "container mt-5">
+                    <button type="button"
+                        className="btn btn-primary"
+                        onClick={this.enSubmit}
+                    >
+                        {LETRERO_BOTON[this.props.orden]}
+                    </button>
 
-                <button type="button"
-                    className="btn btn-red"
-                    onClick={this.enCancel}
-                >
-                    Cancelar
+                    <button type="button"
+                        className="btn btn-secondary"
+                        onClick={this.enCancel}
+                    >
+                        Cancelar
                 </button>
+                </div>
 
             </>
         )

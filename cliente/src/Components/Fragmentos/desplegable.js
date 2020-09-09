@@ -26,16 +26,16 @@ export default class Desplegable extends Component {
 
         this.setState({ id: this.props.depend });
 
-            AccesoAPI.leerDesplegables(this.props.table, this.props.depend)
-                .then(response => {
-                    if (response.Ok) {
-                        this.setState({ datos: response.Datos })
-                    }
-                    else {
-                        this.setState({ error: response.Respuesta });
-                    }
+        AccesoAPI.leerDesplegables(this.props.table, this.props.depend)
+            .then(response => {
+                if (response.Ok) {
+                    this.setState({ datos: response.Datos })
+                }
+                else {
+                    this.setState({ error: response.Respuesta });
+                }
 
-                })
+            })
 
     }
 
@@ -55,24 +55,21 @@ export default class Desplegable extends Component {
 
         let nombreCampo = this.props.name;
         return (
-            <div className="form-group">
-                <div className="input-group">
-                    <label htmlFor={nombreCampo}
-                        className="control-label col-md-2"
-                    >
-                        {this.props.label}
-                    </label>
-                    <div className="col-md-10">
-                        <select name={nombreCampo}
-                            id={nombreCampo}
-                            className="form-control"
-                            onChange={this.props.readValue}
-                            value={this.props.value}
-                        >
-                            {items}
-                        </select>
-                    </div>
-                </div>
+
+            <div className="form-field col-lg-6">
+                <label htmlFor={nombreCampo}
+                    className="label"
+                >
+                    {this.props.label+':'}
+                </label>
+                <select name={nombreCampo}
+                    id={nombreCampo}
+                    className="form-control"
+                    onChange={this.props.readValue}
+                    value={this.props.value}
+                >
+                    {items}
+                </select>
             </div>
         )
 

@@ -1,28 +1,48 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { TextAreaComponent } from '../../Fragmentos/TextAreaComponent';
+import { InputComponent } from '../../Fragmentos/InputComponent';
 
 
 
 
 
-export default class  FormularioDresscode extends Component {
+export default class FormularioDresscode extends Component {
     render() {
         let dresscode = this.props.obj;
         let readonly = this.props.orden.includes(['D', 'V']) ? true : false
 
         return (
-            <div className = "animate__animated animate__fadeIn">
-                <label htmlFor="dressCodeId">Id</label>
-                <input name="dressCodeId" 
-                    value={dresscode.dressCodeId } 
-                    onChange={this.props.funcion} 
-                    readOnly="ON "/>
-                <label htmlFor="dressCodeDescription">Description</label>
-                <input name="dressCodeDescription" 
-                    value={dresscode.dressCodeDescription} 
-                    onChange={this.props.funcion} 
-                    readOnly={readonly} />
-            </div>
+            <section className="get_in_touch animate__animated animate__fadeIn">
+                <h1 className="title">Código de vestimenta</h1>
+                <div className="container">
+                    <form className="formulario row">
+                        {
+                            (dresscode.dressCodeId) ?
+                                <InputComponent name="dressCodeId"
+                                    handleChange={this.props.funcion}
+
+                                    label="ID"
+                                    readOnly={true}
+                                    value={dresscode.dressCodeId} /> : null
+                        }
+                       
+
+                        <InputComponent name="dressCodeName"
+                            handleChange={this.props.funcion}
+                            label="Nombre"
+                            readOnly={readonly}
+                            value={dresscode.dressCodeDescription}
+                        />
+                        <TextAreaComponent name="dressCodeDescription"
+                            handleChange={this.props.funcion}
+                            label="Descripcion"
+                            readOnly={readonly}
+                            value={dresscode.dressCodeDescription}
+                        />
+                    </form>
+                </div>
+            </section>
 
 
         )

@@ -4,25 +4,25 @@ import Imagen from '../../Fragmentos/Imagen';
 import { InputComponent } from '../../Fragmentos/InputComponent';
 import { DesplegableDireccion } from '../../Fragmentos/DesplegableDireccion';
 import Desplegable from '../../Fragmentos/desplegable';
-import { TextAreaComponent } from './TextAreaComponent';
+import { TextAreaComponent } from '../../Fragmentos/TextAreaComponent';
 import SubirImagen from '../../Fragmentos/SubirImagen';
 import ListaCheckBox from '../../Fragmentos/ListaCheckBox';
 
 export default class FormularioClub extends Component {
 
-    
-    constructor(props){
-    super(props);
+
+    constructor(props) {
+        super(props);
         this.anadirMusica = this.anadirMusica.bind(this);
-    
+
     }
 
     anadirMusica(musicsId) {
-       let e ={
-           target:{
-                name:'musicsUpdate',
-                value:musicsId.join(',')
-                }
+        let e = {
+            target: {
+                name: 'musicsUpdate',
+                value: musicsId.join(',')
+            }
 
         }
         this.props.funcion(e);
@@ -38,253 +38,196 @@ export default class FormularioClub extends Component {
         if (this.props.orden === 'D' || this.props.orden === 'V') readonly = true
 
         return (
-            <div className='container animate__animated animate__fadeIn'>
+            <section className="get_in_touch animate__animated animate__fadeIn">
+                <h1 className="title">Formulario club</h1>
+                <div className="container">
+                    <form className="formulario row">
+                        <div className = "container">
+                            {(!readonly) ?
+                                <SubirImagen /> : null
 
-                {(!readonly) ?
-                    <SubirImagen /> : null
+                            }
+                            <Imagen imageUrl={club.coverUrl} with={20} />
+                        </div>
 
-                }
+                        {
+                                (club.clubid) ?
+                                    <InputComponent name="clubid"
+                                        handleChange={this.props.funcion}
 
-                {(club.coverUrl === null) ?
-                    <Imagen imageUrl='' with={20} />
-                    :
-                    <Imagen imageUrl={club.coverUrl} with={20} />
-                }
-                <div className='container'>
-                    <InputComponent name="clubid"
-                        handleChange={this.props.funcion}
-                        
-                        label="ID"
-                        readOnly={true}
-                        value={club.clubid}
-                        clase='elementoFormularioClub' />
-                    <br />
-                    <br />
-                    <hr />
-                </div>
-
-                <div className='container'>
-                    <div className='row '>
-
+                                        label="ID"
+                                        readOnly={true}
+                                        value={club.clubid} /> : null
+                        }
                         {
 
                             /*CLUBNAME*/
-                            <div className='col-4'>
-                                <InputComponent name="clubName"
-                                    handleChange={this.props.funcion}
-                                    
-                                    label="Nombre"
-                                    clase='elementoFormularioClub'
-                                    readOnly={readonly}
-                                    value={club.clubName}
-                                />
-                            </div>
+                            <InputComponent name="clubName"
+                                handleChange={this.props.funcion}
+                                label="Nombre"
+                                readOnly={readonly}
+                                value={club.clubName}
+                            />
                         }
 
 
                         {
 
                             /*DECSRIPCION DEL CLUB */
+                            <TextAreaComponent name="description"
+                                handleChange={this.props.funcion}
 
-                            <div className='col-4'>
-                                <TextAreaComponent name="description"
-                                    handleChange={this.props.funcion}
-                                    
-                                    label="Descripción"
-                                    clase='elementoFormularioClub'
-                                    readOnly={readonly}
-                                    value={club.description} />
-                            </div>
+                                label="Descripción"
+                                readOnly={readonly}
+                                value={club.description} />
                         }
-
-
-
-
-
-
 
                         {
                             /*TELEFONO DEL CLUB */
-                            <div className='col-4'>
-                                <InputComponent name="clubPhone"
-                                    handleChange={this.props.funcion}
-                                    
-                                    label="Teléfono"
-                                    clase='elementoFormularioClub'
-                                    readOnly={readonly}
-                                    value={club.clubPhone}
-                                />
-                            </div>
+
+                            <InputComponent name="clubPhone"
+                                handleChange={this.props.funcion}
+                                label="Teléfono"
+                                readOnly={readonly}
+                                value={club.clubPhone}
+                            />
                         }
-
-                    </div>
-                    <hr />
-                    <div className='row'>
-
-
 
                         {/*DIRECCION COMPLETA DEL CLUB */
                             (readonly) ?
-                                <div className='col-4'>
-                                    <InputComponent name="direccion"
-                                        handleChange={this.props.funcion}
-                                       
-                                        label="Dirección"
-                                        readOnly={readonly}
-                                        value={direccion}
-                                        clase='elementoFormularioClub'
-                                    />
-                                </div>
-                                : null
+                                <InputComponent name="direccion"
+                                    handleChange={this.props.funcion}
+                                    label="Dirección"
+                                    readOnly={readonly}
+                                    value={direccion}
+                                /> : null
                         }
-
 
                         {
                             /*NUMERO DE LA DIRECCION DEL CLUB */
                             (!readonly) ?
-                                <div className='col-4'>
-                                    <InputComponent name="streetNumber"
-                                        handleChange={this.props.funcion}
-                                        
-                                        label="Número de la calle"
-                                        clase='elementoFormularioClub'
-                                        readOnly={readonly}
-                                        value={club.streetNumber} />
-                                </div> : null
+                                <InputComponent name="streetNumber"
+                                    handleChange={this.props.funcion}
 
+                                    label="Número de la calle"
+                                    readOnly={readonly}
+                                    value={club.streetNumber} /> : null
                         }
 
 
                         {
                             /*CODIGO POSTAL DEL CLUB */
                             (!readonly) ?
-                                <div className='col-4'>
-                                    <InputComponent name="postal_code"
-                                        handleChange={this.props.funcion}
-                                        
-                                        label="Codigo postal"
-                                        clase='elementoFormularioClub'
-                                        readOnly={readonly}
-                                        value={club.postal_code}
-                                    />
-                                </div> : null
+                                <InputComponent name="postal_code"
+                                    handleChange={this.props.funcion}
+
+                                    label="Codigo postal"
+                                    readOnly={readonly}
+                                    value={club.postal_code}
+                                /> : null
                         }
                         {
-                            (club.Musica)?
-                            <div className='col-4'>
-                                    <ListaCheckBox name="Musica"
-                                        table='n_music'
-                                        readValue={this.anadirMusica}
-                                        label="Tipos de musica"
-                                        activos={club.Musica}
-                                    />
-                                </div>
+                            (club.Musica) ?
+
+                                <ListaCheckBox name="Musica"
+                                    table='n_music'
+                                    readValue={this.anadirMusica}
+                                    label="Tipos de musica"
+                                    activos={club.Musica}
+                                />
+
                                 :
-                                <div className='col-4'>
-                                    <ListaCheckBox name="Musica"
-                                        table='n_music'
-                                        readValue={this.anadirMusica}
-                                        label="Tipos de musica"
-                                        activos=""
-                                    />
-                                </div> 
+
+                                <ListaCheckBox name="Musica"
+                                    table='n_music'
+                                    readValue={this.anadirMusica}
+                                    label="Tipos de musica"
+                                    activos=""
+                                />
+
                         }
 
+                        <hr />
 
-                    </div>
-
-                    <hr />
-                    <div className='row'>
 
                         {
                             /*EDAD DE ACCESO AL CLUB */
-                            <div className='col-4'>
-                                <InputComponent name="accessAge"
-                                    handleChange={this.props.funcion}
-                                    
-                                    label="Edad mínima"
-                                    clase='elementoFormularioClub'
-                                    type='number'
-                                    readOnly={readonly}
-                                    value={club.accessAge} />
-                            </div>
+
+                            <InputComponent name="accessAge"
+                                handleChange={this.props.funcion}
+
+                                label="Edad mínima"
+                                type='number'
+                                readOnly={readonly}
+                                value={club.accessAge} />
+
 
                         }
 
 
                         {
                             /*DIAS DE ANTICIPACION DEL CLUB */
-                            <div className='col-4'>
-                                <InputComponent name="DiasAnticipacion"
-                                    handleChange={this.props.funcion}
-                                   
-                                    label="Dias Anticipacion"
-                                    clase='elementoFormularioClub'
-                                    type='number'
-                                    readOnly={readonly}
-                                    value={club.DiasAnticipacion} />
-                            </div>
+
+                            <InputComponent name="DiasAnticipacion"
+                                handleChange={this.props.funcion}
+
+                                label="Dias Anticipacion"
+                                type='number'
+                                readOnly={readonly}
+                                value={club.DiasAnticipacion} />
+
 
                         }
-
-
-
-
-
-
                         {
 
                             /*TIPO DE MÚSICA DEL CLUB */
                             (!readonly) ?
-                                <div className='col-4'>
-                                    <Desplegable table='n_music' name='music' label='Tipo de música' value={club.music} readValue={this.props.funcion} />
 
-                                </div>
+                                <Desplegable table='n_music' name='music' label='Tipo de música' value={club.music} readValue={this.props.funcion} />
+
+
                                 :
-                                <div className='col-4'>
-                                    <InputComponent name="Musica"
-                                        handleChange={this.props.funcion}
-                                        label="Tipo de música"
-                                        clase='elementoFormularioClub'
-                                        readOnly={readonly}
-                                        value={club.Musica}
-                                         />
-                                </div>
+
+                                <InputComponent name="Musica"
+                                    handleChange={this.props.funcion}
+                                    label="Tipo de música"
+                                    readOnly={readonly}
+                                    value={club.Musica}
+                                />
+
                         }
 
-                    </div>
-                    <hr />
 
-                    <div className='row'>
+                        <hr />
+
+
                         {
                             /*CODIGO DE VESTIMENTA DEL CLUB */
                             (!readonly) ?
-                                <div className='col-4'>
-                                    <Desplegable table='n_dresscode' name='dressCodeid' label='Codigo de vestimenta' value={club.dressCodeid} readValue={this.props.funcion} />
-                                </div>
+
+                                <Desplegable table='n_dresscode' name='dressCodeid' label='Codigo de vestimenta' value={club.dressCodeid} readValue={this.props.funcion} />
+
                                 :
-                                <div className='col-4'>
-                                    <InputComponent name="dressCodeid"
-                                        handleChange={this.props.funcion}
-                                        label="Codigo de vestimenta"
-                                        readOnly={readonly}
-                                        value={club.dressCodeDescription}
-                                        clase='elementoFormularioClub' />
-                                </div>
+
+                                <InputComponent name="dressCodeid"
+                                    handleChange={this.props.funcion}
+                                    label="Codigo de vestimenta"
+                                    readOnly={readonly}
+                                    value={club.dressCodeDescription} />
+
                         }
 
 
                         {
                             /*COSTO DE ENTRADA AL CLUB */
-                            <div className='col-4'>
-                                <InputComponent name="entryCost"
-                                    handleChange={this.props.funcion}
-                                    
-                                    clase='elementoFormularioClub'
-                                    label="Coste de entrada"
-                                    readOnly={readonly}
-                                    value={club.entryCost} />
-                            </div>
+
+                            <InputComponent name="entryCost"
+                                handleChange={this.props.funcion}
+
+                                label="Coste de entrada"
+                                readOnly={readonly}
+                                value={club.entryCost} />
+
 
                         }
 
@@ -293,209 +236,201 @@ export default class FormularioClub extends Component {
                         {
 
                             /*MAXIMO DE PERSONAS AL CLUB */
-                            <div className='col-4'>
-                                <InputComponent name="maxPeople"
-                                    handleChange={this.props.funcion}
-                                   
-                                    type='number'
-                                    clase='elementoFormularioClub'
-                                    label="Máximo de personas"
-                                    readOnly={readonly}
-                                    value={club.maxPeople} />
-                            </div>
+
+                            <InputComponent name="maxPeople"
+                                handleChange={this.props.funcion}
+
+                                type='number'
+                                label="Máximo de personas"
+                                readOnly={readonly}
+                                value={club.maxPeople} />
+
                         }
-                    </div>
-                    <hr />
-                    <div className='row'>
 
+                        <hr />
 
-                        {<div className='row'>
+                        {<>
 
-
-                            <label id='sesionElement' htmlFor={club.openSeason1}>Sesion de apertura 1:</label>
                             {/*TEMPORADAS DEL CLUB (PRINCIPIO)*/
                                 (club.openSeason1 === null) ?
-                                    <input name="openSeason1"
-                                        id='sesionElement'
-                                        type="date"
-                                        readOnly={readonly} />
+                                    <InputComponent name="openSeason1"
+                                        handleChange={this.props.funcion}
+                                        type='date'
+                                        label="Sesion de apertura 1"
+                                        readOnly={readonly}
+                                    />
                                     :
-                                    <input name="openSeason1"
-                                        id='sesionElement'
-                                        type="date"
-                                        value={club.openSeason1.split('T')[0]}
-                                        readOnly={readonly} />
+                                    <InputComponent name="openSeason1"
+                                        handleChange={this.props.funcion}
+                                        type='date'
+                                        label="Sesion de apertura 1"
+                                        readOnly={readonly}
+                                        value={club.openSeason1.split('T')[0]} />
 
                             }
-                            <label id='sesionElement' htmlFor={club.closingSeason1}>Sesion de cierre 1:</label>
                             {
                                 (club.closingSeason1 === null) ?
-                                    <input name="closingSeason1"
-                                        id='sesionElement'
-                                        type="date"
-                                        readOnly={readonly} />
+
+
+                                    <InputComponent name="closingSeason1"
+                                        handleChange={this.props.funcion}
+                                        type='date'
+                                        label="Sesion de cierre 1"
+                                        readOnly={readonly}
+                                    />
                                     :
-                                    <input name="closingSeason1"
-                                        type="date"
-                                        value={club.closingSeason1.split('T')[0]}
-                                        readOnly={readonly} />
+                                    <InputComponent name="closingSeason1"
+                                        handleChange={this.props.funcion}
+                                        type='date'
+                                        label="Sesion de cierre 1"
+                                        readOnly={readonly}
+                                        value={club.closingSeason1.split('T')[0]} />
 
                             }
-                            <label id='sesionElement' htmlFor={club.openSeason2}>Sesion de apertura 2:</label>
                             {
                                 (club.openSeason2 === null) ?
-                                    <input name="openSeason2"
-                                        id='sesionElement'
-                                        type="date"
-                                        readOnly={readonly} />
+                                    <InputComponent name="openSeason2"
+                                        handleChange={this.props.funcion}
+                                        type='date'
+                                        label="Sesion de apertura 2"
+                                        readOnly={readonly}
+                                    />
                                     :
-                                    <input name="openSeason2"
-                                        type="date"
-                                        value={club.openSeason2.split('T')[0]}
-                                        readOnly={readonly} />
+                                    <InputComponent name="openSeason2"
+                                        handleChange={this.props.funcion}
+                                        type='date'
+                                        label="Sesion de apertura 2"
+                                        readOnly={readonly}
+                                        value={club.openSeason2.split('T')[0]} />
 
                             }
-                            <label id='sesionElement' htmlFor={club.closingSeason2}>Sesion de cierre 2:</label>
                             {
-                                (club.closingSeason1 === null) ?
-                                    <input name="closingSeason2"
-                                        id='sesionElement'
-                                        type="date"
-                                        readOnly={readonly} />
+                                (club.closingSeason2 === null) ?
+                                    <InputComponent name="closingSeason2"
+                                        handleChange={this.props.funcion}
+                                        type='date'
+                                        label="Sesion de cierre 2"
+                                        readOnly={readonly}
+                                    />
                                     :
-                                    <input name="closingSeason2"
-                                        type="date"
-                                        value={club.closingSeason2.split('T')[0]}
-                                        readOnly={readonly} />
+                                    <InputComponent name="closingSeason2"
+                                        handleChange={this.props.funcion}
+                                        type='date'
+                                        label="Sesion de cierre 2"
+                                        readOnly={readonly}
+                                        value={club.closingSeason2.split('T')[0]} />
 
                             }
-                            <label id='sesionElement' htmlFor={club.openSeason3}>Sesion de apertura 3:</label>
                             {
                                 (club.openSeason3 === null) ?
-                                    <input name="openSeason3"
-                                        id='sesionElement'
-                                        type="date"
-                                        readOnly={readonly} />
+                                    <InputComponent name="openSeason3"
+                                        handleChange={this.props.funcion}
+                                        type='date'
+                                        label="Sesion de apertura 3"
+                                        readOnly={readonly}
+                                    />
                                     :
-                                    <input name="openSeason3"
-                                        type="date"
-                                        value={club.openSeason3.split('T')[0]}
-                                        readOnly={readonly} />
+                                    <InputComponent name="openSeason3"
+                                        handleChange={this.props.funcion}
+                                        type='date'
+                                        label="Sesion de apertura 3"
+                                        readOnly={readonly}
+                                        value={club.openSeason3.split('T')[0]} />
 
                             }
-                            <label id='sesionElement' htmlFor={club.closingSeason3}>Sesion de cierre 3:</label>
                             {
                                 (club.closingSeason3 === null) ?
-                                    <input name="closingSeason3"
-                                        id='sesionElement'
-                                        type="date"
-                                        readOnly={readonly} />
+                                    <InputComponent name="closingSeason3"
+                                        handleChange={this.props.funcion}
+                                        type='date'
+                                        label="Sesion de cierre 3"
+                                        readOnly={readonly}
+                                    />
                                     :
-                                    <input name="closingSeason3"
-                                        type="date"
-                                        value={club.closingSeason3.split('T')[0]}
-                                        readOnly={readonly} />
+                                    <InputComponent name="closingSeason3"
+                                        handleChange={this.props.funcion}
+                                        type='date'
+                                        label="Sesion de cierre 3"
+                                        readOnly={readonly}
+                                        value={club.closingSeason3.split('T')[0]} />
                                 /*TEMPORADAS DEL CLUB (FINAL)*/
                             }
-                        </div>}
-                    </div>
-                    <hr />
-                    <div className='row'>
+                        </>}
+
+
 
                         {
                             /*LATITUD DEL CLUB */
-                            <div className='col-4'>
-                                <InputComponent name="latitude"
-                                    handleChange={this.props.funcion}
-                                    
-                                    label="Latitude"
-                                    clase='elementoFormularioClub'
-                                    readOnly={readonly}
-                                    value={club.latitude}
-                                />
-                            </div>
+
+                            <InputComponent name="latitude"
+                                handleChange={this.props.funcion}
+                                label="Latitude"
+                                readOnly={readonly}
+                                value={club.latitude}
+                            />
+
+                        }
+                        {
+                            /*LONGITUD DEL CLUB */
+                            <InputComponent name="longitude"
+                                handleChange={this.props.funcion}
+                                label="Longitude"
+                                readOnly={readonly}
+                                value={club.longitude}
+                            />
+
                         }
 
-                        <div className='row'>
-                            {
-                                /*LONGITUD DEL CLUB */
-                                <div className='col-10'>
-                                    <InputComponent name="longitude"
-                                        handleChange={this.props.funcion}
-                                        
-                                        label="Longitude"
-                                        clase='elementoFormularioClub'
-                                        readOnly={readonly}
-                                        value={club.longitude}
-                                    />
-                                </div>
 
-                            }</div>
-                    </div>
-                    <div className='row'>
                         {/*CIUDAD DEL CLUB */
                             (readonly) ?
-
-                                (<div className='col-12'><InputComponent name="cityName"
+                                <InputComponent name="cityName"
                                     handleChange={this.props.funcion}
-                                    
+
                                     label="Ciudad"
                                     readOnly={readonly}
                                     value={club.cityName}
-                                    clase='elementoFormularioClub'
-                                /></div>)
-
-                                :
-                                (<div className='col-12'><DesplegableDireccion
+                                /> :
+                                <DesplegableDireccion
                                     funcion={this.props.funcion}
                                     valorCCAA={club.stateid}
                                     valorProv={club.provinceid}
                                     valorPobl={club.cityid}
-                                /></div>)
+                                />
 
                         }
-
-                    </div>
-
-                    <div className='row'>
-
 
                         {/*EMPRESA DEL CLUB */
                             (!readonly) ?
-                                <div className='col-12'>
-                                    <label>Empresas</label>
-                                    <Desplegable table='companies' name='companyid' value={club.companyid} readValue={this.props.funcion} />
-                                </div>
+                                <Desplegable
+                                    label='Empresa'
+                                    table='companies'
+                                    name='companyid'
+                                    value={club.companyid}
+                                    readValue={this.props.funcion} />
+
                                 :
-                                <div className='col-12'>
-                                    <InputComponent name="companyName"
-                                        handleChange={this.props.funcion}
-                                        label="Empresa"
-                                        readOnly={readonly}
-                                        value={club.companyName}
-                                        clase='elementoFormularioClub' />
-                                </div>
+                                <InputComponent name="companyName"
+                                    handleChange={this.props.funcion}
+                                    label="Empresa"
+                                    readOnly={readonly}
+                                    value={club.companyName} />
+
                         }
-                    </div>
-                    {
-                        /*COMO LLEGAR AL CLUB */
-                        <div className='col-4'>
+
+                        {
+                            /*COMO LLEGAR AL CLUB */
+
                             <TextAreaComponent name="howToGetThere"
                                 handleChange={this.props.funcion}
-
                                 label="Como legar"
-                                clase='elementoFormularioClub'
                                 readOnly={readonly}
                                 value={club.howToGetThere} />
-                        </div>
-                    }
 
-
+                        }
+                    </form>
                 </div>
-            </div>
-
-
-
+            </section>
         )
     }
 

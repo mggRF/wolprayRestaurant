@@ -18,62 +18,64 @@ export default class FormularioCity extends Component {
                 title = 'modificar';
                 break;
             default:
-                title = 'Información sobre empresa';
+                title = 'Información dela ciudad';
                 break;
         }
         console.log("City=>", City);
         return (
-            <div className="animate__animated animate__fadeIn">
+            <div className="get_in_touch animate__animated animate__fadeIn">
                 {
                     (!readonly) ?
-                        (<h1>{'Formulario para ' + title}</h1>) :
-                        (<h1>{title}</h1>)
+                        (<h1 className="title">{'Formulario para ' + title}</h1>) :
+                        (<h1 className="title">{title}</h1>)
                 }
                 <br />
-                <form className="form-horizontal" >
+                <div className="container">
+                    <form className="formulario row" >
 
 
-                    <><InputComponent
-                        handleChange={this.props.funcion}
-                        name="provinceid"
-                        label="ID"
-                        readOnly={true}
-                        value={City.cityid.toString()}
-                    /></>
+                        <><InputComponent
+                            handleChange={this.props.funcion}
+                            name="provinceid"
+                            label="ID"
+                            readOnly={true}
+                            value={City.cityid.toString()}
+                        /></>
 
-                    <InputComponent
-                        handleChange={this.props.funcion}
-                        name="cityName"
-                        label="Nombre"
-                        readOnly={readonly}
-                        value={City.cityName}
-                    />
-                    <InputComponent
-                        handleChange={this.props.funcion}
-                        name="latitude"
-                        label="Latitud"
-                        readOnly={readonly}
-                        value={City.latitude}
-                    />
-                    <InputComponent
-                        handleChange={this.props.funcion}
-                        name="longitude"
-                        label="Longitud"
-                        readOnly={readonly}
-                        value={City.longitude}
-                    />
+                        <InputComponent
+                            handleChange={this.props.funcion}
+                            name="cityName"
+                            label="Nombre"
+                            readOnly={readonly}
+                            value={City.cityName}
+                        />
+                        <InputComponent
+                            handleChange={this.props.funcion}
+                            name="latitude"
+                            label="Latitud"
+                            readOnly={readonly}
+                            value={City.latitude}
+                        />
+                        <InputComponent
+                            handleChange={this.props.funcion}
+                            name="longitude"
+                            label="Longitud"
+                            readOnly={readonly}
+                            value={City.longitude}
+                        />
 
-                    {
-                        (!readonly) ?
-                            (<Desplegable
-                                label='Estado:'
-                                readValue={this.props.funcion}
-                                table='c_procinces'
-                                value={City.provinceid}
-                                name='stateid'
-                            />) : null
-                    }
-                </form>
+                        {
+                            (!readonly) ?
+                                (<Desplegable
+                                    label='Estado:'
+                                    readValue={this.props.funcion}
+                                    table='c_procinces'
+                                    value={City.provinceid}
+                                    name='stateid'
+                                />) : null
+                        }
+                    </form>
+                </div>
             </div>
         )
     }
