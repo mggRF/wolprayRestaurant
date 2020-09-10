@@ -5,21 +5,14 @@
 const ControladorBase = require("./ControladorBase");
 
 const MODELO = require("../modelos/Role");
+const {QueriesRole} = require("../queries/QueriesRole");
 const TABLA = 'roles';
-
-const QUERIES = {
-    SELECT_SELECT: `SELECT roleid   as id,roleName  as opcion FROM ${TABLA} WHERE roleid   = :id`,
-    SELECT_UNO: `SELECT * FROM ${TABLA} WHERE roleid   = :id`,
-    INSERT: `INSERT INTO ${TABLA} SET ?`,
-    UPDATE: `UPDATE ${TABLA} SET ? WHERE roleid = ?`,
-    DELETE: `DELETE FROM ${TABLA} WHERE roleid = ?`
-}
 
 class ControladorRoles extends ControladorBase {
     constructor(){
         let config = {
             TABLA:TABLA,
-            QUERIES: QUERIES,
+            QUERIES: QueriesRole,
             MODELO:MODELO,
             campoId: 'roleid  ',
         }

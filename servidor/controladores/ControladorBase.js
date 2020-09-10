@@ -19,7 +19,7 @@ class ControladorBase {
         this.sendDataToTable = this.sendDataToTable.bind(this);
         this.enviaDatos = this.enviaDatos.bind(this);
         this.leerCount = this.leerCount.bind(this);
-        this.limite = LPPAGINA
+        this.limite = LPPAGINA;
     }
     /**
      * Enviar datos a puesto //salida API
@@ -54,7 +54,7 @@ class ControladorBase {
      * @param {} res : objeto response.
      */
     listado(req, res) {
-        this.config.QUERIES.SELECT_ALL = "SELECT * FROM " + this.config.TABLA;
+        
 
         return this.leerALL(req, res);
         // let salida = [];
@@ -137,7 +137,8 @@ class ControladorBase {
         let id = req.params.id;
         if (id === "count") return this.leerCount(req, res);
         let sql = this.config.QUERIES.SELECT_UNO.replace(':id', id);
-        this.connect.leerSql(sql)
+
+        this.connect.leerSql(sql.replace(/:TABLA/gi, this.config.TABLA))
             .then(dat => {
                 this.enviaDatos(res, dat);
 
@@ -163,7 +164,7 @@ class ControladorBase {
         const role = req.session.role;
 
 
-        this.connect.leerSql(sql)
+        this.connect.leerSql(sql.replace(/:TABLA/gi,this.config.TABLA))
             .then(dat => {
                 //console.log("dat->", dat);
                 this.enviaDatos(res, dat);
@@ -177,7 +178,8 @@ class ControladorBase {
 
     leerALL(req, res) {
 
-        let sql = this.config.QUERIES.SELECT_ALL;
+        
+        let sql = this.config.QUERIES.SELECT_ALL.replace(/:TABLA/gi,this.config.TABLA);
         let where = "";
 
         const ids = req.session.userid;
@@ -235,7 +237,7 @@ class ControladorBase {
                 this.hacerPut(id, body, file, res);
                 break;
             case 'delete':
-                this.hacerDelete(res, id, QUERIES.DELETE);
+                this.hacerDelete(res, id, QUERIES.DELETE.replace(/:TABLA/gi,this.config.TABLA));
                 break;
             default:
                 this.enviaDatos(res, 'Esta acción no es válida', 400);
@@ -334,7 +336,7 @@ class ControladorBase {
                 this.enviaDatos(res, 'Es obligatorio subir subir una imagen', 400);
                 break;
             default:
-                const result = this.sendDataToTable([body], QUERIES.INSERT, file);
+                const result = this.sendDataToTable([body], QUERIES.INSERT.replace(/:TABLA/gi,this.config.TABLA), file);
                 if (result.Ok) {
                     console.log(result);
                     this.enviaDatos(res, result.Data);
@@ -367,7 +369,7 @@ class ControladorBase {
 
 
         //res,data, sql, metodo, file = null
-        this.sendDataToTable([body, id], QUERIES.UPDATE)
+        this.sendDataToTable([body, id], QUERIES.UPDATE.replace(/:TABLA/gi,this.config.TABLA))
         .then(result =>{
             console.log(result)
                 this.enviaDatos(res, result.Data);
@@ -439,42 +441,3 @@ class ControladorBase {
 
 
 module.exports = ControladorBase
-/**
- * this.connect.modifyTable(sql, data)
-            .then(value => {
-                
-                if (value.insertId && file !== null) {
-                    this.guardarImagen(file, value.insertId)
-                        .then(response => {
-                            console.log('OK => ',response)
-                            return {
-                                Ok: true,
-                                Data: 'Se ha modificado correctamente la tabla en la base de datos. ' + response
-                            }
-                        }).catch(err => {
-                            console.log('Error=> ',err)
-                            return {
-                                Ok: false,
-                                Data: err,
-                                Status: 500
-                            }
-                        });
-                } else {
-                    console.log('OK => ',value);
-                    return {
-                        Ok: true,
-                        Data: 'Se ha modificado correctamente la tabla en la base de datos'
-                    }
-                }
-            }).catch(err => {
-                console.log('ERROR => ',err);
-                return {
-                    OK: false,
-                    Data: err,
-                    Status: 500
-                }
-            });
- * 
- * 
- * 
- */
