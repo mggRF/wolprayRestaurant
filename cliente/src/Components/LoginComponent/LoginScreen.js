@@ -1,8 +1,10 @@
 import React, { Component }  from 'react';
 import ButtonComponent from '../Comun/buttonComponent/ButtonComponent';
+import AccesoAPI from '../../Servicios/AccesoAPI';
 import themeLogo from '../Comun/images/logowolpray.png';
 import './login.css';
 import { Link} from "react-router-dom";
+import { checkUsuario } from '../../Servicios/funcionesSeguridad';
 
 export default class LoginScreen extends Component {
     constructor(props) {
@@ -10,17 +12,23 @@ export default class LoginScreen extends Component {
         this.state = {
             email: '',
             password: '',
-            user: null,
-            admin: false,
-            manager: false
         }
-        console.log("DESDE LOGINSCREEN");
-        console.log(this.state.password);
+        this.TABLA = 'LOGIN';
     }
 
     onSubmitInput = (e) => {
         e.preventDefault();
-        this.props.history.replace('/');
+        console.log('State: ',this.state);
+        AccesoAPI.verificaUsuario(this.TABLA,this.state)
+            .then(response => {
+                console.log('Respuesta: ', response);
+                if(response.Ok){
+                    localStorage.setItem('user', response.Datos);
+                    console.log('Check usuario: ', checkUsuario);
+                }
+
+                 this.props.history.push('/');
+            }).catch(err => console.log('Error: ', err));
     }
 
     handleInputChange = ({ target }) => {
@@ -30,8 +38,6 @@ export default class LoginScreen extends Component {
                 [target.name]: target.value
             }
         );
-        console.log("DESDE handleInputChange")
-        console.log(this.state)
     }
 
     render() {
@@ -41,7 +47,7 @@ export default class LoginScreen extends Component {
 
             <form className="login-bx mt-5 animate__animated animate__fadeIn" onSubmit={this.onSubmitInput}>
                 <h1>Login</h1>
-                <div className="bximg">
+                <div className="bximg animate__animated animate__jackInTheBox">
                     <img src={themeLogo} alt = 'Logo' />
                 </div>
 
@@ -72,7 +78,7 @@ export default class LoginScreen extends Component {
                 </div>
 
                 <div className="bottom-text">
-                    ¿Aún no eres parte de nosotros? <Link to = '/register'>¡Contáctanos!</Link>
+                    ¿Has olvidado tu contraseña? <Link to = '/register'>¡Contáctanos!</Link>
                 </div>
             </form>
             

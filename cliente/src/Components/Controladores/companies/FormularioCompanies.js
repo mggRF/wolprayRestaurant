@@ -28,16 +28,13 @@ export default class FormularioCompanies extends Component {
         console.log("Company=>", company);
         console.log('El readonly es: ' + readonly)
         return (
-            <div className="get_in_touch animate__animated animate__fadeIn">
-                <div className="row mb-5">
-                    <div className="col-xl-10 col-lg-9 col-md-8 ml-auto">
-                        <div className="row">
-
-                            {
-                                (!readonly) ?
-                                    (<h1 className="title">{'Formulario para ' + title}</h1>) :
-                                    (<h1 className="title">{title}</h1>)
-                            }
+            <section className="get_in_touch animate__animated animate__fadeIn">
+                {
+                    (!readonly) ?
+                        (<h1 className="title">{'Formulario para ' + title}</h1>) :
+                        (<h1 className="title">{title}</h1>)
+                }
+                <div className="container">
                             <br />
                             <div className="container">
                                 <form className="formulario row">
@@ -96,11 +93,8 @@ export default class FormularioCompanies extends Component {
                                     }
                                 </form>
                             </div>
-
-                        </div>
-                    </div>
                 </div>
-            </div>
+            </section>
         )
     }
 }

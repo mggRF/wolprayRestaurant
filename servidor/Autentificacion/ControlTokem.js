@@ -19,36 +19,38 @@ class ControlTokem {
                                 const token = createToken(user);
                                 req.session.userid = user.userid;
                                 req.session.role = user.roleid;
-                                res.json({
+                                usersController.enviaDatos(res,{
                                     mensaje: 'Autenticación correcta',
                                     token: token
-                                });
+                                })
                             } else {
-                                res.json({ mensaje: "Usuario o contraseña incorrectos" });
+                                usersController.enviaDatos(res,{
+                                    mensaje: "Usuario o contraseña incorrectos"
+                                },403);
                             }
 
                         } else {
-                            res.json({ mensaje: "Usuario o contraseña incorrectos" });
+                            usersController.enviaDatos(res,{ mensaje: "Usuario o contraseña incorrectos" }, 403);
                         }
                     }else{
-                        res.json({ mensaje: "Usuario o contraseña incorrectos" });
+                        usersController.enviaDatos(res,{ mensaje: "Usuario o contraseña incorrectos" }, 403);
                     }
 
                 })
                 .catch(err => {
                     console.log('Ha ocurrido un error')
                     console.log(err)
-                    res.json({ mensaje: err });
+                    usersController.enviaDatos(res,{ mensaje: err }, 403);
                 });
         } else {
-            res.json({ mensaje: "Error en los parámetros ingresados" });
+            usersController.enviaDatos(res,{ mensaje: "Error en los parámetros ingresados" }, 500);
         }
     }
 
 
     logout(req, res) {
         req.session.destroy();
-        res.json({ mensaje: "Se ha cerrado la sesión" });
+        usersController.enviaDatos(res,{ mensaje: "Se ha cerrado la sesión" });
     }
 }
 

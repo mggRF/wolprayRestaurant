@@ -12,51 +12,52 @@ const variable_url = () => {
     }
 }
 module.exports = {
-    API_URL: variable_url()  + VERSION_API + '/',
+    API_URL: variable_url() + VERSION_API + '/',
     CLUBS: 'clubs',
     EVENTS: 'events',
     STATES: 'states',
     PROVINCES: 'provinces',
     MUSIC: 'musics',
-    COMPANIES:'companies',
+    COMPANIES: 'companies',
     DRESSCODE: 'dresscode',
     ROLE: 'roles',
     USERS: 'users',
     CITYS: 'citys',
-    STATES_SELECT: 'states/select/',
-
+    COUNTRIES:'countrys',
     LPPAGINA: "5",                             //lineas por pagina
-    
+
     INS: "Añadir",
     MOD: "Modificar",
     DEL: "Delete",
     VIE: "VER",
-    
+
     CONVERSOR: {
         c_state: 'states',
         c_city: 'citys',
         c_country: 'countrys',
         c_provinces: 'provinces',
-        n_categories:'categories',
-        n_dresscode:'dresscode',
-        n_music:'musics'
-        
+        n_categories: 'categories',
+        n_dresscode: 'dresscode',
+        n_music: 'musics',
+        LOGIN: variable_url()+'login',
+        LOGOUT: variable_url()+ 'logout',
+
     },
     METODO: {
-        I:'POST',
-        E:'PUT',
-        D:'DELETE'
+        I: 'POST',
+        E: 'PUT',
+        D: 'DELETE'
     },
-    LETRERO_BOTON:{
-        I:'Insertar',
-        E:'Modificar',
-        D:'Borrar',
-        V:'Cerrar'
+    LETRERO_BOTON: {
+        I: 'Insertar',
+        E: 'Modificar',
+        D: 'Borrar',
+        V: 'Cerrar'
 
     },
     COLORES: {                      //indicar clase
-        BTN_VER:"btn-info",
-        BTN_EDIT:"btn-success",
+        BTN_VER: "btn-info",
+        BTN_EDIT: "btn-success",
         BTN_DEL: "btn-danger",
         BTN_INSERT: "btn-success"
 

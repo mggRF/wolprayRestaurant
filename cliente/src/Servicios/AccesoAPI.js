@@ -9,7 +9,7 @@ export default class AccesoAPI {
 
   static async leerDesplegables(tabla, precursor) {
     let url = API_URL + this.verificaTabla(tabla) + "/select/"
-    if (!(precursor === undefined || precursor===0)) url += precursor;
+    if (!(precursor === undefined || precursor === 0)) url += precursor;
     return this.accederApi(url);
   }
 
@@ -33,15 +33,36 @@ export default class AccesoAPI {
       case 'DELETE':
         url += '/' + id;
         return this.accederApi(url, metodo, null);
-        default:
-          break;
+      default:
+        break;
     }
 
+  }
+
+  /**
+   * Verifica si el usuario existe en la base de datos.
+   * 
+   * @param {*} accion acción solicitada
+   * @param {*} datos datos para verificar
+   */
+  static async verificaUsuario(accion, datos) {
+    console.log('Estoy en verificar usuario')
+    let url = this.verificaTabla(accion);
+    console.log('La url es: ', url)
+    switch (accion) {
+      case 'LOGIN':
+        return this.accederApi(url, 'PUT', datos);
+      case 'LOGOUT':
+        return this.accederApi(url, 'PUT', datos);
+      default:
+        break;
+    }
   }
   /*
   *  Metodo de acceso a la API. Comun......
   */
   static async accederApi(url, metodo = "GET", datos = null) {
+    console.log('Los datos')
     const cabeceras = new Headers();
     cabeceras.append("Content-Type", "application/json");
     cabeceras.append("Authorization", "Bearer my-token");
