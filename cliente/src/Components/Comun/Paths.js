@@ -5,6 +5,16 @@ const paths = {
         icon: 'fas fa-home',
 
     },
+    EVENTS : {
+        title: 'Eventos',
+        path: '/events',
+        icon: 'fas fa-calendar-week'
+    },
+    COUNTRIES : {
+        title: 'Paises',
+        path: '/countries',
+        icon: 'fas fa-globe-europe'
+    },
     MUSICA : {
         title: 'Música',
         path: '/music',

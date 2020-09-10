@@ -11,14 +11,16 @@ import ControllerUsers from '../Controladores/users/ControllerUsers';
 import ControllerCCAA from '../Controladores/ccaa/ControllerCCAA';
 import ControllerProvince from '../Controladores/province/ControllerProvince';
 import ControllerCity from '../Controladores/city/ControllerCity';
-
+import ControllerEvents from '../Controladores/events/ControllerEvents';
 
 import paths from './Paths';
+import ControllerPais from '../Controladores/pais/ControllerPais';
+
 
 export const DashboardRoutes = () => {
 
 
-    const { MUSICA, HOME, CCAA, CLUBS, COMPANIES, DRESSCODE, ROLES, USERS , PROVINCE, CITY} = paths;
+    const { MUSICA, HOME, CCAA, CLUBS, COMPANIES, DRESSCODE, ROLES, USERS , PROVINCE, CITY, EVENTS,COUNTRIES} = paths;
 
     return (
         <>
@@ -33,6 +35,8 @@ export const DashboardRoutes = () => {
                 <Route exact path={CCAA.path} component={ControllerCCAA} />
                 <Route exact path={PROVINCE.path} component={ControllerProvince} />
                 <Route exact path={CITY.path} component={ControllerCity} />
+                <Route exact path={EVENTS.path} component={ControllerEvents} />
+                <Route exact path={COUNTRIES.path} component={ControllerPais} />
 
                 <Redirect to={HOME.path} />
             </Switch>
