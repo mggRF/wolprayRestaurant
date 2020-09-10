@@ -1,8 +1,20 @@
-export function checkUsuario(){
-    return {id:1,
-            role:9,
-            remote:'kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk'
+export function checkUsuario(role) {
+
+    if (role >= init.role) {
+
+        return {
+            id: init.id,
+            role: init.role,
+            token: init.token
         };
+    }else{
+
+    }
+}
+
+
+function init() {
+    return JSON.parse(localStorage.getItem('user')) || { logged: false };
 }
 
 

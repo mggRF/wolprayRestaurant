@@ -55,4 +55,33 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
   integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
+
+
+<script type="text/javascript">
+  $('.txtb input').on('focus',function(){
+    $(this).addClass('focus');
+  });
+  $('.txtb input').on('blur',function(){
+    if($(this).val() == ''){
+
+      $(this).removeClass('focus');
+    }
+  });
+  $('.txtb input').keydown(function() {
+  
+  var textLength = $(this).val().length;
+  
+  if(textLength <= 16){
+      $(this).css('font-size', '100%');
+  }else if(textLength > 16 && textLength <= 19) {
+      $(this).css('font-size', '85%');
+  }else if(textLength > 19 && textLength <= 22) {
+      $(this).css('font-size', '70%');
+  }else if(textLength > 22) {
+      $(this).css('font-size', '65%');
+  }
+  
+ console.log(textLength);
+});
+</script>
 </html>
