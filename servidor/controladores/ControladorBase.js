@@ -237,7 +237,7 @@ class ControladorBase {
                 this.hacerPut(id, body, file, res);
                 break;
             case 'delete':
-                this.hacerDelete(res, id, QUERIES.DELETE.replace(/:TABLA/gi,this.config.TABLA));
+                this.hacerDelete(res, id, QUERIES.DELETE);
                 break;
             default:
                 this.enviaDatos(res, 'Esta acción no es válida', 400);
@@ -336,7 +336,7 @@ class ControladorBase {
                 this.enviaDatos(res, 'Es obligatorio subir subir una imagen', 400);
                 break;
             default:
-                const result = this.sendDataToTable([body], QUERIES.INSERT.replace(/:TABLA/gi,this.config.TABLA), file);
+                const result = this.sendDataToTable([body], QUERIES.INSERT, file);
                 if (result.Ok) {
                     console.log(result);
                     this.enviaDatos(res, result.Data);
@@ -369,7 +369,7 @@ class ControladorBase {
 
 
         //res,data, sql, metodo, file = null
-        this.sendDataToTable([body, id], QUERIES.UPDATE.replace(/:TABLA/gi,this.config.TABLA))
+        this.sendDataToTable([body, id], QUERIES.UPDATE)
         .then(result =>{
             console.log(result)
                 this.enviaDatos(res, result.Data);
@@ -399,7 +399,7 @@ class ControladorBase {
      */
     async sendDataToTable(data, sql, file = null) {
         const result = await new Promise((resolve, reject) => {
-            this.connect.modifyTable(sql, data)
+            this.connect.modifyTable(sql.replace(/:TABLA/gi,this.config.TABLA), data)
                 .then(value => {
 
                     if (value.insertId && file !== null) {
