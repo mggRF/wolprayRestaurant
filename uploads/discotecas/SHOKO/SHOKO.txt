@@ -1,0 +1,20 @@
+NOMBRE:
+Discoteca Shôko Barcelona
+
+DESCRIPCIÓN:
+Shôko Barcelona. Discoteca con terraza situada en el Puerto Olímpico a primera línea de la playa abierta todos los días y noches de la semana. También ofrece servicio de restaurante
+
+DIRECCIÓN:
+Passeig Marítim de la Barceloneta, 36, Barcelona, Metro L4 Ciutadella Vila Olímpica.
+
+SCHEDULE:
+23:55h - 06:00h
+
+AMBIENCE:
+Hip Hop / R&B / Reggaeton / Electro / House Comercial / EDM
+
+DRESS_CODE:
+Casual - No Bambas o Ropa Deportiva
+
+TELEFONO:
+932 25 92 00

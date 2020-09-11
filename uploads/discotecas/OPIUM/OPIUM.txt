@@ -1,0 +1,20 @@
+NOMBRE:
+Discoteca Opium Barcelona
+
+DESCRIPCIÓN:
+Discoteca Opium Barcelona. Descubre las mejores fiestas de Barcelona con DJ's internacionales, buena música y una terraza frente al mar.
+
+DIRECCIÓN:
+Passeig Marítim de la Barceloneta, 34, Barcelona, Metro L4 Ciutadella Vila Olímpica.
+
+SCHEDULE:
+23:55h - 06:00h
+
+AMBIENCE:
+R&B / Hip Hop / House Comercial / Top Hits / Reggaeton
+
+DRESS_CODE:
+Elegante - No Bambas o Ropa Deportiva
+
+TELEFONO:
+932 21 32 24

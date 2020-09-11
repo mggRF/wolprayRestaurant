@@ -11,6 +11,7 @@ var rutas = express.Router();
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
 rutas.get('/', events.listado);
 rutas.get('/select/:id',events.leerSelect)
+rutas.get('/uploads/:id/:img',events.getFoto)
 rutas.get('/:id', events.leerUno);
 rutas.post('/', events.updateTable);
 rutas.put('/:id', events.updateTable);

@@ -1,0 +1,20 @@
+NOMBRE:
+Discoteca Razzmatazz
+
+DESCRIPCIÓN:
+Razzmatazz es sin duda es uno de los referentes del ocio y la cultura nacional e internacional. Está situado en un edifico que se asocia al paisaje industrial de la ciudad, en el barrio Poble Nou de Barcelona.
+
+DIRECCIÓN:
+Carrer dels Almogàvers, 122, Barcelona, Metro L4 Bogatell
+
+SCHEDULE:
+23:55h - 06:00h
+
+AMBIENCE:
+Variada
+
+DRESS_CODE:
+Casual - No Bambas o Ropa Deportiva
+
+TELEFONO:
+932 24 04 70

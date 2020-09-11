@@ -1,0 +1,20 @@
+NOMBRE:
+Discoteca Hyde Club
+
+DESCRIPCIÓN:
+Hyde Club Barcelona. Discoteca divertida situada en el centro de la ciudad. Es el lugar de referencia de los mejores afterworks de la noche con un público selecto y adulto.
+
+DIRECCIÓN:
+Passatge de Domingo, 3, Barcelona, Metro L3 o L5 Diagonal / L3 o L4 Passeig de Gràcia
+
+SCHEDULE:
+23:55h - 06:00h
+
+AMBIENCE:
+House Comercial / Reggaeton / R&B / Pop / Top Hits
+
+DRESS_CODE:
+Arreglado - No Bambas o Ropa Deportiva
+
+TELEFONO:
+ 661 225 353

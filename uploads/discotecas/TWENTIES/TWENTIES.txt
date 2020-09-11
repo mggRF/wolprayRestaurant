@@ -1,0 +1,20 @@
+NOMBRE:
+TWENTIES BARCELONA
+
+DESCRIPCIÓN:
+Twenties Barcelona. Discoteca de moda situada en la Zona Alta. Averigua las mejores fiestas, el mejor ambiente y vivirás una experiencia única que nunca olvidarás.
+
+DIRECCIÓN:
+Calle Rosselló, 208 08014 Barcelona, Metro L3 o L5 Diagonal / FFCC Provença
+
+SCHEDULE:
+23:55h - 06:00h
+
+AMBIENCE:
+Hits / Reggaeton / R&B / House Comercial / Top Hits
+
+DRESS_CODE:
+Arreglado - No Bambas o Ropa Deportiva
+
+TELEFONO:
+ 661 225 353

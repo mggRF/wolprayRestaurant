@@ -6,6 +6,7 @@ class FileSystem {
     constructor(config) {
         this.config = config;
         this.guardarImagenTemporal = this.guardarImagenTemporal.bind(this);
+        this.getFotoUrl =  this.getFotoUrl.bind(this);
     }
 
 
@@ -99,6 +100,19 @@ class FileSystem {
         }else{
             return false;
         }
+    }
+
+
+
+    getFotoUrl(id,img){
+        const pathFoto = path.resolve(__dirname,'../../uploads',this.config.CARPETA.CARPETA, id, img);
+
+        const exist = fs.existsSync(pathFoto);
+
+        if(!exist){
+            return path.resolve(__dirname,'../../uploads','nofile.JPG')
+        }
+        return pathFoto;
     }
 }
 

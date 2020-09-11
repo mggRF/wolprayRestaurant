@@ -1,0 +1,20 @@
+NOMBRE:
+Discoteca Otto Zutz
+
+DESCRIPCIÓN:
+Otto Zutz Barcelona. Discoteca con tres salas diferentes y situada en la Zona Alta. Podrás escuchar la mejor música Hip Hop, Reggaeton, R&B y Top Hits del momento.
+
+DIRECCIÓN:
+Carrer de Lincoln, 15, Barcelona, Metro L3 Fontana / FGC Gràcia
+
+SCHEDULE:
+23:55h - 06:00h
+
+AMBIENCE:
+Hip Hop / Reggaeton / Top Hits / R&B
+
+DRESS_CODE:
+Casual - No Bambas o Ropa Deportiva
+
+TELEFONO:
+932 38 07 22
