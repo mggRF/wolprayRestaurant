@@ -5,6 +5,7 @@
 const ControladorBase = require("./ControladorBase");
 
 const MODELO = require("../modelos/Nmusic");
+const {QueriesMusic} = require("../queries/QueriesMusic");
 const TABLA = 'n_music';
 /**
  * Querys que utiliza el controlador para obtener los distintos resultados
@@ -20,21 +21,14 @@ const TABLA = 'n_music';
  * :id id del registro con el que se desea trabajar
  */
 
-const QUERIES = {
-    SELECT_ALL: `SELECT * FROM ${TABLA} WHERE musicid = :ids`,
-    SELECT_SELECT: `SELECT musicid as id,musicName as opcion FROM ${TABLA}` ,
-    SELECT_UNO: `SELECT * FROM ${TABLA} WHERE musicid = :id`,
-    INSERT: `INSERT INTO ${TABLA} SET ?`,
-    UPDATE: `UPDATE ${TABLA} SET ? WHERE musicid = ?`,
-    DELETE: `DELETE FROM ${TABLA} WHERE musicid = ?`
-}
+
  
 class ControladorMusic extends ControladorBase {
    
     constructor(){
         let config = {
             TABLA:TABLA,
-            QUERIES: QUERIES,
+            QUERIES: QueriesMusic,
             MODELO:MODELO,
             campoId: 'musicid',
         }

@@ -5,21 +5,16 @@
 const ControladorBase = require("./ControladorBase");
 
 const MODELO = require("../modelos/Poblacion");
+const {QueriesPoblacion} = require("../queries/QueriesPoblacion");
 const TABLA = 'c_city';
 
-const QUERIES = {
-    SELECT_SELECT: `SELECT cityid as id,cityName as opcion FROM ${TABLA} WHERE provinceid  = :id`,
-    SELECT_UNO: `SELECT * FROM ${TABLA} WHERE cityid = :id`,
-    INSERT: `INSERT INTO ${TABLA} SET ?`,
-    UPDATE: `UPDATE ${TABLA} SET ? WHERE cityid = ?`,
-    DELETE: `DELETE FROM ${TABLA} WHERE cityid = ?`
-}
+
 
 class ControladorPoblacion extends ControladorBase {
     constructor(){
         let config = {
             TABLA:TABLA,
-            QUERIES: QUERIES,
+            QUERIES: QueriesPoblacion,
             MODELO:MODELO,
             campoId: 'cityid',
         }

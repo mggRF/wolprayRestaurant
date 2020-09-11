@@ -5,22 +5,16 @@
 const ControladorBase = require("./ControladorBase");
 const Presenta = require('../servicios/Presenta');
 const MODELO = require("../modelos/Users");
+const {QueriesUser} = require("../queries/QueriesUser");
 const TABLA = 'users';
-const SELECT_BY_MAIL = `SELECT * FROM ${TABLA} WHERE mail  = ':email'`
 
-const QUERIES = {
-    SELECT_SELECT: `SELECT userid  as id,userName  as opcion FROM ${TABLA} WHERE roleid = :id`,
-    SELECT_UNO: `SELECT * FROM ${TABLA} WHERE userid  = :id`,
-    INSERT: `INSERT INTO ${TABLA} SET ?`,
-    UPDATE: `UPDATE ${TABLA} SET ? WHERE userid = ?`,
-    DELETE: `DELETE FROM ${TABLA} WHERE userid = ?`
-}
+
 
 class ControladorUsers extends ControladorBase {
     constructor(){
         let config = {
             TABLA:TABLA,
-            QUERIES: QUERIES,
+            QUERIES: QueriesUser,
             MODELO:MODELO,
             campoId: 'userid',
         }
@@ -29,11 +23,12 @@ class ControladorUsers extends ControladorBase {
     }
     
     async userByEmail(email){
-        const sql = SELECT_BY_MAIL.replace(':email',email);
-        Presenta.log(sql)
+        
+        const sql = QueriesUser.SELECT_BY_MAIL.replace(':email',email);
+        Presenta.log(sql.replace(/:TABLA/gi,TABLA))
         
           
-       return await this.connect.leerSql(sql);
+       return await this.connect.leerSql(sql.replace(/:TABLA/gi,TABLA));
         
     }
 
