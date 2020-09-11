@@ -8,7 +8,6 @@ const MODELO = require("../modelos/Slot");
 const {QueriesSlot} = require("../queries/QueriesSlot");
 const TABLA = 'slots';
 
-<<<<<<< HEAD
 const QUERIES = {
     SELECT_SELECT: `SELECT slotid  as id,clubid  as opcion FROM ${TABLA} WHERE clubid  = :id`,
     SELECT_UNO: `SELECT * FROM ${TABLA} WHERE slotid  = :id`,
@@ -17,9 +16,6 @@ const QUERIES = {
     UPDATE: `UPDATE ${TABLA} SET ? WHERE slotid = ?`,
     DELETE: `DELETE FROM ${TABLA} WHERE slotid = ?`
 }
-=======
-
->>>>>>> fc4bcf686fc9371f7024fa506288dba7c7a94619
 
 class ControladorSlot extends ControladorBase {
     constructor(){
