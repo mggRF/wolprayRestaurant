@@ -15,12 +15,13 @@ import ControllerEvents from '../Controladores/events/ControllerEvents';
 
 import paths from './Paths';
 import ControllerPais from '../Controladores/pais/ControllerPais';
+import ControllerSlots from '../Controladores/slots/ControllerSlots';
 
 
 export const DashboardRoutes = () => {
 
 
-    const { MUSICA, HOME, CCAA, CLUBS, COMPANIES, DRESSCODE, ROLES, USERS , PROVINCE, CITY, EVENTS,COUNTRIES} = paths;
+    const { MUSICA, HOME, CCAA, CLUBS, COMPANIES, DRESSCODE, ROLES, USERS , PROVINCE, CITY, EVENTS,COUNTRIES, SLOTS} = paths;
 
     return (
         <>
@@ -37,6 +38,7 @@ export const DashboardRoutes = () => {
                 <Route exact path={CITY.path} component={ControllerCity} />
                 <Route exact path={EVENTS.path} component={ControllerEvents} />
                 <Route exact path={COUNTRIES.path} component={ControllerPais} />
+                <Route exact path={SLOTS.path} component={ControllerSlots} />
 
                 <Redirect to={HOME.path} />
             </Switch>

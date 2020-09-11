@@ -24,6 +24,7 @@ module.exports = {
     USERS: 'users',
     CITYS: 'citys',
     COUNTRIES:'countrys',
+    SLOTS:'slots',
     LPPAGINA: "5",                             //lineas por pagina
 
     INS: "Añadir",

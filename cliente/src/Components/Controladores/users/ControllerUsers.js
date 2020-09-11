@@ -15,6 +15,7 @@ export default class ControllerUsers extends ControllerBase {
         this.ID = 'userid';
         this.LISTADO = ListadoUsers
         this.FORMULARIO = FormularioUsers
+        
         this.state = {
             estadoActualizacion: 0,
             orden: "",
