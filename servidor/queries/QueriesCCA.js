@@ -9,7 +9,7 @@ module.exports = {
 
         SELECT_ALL: `SELECT :TABLA.* , c_country.countryName 
                     FROM :TABLA
-                    LEFT JOIN c_country on :TABLA.countryid = c_country.countryId;
+                    LEFT JOIN c_country on :TABLA.countryid = c_country.countryId
                     `,
 
         SELECT_SELECT: `SELECT stateid as id,stateName as opcion FROM :TABLA WHERE countryid = :id`,
