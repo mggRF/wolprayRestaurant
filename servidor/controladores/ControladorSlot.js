@@ -8,14 +8,6 @@ const MODELO = require("../modelos/Slot");
 const {QueriesSlot} = require("../queries/QueriesSlot");
 const TABLA = 'slots';
 
-const QUERIES = {
-    SELECT_SELECT: `SELECT slotid  as id,clubid  as opcion FROM ${TABLA} WHERE clubid  = :id`,
-    SELECT_UNO: `SELECT * FROM ${TABLA} WHERE slotid  = :id`,
-    SELECT_MES_CLUB: `SELECT * FROM ${TABLA} WHERE clubid  = :id AND `,
-    INSERT: `INSERT INTO ${TABLA} SET ?`,
-    UPDATE: `UPDATE ${TABLA} SET ? WHERE slotid = ?`,
-    DELETE: `DELETE FROM ${TABLA} WHERE slotid = ?`
-}
 
 class ControladorSlot extends ControladorBase {
     constructor(){
@@ -26,6 +18,28 @@ class ControladorSlot extends ControladorBase {
             campoId: 'slotid ',
         }
         super(config);
+        this.findByMonth = this.findByMonth.bind(this);
+    }
+
+    
+
+    findByMonth(req, res){
+        let clubid =req.params.id;
+        let ano = req.params.ano;
+        let mes =  req.params.mes;
+        let sql = QueriesSlot.SELECT_MES_CLUB.replace(':id', clubid).replace(':ano',ano).replace(':mes',mes);
+        
+        console.log("este es el sql", sql.replace(/:TABLA/gi, TABLA) );
+
+        this.connect.leerSql(sql.replace(/:TABLA/gi,TABLA))
+            .then(dat => {
+                //console.log("dat->", dat);
+                this.enviaDatos(res, dat);
+            })
+            .catch(err => {
+                this.enviaDatos(res, "Error en leer SELECT", err);
+
+            });
     }
     
 

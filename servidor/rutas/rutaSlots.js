@@ -11,6 +11,7 @@ var rutas = express.Router();
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
 rutas.get('/', slots.listado);
 rutas.get('/select/:id',slots.leerSelect)
+rutas.get('/mes/:id/:ano/:mes',slots.findByMonth)
 rutas.get('/:id', slots.leerUno);
 rutas.post('/', slots.updateTable);
 rutas.put('/:id', slots.updateTable);
