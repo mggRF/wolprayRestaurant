@@ -1,18 +1,24 @@
+//                        n_dresscode.dressCodeId,
+//                        companies.companyid,
+//                        c_city.cityid,
+//                        c_provinces.provinceid,
+ //                       c_state.stateid,
+ //                        c_country.countryId,
 module.exports = {
     QueriesClub: {
         SELECT_UNO: `select  
                         :TABLA.*, 
-//                        n_dresscode.dressCodeId,
+
                         n_dresscode.dressCodeDescription,
-//                        companies.companyid,
+
                         companies.companyName,
-//                        c_city.cityid,
+
                         c_city.cityName,
-//                        c_provinces.provinceid,
+
                         c_provinces.provinceName,
- //                       c_state.stateid,
+
                         c_state.stateName,
-//                        c_country.countryId,
+
                         c_country.countryName,
                         GROUP_CONCAT(n_music.musicName) as Musica
                     from :TABLA 
