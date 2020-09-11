@@ -1,7 +1,9 @@
+import { AUTENTIFICACION } from "../Components/Constantes";
+
 export function checkUsuario(role) {
     let init = JSON.parse(localStorage.getItem('user')) || { logged: false };
-    init.role=9;
-    if (role >= init.role) {
+    if (!AUTENTIFICACION) init.role=9;
+    if (role <= init.role) {
         return {
             id: init.id,
             role: init.role,
