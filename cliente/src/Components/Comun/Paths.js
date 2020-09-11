@@ -5,6 +5,7 @@ const paths = {
         icon: 'fas fa-home',
 
     },
+    
     EVENTS : {
         title: 'Eventos',
         path: '/events',
@@ -29,6 +30,11 @@ const paths = {
         title: 'Compañías',
         path: "/companies",
         icon: 'fas fa-building'
+    },
+    SLOTS : {
+        title: 'Slots',
+        path: '/slots',
+        icon: 'fas fa-calendar-week'
     },
     DRESSCODE : {
         title: 'Vestimenta',
