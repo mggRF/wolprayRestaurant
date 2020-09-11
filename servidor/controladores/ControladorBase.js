@@ -6,7 +6,7 @@ const {
 const Presenta = require("../servicios/Presenta");
 const FyleSystem = require('../modelos/FileSystem');
 const os = require('os');
-const {URL, VERSION} = require('../Constantes/ConstantesRutas')
+const { URL, VERSION } = require('../Constantes/ConstantesRutas')
 
 class ControladorBase {
 
@@ -59,20 +59,23 @@ class ControladorBase {
 
     obtenerFotoUrl(datos) {
         if (this.config.CARPETA) {
-            return datos.map(d => {
-                for(let k in d){
-                    if(k === this.config.CARPETA.CAMPO){
-                        if(d[this.config.CARPETA.CAMPO]){
+            if (datos.length) {
 
-                            d[k] = URL+VERSION + this.config.CARPETA.CARPETA + '/uploads/' + d[this.config.campoId] +'/'+ d[this.config.CARPETA.CAMPO];
-                        }else{
-                            d[k] = URL+VERSION + this.config.CARPETA.CARPETA + '/uploads/' + d[this.config.campoId] +'/'+ 'nopicture.jpg';
+                return datos.map(d => {
+                    for (let k in d) {
+                        if (k === this.config.CARPETA.CAMPO) {
+                            if (d[this.config.CARPETA.CAMPO]) {
+
+                                d[k] = URL + VERSION + this.config.CARPETA.CARPETA + '/uploads/' + d[this.config.campoId] + '/' + d[this.config.CARPETA.CAMPO];
+                            } else {
+                                d[k] = URL + VERSION + this.config.CARPETA.CARPETA + '/uploads/' + d[this.config.campoId] + '/' + 'nopicture.jpg';
+                            }
                         }
                     }
-                }
-                return d;
-            });
-        }else{
+                    return d;
+                });
+            }
+        } else {
             return datos;
         }
     }
