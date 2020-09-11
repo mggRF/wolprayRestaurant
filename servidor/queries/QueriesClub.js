@@ -25,7 +25,7 @@ module.exports = {
                         JOIN c_state ON c_state.stateid = c_provinces.stateid
                         JOIN c_country on c_country.countryId = c_state.countryid
                     WHERE :TABLA.clubid = :id
-                    GROUP BY :TABLA.clubid;`,
+                    GROUP BY :TABLA.clubid`,
 
         SELECT_ALL: `select  
                         :TABLA.*, 
@@ -39,7 +39,7 @@ module.exports = {
                         LEFT JOIN n_dresscode ON n_dresscode.dressCodeId = :TABLA.dressCodeid
                         LEFT JOIN companies on companies.companyid = :TABLA.companyid
                         LEFT JOIN c_city ON c_city.cityid = :TABLA.cityid
-                    GROUP BY :TABLA.clubid;`,
+                    GROUP BY :TABLA.clubid`,
 
 
         SELECT_SELECT: `select clubid as id, clubName as option from :TABLA WHERE companyid = id`,
