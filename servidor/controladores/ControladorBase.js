@@ -224,7 +224,7 @@ class ControladorBase {
             sql = sql.split('WHERE')[0];
         }
 
-        console.log('Ip: ', os.networkInterfaces()['vEthernet (Conmutador virtual Intel(R) Dual Band Wireless-N 7260)'][1].address)
+        
         sql = sql + this.conplementoSQL(req);
         // console.log("sql---------->", sql)
         this.connect.leerSql(sql)
