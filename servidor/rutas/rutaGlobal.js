@@ -4,7 +4,6 @@ const express = require('express');
 const session = require('express-session');
 const ControlTokem = require('../Autentificacion/ControlTokem');
 const cTokem = new ControlTokem();
-const Home = require('../paginas/home');
 const {TOKEN_SECRET} = require('../Constantes/ConstantesSeguridad');
 
 // Llamamos al router

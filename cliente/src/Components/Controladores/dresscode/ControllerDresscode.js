@@ -14,6 +14,11 @@ export default class  ControllerDresscode extends ControllerBase {
         this.ID ='dressCodeId';
         this.LISTADO = ListadoDresscode
         this.FORMULARIO = FormularioDresscode
+        this.MODELO = {
+            dressCodeId:0,
+            dressCodeName:"",
+            dressCodeDescription:""
+        }
         this.state = {
             estadoActualizacion: 0,
             orden: "",

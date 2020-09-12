@@ -15,6 +15,11 @@ export default class ControllerRole extends ControllerBase {
         this.ID = 'roleid';
         this.LISTADO = ListadoRole
         this.FORMULARIO = FormularioRole
+        this.MODELO = {
+            roleid:0,
+            roleName:"",
+            roleDescription:""
+        }
         this.state = {
             estadoActualizacion: 0,
             orden: "",
