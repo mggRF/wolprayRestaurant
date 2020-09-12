@@ -1,15 +1,20 @@
 const Conexion = require("../servicios/Conexion");
+
 const {
     LPPAGINA
 } = require("../Constantes/ConstantesDataBase/ConstantesPaginacion");
 const Presenta = require("../servicios/Presenta");
 const FyleSystem = require('../modelos/FileSystem');
+const os = require('os');
+const { URL, VERSION } = require('../Constantes/ConstantesRutas')
+
 class ControladorBase {
 
     constructor(config) {
         this.config = config;
         this.connect = new Conexion();
         this.fileSystem = new FyleSystem(config);
+
 
 
         this.listado = this.listado.bind(this);
@@ -20,6 +25,7 @@ class ControladorBase {
         this.enviaDatos = this.enviaDatos.bind(this);
         this.leerCount = this.leerCount.bind(this);
         this.limite = LPPAGINA;
+        this.getFoto = this.getFoto.bind(this);
     }
     /**
      * Enviar datos a puesto //salida API
@@ -29,6 +35,7 @@ class ControladorBase {
      *                      
      */
     enviaDatos(res, objeto, status = null) {
+
         let respuesta;
         respuesta = {
             Ok: true,
@@ -37,13 +44,39 @@ class ControladorBase {
         if (status == null) {
             res.setHeader('Access-Control-Allow-Methods', 'HEAD,GET,POST,PUT,DELETE,OPTIONS');
             res.setHeader('Allow', 'HEAD,GET,POST,PUT,DELETE,OPTIONS');
-            res.json(respuesta);
+            res.json({
+                Ok: true,
+                Datos: this.obtenerFotoUrl(objeto)
+            });
         } else {
             res.status(status)
                 .send({
                     Ok: false,
                     Message: objeto
                 });
+        }
+    }
+
+    obtenerFotoUrl(datos) {
+        if (this.config.CARPETA) {
+            if (datos.length) {
+
+                return datos.map(d => {
+                    for (let k in d) {
+                        if (k === this.config.CARPETA.CAMPO) {
+                            if (d[this.config.CARPETA.CAMPO]) {
+
+                                d[k] = URL + VERSION + this.config.CARPETA.CARPETA + '/uploads/' + d[this.config.campoId] + '/' + d[this.config.CARPETA.CAMPO];
+                            } else {
+                                d[k] = URL + VERSION + this.config.CARPETA.CARPETA + '/uploads/' + d[this.config.campoId] + '/' + 'nopicture.jpg';
+                            }
+                        }
+                    }
+                    return d;
+                });
+            }
+        } else {
+            return datos;
         }
     }
 
@@ -54,7 +87,7 @@ class ControladorBase {
      * @param {} res : objeto response.
      */
     listado(req, res) {
-        
+
 
         return this.leerALL(req, res);
         // let salida = [];
@@ -164,7 +197,7 @@ class ControladorBase {
         const role = req.session.role;
 
 
-        this.connect.leerSql(sql.replace(/:TABLA/gi,this.config.TABLA))
+        this.connect.leerSql(sql.replace(/:TABLA/gi, this.config.TABLA))
             .then(dat => {
                 //console.log("dat->", dat);
                 this.enviaDatos(res, dat);
@@ -178,8 +211,8 @@ class ControladorBase {
 
     leerALL(req, res) {
 
-        
-        let sql = this.config.QUERIES.SELECT_ALL.replace(/:TABLA/gi,this.config.TABLA);
+
+        let sql = this.config.QUERIES.SELECT_ALL.replace(/:TABLA/gi, this.config.TABLA);
         let where = "";
 
         const ids = req.session.userid;
@@ -191,12 +224,11 @@ class ControladorBase {
             sql = sql.split('WHERE')[0];
         }
 
-
+        console.log('Ip: ', os.networkInterfaces()['vEthernet (Conmutador virtual Intel(R) Dual Band Wireless-N 7260)'][1].address)
         sql = sql + this.conplementoSQL(req);
         // console.log("sql---------->", sql)
         this.connect.leerSql(sql)
             .then(dat => {
-                //console.log("dat->", dat);
                 this.enviaDatos(res, dat);
             })
             .catch(err => {
@@ -370,14 +402,14 @@ class ControladorBase {
 
         //res,data, sql, metodo, file = null
         this.sendDataToTable([body, id], QUERIES.UPDATE)
-        .then(result =>{
-            console.log(result)
+            .then(result => {
+                console.log(result)
                 this.enviaDatos(res, result.Data);
-        }).catch(err=>{
-            console.log(err)
-            this.enviaDatos(res, err.Data, err.Status);
-        })
-        
+            }).catch(err => {
+                console.log(err)
+                this.enviaDatos(res, err.Data, err.Status);
+            })
+
         /*if (result.Ok) {
             console.log(result);
             this.enviaDatos(res, result.Data);
@@ -385,6 +417,21 @@ class ControladorBase {
             console.log(result);
             this.enviaDatos(res, result.Data, result.Status);
         }*/
+    }
+
+    getFoto(req, res) {
+
+        if (this.config.CARPETA) {
+            const id = req.params.id;
+            const img = req.params.img;
+
+            const pathFoto = this.fileSystem.getFotoUrl(id, img)
+
+
+            res.sendFile(pathFoto);
+        } else {
+            this.enviaDatos(res, 'Acción inválida', 403);
+        }
     }
 
 
@@ -399,20 +446,20 @@ class ControladorBase {
      */
     async sendDataToTable(data, sql, file = null) {
         const result = await new Promise((resolve, reject) => {
-            this.connect.modifyTable(sql.replace(/:TABLA/gi,this.config.TABLA), data)
+            this.connect.modifyTable(sql.replace(/:TABLA/gi, this.config.TABLA), data)
                 .then(value => {
 
                     if (value.insertId && file !== null) {
                         this.guardarImagen(file, value.insertId)
                             .then(response => {
                                 console.log('OK => ', response)
-                                resolve ({
+                                resolve({
                                     Ok: true,
                                     Data: 'Se ha modificado correctamente la tabla en la base de datos. ' + response
                                 })
                             }).catch(err => {
                                 console.log('Error=> ', err)
-                                reject( {
+                                reject({
                                     Ok: false,
                                     Data: err,
                                     Status: 500
@@ -420,14 +467,14 @@ class ControladorBase {
                             });
                     } else {
                         console.log('OK => ', value);
-                        resolve( {
+                        resolve({
                             Ok: true,
                             Data: 'Se ha modificado correctamente la tabla en la base de datos'
                         })
                     }
                 }).catch(err => {
                     console.log('ERROR => ', err);
-                    reject( {
+                    reject({
                         OK: false,
                         Data: err,
                         Status: 500

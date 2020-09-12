@@ -1,7 +1,7 @@
-import { AUTENTIFICACION } from "../Components/Constantes";
-
+import { AUTORIZAR } from "../Components/Constantes";
+ 
 export function checkUsuario(role) {
-    if (AUTENTIFICACION){
+    if (AUTORIZAR){
         let init = JSON.parse(localStorage.getItem('user')) || { logged: false };
 
         init.role=9;
@@ -19,8 +19,8 @@ export function checkUsuario(role) {
 }
 
 
-function init() {
-    return JSON.parse(localStorage.getItem('user')) || { logged: false };
-}
+// function init() {
+//     return JSON.parse(localStorage.getItem('user')) || { logged: false };
+// }
 
 
