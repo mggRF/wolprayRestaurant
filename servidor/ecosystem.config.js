@@ -26,7 +26,7 @@ module.exports = {
       user: 'wolpray',
       host: 'wolpray.es',
       ref: 'origin/master',
-      repo: 'git@github.com:mggRF/servidor.git',
+      repo: 'https://github.com/mggRF/servidor.git',
       path: '/home/wolpraynode/servidor',
       key: "/home/wolpray/.ssh/authorized_keys",
       ssh_options: ["ForwardAgent=yes"],
