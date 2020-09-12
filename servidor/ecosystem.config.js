@@ -24,7 +24,7 @@ module.exports = {
   deploy: {
     production: {
       user: 'wolpray',
-      host: '51.210.241.194',
+      host: 'wolpray.es',
       ref: 'origin/master',
       repo: 'https://github.com/mggRF/servidor.git',
       path: '/home/wolpraynode/servidor',
