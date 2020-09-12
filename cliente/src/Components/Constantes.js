@@ -11,7 +11,7 @@ const variable_url = () => {
     }
 }
 module.exports = {
-    AUTENTIFICACION:false,
+    AUTORIZAR:false,
     API_URL: variable_url() + VERSION_API + '/',
     CLUBS: 'clubs',
     EVENTS: 'events',
