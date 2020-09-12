@@ -36,17 +36,13 @@ class ControladorBase {
      */
     enviaDatos(res, objeto, status = null) {
 
-        let respuesta;
-        respuesta = {
-            Ok: true,
-            Datos: objeto
-        };
+
         if (status == null) {
             res.setHeader('Access-Control-Allow-Methods', 'HEAD,GET,POST,PUT,DELETE,OPTIONS');
             res.setHeader('Allow', 'HEAD,GET,POST,PUT,DELETE,OPTIONS');
             res.json({
                 Ok: true,
-                Datos: this.obtenerFotoUrl(objeto)
+                Datos: objeto
             });
         } else {
             res.status(status)
@@ -57,11 +53,11 @@ class ControladorBase {
         }
     }
 
-    obtenerFotoUrl(datos) {
+    obtenerFotoUrl(res,datos, status = null) {
         if (this.config.CARPETA) {
             if (datos.length) {
 
-                return datos.map(d => {
+                let dat = datos.map(d => {
                     for (let k in d) {
                         if (k === this.config.CARPETA.CAMPO) {
                             if (d[this.config.CARPETA.CAMPO]) {
@@ -74,9 +70,13 @@ class ControladorBase {
                     }
                     return d;
                 });
+                this.enviaDatos(res,dat, status);
+            }else{
+                this.enviaDatos(res,datos, status);
             }
+
         } else {
-            return datos;
+            this.enviaDatos(res,datos, status);
         }
     }
 
@@ -173,7 +173,7 @@ class ControladorBase {
 
         this.connect.leerSql(sql.replace(/:TABLA/gi, this.config.TABLA))
             .then(dat => {
-                this.enviaDatos(res, dat);
+                this.obtenerFotoUrl(res,dat);
 
             })
             .catch(err => {
@@ -224,16 +224,15 @@ class ControladorBase {
             sql = sql.split('WHERE')[0];
         }
 
-        
+
         sql = sql + this.conplementoSQL(req);
         // console.log("sql---------->", sql)
         this.connect.leerSql(sql)
             .then(dat => {
-                this.enviaDatos(res, dat);
+                this.obtenerFotoUrl(res,dat);
             })
             .catch(err => {
                 this.enviaDatos(res, "Error en leer SELECT", err);
-
             });
 
     }
@@ -353,6 +352,7 @@ class ControladorBase {
      * 
      */
     hacerPost(body, file, res) {
+        
         const {
             QUERIES
         } = this.config;

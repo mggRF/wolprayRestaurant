@@ -63,6 +63,7 @@ export default class Paginacion extends Component {
         AccesoAPI.accederApi(API_URL + this.props.tabla + '/count')
             .then(response => {
                 if (response.Ok) {
+                    console.log('Desde paginacion: ', response)
                     let contador = response.Datos.contador;
                     let paginas = contador / this.state.lppagina;
                     if (paginas !== Math.floor(paginas)) paginas++
