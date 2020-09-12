@@ -46,20 +46,31 @@ export default class ListadoSlotsSegundaPantalla extends Component {
 
     render() {
         let item = [];
+       
         
             this.state.datos.forEach((valor, index) => item.push(
+                (valor.listaVip===1)?
                 <tr key={index}>
                     <td key={index} >{valor.slotid}</td>
-                    <td>{valor.clubid}</td>
                     <td>{valor.day.split('T')[0]}</td>
                     <td>{valor.opening_time}</td>
                     <td>{valor.closing_time}</td>
                     <td>{valor.maxPeople}</td>
-                    <td>{valor.listaVip}</td>
+                    <td>Si</td>
                     <TresBotonesListado funcion={this.props.trabajo}
                                         id={valor.slotid}/>
                 </tr>
-
+                :
+                <tr key={index}>
+                    <td key={index} >{valor.slotid}</td>
+                    <td>{valor.day.split('T')[0]}</td>
+                    <td>{valor.opening_time}</td>
+                    <td>{valor.closing_time}</td>
+                    <td>{valor.maxPeople}</td>
+                    <td>NO</td>
+                    <TresBotonesListado funcion={this.props.trabajo}
+                                        id={valor.slotid}/>
+                </tr>
             ))
             
             
@@ -75,10 +86,12 @@ export default class ListadoSlotsSegundaPantalla extends Component {
                         <MontaCabecera separador='th'
                         funcion={this.gl.setSortedField}
                         lista={[
-                            ['eventid', 'Identificador'],
-                            ['eventName', 'Nombre'],
-                            ['event_initDate', 'Fecha inicio'],
-                            ['event_endDate', 'Fecha fin']
+                            ['slotI', 'Identificador'],
+                            ['day', 'Fecha'],
+                            ['opening_time', 'Hora de apertura'],
+                            ['closing_time', 'Hora de cierre'],
+                            ['maxPeople', 'Máximo de personas'],
+                            ['listaVip', 'Lista VIP']
                         ]} />
                         <th></th><th></th><th></th>
                     </tr>

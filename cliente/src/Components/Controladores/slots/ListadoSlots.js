@@ -8,9 +8,8 @@ import AccesoAPI from './../../../Servicios/AccesoAPI';
 
 import GestorListado from './../../../Servicios/GestorListado';
 import MontaCabecera from '../../Fragmentos/MontaCabecera';
-import { Link } from 'react-router-dom';
 import ListadoSlotsSegundaPantalla from './ListadoSlotsSegundaPantalla';
-import Desplegable from '../../Fragmentos/desplegable';
+
 
 export default class ListadoSlots extends Component {
     constructor(props) {
@@ -113,7 +112,8 @@ monta(){
         
         let listado = false;
 
-            if(this.state.clubid !=0 &&  this.state.idmes != '') listado= true;
+            if(this.state.clubid != 0 &&  this.state.idmes != '') listado = true;
+            else listado = false;
             return (
             
             <div className="container animate__animated animate__fadeIn">
@@ -128,8 +128,6 @@ monta(){
                     <MontaCabecera separador='th'
                     funcion={this.gl.setSortedField}
                     lista={[
-                        ['clubid', 'Identificador'],
-                        ['clubName', 'name'],
                         ['meses', 'Escoge mes'],
                         
                     ]} />

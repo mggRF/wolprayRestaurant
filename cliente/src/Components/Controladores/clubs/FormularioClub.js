@@ -182,7 +182,7 @@ export default class FormularioClub extends Component {
                             /*TIPO DE MÚSICA DEL CLUB */
                             (!readonly) ?
 
-                                <Desplegable table='n_music' name='music' label='Tipo de música' value={club.music} readValue={this.props.funcion} />
+                                null
 
 
                                 :

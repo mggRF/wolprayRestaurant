@@ -6,6 +6,13 @@ export default class FormularioSlots extends Component {
     render() {
         let slot = this.props.obj;
         let readonly = false;
+        
+        let vip = false;
+        if(slot.listaVip===1){
+            vip = true;
+        }else{
+            vip = false;
+        }
         if (this.props.orden === 'D' || this.props.orden === 'V')
             readonly = true
         return (
@@ -50,9 +57,30 @@ export default class FormularioSlots extends Component {
                                     label="Máximo de personas"
                                     readOnly={readonly}
                                     value={slot.maxPeople} />
+
+                                   
+                                    <label>VIP </label>
                         {
-                            (slot.listaVip)?
-                            <InputComponent name="hora"
+                            /**HAY QUE ARREGLAR BIEN EL CPMPONENTE DE VIP */
+                            (vip)?
+                            
+                            <input name ='listaVip'
+                            type='checkbox'
+                            checked
+                            value={vip}
+                            disabled={readonly}
+                            >
+                            
+                            </input>
+                            :
+                            <input name ='listaVip'
+                            type='checkbox'
+                            value={vip}
+                            disabled={readonly}
+                            >
+                            
+                            </input>
+                           /* <InputComponent name="listaVip"
                                     handleChange={this.props.funcion}
                                     type='checkbox'
                                     label="VIP"
@@ -63,7 +91,7 @@ export default class FormularioSlots extends Component {
                                     type='checkbox'
                                     label="VIP"
                                     readOnly={readonly}
-                                    />
+                                    />*/
 
                         }
                         
