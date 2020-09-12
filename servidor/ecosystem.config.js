@@ -29,7 +29,7 @@ module.exports = {
       repo: 'https://github.com/mggRF/servidor.git',
       path: '/home/wolpraynode/servidor',
       ssh_options: "StrictHostKeyChecking=no",
-      "post-deploy": ". ~/.bash_profile && npm install && pm2 startOrRestart ecosystem.json --env production",
+      "post-deploy": ". ~/npm install && pm2 startOrRestart ecosystem.json --env production",
       "env": {
         DB_HOST: process.env.DB_HOST,
         DB_PASS: process.env.DB_PASS,
