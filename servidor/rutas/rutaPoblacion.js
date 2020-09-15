@@ -8,7 +8,7 @@ let pobla = new ControladorPoblacion();
 var rutas = express.Router();
 //var md_auth = require('../middlewares/authenticated');
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
-rutas.get('/', pobla.listado);
+rutas.get('/', pobla.leerALL);
 rutas.get('/select/:id',pobla.leerSelect)
 rutas.get('/:id', pobla.leerUno);
 rutas.post('/', pobla.updateTable);

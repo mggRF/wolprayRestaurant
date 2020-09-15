@@ -6,6 +6,6 @@ module.exports = {
         INSERT: `INSERT INTO :TABLA SET ?`,
         UPDATE: `UPDATE :TABLA SET ? WHERE userid = ?`,
         DELETE: `DELETE FROM :TABLA WHERE userid = ?`,
-        SELECT_BY_MAIL: `SELECT * FROM :TABLA WHERE mail  = :email`
+        SELECT_BY_MAIL: `SELECT * FROM :TABLA WHERE mail  = ':email'`
     }
 }

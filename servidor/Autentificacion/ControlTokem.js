@@ -14,43 +14,42 @@ class ControlTokem {
                         let user = dat[0];
                         if (user != null) {
                             if (password === user.password) {
-                                console.log('El usuario se ha conectado ccorrectamente');
 
                                 const token = createToken(user);
                                 req.session.userid = user.userid;
                                 req.session.role = user.roleid;
                                 usersController.enviaDatos(res,{
                                     mensaje: 'Autenticación correcta',
-                                    token: token
+                                    token: token,
+                                    role:user.roleid,
+                                    id: user.userid
                                 })
                             } else {
-                                usersController.enviaDatos(res,{
-                                    mensaje: "Usuario o contraseña incorrectos"
-                                },403);
+                                usersController.enviaDatos(res, "Credenciales incorrectas",403);
                             }
 
                         } else {
-                            usersController.enviaDatos(res,{ mensaje: "Usuario o contraseña incorrectos" }, 403);
+                            usersController.enviaDatos(res, "Credenciales incorrectas", 403);
                         }
                     }else{
-                        usersController.enviaDatos(res,{ mensaje: "Usuario o contraseña incorrectos" }, 403);
+                        usersController.enviaDatos(res, "Credenciales incorrectas" , 403);
                     }
 
                 })
                 .catch(err => {
                     console.log('Ha ocurrido un error')
                     console.log(err)
-                    usersController.enviaDatos(res,{ mensaje: err }, 403);
+                    usersController.enviaDatos(res, err , 403);
                 });
         } else {
-            usersController.enviaDatos(res,{ mensaje: "Error en los parámetros ingresados" }, 500);
+            usersController.enviaDatos(res,"Error en los parámetros ingresados", 500);
         }
     }
 
 
     logout(req, res) {
         req.session.destroy();
-        usersController.enviaDatos(res,{ mensaje: "Se ha cerrado la sesión" });
+        usersController.enviaDatos(res,"Se ha cerrado la sesión");
     }
 }
 

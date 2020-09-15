@@ -7,7 +7,7 @@ let products = new ControladorProducts();
 var rutas = express.Router();
 //var md_auth = require('../middlewares/authenticated');
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
-rutas.get('/', products.listado);
+rutas.get('/', products.leerALL);
 rutas.get('/select/:id',products.leerSelect);
 rutas.get('/uploads/:id/:img',products.getFoto)
 rutas.get('/:id', products.leerUno);
