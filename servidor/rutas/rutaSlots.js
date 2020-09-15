@@ -9,7 +9,7 @@ let slots = new ControladorSlot();
 var rutas = express.Router();
 //var md_auth = require('../middlewares/authenticated');
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
-rutas.get('/', slots.listado);
+rutas.get('/', slots.leerALL);
 rutas.get('/select/:id',slots.leerSelect)
 rutas.get('/mes/:id/:ano/:mes',slots.findByMonth)
 rutas.get('/:id', slots.leerUno);

@@ -8,7 +8,7 @@ let cPais = new ControladorPais();
 var api = express.Router();
 //var md_auth = require('../middlewares/authenticated');
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
-api.get('/', cPais.listado);
+api.get('/', cPais.leerALL);
 api.get('/select/',cPais.leerSelect)
 api.get('/:id', cPais.leerUno);
 api.post('/', cPais.updateTable);

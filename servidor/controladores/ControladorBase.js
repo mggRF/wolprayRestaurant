@@ -5,8 +5,7 @@ const {
 } = require("../Constantes/ConstantesDataBase/ConstantesPaginacion");
 const Presenta = require("../servicios/Presenta");
 const FyleSystem = require('../modelos/FileSystem');
-const os = require('os');
-const { URL, VERSION } = require('../Constantes/ConstantesRutas')
+const { URL, VERSION } = require('../Constantes/ConstantesRutas');
 
 class ControladorBase {
 
@@ -17,7 +16,7 @@ class ControladorBase {
 
 
 
-        this.listado = this.listado.bind(this);
+
         this.leerUno = this.leerUno.bind(this);
         this.leerSelect = this.leerSelect.bind(this);
         this.updateTable = this.updateTable.bind(this);
@@ -26,6 +25,7 @@ class ControladorBase {
         this.leerCount = this.leerCount.bind(this);
         this.limite = LPPAGINA;
         this.getFoto = this.getFoto.bind(this);
+        this.leerALL = this.leerALL.bind(this);
     }
     /**
      * Enviar datos a puesto //salida API
@@ -80,39 +80,7 @@ class ControladorBase {
         }
     }
 
-    /**
-     * Lista todos los archivos de la base de datos.
-     * 
-     * @param {} req : objeto request.
-     * @param {} res : objeto response.
-     */
-    listado(req, res) {
 
-
-        return this.leerALL(req, res);
-        // let salida = [];
-        // const ids = req.session.userid;
-        // const role = req.session.role;
-
-        // this.connect.leerTabla(this.config.TABLA)
-        //     .then(dat => {
-        //         dat.forEach(row => {
-        //             //console.log("row=>",row)
-        //             // let ca = new this.config.MODELO(...row);
-        //             // console.log("ca=>",ca)
-        //             salida.push(row);
-        //         })
-        //         //console.log(salida)
-        //         this.enviaDatos(res, salida);
-
-        //     })
-        //     .catch(err => {
-        //         console.error(err);
-        //         this.enviaDatos(res, "Error en lectura de tabla", err);
-
-        //     });
-
-    }
 
 
 

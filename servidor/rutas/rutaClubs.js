@@ -8,7 +8,7 @@ let clubs = new ControladorClubs();
 var rutas = express.Router();
 //var md_auth = require('../middlewares/authenticated');
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
-rutas.get('/', clubs.listado);
+rutas.get('/', clubs.leerALL);
 rutas.get('/select/:id',clubs.leerSelect) ////<---¿quien ha hecho esto?
 rutas.get('/uploads/:id/:img',clubs.getFoto) ////<---¿quien ha hecho esto?
 rutas.get('/:id', clubs.leerUno);

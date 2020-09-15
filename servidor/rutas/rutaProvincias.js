@@ -9,7 +9,7 @@ let provin = new ControladorProvincia();
 var rutas = express.Router();
 //var md_auth = require('../middlewares/authenticated');
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
-rutas.get('/', provin.listado);
+rutas.get('/', provin.leerALL);
 rutas.get('/select/:id',provin.leerSelect)
 rutas.get('/:id', provin.leerUno);
 rutas.post('/', provin.updateTable);

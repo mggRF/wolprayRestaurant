@@ -8,7 +8,7 @@ let dressCode = new DressCodeController();
 var rutas = express.Router();
 //var md_auth = require('../middlewares/authenticated');
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
-rutas.get('/', dressCode.listado);
+rutas.get('/', dressCode.leerALL);
 rutas.get('/select/',dressCode.leerSelect)
 rutas.get('/:id', dressCode.leerUno);
 rutas.post('/', dressCode.updateTable);
