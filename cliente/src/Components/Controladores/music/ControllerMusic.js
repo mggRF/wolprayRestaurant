@@ -16,8 +16,9 @@ export default class ControllerMusic extends ControllerBase {
         this.LISTADO = Listado
         this.FORMULARIO = Formulario
         this.MODELO = {
-            musicid:null,
-            musicName:""
+            musicid:'',
+            musicName:"",
+            musicDescription:""
         }
         this.state = {
             estadoActualizacion: 0,
