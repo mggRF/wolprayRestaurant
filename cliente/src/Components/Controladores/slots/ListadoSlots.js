@@ -92,8 +92,6 @@ monta(){
 
     render() {
 
-
-
         let itemsDesplegableMeses = [];
         itemsDesplegableMeses.push(<option key="0" value="0">Selecciona....</option>);
         if (this.state.meses.length > 0) {
@@ -136,9 +134,6 @@ monta(){
                 </thead>
                 <tbody>
                 <div className='container'>
-
-    
-                    
                 <select name='meses'
                 id='clubs'
                 className="form-control"

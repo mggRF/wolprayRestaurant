@@ -36,10 +36,10 @@ export default class ListadoSlotsSegundaPantalla extends Component {
 
             })
     }
-
-    componentDidMount() {
+    componentDidUpdate(){
         this.leeTabla();
     }
+
 
 
 
