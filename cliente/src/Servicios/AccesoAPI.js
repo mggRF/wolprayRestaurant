@@ -14,10 +14,8 @@ export default class AccesoAPI {
   }
 
   static async leerUNO(tabla, id) {
-    console.log('desde leerUNO de AccesoAPI')
     let url2 = this.verificaTabla(tabla);
     let url = API_URL + url2 + "/" + id;
-    console.log('leerUno url:', url);
     return this.accederApi(url);
   }
 
@@ -46,9 +44,7 @@ export default class AccesoAPI {
    * @param {*} datos datos para verificar
    */
   static async verificaUsuario(accion, datos) {
-    console.log('Estoy en verificar usuario')
     let url = this.verificaTabla(accion);
-    console.log('La url es: ', url)
     switch (accion) {
       case 'LOGIN':
         return this.accederApi(url, 'PUT', datos);
@@ -62,7 +58,6 @@ export default class AccesoAPI {
   *  Metodo de acceso a la API. Comun......
   */
   static async accederApi(url, metodo = "GET", datos = null) {
-    console.log('Los datos')
     const cabeceras = new Headers();
     cabeceras.append("Content-Type", "application/json");
     cabeceras.append("Authorization", "Bearer my-token");
@@ -85,8 +80,6 @@ export default class AccesoAPI {
       .then(res => res.json())
       .then(
         results => {
-          console.log("desde accesoApi accederApi ")
-          console.log("es esto: ", results)
           return results;
         }
       )
