@@ -6,6 +6,7 @@ const {
 const Presenta = require("../servicios/Presenta");
 const FyleSystem = require('../modelos/FileSystem');
 const { URL, VERSION } = require('../Constantes/ConstantesRutas');
+const uniqid = require('uniqid');
 
 class ControladorBase {
 
@@ -20,12 +21,13 @@ class ControladorBase {
         this.leerUno = this.leerUno.bind(this);
         this.leerSelect = this.leerSelect.bind(this);
         this.updateTable = this.updateTable.bind(this);
-        this.sendDataToTable = this.sendDataToTable.bind(this);
+        this.s8endDataToTable = this.sendDataToTable.bind(this);
         this.enviaDatos = this.enviaDatos.bind(this);
         this.leerCount = this.leerCount.bind(this);
         this.limite = LPPAGINA;
         this.getFoto = this.getFoto.bind(this);
         this.leerALL = this.leerALL.bind(this);
+        this.hacerPost = this.hacerPost.bind(this)
     }
     /**
      * Enviar datos a puesto //salida API
@@ -338,7 +340,6 @@ class ControladorBase {
             default:
                 const result = this.sendDataToTable([body], QUERIES.INSERT, file);
                 if (result.Ok) {
-                    console.log(result);
                     this.enviaDatos(res, result.Data);
                 } else {
                     console.log(result);
@@ -364,7 +365,7 @@ class ControladorBase {
 
 
         if (isNaN(file) && file !== null) {
-            this.fileSystem.guardarImagenTemporal(file, req.params.id);
+            this.fileSystem.guardarImagen(file, req.params.id);
         }
 
 
@@ -413,12 +414,18 @@ class ControladorBase {
      * 
      */
     async sendDataToTable(data, sql, file = null) {
+        if(this.config.CARPETA){
+            const nombreUnico = uniqid();
+            data[this.config.CARPETA.CAMPO] = nombreUnico;
+
+        }
         const result = await new Promise((resolve, reject) => {
             this.connect.modifyTable(sql.replace(/:TABLA/gi, this.config.TABLA), data)
                 .then(value => {
 
                     if (value.insertId && file !== null) {
-                        this.guardarImagen(file, value.insertId)
+                        
+                        this.fileSystem.guardarImagen(file, value.insertId,data[this.config.CARPETA.CAMPO])
                             .then(response => {
                                 console.log('OK => ', response)
                                 resolve({

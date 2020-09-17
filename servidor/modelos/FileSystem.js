@@ -5,12 +5,12 @@ const uniqid = require('uniqid');
 class FileSystem {
     constructor(config) {
         this.config = config;
-        this.guardarImagenTemporal = this.guardarImagenTemporal.bind(this);
+        this.guardarImagen = this.guardarImagen.bind(this);
         this.getFotoUrl =  this.getFotoUrl.bind(this);
     }
 
 
-    guardarImagenTemporal(file, id) {
+    guardarImagen(file, id, nombreUnico) {
         console.log('El id desde el comienzo de guardar imagen temporal es: ', id)
 
         return new Promise((resolve, reject) => {
@@ -21,7 +21,7 @@ class FileSystem {
 
 
             //Nombre archivo
-            const nombreArchivo = this.config.CARPETA.nombreFoto;
+            const nombreArchivo = this.generarNombreUnico(file.name, nombreUnico)
 
             console.log('El nombre original del archivo es: ', file.name);
             console.log('El nombre del achivo será: ', nombreArchivo);
@@ -37,6 +37,13 @@ class FileSystem {
 
         });
 
+    }
+
+    generarNombreUnico(nombreOriginal, nombreUnico){
+        const nombreArr = nombreOriginal.split('.');
+        const extension = nombreArr[nombreArr.length -1];
+
+        return `${nombreUnico}.${extension}`;
     }
 
     crearCarpetaFinal(id) {
