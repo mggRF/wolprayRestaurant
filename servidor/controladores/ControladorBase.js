@@ -226,6 +226,7 @@ class ControladorBase {
         } = req.route.stack[0];
         const id = req.params.id;
         const body = req.body;
+        console.log('Body  => ',body)
 
         const file = this.verificaImagen(req);
 
@@ -238,7 +239,7 @@ class ControladorBase {
 
         switch (method.toLowerCase()) {
             case 'post':
-                this.hacerPost(req, file, res);
+                this.hacerPost(body, file, res);
                 break;
             case 'put':
                 this.hacerPut(id, body, file, res);
@@ -344,13 +345,19 @@ class ControladorBase {
                 this.enviaDatos(res, 'Es obligatorio subir subir una imagen', 400);
                 break;
             default:
-                const result = this.sendDataToTable([body], QUERIES.INSERT, file);
-                if (result.Ok) {
-                    this.enviaDatos(res, result.Data);
-                } else {
-                    console.log(result);
-                    this.enviaDatos(res, result.Data, result.Status);
-                }
+                this.sendDataToTable([body], QUERIES.INSERT, file)
+                    .then( result => {
+
+                        if (result.Ok) {
+                            this.enviaDatos(res, result.Data);
+                        } else {
+                            console.log(result);
+                            this.enviaDatos(res, result.Data, result.Status);
+                        }
+                    }).catch(err => {
+                        console.log(err);
+                        this.enviaDatos(res, err.Data, err.Status);
+                    });
                 break;
         }
     }
@@ -450,7 +457,8 @@ class ControladorBase {
                         console.log('OK => ', value);
                         resolve({
                             Ok: true,
-                            Data: 'Se ha modificado correctamente la tabla en la base de datos'
+                            Data: 'Se ha modificado correctamente la tabla en la base de datos',
+                            status: 500
                         })
                     }
                 }).catch(err => {

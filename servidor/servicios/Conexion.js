@@ -89,6 +89,7 @@ class Conexion {
     async modifyTable(sql, data){
         const result = await this.usePooledConnectionAsync(async conn => {
             const rows = await new Promise((resolve, reject) => {
+                console.log('Sql => ', sql);
                 conn.query(sql,data, (err, result) => {
                     if (err) {
                         reject(err);
