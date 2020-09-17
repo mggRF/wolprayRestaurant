@@ -1,4 +1,5 @@
 const url = require('url');
+const Presenta = require("../servicios/Presenta");
 /**
      * genera la clasificacion de la tabla, y los limites a listar (registros)
      * utilizando parametros que llegan en al urj
@@ -23,7 +24,7 @@ class CompletaSQL {
         if (!(clasi !== undefined && clasi !== "" && clasi !== null)) {
             clasi = req.query._class;
         }
-        console.log("complementos", size, clasi)
+        Presenta.log("complementos", size, clasi)
 
         if (clasi !== undefined && clasi !== "" && clasi !== null) {
             salida += " ORDER BY " + clasi.split(',').join(" ");
@@ -78,12 +79,9 @@ class CompletaSQL {
         console.log("WHERE0_>",where);
         if (sql.includes(' WHERE ')){
             where = ' AND ' + where;
-            console.log("WHEREa_>",where);
         } else {
             where = ' WHERE ' + where;
-            console.log("WHEREb_>",where);
         }
-        console.log("WHERE_>",where);
         sql = sql.replace(':WHERE', where);
         return sql;
 
