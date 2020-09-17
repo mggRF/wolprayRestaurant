@@ -27,7 +27,10 @@ class ControladorBase {
         this.limite = LPPAGINA;
         this.getFoto = this.getFoto.bind(this);
         this.leerALL = this.leerALL.bind(this);
-        this.hacerPost = this.hacerPost.bind(this)
+        this.hacerPost = this.hacerPost.bind(this);
+        this.leerSelectDir = this.leerSelectDir.bind(this);
+
+        
     }
     /**
      * Enviar datos a puesto //salida API
@@ -183,11 +186,13 @@ class ControladorBase {
 
             });
 
-    }leerSelectDir(req, res, sql) {
+    }
+    leerSelectDir(req, res, sql) {
         
         const ids = req.session.userid;
         const role = req.session.role;
-
+        sql = sql.replace(/:TABLA/gi, this.config.TABLA);
+        console.log(sql);
 
         this.connect.leerSql(sql.replace(/:TABLA/gi, this.config.TABLA))
             .then(dat => {
@@ -196,6 +201,7 @@ class ControladorBase {
             })
             .catch(err => {
                 this.enviaDatos(res, "Error en leer SELECT", err);
+                throw new Error(err);
 
             });
 

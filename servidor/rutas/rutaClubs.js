@@ -11,9 +11,10 @@ var rutas = express.Router();
 rutas.get('/', clubs.leerALL);
 rutas.get('/select/:id',clubs.leerSelect) ////<---¿quien ha hecho esto?
 rutas.get('/uploads/:id/:img',clubs.getFoto) ////<---¿quien ha hecho esto?
-rutas.get('/:id', clubs.leerUno);
+
 rutas.get('/citys',clubs.leerSelectCitys); 
 rutas.get('/province',clubs.leerSelectProvinces); 
+rutas.get('/:id', clubs.leerUno);
 rutas.post('/', clubs.updateTable);
 rutas.put('/:id', clubs.updateTable);
 rutas.delete('/:id', clubs.updateTable);
