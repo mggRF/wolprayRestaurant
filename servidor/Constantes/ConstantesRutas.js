@@ -16,4 +16,5 @@ module.exports = {
     ROLES: '/' +  VERSION  + 'roles',
     COMPANIES: '/' +  VERSION  + 'companies',
     PRODUCTS: '/' +  VERSION  + 'products',
+    IMAGES: '/' +  VERSION  + 'images',
 }

@@ -13,6 +13,7 @@ class ControladorBase {
     constructor(config) {
         this.config = config;
         this.connect = new Conexion();
+        this.extension = '.jpg';
         this.fileSystem = new FyleSystem(config);
 
 
@@ -60,26 +61,30 @@ class ControladorBase {
 
     obtenerFotoUrl(res, datos, status = null) {
         if (this.config.CARPETA) {
-            if (datos.length) {
+            const {CAMPO} = this.config.CARPETA;
+            const {CARPETA} = this.config.CARPETA;
+            const {campoId} = this.config;
+            if (datos.length > 0) {
 
                 let dat = datos.map(d => {
                     for (let k in d) {
-                        if (k === this.config.CARPETA.CAMPO) {
-                            if (d[this.config.CARPETA.CAMPO]) {
+                        if (k === CAMPO) {
 
-                                d[k] = URL + VERSION + this.config.CARPETA.CARPETA + '/uploads/' + d[this.config.campoId] + '/' + d[this.config.CARPETA.CAMPO];
+                            // console.log('Datos=> ', d);
+                            // console.log('Campo en el base=> ', k);
+                            // console.log('Campo recogido => ',d[k])
+                            if (d[k]) {
+                                d[k] = `${URL}${VERSION}${CARPETA}/uploads/${d[campoId]}/${d[k]}`;
                             } else {
-                                d[k] = URL + VERSION + this.config.CARPETA.CARPETA + '/uploads/' + d[this.config.campoId] + '/' + 'nopicture.jpg';
+                                d[k] = `${URL}${VERSION}${CARPETA}/uploads/${d[campoId]}/nopicture.jpg`;
                             }
+                            break;
                         }
                     }
                     return d;
                 });
                 this.enviaDatos(res, dat, status);
-            } else {
-                this.enviaDatos(res, datos, status);
-            }
-
+            } 
         } else {
             this.enviaDatos(res, datos, status);
         }
@@ -362,6 +367,7 @@ class ControladorBase {
     getFoto(req, res) {
 
         if (this.config.CARPETA) {
+            
             const id = req.params.id;
             const img = req.params.img;
 
@@ -387,7 +393,7 @@ class ControladorBase {
     async sendDataToTable(data, sql, file = null) {
         if (file !== null && file !== undefined) {
             const nombreUnico = uniqid();
-            data[0][this.config.CARPETA.CAMPO] = nombreUnico;
+            data[0][this.config.CARPETA.CAMPO] = nombreUnico+this.extension;
         }
 
         const result = await new Promise((resolve, reject) => {

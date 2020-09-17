@@ -21,7 +21,7 @@ class FileSystem {
 
 
             //Nombre archivo
-            const nombreArchivo = this.generarNombreUnico(file.name, nombreUnico)
+            const nombreArchivo = this.generarNombreUnico( nombreUnico)
 
             console.log('El nombre original del archivo es: ', file.name);
             console.log('El nombre del achivo será: ', nombreArchivo);
@@ -39,11 +39,9 @@ class FileSystem {
 
     }
 
-    generarNombreUnico(nombreOriginal, nombreUnico){
-        const nombreArr = nombreOriginal.split('.');
-        const extension = nombreArr[nombreArr.length -1];
+    generarNombreUnico(nombreUnico){
 
-        return `${nombreUnico}.${extension}`;
+        return `${nombreUnico}`;
     }
 
     crearCarpetaFinal(id) {
@@ -112,15 +110,105 @@ class FileSystem {
 
 
     getFotoUrl(id,img){
+        console.log('Imagen => ',img)
         const pathFoto = path.resolve(__dirname,'../../uploads',this.config.CARPETA.CARPETA, id, img);
-
+        
         const exist = fs.existsSync(pathFoto);
-
+        
         if(!exist){
             return path.resolve(__dirname,'../../uploads','nofile.JPG')
         }
+
+        
         return pathFoto;
     }
+
+
+    obtenerImagenesAleatorias(opcion, id = null, All = null){
+        const imagenesAleatorias = this.getImageWithRandom(opcion, id, All);
+        
+
+        return imagenesAleatorias;
+
+    }
+
+
+    obtenerImagenes(id){
+        const pathId = path.resolve(__dirname,'../../uploads',this.config.CARPETA.CARPETA, id);
+        return fs.readdirSync(pathId);
+    }
+
+
+    
+    getImageWithRandom(opcion, id, all){
+        let pathImages;
+        console.log(opcion, id, all);
+        if(id && all){
+            pathImages = path.resolve(__dirname,'../../uploads',opcion, id);//Con el all
+            
+            let exist = fs.existsSync(pathImages);
+        
+            if(!exist){
+                return path.resolve(__dirname,'../../uploads','nofile.JPG')
+            }
+            
+            return fs.readdirSync(pathImages);
+        }
+        if(id && all === null){
+            pathImages = path.resolve(__dirname,'../../uploads',opcion, id);
+            
+            let exist = fs.existsSync(pathImages);
+        
+            if(!exist){
+                return path.resolve(__dirname,'../../uploads','nofile.JPG')
+            }
+
+            let files = fs.readdirSync(pathImages);
+            let random = this.getRandomInt(0, files.length);
+         
+            return fs.readdirSync(files[random]);
+        }
+        
+        let pathCarpet = path.resolve(__dirname,'../../uploads',opcion)
+        
+        
+        let existCarpet = fs.existsSync(pathCarpet);
+        
+            if(!existCarpet){
+                return path.resolve(__dirname,'../../uploads','nofile.JPG')
+            }
+
+            let directories = fs.readdirSync(pathCarpet);
+            
+
+            let dir = directories[this.getRandomInt(0, directories.length)];
+                
+            let finalDirs = path.resolve(__dirname,'../../uploads/',opcion, dir);
+            
+            let existFinalDirs = fs.existsSync(finalDirs);
+            
+            if(!existFinalDirs){
+                return path.resolve(__dirname,'../../uploads','nofile.JPG')
+            }
+
+            let finalFiles = path.resolve(finalDirs);
+
+            let existFinalFiles = fs.existsSync(finalFiles);
+            
+            if(!existFinalFiles){
+                return path.resolve(__dirname,'../../uploads','nofile.JPG')
+            }
+
+            let imagenes = fs.readdirSync(finalFiles);
+
+        return path.resolve(__dirname,'../../uploads',opcion, dir, imagenes[this.getRandomInt(0, imagenes.length)]);
+
+    }
+
+    getRandomInt(min, max) {
+        let ran = Math.floor(Math.random() * (max - min)) + min;
+        return ran;
+      }
 }
 
 module.exports = FileSystem;

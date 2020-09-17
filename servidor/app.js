@@ -15,7 +15,7 @@ const fileUpload = require('express-fileupload');
 const path = require('path');
 
 
-const { COMUNIDADES, PAISES, POBLACIONES, PROVINCIAS, MUSICA, CLUBS, DRESSCODE, EVENTS, USERS, SLOTS, ROLES, COMPANIES, PRODUCTS } = require('./Constantes/ConstantesRutas');
+const { COMUNIDADES, PAISES, POBLACIONES, PROVINCIAS, MUSICA, CLUBS, DRESSCODE, EVENTS, USERS, SLOTS, ROLES, COMPANIES, PRODUCTS , IMAGES} = require('./Constantes/ConstantesRutas');
 
 
 const app = express();
@@ -39,6 +39,7 @@ const rRoles = require('./rutas/rutaRoles');
 const rCompanies = require('./rutas/rutaCompanies');
 const rDressCode = require('./rutas/rutaDressCode');
 const rProducts = require('./rutas/rutaProducts');
+const rImages = require('./rutas/rutaImages');
 const Autorizado = require('./Autentificacion/middelAut');
 
 
@@ -48,10 +49,6 @@ const Autorizado = require('./Autentificacion/middelAut');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-// app.use(formData.parse(options));
-// app.use(formData.format());
-// app.use(formData.stream());
-// app.use(formData.union());
 //Subida de imagenes
 app.use(fileUpload({
     useTempFiles: true
@@ -73,6 +70,7 @@ app.use(ROLES, Autorizado, rRoles);
 app.use(COMPANIES, Autorizado, rCompanies);
 app.use(DRESSCODE, Autorizado, rDressCode);
 app.use(PRODUCTS, Autorizado, rProducts);
+app.use(IMAGES, Autorizado, rImages);
 
 if (process.env.NODE_ENV == 'production') {
     // create a rotating write stream
