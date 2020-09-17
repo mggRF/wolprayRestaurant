@@ -1,5 +1,5 @@
 const Conexion = require("../servicios/Conexion");
-
+const CompletaSQL = require("../servicios/CompletaSQL");
 const {
     LPPAGINA
 } = require("../Constantes/ConstantesDataBase/ConstantesPaginacion");
@@ -102,43 +102,6 @@ class ControladorBase {
 
     }
 
-
-    /**
-     * genera la clasificacion de la tabla, y los limites a listar (registros)
-     * utilizando parametros que llegan en al urj
-     * size=totalregistros,a partir de registro
-     * clasificador= nombre de campo y ASC/DESC segun se desee
-     * @param { } req 
-     */
-    conplementoSQL(req) {
-        let salida = "";
-        let size = req.query.size;
-        if (!(size !== undefined && size !== "" && size !== null)) {
-            size = req.query._size;
-        }
-        let clasi = req.query.clasificacion;
-        if (!(clasi !== undefined && clasi !== "" && clasi !== null)) {
-            clasi = req.query._class;
-        }
-        console.log("complementos", size, clasi)
-
-        if (clasi !== undefined && clasi !== "" && clasi !== null) {
-            salida += " ORDER BY " + clasi.split(',').join(" ");
-        }
-
-        if (size !== undefined && size !== "" && size !== null) {
-            let valores = size.split(',') // SI 2 offset y limit; si 1, limit
-            salida += " LIMIT ";
-            salida += valores[0]
-            if (valores.length > 1) {
-                salida += ", " + valores[1]
-            }
-        }
-        // console.log("salida", salida)
-        return salida;
-    }
-
-
     /**
      * Lista datos del objeto indexado.
      * 
@@ -197,20 +160,9 @@ class ControladorBase {
 
 
         let sql = this.config.QUERIES.SELECT_ALL.replace(/:TABLA/gi, this.config.TABLA);
-        let where = "";
+        sql = CompletaSQL.cSQL(req,sql);
 
-        const ids = req.session.userid;
-        const role = req.session.role;
-        //si existe :ids, añadir el usuario login
-        if (role < 9 && sql.include(':ids')) {
-            sql.replace(':ids', number(ids))
-        } else {
-            sql = sql.split('WHERE')[0];
-        }
-
-
-        sql = sql + this.conplementoSQL(req);
-        // console.log("sql---------->", sql)
+        console.log("sql---------->", sql)
         this.connect.leerSql(sql)
             .then(dat => {
                 this.obtenerFotoUrl(res, dat);

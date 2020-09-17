@@ -42,7 +42,8 @@ module.exports = {
                         LEFT JOIN n_dresscode ON n_dresscode.dressCodeId = :TABLA.dressCodeid
                         LEFT JOIN companies on companies.companyid = :TABLA.companyid
                         LEFT JOIN c_city ON c_city.cityid = :TABLA.cityid
-                    GROUP BY :TABLA.clubid`,
+                    :WHERE 
+                        GROUP BY :TABLA.clubid`,
 
 
         SELECT_SELECT: `select clubid as id, clubName as option 
