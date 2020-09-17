@@ -21,7 +21,6 @@ export default class FormularioDresscode extends Component {
                             (dresscode.dressCodeId) ?
                                 <InputComponent name="dressCodeId"
                                     handleChange={this.props.funcion}
-
                                     label="ID"
                                     readOnly={true}
                                     value={dresscode.dressCodeId} /> : null
@@ -32,7 +31,7 @@ export default class FormularioDresscode extends Component {
                             handleChange={this.props.funcion}
                             label="Nombre"
                             readOnly={readonly}
-                            value={dresscode.dressCodeDescription}
+                            value={dresscode.dressCodeName}
                         />
                         <TextAreaComponent name="dressCodeDescription"
                             handleChange={this.props.funcion}

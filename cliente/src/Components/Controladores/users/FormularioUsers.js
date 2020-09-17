@@ -21,6 +21,13 @@ export default class FormularioUsers extends Component {
                                     readOnly={true}
                                     value={user.userid} /> : null
                         }
+                        <InputComponent name="userName "
+                            handleChange={this.props.funcion}
+                            label="Nombre"
+                            readOnly={readonly}
+                            value={user.userName}
+                        />
+
                         <InputComponent name="mail"
                             handleChange={this.props.funcion}
                             label="Correo electrónico"

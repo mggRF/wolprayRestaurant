@@ -110,14 +110,20 @@ class ControladorBase {
     conplementoSQL(req) {
         let salida = "";
         let size = req.query.size;
+        if (!(size !== undefined && size !== "" && size !== null)) {
+            size = req.query._size;
+        }
         let clasi = req.query.clasificacion;
-        // console.log("complementos", size, clasi)
+        if (!(clasi !== undefined && clasi !== "" && clasi !== null)) {
+            clasi = req.query._class;
+        }
+         console.log("complementos", size, clasi)
 
-        if (clasi !== undefined) {
+        if (clasi !== undefined && clasi !== "" && clasi !== null) {
             salida += " ORDER BY " + clasi.split(',').join(" ");
         }
 
-        if (size !== undefined) {
+        if (size !== undefined && size !== "" && size !== null) {
             let valores = size.split(',') // SI 2 offset y limit; si 1, limit
             salida += " LIMIT ";
             salida += valores[0]

@@ -63,6 +63,8 @@ export default class ListadoCompanies extends Component {
             <tr key={index}>
                 <td key={index} >{valor.companyid}</td>
                 <td>{valor.companyName}</td>
+                <td>{valor.companyAddress}</td>
+                <td>{valor.cityid}</td>
                 <TresBotonesListado funcion={this.props.trabajo}
                     id={valor.companyid} />
             </tr>
@@ -88,7 +90,9 @@ export default class ListadoCompanies extends Component {
                                     funcion={this.gl.setSortedField}
                                     lista={[
                                         ['companyid', 'Identificador'],
-                                        ['companyName', 'name']
+                                        ['companyName', 'Nombre'],
+                                        ['companyAddress', 'Direccion'],
+                                        ['cityid', 'Id Ciudad']
                                     ]} />
                                     <th></th><th></th><th></th>
                                     </tr>

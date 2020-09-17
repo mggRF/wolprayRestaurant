@@ -102,6 +102,16 @@ export default class FormularioClub extends Component {
                                     value={direccion}
                                 /> : null
                         }
+                        {
+                            /*NOMBRE DE LA DIRECCION DEL CLUB */
+                            (!readonly) ?
+                                <InputComponent name="streetNumber"
+                                    handleChange={this.props.funcion}
+
+                                    label="Nombre de la calle"
+                                    readOnly={readonly}
+                                    value={club.streetName} /> : null
+                        }
 
                         {
                             /*NUMERO DE LA DIRECCION DEL CLUB */
@@ -180,13 +190,9 @@ export default class FormularioClub extends Component {
                         {
 
                             /*TIPO DE MÚSICA DEL CLUB */
-                            (!readonly) ?
-
+                            /*(!readonly) ?
                                 null
-
-
                                 :
-
                                 <InputComponent name="Musica"
                                     handleChange={this.props.funcion}
                                     label="Tipo de música"
@@ -194,8 +200,7 @@ export default class FormularioClub extends Component {
                                     value={club.Musica}
                                 />
 
-                        }
-
+                        */}
 
                         <hr />
 
@@ -422,7 +427,7 @@ export default class FormularioClub extends Component {
 
                             <TextAreaComponent name="howToGetThere"
                                 handleChange={this.props.funcion}
-                                label="Como legar"
+                                label="Como llegar"
                                 readOnly={readonly}
                                 value={club.howToGetThere} />
 
