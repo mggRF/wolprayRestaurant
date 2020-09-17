@@ -23,6 +23,9 @@ class ControladorClubs extends ControladorBase {
             campoId: 'clubid',
         }
         super(config);
+        this.updateTable=this.updateTable.bind(this);
+        this.leerSelectCitys=this.leerSelectCitys.bind(this);
+        this.leerSelectProvinces=this.leerSelectProvinces.bind(this);
     }
 
     async updateTable(req, res) {
@@ -55,7 +58,7 @@ class ControladorClubs extends ControladorBase {
 
             delete req.body['musicsUpdate'];
         }
-        super.updateTable(req, res);
+        this.updateTable(req, res);
     }
 
     /**GUARDAR musicsUpdate EN OTRO CAMPO Y QUITARLO DEL REQUEST QUE HA LLEGADO*/
@@ -64,12 +67,12 @@ class ControladorClubs extends ControladorBase {
     leerSelectCitys(req,res){
         let sql = QueriesClub.SELECT_SELECT_CITYS;
         console.log(sql);
-        super.leerSelectDir(req,res,sql);
+        this.leerSelectDir(req,res,sql);
     }
     leerSelectProvinces(req,res){
         let sql = QueriesClub.SELECT_SELECT_PROVINCES;
         console.log(sql);
-        super.leerSelectDir(req,res,sql);
+        this.leerSelectDir(req,res,sql);
     }
     
 }
