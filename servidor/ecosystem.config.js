@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config();
 
 
 module.exports = {
@@ -24,7 +24,7 @@ module.exports = {
   deploy: {
     production: {
       user: 'wolpray',
-      host: 'wolpray.es',
+      host: '51.210.241.194',
       ref: 'origin/master',
       repo: 'https://github.com/mggRF/servidor.git',
       path: '/home/wolpraynode/servidor',
@@ -32,8 +32,8 @@ module.exports = {
       ssh_options: ["ForwardAgent=yes"],
       "post-deploy": " npm install && pm2 startOrRestart ecosystem.config.js --env production",
       "env": {
-        DB_HOST: process.env.DB_HOST,
-        DB_PASS: process.env.DB_PASS,
+        //DB_HOST: process.env.DB_HOST,
+        //DB_PASS: process.env.DB_PASS,
       }
       // staging : {
       //   user : "node",
