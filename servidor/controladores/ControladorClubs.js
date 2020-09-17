@@ -61,8 +61,15 @@ class ControladorClubs extends ControladorBase {
     /**GUARDAR musicsUpdate EN OTRO CAMPO Y QUITARLO DEL REQUEST QUE HA LLEGADO*/
     //   }
 
-
-
+    leerSelectProvinces(req,res){
+        let sql = QueriesClub.SELECT_SELECT_CITYS;
+        leerSelectDir(req,res,sql);
+    }
+    leerSelectCitys(req,res){
+        let sql = QueriesClub.SELECT_SELECT_PROVINCES;
+        leerSelectDir(req,res,sql);
+    }
+    
 }
 
 

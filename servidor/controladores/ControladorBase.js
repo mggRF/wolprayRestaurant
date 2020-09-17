@@ -183,6 +183,22 @@ class ControladorBase {
 
             });
 
+    }leerSelectDir(req, res, sql) {
+        
+        const ids = req.session.userid;
+        const role = req.session.role;
+
+
+        this.connect.leerSql(sql.replace(/:TABLA/gi, this.config.TABLA))
+            .then(dat => {
+                //console.log("dat->", dat);
+                this.enviaDatos(res, dat);
+            })
+            .catch(err => {
+                this.enviaDatos(res, "Error en leer SELECT", err);
+
+            });
+
     }
 
     leerALL(req, res) {
