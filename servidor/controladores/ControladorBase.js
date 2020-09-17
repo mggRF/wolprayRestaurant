@@ -436,7 +436,7 @@ class ControladorBase {
 
                     if (value.insertId && file !== null) {
 
-                        this.fileSystem.guardarImagen(file, value.insertId, data[this.config.CARPETA.CAMPO])
+                        this.fileSystem.guardarImagen(file, value.insertId, data[0][this.config.CARPETA.CAMPO])
                             .then(response => {
                                 console.log('OK => ', response)
                                 resolve({
