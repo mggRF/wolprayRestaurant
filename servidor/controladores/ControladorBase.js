@@ -21,7 +21,7 @@ class ControladorBase {
         this.leerUno = this.leerUno.bind(this);
         this.leerSelect = this.leerSelect.bind(this);
         this.updateTable = this.updateTable.bind(this);
-        this.s8endDataToTable = this.sendDataToTable.bind(this);
+        this.sendDataToTable = this.sendDataToTable.bind(this);
         this.enviaDatos = this.enviaDatos.bind(this);
         this.leerCount = this.leerCount.bind(this);
         this.limite = LPPAGINA;
