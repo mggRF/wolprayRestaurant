@@ -74,15 +74,19 @@ class CompletaSQL {
         where = CompletaSQL.cWhere(req);
         if (where == undefined || where.length == 0) {
             sql = sql.replace(':WHERE', '');
+            sql = sql.replace(':AND', '');
             return sql;
         }
-        console.log("WHERE0_>",where);
-        if (sql.includes(' WHERE ')){
+        
+        if (sql.includes(' :AND ')){
             where = ' AND ' + where;
-        } else {
+            sql = sql.replace('::AND', where);
+        } 
+        if (sql.includes(' :WHERE ')){
             where = ' WHERE ' + where;
+            sql = sql.replace(':WHERE', where);
         }
-        sql = sql.replace(':WHERE', where);
+        
         return sql;
 
     }
