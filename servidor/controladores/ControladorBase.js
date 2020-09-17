@@ -55,7 +55,7 @@ class ControladorBase {
         }
     }
 
-    obtenerFotoUrl(res,datos, status = null) {
+    obtenerFotoUrl(res, datos, status = null) {
         if (this.config.CARPETA) {
             if (datos.length) {
 
@@ -72,13 +72,13 @@ class ControladorBase {
                     }
                     return d;
                 });
-                this.enviaDatos(res,dat, status);
-            }else{
-                this.enviaDatos(res,datos, status);
+                this.enviaDatos(res, dat, status);
+            } else {
+                this.enviaDatos(res, datos, status);
             }
 
         } else {
-            this.enviaDatos(res,datos, status);
+            this.enviaDatos(res, datos, status);
         }
     }
 
@@ -117,7 +117,7 @@ class ControladorBase {
         if (!(clasi !== undefined && clasi !== "" && clasi !== null)) {
             clasi = req.query._class;
         }
-         console.log("complementos", size, clasi)
+        console.log("complementos", size, clasi)
 
         if (clasi !== undefined && clasi !== "" && clasi !== null) {
             salida += " ORDER BY " + clasi.split(',').join(" ");
@@ -149,7 +149,7 @@ class ControladorBase {
 
         this.connect.leerSql(sql.replace(/:TABLA/gi, this.config.TABLA))
             .then(dat => {
-                this.obtenerFotoUrl(res,dat);
+                this.obtenerFotoUrl(res, dat);
 
             })
             .catch(err => {
@@ -205,7 +205,7 @@ class ControladorBase {
         // console.log("sql---------->", sql)
         this.connect.leerSql(sql)
             .then(dat => {
-                this.obtenerFotoUrl(res,dat);
+                this.obtenerFotoUrl(res, dat);
             })
             .catch(err => {
                 this.enviaDatos(res, "Error en leer SELECT", err);
@@ -226,7 +226,7 @@ class ControladorBase {
         } = req.route.stack[0];
         const id = req.params.id;
         const body = req.body;
-        console.log('Body  => ',body)
+
 
         const file = this.verificaImagen(req);
 
@@ -329,7 +329,7 @@ class ControladorBase {
      * 
      */
     hacerPost(body, file, res) {
-        
+
         const {
             QUERIES
         } = this.config;
@@ -346,16 +346,14 @@ class ControladorBase {
                 break;
             default:
                 this.sendDataToTable([body], QUERIES.INSERT, file)
-                    .then( result => {
+                    .then(result => {
 
                         if (result.Ok) {
                             this.enviaDatos(res, result.Data);
                         } else {
-                            console.log(result);
                             this.enviaDatos(res, result.Data, result.Status);
                         }
                     }).catch(err => {
-                        console.log(err);
                         this.enviaDatos(res, err.Data, err.Status);
                     });
                 break;
@@ -427,18 +425,18 @@ class ControladorBase {
      * 
      */
     async sendDataToTable(data, sql, file = null) {
-        if(this.config.CARPETA){
+        if (file !== null && file !== undefined) {
             const nombreUnico = uniqid();
-            data[this.config.CARPETA.CAMPO] = nombreUnico;
-
+            data[0][this.config.CARPETA.CAMPO] = nombreUnico;
         }
+
         const result = await new Promise((resolve, reject) => {
             this.connect.modifyTable(sql.replace(/:TABLA/gi, this.config.TABLA), data)
                 .then(value => {
 
                     if (value.insertId && file !== null) {
-                        
-                        this.fileSystem.guardarImagen(file, value.insertId,data[this.config.CARPETA.CAMPO])
+
+                        this.fileSystem.guardarImagen(file, value.insertId, data[this.config.CARPETA.CAMPO])
                             .then(response => {
                                 console.log('OK => ', response)
                                 resolve({
