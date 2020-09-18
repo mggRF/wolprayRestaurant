@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const uniqid = require('uniqid');
+const { IMAGES } = require('../Constantes/ConstantesRutas');
 
 class FileSystem {
     constructor(config) {
@@ -140,50 +141,9 @@ class FileSystem {
 
 
     
-    getImageWithRandom(opcion, id, all){
-        let pathImages;
-        console.log(opcion, id, all);
-        if(id && all){
-            pathImages = path.resolve(__dirname,'../../uploads',opcion, id);//Con el all
-            
-            let exist = fs.existsSync(pathImages);
-        
-            if(!exist){
-                return path.resolve(__dirname,'../../uploads','nofile.JPG')
-            }
-            
-            return fs.readdirSync(pathImages);
-        }
-        if(id && all === null){
-            pathImages = path.resolve(__dirname,'../../uploads',opcion, id);
-            
-            let exist = fs.existsSync(pathImages);
-        
-            if(!exist){
-                return path.resolve(__dirname,'../../uploads','nofile.JPG')
-            }
-
-            let files = fs.readdirSync(pathImages);
-            let random = this.getRandomInt(0, files.length);
-         
-            return fs.readdirSync(files[random]);
-        }
-        
-        let pathCarpet = path.resolve(__dirname,'../../uploads',opcion)
-        
-        
-        let existCarpet = fs.existsSync(pathCarpet);
-        
-            if(!existCarpet){
-                return path.resolve(__dirname,'../../uploads','nofile.JPG')
-            }
-
-            let directories = fs.readdirSync(pathCarpet);
-            
-
-            let dir = directories[this.getRandomInt(0, directories.length)];
+    getAllImagesInAId(opcion, id){
                 
-            let finalDirs = path.resolve(__dirname,'../../uploads/',opcion, dir);
+            let finalDirs = path.resolve(__dirname,'../../uploads/',opcion, id);
             
             let existFinalDirs = fs.existsSync(finalDirs);
             
@@ -191,17 +151,12 @@ class FileSystem {
                 return path.resolve(__dirname,'../../uploads','nofile.JPG')
             }
 
-            let finalFiles = path.resolve(finalDirs);
+            let imagenes = fs.readdirSync(finalDirs);
 
-            let existFinalFiles = fs.existsSync(finalFiles);
-            
-            if(!existFinalFiles){
-                return path.resolve(__dirname,'../../uploads','nofile.JPG')
-            }
+        
+    
 
-            let imagenes = fs.readdirSync(finalFiles);
-
-        return path.resolve(__dirname,'../../uploads',opcion, dir, imagenes[this.getRandomInt(0, imagenes.length)]);
+        return imagenes;
 
     }
 
