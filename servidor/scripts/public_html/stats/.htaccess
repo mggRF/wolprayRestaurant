@@ -1,7 +1,0 @@
-AuthName "wolpray.es statistics"
-AuthType Basic
-AuthUserFile /home/wolpray/.stats-htpasswd
-require valid-user
-<Files .stats-htpasswd>
-deny from all
-</Files>
