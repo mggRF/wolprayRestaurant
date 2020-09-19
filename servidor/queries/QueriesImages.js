@@ -22,15 +22,15 @@ module.exports = {
         },
         clubevents: {
             select_by_option: `
-            SELECT clubid as id, clubName as name, description as description,  coverUrl as image 
-                FROM clubs 
-                UNION 
-            SELECT eventid, eventName, eventDescription,  event_imagePral  FROM events ORDER BY rand() LIMIT 1`,
+                        SELECT clubid as id, clubName as name, description as description,  coverUrl as image 
+                            FROM clubs 
+                            UNION 
+                        SELECT eventid, eventName, eventDescription,  event_imagePral  FROM events ORDER BY rand() LIMIT 1`,
             select_all: `
-            SELECT clubid as id, clubName as name, description as description,  coverUrl as image 
-                FROM clubs 
-                UNION 
-            SELECT eventid, eventName, eventDescription,  event_imagePral  FROM events`,
+                        SELECT clubid as id, clubName as name, description as description,  coverUrl as image 
+                            FROM clubs 
+                            UNION 
+                        SELECT eventid, eventName, eventDescription,  event_imagePral  FROM events`,
         },
     }
 }
