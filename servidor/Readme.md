@@ -1,19 +1,25 @@
 # API wolpray
 
 
+<http://localhost:3800/api_v00/>
 
 
+
+___
 ### Sistema de identificación
 
 ##### GET
 - /Login                      - Identifica al usuario y devuelve tokem.
 - /Logout                     - Cierra la sesión de usuario.
 
-###### IMPORTANTE: El token caduca cada 30 minutos.
+***IMPORTANTE: El token caduca cada 30 minutos.***
 
-## Área de mantenimiento----- IDENTIFICADO **********************
+___
 
-### Países--------------------------------------------------------
+## Área de mantenimiento *IDENTIFICADO*
+___
+### Países
+
 
 ##### GET
 - /api_v00/countrys/          - Listado de todos los países.
@@ -26,8 +32,8 @@
 ##### PUT
 - /api_v00/countrys/:id       - Objeto JSON de country indicado por id.
 
-
-### Comunidades Autónomas/estados----------------------------------
+___
+### Comunidades Autónomas/estados
 
 ##### GET
 - /api_v00/states/            - Listado de todos los estados/comunidades autónomas.
@@ -40,8 +46,8 @@
 ##### PUT
 - /api_v00/states/:id       - Objeto JSON de estado/comunidad indicado por id.
 
-
-### Provincias-----------------------------------------------------
+___
+### Provincias
 
 ##### GET
 - /api_v00/provinces/         - Listado de todas las provincias.
@@ -56,8 +62,8 @@
 ##### PUT
 - /api_v00/provinces/:id       - Objeto JSON de provincia indicado por id.
 
-
-### Poblaciones----------------------------------------------------
+___
+### Poblaciones
 
 ##### GET
 - /api_v00/citys/             - Listado de todas las poblaciones.
@@ -71,8 +77,8 @@
 
 ##### PUT
 - /api_v00/citys/:id       - Objeto JSON de población indicado por id. 
-
-### Clubs----------------------------------------------------
+___
+### Clubs
 
 ##### GET
 - /api_v00/clubs/             - Listado de todos los clubs.
@@ -87,8 +93,8 @@
 ##### PUT
 - /api_v00/clubs/:id       - Objeto JSON de club indicado por id.
 
-
-### Companies----------------------------------------------------
+___
+### Companies
 
 ##### GET
 - /api_v00/companies/            - Listado de todas las compañias.
@@ -101,8 +107,8 @@
 
 ##### PUT
 - /api_v00/companies/:id       - Objeto JSON de compañía indicado por id.
-
-### Dress Code----------------------------------------------------
+___
+### Dress Code
 
 ##### GET
 - /api_v00/dresscode/         - Listado de todos los códigos de vestimenta.
@@ -112,8 +118,8 @@
 
 ##### PUT
 - /api_v00/dresscode/:id       - Objeto JSON de código de vestimenta indicado por id.
-
-### Events----------------------------------------------------
+___
+### Events
 
 ##### GET
 - /api_v00/events/            - Listado de todos los eventos.
@@ -127,8 +133,8 @@
 
 ##### PUT
 - /api_v00/events/:id       - Objeto JSON de evento indicado por id.
-
-### Musics----------------------------------------------------
+___
+### Musics
 
 ##### GET
 - /api_v00/musics/            - Listado de todos los tipos de música.
@@ -143,8 +149,8 @@
 - /api_v00/musics/:id       - Objeto JSON de música indicado por id.
 
 
-
-### Roles----------------------------------------------------
+___
+### Roles
 
 ##### GET
 - /api_v00/roles/             - Listado de todos los roles.
@@ -156,8 +162,8 @@
 ##### PUT
 - /api_v00/roles/:id       - Objeto JSON de rol indicado por id.
 
-
-### Slots----------------------------------------------------
+___
+### Slots
 
 ##### GET
 - /api_v00/slots/             - Listado de todos los slots.
@@ -171,8 +177,8 @@
 ##### PUT
 - /api_v00/slots/:id       - Objeto JSON de slot indicado por id.
 
-
-### Users----------------------------------------------------
+___
+### Users
 
 ##### GET
 - /api_v00/users/             - listado de todos los usuarios.
@@ -187,11 +193,23 @@
 - /api_v00/users/:id          - Objeto JSON de usuario indicado por id.
 
 
-### Poner en marcha el servidor ****************************
 
+___
+### Controlador imágenes
 
+##### GET
+- /api_v00/                                                      - Muestra una imagen y la información de un elemento aleatoriamente sin importar la opción.
+- /api_v00/:opcion/             - Muestra una imagen y la información de un elemento aleatoriamente.
+- /api_v00/:opcion/:all         - Muestra una imagen y la información de todos los elementos de la opción dada.
+- /api_v00/:opcion/:id          - Muestra una imagen y la información de un elemento indexado con el id dado.
+- /api_v00/:opcion/:id/:all     - Muestra todas las imágenes y la información de un elemento indexado con el id dado.
 
-#### Módulos a instalar con npm i----------------------------
+***Opcion = products | clubs | promotions | events | clubevents***
+___
+### *Poner en marcha el servidor*
+
+___
+#### Módulos a instalar con npm i
 
     -cors.
 	-express.
@@ -202,6 +220,6 @@
 	-mysql.
 	-nodemon (npm i nodemon --dev).
 
-#### En el apartado de scripts añadir "start": "nodemon index".
+***En el apartado de scripts añadir "start": "nodemon index".***
 
-#### Para iniciar el servidor solo basta con npm start. Con el módulo nodemon instalado se reiniciará automáticamente cuando hagas algún cambio. No hace falta reiniciarlo manualmente.
+***Para iniciar el servidor solo basta con npm start. Con el módulo nodemon instalado se reiniciará automáticamente cuando hagas algún cambio. No hace falta reiniciarlo manualmente.***
