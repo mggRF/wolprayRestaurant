@@ -1,4 +1,4 @@
-<h1>API wolpray</h1> 
+# API wolpray
 
 
 
@@ -12,8 +12,9 @@
 ###### IMPORTANTE: El token caduca cada 30 minutos.
 
 ## Área de mantenimiento----- IDENTIFICADO **********************
-
-### Países--------------------------------------------------------
+___
+### Países
+___
 
 ##### GET
 - /api_v00/countrys/          - Listado de todos los países.
@@ -28,7 +29,7 @@
 
 
 ### Comunidades Autónomas/estados----------------------------------
-
+___
 ##### GET
 - /api_v00/states/            - Listado de todos los estados/comunidades autónomas.
 - /api_v00/states/:id         - Listado del estado estado/comunidad por id.
@@ -42,7 +43,7 @@
 
 
 ### Provincias-----------------------------------------------------
-
+___
 ##### GET
 - /api_v00/provinces/         - Listado de todas las provincias.
 - /api_v00/provinces/:id      - Listado dela provincia indicado por id.
@@ -58,7 +59,7 @@
 
 
 ### Poblaciones----------------------------------------------------
-
+___
 ##### GET
 - /api_v00/citys/             - Listado de todas las poblaciones.
 - /api_v00/citys/:id          - Listado de la población indicado por id.
@@ -73,7 +74,7 @@
 - /api_v00/citys/:id       - Objeto JSON de población indicado por id. 
 
 ### Clubs----------------------------------------------------
-
+___
 ##### GET
 - /api_v00/clubs/             - Listado de todos los clubs.
 - /api_v00/clubs/:id          - Listado de club indicado por id.
@@ -89,7 +90,7 @@
 
 
 ### Companies----------------------------------------------------
-
+___
 ##### GET
 - /api_v00/companies/            - Listado de todas las compañias.
 - /api_v00/companies/:id         - Listado de compañía indicado por id.
@@ -103,7 +104,7 @@
 - /api_v00/companies/:id       - Objeto JSON de compañía indicado por id.
 
 ### Dress Code----------------------------------------------------
-
+___
 ##### GET
 - /api_v00/dresscode/         - Listado de todos los códigos de vestimenta.
 - /api_v00/dresscode/:id      - Listado de codigos de vestimenta indicado por id.
@@ -114,7 +115,7 @@
 - /api_v00/dresscode/:id       - Objeto JSON de código de vestimenta indicado por id.
 
 ### Events----------------------------------------------------
-
+___
 ##### GET
 - /api_v00/events/            - Listado de todos los eventos.
 - /api_v00/events/:id         - Listado de evento indicado por id.
@@ -129,7 +130,7 @@
 - /api_v00/events/:id       - Objeto JSON de evento indicado por id.
 
 ### Musics----------------------------------------------------
-
+___
 ##### GET
 - /api_v00/musics/            - Listado de todos los tipos de música.
 - /api_v00/musics/:id         - Listado de música indicado por id.
@@ -145,7 +146,7 @@
 
 
 ### Roles----------------------------------------------------
-
+___
 ##### GET
 - /api_v00/roles/             - Listado de todos los roles.
 - /api_v00/roles/:id          - Listado de rol indicado por id.
@@ -158,7 +159,7 @@
 
 
 ### Slots----------------------------------------------------
-
+___
 ##### GET
 - /api_v00/slots/             - Listado de todos los slots.
 - /api_v00/slots/:id          - Listado de slot indicado por id.
@@ -173,7 +174,7 @@
 
 
 ### Users----------------------------------------------------
-
+___
 ##### GET
 - /api_v00/users/             - listado de todos los usuarios.
 - /api_v00/users/:id          - listado de usuario indicado por id.
@@ -190,7 +191,7 @@
 
 
 ### Controlador imágenes----------------------------------------------------
-
+___
 ##### GET
 - /api_v00/clubs || poducts || events || clubevents/             - listado de todos los usuarios.
 - /api_v00/users/:id          - listado de usuario indicado por id.
@@ -203,13 +204,13 @@
 ##### PUT
 - /api_v00/users/:id          - Objeto JSON de usuario indicado por id.
 
-
+___
 ### Poner en marcha el servidor ****************************
-
+___
 
 
 #### Módulos a instalar con npm i----------------------------
-
+___
     -cors.
 	-express.
 	-express-parser.
