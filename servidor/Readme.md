@@ -198,10 +198,11 @@ ___
 ### Controlador imágenes
 
 ##### GET
-- /api_v00/clubs || poducts || events || clubevents/             - listado de todos los usuarios.
-- /api_v00/users/:id          - listado de usuario indicado por id.
-- /api_v00/users/select/:id   - listado de todos los usuarios con id y opción del rol
-                            indicado por id.
+- /api_v00/                                                      - Muestra una imagen y la información de un elemento aleatoriamente sin importar la opción.
+- /api_v00/clubs || poducts || events || clubevents/             - Muestra una imagen y la información de un elemento aleatoriamente.
+- /api_v00/clubs || poducts || events || clubevents/:all         - Muestra una imagen y la información de todos los elementos de la opción dada.
+- /api_v00/clubs || poducts || events || clubevents/:id          - Muestra una imagen y la información de un elemento indexado con el id dado.
+- /api_v00/clubs || poducts || events || clubevents/:id/:all     - Muestra todas las imágenes y la información de un elemento indexado con el id dado.
 
 ##### POST
 - /api_v00/users/             - Objeto JSON de usuario sin id. (El id es auto increment).
