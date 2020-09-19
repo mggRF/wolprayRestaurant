@@ -9,9 +9,11 @@ ___
 - /Login                      - Identifica al usuario y devuelve tokem.
 - /Logout                     - Cierra la sesión de usuario.
 
-###### IMPORTANTE: El token caduca cada 30 minutos.
+*###### IMPORTANTE: El token caduca cada 30 minutos.*
 
-## Área de mantenimiento----- IDENTIFICADO **********************
+___
+
+## Área de mantenimiento *IDENTIFICADO*
 ___
 ### Países
 
@@ -28,7 +30,7 @@ ___
 - /api_v00/countrys/:id       - Objeto JSON de country indicado por id.
 
 ___
-### Comunidades Autónomas/estados----------------------------------
+### Comunidades Autónomas/estados
 
 ##### GET
 - /api_v00/states/            - Listado de todos los estados/comunidades autónomas.
@@ -42,7 +44,7 @@ ___
 - /api_v00/states/:id       - Objeto JSON de estado/comunidad indicado por id.
 
 ___
-### Provincias-----------------------------------------------------
+### Provincias
 
 ##### GET
 - /api_v00/provinces/         - Listado de todas las provincias.
@@ -58,7 +60,7 @@ ___
 - /api_v00/provinces/:id       - Objeto JSON de provincia indicado por id.
 
 ___
-### Poblaciones----------------------------------------------------
+### Poblaciones
 
 ##### GET
 - /api_v00/citys/             - Listado de todas las poblaciones.
@@ -73,7 +75,7 @@ ___
 ##### PUT
 - /api_v00/citys/:id       - Objeto JSON de población indicado por id. 
 ___
-### Clubs----------------------------------------------------
+### Clubs
 
 ##### GET
 - /api_v00/clubs/             - Listado de todos los clubs.
@@ -89,7 +91,7 @@ ___
 - /api_v00/clubs/:id       - Objeto JSON de club indicado por id.
 
 ___
-### Companies----------------------------------------------------
+### Companies
 
 ##### GET
 - /api_v00/companies/            - Listado de todas las compañias.
@@ -103,7 +105,7 @@ ___
 ##### PUT
 - /api_v00/companies/:id       - Objeto JSON de compañía indicado por id.
 ___
-### Dress Code----------------------------------------------------
+### Dress Code
 
 ##### GET
 - /api_v00/dresscode/         - Listado de todos los códigos de vestimenta.
@@ -114,7 +116,7 @@ ___
 ##### PUT
 - /api_v00/dresscode/:id       - Objeto JSON de código de vestimenta indicado por id.
 ___
-### Events----------------------------------------------------
+### Events
 
 ##### GET
 - /api_v00/events/            - Listado de todos los eventos.
@@ -129,7 +131,7 @@ ___
 ##### PUT
 - /api_v00/events/:id       - Objeto JSON de evento indicado por id.
 ___
-### Musics----------------------------------------------------
+### Musics
 
 ##### GET
 - /api_v00/musics/            - Listado de todos los tipos de música.
@@ -145,7 +147,7 @@ ___
 
 
 ___
-### Roles----------------------------------------------------
+### Roles
 
 ##### GET
 - /api_v00/roles/             - Listado de todos los roles.
@@ -158,7 +160,7 @@ ___
 - /api_v00/roles/:id       - Objeto JSON de rol indicado por id.
 
 ___
-### Slots----------------------------------------------------
+### Slots
 
 ##### GET
 - /api_v00/slots/             - Listado de todos los slots.
@@ -173,7 +175,7 @@ ___
 - /api_v00/slots/:id       - Objeto JSON de slot indicado por id.
 
 ___
-### Users----------------------------------------------------
+### Users
 
 ##### GET
 - /api_v00/users/             - listado de todos los usuarios.
@@ -190,7 +192,7 @@ ___
 
 
 ___
-### Controlador imágenes----------------------------------------------------
+### Controlador imágenes
 
 ##### GET
 - /api_v00/clubs || poducts || events || clubevents/             - listado de todos los usuarios.
@@ -205,10 +207,10 @@ ___
 - /api_v00/users/:id          - Objeto JSON de usuario indicado por id.
 
 ___
-### Poner en marcha el servidor ****************************
+*### Poner en marcha el servidor*
 
 ___
-#### Módulos a instalar con npm i----------------------------
+#### Módulos a instalar con npm i
 
     -cors.
 	-express.
