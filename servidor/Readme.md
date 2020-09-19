@@ -2,7 +2,7 @@
 
 
 
-
+___
 ### Sistema de identificación
 
 ##### GET
@@ -14,7 +14,7 @@
 ## Área de mantenimiento----- IDENTIFICADO **********************
 ___
 ### Países
-___
+
 
 ##### GET
 - /api_v00/countrys/          - Listado de todos los países.
@@ -27,9 +27,9 @@ ___
 ##### PUT
 - /api_v00/countrys/:id       - Objeto JSON de country indicado por id.
 
-
-### Comunidades Autónomas/estados----------------------------------
 ___
+### Comunidades Autónomas/estados----------------------------------
+
 ##### GET
 - /api_v00/states/            - Listado de todos los estados/comunidades autónomas.
 - /api_v00/states/:id         - Listado del estado estado/comunidad por id.
@@ -41,9 +41,9 @@ ___
 ##### PUT
 - /api_v00/states/:id       - Objeto JSON de estado/comunidad indicado por id.
 
-
-### Provincias-----------------------------------------------------
 ___
+### Provincias-----------------------------------------------------
+
 ##### GET
 - /api_v00/provinces/         - Listado de todas las provincias.
 - /api_v00/provinces/:id      - Listado dela provincia indicado por id.
@@ -57,9 +57,9 @@ ___
 ##### PUT
 - /api_v00/provinces/:id       - Objeto JSON de provincia indicado por id.
 
-
-### Poblaciones----------------------------------------------------
 ___
+### Poblaciones----------------------------------------------------
+
 ##### GET
 - /api_v00/citys/             - Listado de todas las poblaciones.
 - /api_v00/citys/:id          - Listado de la población indicado por id.
@@ -72,9 +72,9 @@ ___
 
 ##### PUT
 - /api_v00/citys/:id       - Objeto JSON de población indicado por id. 
-
-### Clubs----------------------------------------------------
 ___
+### Clubs----------------------------------------------------
+
 ##### GET
 - /api_v00/clubs/             - Listado de todos los clubs.
 - /api_v00/clubs/:id          - Listado de club indicado por id.
@@ -88,9 +88,9 @@ ___
 ##### PUT
 - /api_v00/clubs/:id       - Objeto JSON de club indicado por id.
 
-
-### Companies----------------------------------------------------
 ___
+### Companies----------------------------------------------------
+
 ##### GET
 - /api_v00/companies/            - Listado de todas las compañias.
 - /api_v00/companies/:id         - Listado de compañía indicado por id.
@@ -102,9 +102,9 @@ ___
 
 ##### PUT
 - /api_v00/companies/:id       - Objeto JSON de compañía indicado por id.
-
-### Dress Code----------------------------------------------------
 ___
+### Dress Code----------------------------------------------------
+
 ##### GET
 - /api_v00/dresscode/         - Listado de todos los códigos de vestimenta.
 - /api_v00/dresscode/:id      - Listado de codigos de vestimenta indicado por id.
@@ -113,9 +113,9 @@ ___
 
 ##### PUT
 - /api_v00/dresscode/:id       - Objeto JSON de código de vestimenta indicado por id.
-
-### Events----------------------------------------------------
 ___
+### Events----------------------------------------------------
+
 ##### GET
 - /api_v00/events/            - Listado de todos los eventos.
 - /api_v00/events/:id         - Listado de evento indicado por id.
@@ -128,9 +128,9 @@ ___
 
 ##### PUT
 - /api_v00/events/:id       - Objeto JSON de evento indicado por id.
-
-### Musics----------------------------------------------------
 ___
+### Musics----------------------------------------------------
+
 ##### GET
 - /api_v00/musics/            - Listado de todos los tipos de música.
 - /api_v00/musics/:id         - Listado de música indicado por id.
@@ -144,9 +144,9 @@ ___
 - /api_v00/musics/:id       - Objeto JSON de música indicado por id.
 
 
-
-### Roles----------------------------------------------------
 ___
+### Roles----------------------------------------------------
+
 ##### GET
 - /api_v00/roles/             - Listado de todos los roles.
 - /api_v00/roles/:id          - Listado de rol indicado por id.
@@ -157,9 +157,9 @@ ___
 ##### PUT
 - /api_v00/roles/:id       - Objeto JSON de rol indicado por id.
 
-
-### Slots----------------------------------------------------
 ___
+### Slots----------------------------------------------------
+
 ##### GET
 - /api_v00/slots/             - Listado de todos los slots.
 - /api_v00/slots/:id          - Listado de slot indicado por id.
@@ -172,9 +172,9 @@ ___
 ##### PUT
 - /api_v00/slots/:id       - Objeto JSON de slot indicado por id.
 
-
-### Users----------------------------------------------------
 ___
+### Users----------------------------------------------------
+
 ##### GET
 - /api_v00/users/             - listado de todos los usuarios.
 - /api_v00/users/:id          - listado de usuario indicado por id.
@@ -189,9 +189,9 @@ ___
 
 
 
-
-### Controlador imágenes----------------------------------------------------
 ___
+### Controlador imágenes----------------------------------------------------
+
 ##### GET
 - /api_v00/clubs || poducts || events || clubevents/             - listado de todos los usuarios.
 - /api_v00/users/:id          - listado de usuario indicado por id.
@@ -208,9 +208,9 @@ ___
 ### Poner en marcha el servidor ****************************
 ___
 
-
-#### Módulos a instalar con npm i----------------------------
 ___
+#### Módulos a instalar con npm i----------------------------
+
     -cors.
 	-express.
 	-express-parser.
