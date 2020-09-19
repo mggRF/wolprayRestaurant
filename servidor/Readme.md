@@ -1,7 +1,7 @@
 # API wolpray
 
 
-[***End point***](http://localhost:3800/api_v00/)
+<http://localhost:3800/api_v00/>
 
 
 
