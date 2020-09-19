@@ -25,11 +25,12 @@ module.exports = {
     production: {
       user: 'wolpray',
       host: '51.210.241.194',
+      port:"3872",
       ref: 'origin/master',
       repo: 'https://github.com/mggRF/servidor.git',
       path: '/home/wolpraynode/servidor',
-      key: "/home/wolpray/.ssh/authorized_keys",
-      ssh_options: ["ForwardAgent=yes"],
+      key: "D:\Proyectos\wolpray\SSH_PRIVATE.ppk",
+      ssh_options: ["ForwardAgent=yes","Port=3872"],
       "post-deploy": " npm install && pm2 startOrRestart ecosystem.config.js --env production",
       "env": {
         //DB_HOST: process.env.DB_HOST,

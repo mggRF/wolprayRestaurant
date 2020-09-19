@@ -6,7 +6,7 @@ import { LPPAGINA } from "../Components/Constantes";
 export default class GestorListado {
 
     constructor(ruta,lector) {
-        this.offset = "?size=" + LPPAGINA;   //lineas por página
+        this.offset = "?_size=" + LPPAGINA;   //lineas por página
         this.clasificador = "";              //columna por la que se desea clasificar
         this.clasSen = 1;                   //sentido clasificacion 1 ascendente -1 descendente
         this.ruta = ruta;                   //Ruta BASICA de llamada a la api
@@ -16,10 +16,10 @@ export default class GestorListado {
     terminaURLlistado = () => {
         let url = this.ruta + this.offset;
         if (this.clasificador !== "") {
-            url += "&clasificacion=" + this.clasificador + ",";
+            url += "&_class=" + this.clasificador + ",";
             url += this.clasSen > 0 ? "ASC" : "DESC"
         }
-        console.log("preparada->", url)
+        //console.log("preparada->", url)
         return url
     }
     /**
