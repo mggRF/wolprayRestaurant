@@ -199,10 +199,12 @@ ___
 
 ##### GET
 - /api_v00/                                                      - Muestra una imagen y la información de un elemento aleatoriamente sin importar la opción.
-- /api_v00/clubs | poducts | events | clubevents/             - Muestra una imagen y la información de un elemento aleatoriamente.
-- /api_v00/clubs | poducts | events | clubevents/:all         - Muestra una imagen y la información de todos los elementos de la opción dada.
-- /api_v00/clubs | poducts | events | clubevents/:id          - Muestra una imagen y la información de un elemento indexado con el id dado.
-- /api_v00/clubs | poducts | events | clubevents/:id/:all     - Muestra todas las imágenes y la información de un elemento indexado con el id dado.
+- /api_v00/:opcion/             - Muestra una imagen y la información de un elemento aleatoriamente.
+- /api_v00/:opcion/:all         - Muestra una imagen y la información de todos los elementos de la opción dada.
+- /api_v00/:opcion/:id          - Muestra una imagen y la información de un elemento indexado con el id dado.
+- /api_v00/:opcion/:id/:all     - Muestra todas las imágenes y la información de un elemento indexado con el id dado.
+
+***Opcion = products | clubs | promotions | events | clubevents***
 ___
 ### *Poner en marcha el servidor*
 
