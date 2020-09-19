@@ -9,7 +9,7 @@ ___
 - /Login                      - Identifica al usuario y devuelve tokem.
 - /Logout                     - Cierra la sesión de usuario.
 
-*###### IMPORTANTE: El token caduca cada 30 minutos.*
+*IMPORTANTE: El token caduca cada 30 minutos.*
 
 ___
 
@@ -207,7 +207,7 @@ ___
 - /api_v00/users/:id          - Objeto JSON de usuario indicado por id.
 
 ___
-*### Poner en marcha el servidor*
+### *Poner en marcha el servidor*
 
 ___
 #### Módulos a instalar con npm i
