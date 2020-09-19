@@ -6,7 +6,7 @@ var DressCodeController = require('../controladores/ControladorDressCode');
 let dressCode = new DressCodeController();
 // Llamamos al router
 var rutas = express.Router();
-//var md_auth = require('../middlewares/authenticated');
+
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
 rutas.get('/', dressCode.leerALL);
 rutas.get('/select/',dressCode.leerSelect)

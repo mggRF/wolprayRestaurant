@@ -80,7 +80,7 @@ if (process.env.NODE_ENV == 'production') {
     })
     app.use(morgan('combined', { stream: accessLogStream }))
 } else {
-    app.use(morgan('combined'));
+    app.use(morgan('dev'));
 }
 
 module.exports = app;

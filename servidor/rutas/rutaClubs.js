@@ -6,7 +6,7 @@ var ControladorClubs = require('../controladores/ControladorClubs');
 let clubs = new ControladorClubs();
 // Llamamos al router
 var rutas = express.Router();
-//var md_auth = require('../middlewares/authenticated');
+
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
 rutas.get('/', clubs.leerALL);
 rutas.get('/select/:id',clubs.leerSelect) ////<---¿quien ha hecho esto?
