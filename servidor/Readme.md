@@ -206,7 +206,6 @@ ___
 
 ___
 ### Poner en marcha el servidor ****************************
-___
 
 ___
 #### Módulos a instalar con npm i----------------------------
