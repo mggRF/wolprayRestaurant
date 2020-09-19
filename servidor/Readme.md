@@ -192,7 +192,7 @@
 ### Controlador imágenes----------------------------------------------------
 
 ##### GET
-- /api_v00/<clubs|poducts|events|clubevents>/             - listado de todos los usuarios.
+- /api_v00/<clubs || poducts || events || clubevents>/             - listado de todos los usuarios.
 - /api_v00/users/:id          - listado de usuario indicado por id.
 - /api_v00/users/select/:id   - listado de todos los usuarios con id y opción del rol
                             indicado por id.
