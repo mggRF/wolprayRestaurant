@@ -221,6 +221,6 @@ ___
 	-mysql.
 	-nodemon (npm i nodemon --dev).
 
-#### En el apartado de scripts añadir "start": "nodemon index".
+#### *En el apartado de scripts añadir "start": "nodemon index".*
 
-#### Para iniciar el servidor solo basta con npm start. Con el módulo nodemon instalado se reiniciará automáticamente cuando hagas algún cambio. No hace falta reiniciarlo manualmente.
+#### *Para iniciar el servidor solo basta con npm start. Con el módulo nodemon instalado se reiniciará automáticamente cuando hagas algún cambio. No hace falta reiniciarlo manualmente.*
