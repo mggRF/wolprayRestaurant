@@ -145,10 +145,10 @@ class ControladorBase {
     leerSelectDir(req, res, sql) {   
         const ids = req.session.userid;
         const role = req.session.role;
-        sql = sql.replace(/:TABLA/gi, this.config.TABLA);
+        sql = sql.replace(/:TABLA/gi, this.config.TABLA);      
+        sql = CompletaSQL.cSQL(req,sql);
         console.log(sql);
-
-        this.connect.leerSql(sql.replace(/:TABLA/gi, this.config.TABLA))
+        this.connect.leerSql(sql)
             .then(dat => {
                 //console.log("dat->", dat);
                 this.enviaDatos(res, dat);
@@ -167,7 +167,7 @@ class ControladorBase {
         let sql = this.config.QUERIES.SELECT_ALL.replace(/:TABLA/gi, this.config.TABLA);
         sql = CompletaSQL.cSQL(req,sql);
 
-        console.log("sql---------->", sql)
+        Presenta.log("sql---------->", sql)
         this.connect.leerSql(sql)
             .then(dat => {
                 this.obtenerFotoUrl(res, dat);

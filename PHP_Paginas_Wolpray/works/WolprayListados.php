@@ -4,10 +4,10 @@ defined('DIR_ROOT') or define('DIR_ROOT', dirname(dirname(__FILE__)));
 
 require_once DIR_ROOT . '/includes/constantes.php';
 require_once DIR_ROOT . '/includes/accesoURL.php';
-require_once DIR_ROOT . '/funciones/FuncionesHTML.php';
-require_once DIR_ROOT . '/funciones/Request.php';
+//require_once DIR_ROOT . '/funciones/FuncionesHTML.php';
+//require_once DIR_ROOT . '/funciones/Request.php';
 
-use App\service\Request;
+//use App\service\Request;
 
 
 function WPI_consigue($tabla, $size = LPPAGINA, $clasificacion = "")
@@ -50,4 +50,4 @@ function WPI_consigueClubsXCity($city)
     $ruta = 'clubs';
     return json_decode(RFW_accederRemoto($ruta, $query))->Datos;
 }
-WPI_listaClubs();
+

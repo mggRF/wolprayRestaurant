@@ -66,12 +66,10 @@ class ControladorClubs extends ControladorBase {
 
     leerSelectCitys(req,res){
         let sql = QueriesClub.SELECT_SELECT_CITYS;
-        console.log(sql);
         this.leerSelectDir(req,res,sql);
     }
     leerSelectProvinces(req,res){
         let sql = QueriesClub.SELECT_SELECT_PROVINCES;
-        console.log(sql);
         this.leerSelectDir(req,res,sql);
     }
     
