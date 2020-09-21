@@ -7,10 +7,10 @@ let products = 'products';
 let promotions = 'promotions';
 let events = 'events';
 let clubevents = 'clubevents';
-class ControladorImagenes extends ControladorBase{
+class ControladorImagenes extends ControladorBase {
 
 
-    constructor(){
+    constructor() {
         let config = {
             TABLAS: {
                 clubs,
@@ -19,7 +19,7 @@ class ControladorImagenes extends ControladorBase{
                 events,
                 clubevents
             },
-            OPCIONES:[clubs,
+            OPCIONES: [clubs,
                 products,
                 promotions,
                 events,
@@ -29,22 +29,22 @@ class ControladorImagenes extends ControladorBase{
         this.getImagebyOption = this.getImagebyOption.bind(this);
     }
 
-    getImagebyOption(req, res){
-        
+    getImagebyOption(req, res) {
+
         let numParams = Object.getOwnPropertyNames(req.params);
-        
-        const {opcion, id} = req.params;
+
+        const { opcion, id } = req.params;
         var queries = QueriesImages[opcion];
         const tabla = this.config.TABLAS[opcion];
-        switch(numParams.length){
+        switch (numParams.length) {
             case 0:
                 this.mostrarDatosRandom(res);
                 break;
             case 1:
-                this.obtenerDatos(opcion,res,queries,tabla);
+                this.obtenerDatos(opcion, res, queries, tabla);
                 break;
             case 2:
-                this.obtenerDatos(opcion,res,queries,tabla, id);
+                this.obtenerDatos(opcion, res, queries, tabla, id);
                 break;
             case 3:
                 this.mostrarMultiplesFotos(opcion, res, queries, tabla, id);
@@ -56,92 +56,80 @@ class ControladorImagenes extends ControladorBase{
         }
     }
 
-    mostrarDatosRandom(res){
+    mostrarDatosRandom(res) {
         let maxRan = Object.getOwnPropertyNames(QueriesImages);
         let random = this.getRandomInt(1, maxRan.length);
         let opcionRandom = this.config.OPCIONES[random];
         var queriesRandom = QueriesImages[opcionRandom];
         let tablaRandom = this.config.TABLAS[opcionRandom];
-        this.obtenerDatos(opcionRandom,res,queriesRandom,tablaRandom);
+        this.obtenerDatos(opcionRandom, res, queriesRandom, tablaRandom);
     }
 
-    mostrarMultiplesFotos(opcion,res,queries, tabla, id){
+    mostrarMultiplesFotos(opcion, res, queries, tabla, id) {
         var query = query = queries.select_by_id.replace(':id', id);
-        console.log('Esthyo mostrando todos los datos')
-
         let images = this.fileSystem.getAllImagesInAId(opcion, id);
-
-        let imagesUrl = [];
-
-        this.connect.leerSql(query.replace(/:TABLA/gi, tabla))
-                .then(datos => {
-                    if(datos.length > 0){
-                        let dat = datos.map(dat => {
-                            if (dat['image'] && dat['image'].includes('.')) {
-                                dat['image'] = `${URL}${VERSION}${opcion}/uploads/${dat['id']}/${dat['image']}`;
-                            } else {
-                                dat['image'] = `${URL}${VERSION}${opcion}/uploads/${dat['id']}/nopicture.jpg`;
-                            }
-                            dat['comment'] = null; 
-                            dat['url'] = null; 
-                            
-                            
-                            if(Array.isArray(images)){
-
-                                if(images.length > 0){
-                                    images.map((image) => {
-                                        imagesUrl = [...imagesUrl, `${URL}${VERSION}${opcion}/uploads/${dat['id']}/${image}`];
-                                    });
-                                }
-                            }
-                                dat['images'] = imagesUrl;
-                                dat['tabla'] = tabla;
-                            return dat;
-                        });
-                        this.enviaDatos(res, dat, null);
-
-                    }
-                }).catch(err => console.log(err));
+        let sql = query.replace(/:TABLA/gi, tabla);
+        this.leerYPreparar(sql,images,tabla);
     }
+
+    leerYPreparar(sql,images,tabla) {
+        let imagesUrl = [];
+        this.connect.leerSql(sql)
+            .then(datos => {
+                if (datos.length > 0) {
+                    let dat = datos.map(dat => {
+                        if (dat['image'] && dat['image'].includes('.')) {
+                            dat['image'] = `${URL}${VERSION}${opcion}/uploads/${dat['id']}/${dat['image']}`;
+                        } else {
+                            dat['image'] = `${URL}${VERSION}${opcion}/uploads/${dat['id']}/nopicture.jpg`;
+                        }
+                        dat['comment'] = null;
+                        dat['url'] = null;
+
+
+                        if (Array.isArray(images)) {
+
+                            if (images.length > 0) {
+                                images.map((image) => {
+                                    imagesUrl = [...imagesUrl, `${URL}${VERSION}${opcion}/uploads/${dat['id']}/${image}`];
+                                });
+                            }
+                        }
+                        dat['images'] = imagesUrl;
+                        dat['tabla'] = tabla;
+                        return dat;
+                    });
+                    this.enviaDatos(res, dat, null);
+
+                }
+            }).catch(err => console.log(err));
+    }
+}
+
+
+obtenerDatos(opcion, res, queries, tabla, id = null){
+    var query = '';
+    let images='';
+    if (id !== null) {
+        if (!isNaN(id)) {
+            query = queries.select_by_id.replace(':id', id);
+        } else {
+            query = queries.select_all;
+        }
+    } else {
+        query = queries.select_by_option;
+    }
+    console.log('Select: ', query)
+    sql=query.replace(/:TABLA/gi, tabla);
+    leerYPreparar(sql,images,tabla);
+}
     
 
-    obtenerDatos(opcion,res,queries, tabla, id = null){
-        var query = '';
-        if(id !== null ){
-            if(!isNaN(id)){
-                query = queries.select_by_id.replace(':id', id);
-            }else{
-                query = queries.select_all;
-            }
-        }else{
-            query = queries.select_by_option;
-        }
-        console.log('Select: ',query)
-        this.connect.leerSql(query.replace(/:TABLA/gi, tabla))
-                .then(datos => {
-                    if(datos.length > 0){
-                        let dat = datos.map(dat => {
-                            if (dat['image'] && dat['image'].includes('.')) {
-                                dat['image'] = `${URL}${VERSION}${opcion}/uploads/${dat['id']}/${dat['image']}`;
-                            } else {
-                                dat['image'] = `${URL}${VERSION}${opcion}/uploads/${dat['id']}/nopicture.jpg`;
-                            }
-                            dat['comment'] = null; 
-                            dat['url'] = null;
-                            dat['tabla'] = tabla; 
-                            return dat;
-                        });
-                        this.enviaDatos(res, dat, null);
 
-                    }
-                }).catch(err => console.log(err));
-    }
-
-
-    getRandomInt(min, max) {
-        let ran = Math.floor(Math.random() * (max - min)) + min;
-        return ran;
-      }
+getRandomInt(min, max) {
+    let ran = Math.floor(Math.random() * (max - min)) + min;
+    return ran;
+}
 
 }
 

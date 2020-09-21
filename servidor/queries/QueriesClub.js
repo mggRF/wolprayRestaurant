@@ -46,18 +46,18 @@ module.exports = {
                         GROUP BY :TABLA.clubid`,
 
 
-        SELECT_SELECT: `select clubid as id, clubName as option 
+        SELECT_SELECT: `select clubid as id, clubName as opcion 
             from :TABLA ,
             WHERE companyid = idc`,
         INSERT: `INSERT INTO :TABLA SET ?`,
         UPDATE: `UPDATE :TABLA SET ? WHERE clubid = ?`,
         DELETE: `DELETE FROM :TABLA WHERE clubid = ?`,
 
-        SELECT_SELECT_CITYS: `SELECT DISTINCT c_city.cityid id, c_city.cityName as option  
+        SELECT_SELECT_CITYS: `SELECT DISTINCT c_city.cityid id, c_city.cityName as opcion  
             from :TABLA  
             LEFT JOIN c_city ON c_city.cityid = :TABLA.cityid`,
 
-        SELECT_SELECT_PROVINCES: `SELECT DISTINCT c_provinces.provinceid id, c_provinces.provinceName as option  
+        SELECT_SELECT_PROVINCES: `SELECT DISTINCT c_provinces.provinceid id, c_provinces.provinceName as opcion  
             from :TABLA   
             LEFT JOIN c_city ON c_city.cityid = :TABLA.cityid
             LEFT JOIN c_provinces ON c_city.provinceid = c_provinces.provinceid`
