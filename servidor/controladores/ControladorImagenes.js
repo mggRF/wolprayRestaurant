@@ -72,7 +72,7 @@ class ControladorImagenes extends ControladorBase {
         this.leerYPreparar(sql, images, tabla, opcion);
     }
 
-    leerYPreparar(sql, images, tabla, opcionRandom) {
+    leerYPreparar(sql, images, tabla, opcion) {
         let imagesUrl = [];
         this.connect.leerSql(sql)
             .then(datos => {

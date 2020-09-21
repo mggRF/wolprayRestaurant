@@ -27,4 +27,5 @@ module.exports = {
     COMPANIES: '/' +  VERSION  + 'companies',
     PRODUCTS: '/' +  VERSION  + 'products',
     IMAGES: '/' +  VERSION  + 'images',
+    UPLOADS: '/' +  VERSION  + 'uploads'
 }

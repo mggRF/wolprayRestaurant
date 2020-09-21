@@ -42,7 +42,9 @@ function WPI_consigueCitys()
 {
     $query = '_size=500&_class=cityName';
     $ruta = 'clubs/citys';
-    return json_decode(RFW_accederRemoto($ruta, $query))->Datos;
+    $salida = RFW_accederRemoto($ruta, $query);
+    $recibe=json_decode($salida);
+    return $recibe->Datos;
 }
 function WPI_consigueClubsXCity($city)
 {

@@ -15,7 +15,7 @@ if (!function_exists('RFW_accederRemoto')) {
     {
         $url = API_URL . $ruta;
         if ($query != '') $url .= '?' . $query;
-        //echo "<br>" . $url ;exit;
+        //echo "<br>" . $url;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

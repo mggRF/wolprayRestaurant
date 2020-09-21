@@ -15,7 +15,7 @@ const fileUpload = require('express-fileupload');
 const path = require('path');
 
 
-const { COMUNIDADES, PAISES, POBLACIONES, PROVINCIAS, MUSICA, CLUBS, DRESSCODE, EVENTS, USERS, SLOTS, ROLES, COMPANIES, PRODUCTS , IMAGES} = require('./Constantes/ConstantesRutas');
+const { UPLOADS, COMUNIDADES, PAISES, POBLACIONES, PROVINCIAS, MUSICA, CLUBS, DRESSCODE, EVENTS, USERS, SLOTS, ROLES, COMPANIES, PRODUCTS , IMAGES} = require('./Constantes/ConstantesRutas');
 
 
 const app = express();
@@ -40,6 +40,8 @@ const rCompanies = require('./rutas/rutaCompanies');
 const rDressCode = require('./rutas/rutaDressCode');
 const rProducts = require('./rutas/rutaProducts');
 const rImages = require('./rutas/rutaImages');
+const rImagenes = require('./rutas/rutaImagenes');
+
 const Autorizado = require('./Autentificacion/middelAut');
 
 
@@ -57,6 +59,7 @@ app.use(fileUpload({
 
 // Cargamos las rutas
 app.use('/', rGlobal);
+app.use(UPLOADS,rImagenes)
 app.use(COMUNIDADES, Autorizado, rComunidades);
 app.use(PAISES, Autorizado, rPais);
 app.use(POBLACIONES, Autorizado, rPoblacion);

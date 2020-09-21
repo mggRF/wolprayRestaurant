@@ -5,7 +5,7 @@ var ControladorMusic = require('../controladores/ControladorMusic');
 let music = new ControladorMusic();
 // Llamamos al router
 var rutas = express.Router();
-//var md_auth = require('../middlewares/authenticated');
+
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
 rutas.get('/', music.leerALL);
 rutas.get('/select/',music.leerSelect)

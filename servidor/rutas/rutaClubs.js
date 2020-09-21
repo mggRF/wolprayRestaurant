@@ -10,8 +10,6 @@ var rutas = express.Router();
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
 rutas.get('/', clubs.leerALL);
 rutas.get('/select/:id',clubs.leerSelect) ////<---¿quien ha hecho esto?
-rutas.get('/uploads/:id/:img',clubs.getFoto) ////<---¿quien ha hecho esto?
-
 rutas.get('/citys',clubs.leerSelectCitys); 
 rutas.get('/province',clubs.leerSelectProvinces); 
 rutas.get('/:id', clubs.leerUno);

@@ -74,9 +74,9 @@ class ControladorBase {
                             // console.log('Campo en el base=> ', k);
                             // console.log('Campo recogido => ',d[k])
                             if (d[k]) {
-                                d[k] = `${URL}${VERSION}${CARPETA}/uploads/${d[campoId]}/${d[k]}`;
+                                d[k] = `${URL}${VERSION}uploads/${CARPETA}/${d[campoId]}/${d[k]}`;
                             } else {
-                                d[k] = `${URL}${VERSION}${CARPETA}/uploads/${d[campoId]}/nopicture.jpg`;
+                                d[k] = `${URL}${VERSION}uploads/nofile.jpg`;
                             }
                             break;
                         }

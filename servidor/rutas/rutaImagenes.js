@@ -1,21 +1,16 @@
 var express = require('express');
 
+var ControladorClubs = require('../controladores/ControladorClubs');
+let clubs = new ControladorClubs();
+var ControladorEvents = require('../controladores/ControladorEvents');
+let events = new ControladorEvents();
+var ControladorProducts = require('../controladores/ControladorProducts');
+let products = new ControladorProducts();
+// Llamamos al router
 var rutas = express.Router();
 
-const FileSystem = require('../modelos/FileSystem');
-
-rutas.get('/uploads/:carpeta/:id/:img',(req, res) =>{
-    const carpeta = req.params.carpeta;
-    const id = req.params.id;
-    const img = req.params.img;
-
-    //const pathFoto
-
-    res.json({
-        carpeta,
-        id,
-        img
-    })
-});
-
+// Creamos una ruta para los métodos que tenemos en nuestros controladores
+rutas.get('/clubs/:id/:img',clubs.getFoto);
+rutas.get('/events/:id/:img',events.getFoto)
+rutas.get('/products/:id/:img',products.getFoto)
 module.exports = rutas;
