@@ -69,19 +69,19 @@ class ControladorImagenes extends ControladorBase {
         var query = query = queries.select_by_id.replace(':id', id);
         let images = this.fileSystem.getAllImagesInAId(opcion, id);
         let sql = query.replace(/:TABLA/gi, tabla);
-        this.leerYPreparar(sql,images,tabla);
+        this.leerYPreparar(sql, images, tabla, opcion);
     }
 
-    leerYPreparar(sql,images,tabla) {
+    leerYPreparar(sql, images, tabla, opcionRandom) {
         let imagesUrl = [];
         this.connect.leerSql(sql)
             .then(datos => {
                 if (datos.length > 0) {
                     let dat = datos.map(dat => {
                         if (dat['image'] && dat['image'].includes('.')) {
-                            dat['image'] = `${URL}${VERSION}${opcion}/uploads/${dat['id']}/${dat['image']}`;
+                            dat['image'] = `${URL}${VERSION}/uploads/${opcion}/${dat['id']}/${dat['image']}`;
                         } else {
-                            dat['image'] = `${URL}${VERSION}${opcion}/uploads/${dat['id']}/nopicture.jpg`;
+                            dat['image'] = `${URL}${VERSION}/uploads/nofile.jpg`;
                         }
                         dat['comment'] = null;
                         dat['url'] = null;
@@ -104,32 +104,32 @@ class ControladorImagenes extends ControladorBase {
                 }
             }).catch(err => console.log(err));
     }
-}
 
 
-obtenerDatos(opcion, res, queries, tabla, id = null){
-    var query = '';
-    let images='';
-    if (id !== null) {
-        if (!isNaN(id)) {
-            query = queries.select_by_id.replace(':id', id);
+
+    obtenerDatos(opcion, res, queries, tabla, id = null) {
+        var query = '';
+        let images = '';
+        if (id !== null) {
+            if (!isNaN(id)) {
+                query = queries.select_by_id.replace(':id', id);
+            } else {
+                query = queries.select_all;
+            }
         } else {
-            query = queries.select_all;
+            query = queries.select_by_option;
         }
-    } else {
-        query = queries.select_by_option;
+        console.log('Select: ', query)
+        sql = query.replace(/:TABLA/gi, tabla);
+        leerYPreparar(sql, images, tabla, opcion);
     }
-    console.log('Select: ', query)
-    sql=query.replace(/:TABLA/gi, tabla);
-    leerYPreparar(sql,images,tabla);
-}
-    
 
 
-getRandomInt(min, max) {
-    let ran = Math.floor(Math.random() * (max - min)) + min;
-    return ran;
-}
+
+    getRandomInt(min, max) {
+        let ran = Math.floor(Math.random() * (max - min)) + min;
+        return ran;
+    }
 
 }
 
