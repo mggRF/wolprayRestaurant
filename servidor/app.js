@@ -13,7 +13,7 @@ const compression = require('compression');
 const helmet = require('helmet');
 const fileUpload = require('express-fileupload');
 const path = require('path');
-
+const rfs = require('rotating-file-stream') // version 2.x
 
 const { UPLOADS, COMUNIDADES, PAISES, POBLACIONES, PROVINCIAS, MUSICA, CLUBS, DRESSCODE, EVENTS, USERS, SLOTS, ROLES, COMPANIES, PRODUCTS , IMAGES} = require('./Constantes/ConstantesRutas');
 
@@ -83,7 +83,7 @@ if (process.env.NODE_ENV == 'production') {
     })
     app.use(morgan('combined', { stream: accessLogStream }))
 } else {
-    app.use(morgan('dev'));
+    app.use(morgan('combined'));
 }
 
 module.exports = app;
