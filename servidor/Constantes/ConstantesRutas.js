@@ -1,12 +1,21 @@
+const path = require('path');
 const API_BASE_DEVELOPPER = "http://localhost:3800/";   //direccion base
 const API_BASE_PRODUCTION = "http://api.wolpray.es:3800/";   //direccion base
-
+const RUTA_UPLOADS_DEVELOPPER = path.dirname(__dirname);
+const RUTA_UPLOADS_PRODUCTION = "/home/wolpraynode/uploads";
 
 const variable_url = () => {
     if (process.env.NODE_ENV === 'production') {
         return API_BASE_PRODUCTION;
     } else {
         return API_BASE_DEVELOPPER;
+    }
+}
+const carpeta_imagenes = () => {
+    if (process.env.NODE_ENV === 'production') {
+        return RUTA_UPLOADS_PRODUCTION;
+    } else {
+        return RUTA_UPLOADS_DEVELOPPER;
     }
 }
 const VERSION = 'api_v00/';
@@ -27,5 +36,6 @@ module.exports = {
     COMPANIES: '/' +  VERSION  + 'companies',
     PRODUCTS: '/' +  VERSION  + 'products',
     IMAGES: '/' +  VERSION  + 'images',
-    UPLOADS: '/' +  VERSION  + 'uploads'
+    UPLOADS: '/' +  VERSION  + 'uploads',
+    CARPETA_IMAGENES: carpeta_imagenes()
 }
