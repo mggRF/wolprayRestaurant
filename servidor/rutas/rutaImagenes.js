@@ -10,6 +10,7 @@ let products = new ControladorProducts();
 var rutas = express.Router();
 
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
+rutas.get('/:img',clubs.getFoto);                    //no existe imagen
 rutas.get('/clubs/:id/:img',clubs.getFoto);
 rutas.get('/events/:id/:img',events.getFoto)
 rutas.get('/products/:id/:img',products.getFoto)

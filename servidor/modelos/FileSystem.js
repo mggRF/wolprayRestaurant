@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const uniqid = require('uniqid');
 const { IMAGES } = require('../Constantes/ConstantesRutas');
+const { isNull } = require('util');
 
 class FileSystem {
     constructor(config) {
@@ -111,11 +112,12 @@ class FileSystem {
 
 
     getFotoUrl(id,img){
+        const exist = false
         console.log('Imagen => ',img)
-        const pathFoto = path.resolve(__dirname,'../../uploads',this.config.CARPETA.CARPETA, id, img);
-        
-        const exist = fs.existsSync(pathFoto);
-        
+        if (id != undefined && id !== null) {
+            const pathFoto = path.resolve(__dirname,'../../uploads',this.config.CARPETA.CARPETA, id, img);
+            exist = fs.existsSync(pathFoto);
+        }
         if(!exist){
             return path.resolve(__dirname,'../../uploads','nofile.JPG')
         }
