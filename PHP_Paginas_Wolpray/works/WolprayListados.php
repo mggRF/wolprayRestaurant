@@ -4,38 +4,46 @@ defined('DIR_ROOT') or define('DIR_ROOT', dirname(dirname(__FILE__)));
 
 require_once DIR_ROOT . '/includes/constantes.php';
 require_once DIR_ROOT . '/includes/accesoURL.php';
-//require_once DIR_ROOT . '/funciones/FuncionesHTML.php';
-//require_once DIR_ROOT . '/funciones/Request.php';
+require_once DIR_ROOT . '/assets/estilo.html';
 
-//use App\service\Request;
+define('IMG_IN_ROW',6);//Imagenes por fila
 
 
-function WPI_consigue($tabla, $size = LPPAGINA, $clasificacion = "")
-{
-    $req = new Request();
-    $ruta = $tabla;
-    $query = '_size=' . $size;
-    if (!is_null($clasificacion) && $clasificacion != "") {
-        $query .= '&_class=' . $clasificacion;
-    }
-    //echo $ruta . '/' . $query;
-    return json_decode(RFW_accederRemoto($ruta, $query))->Datos;
-}
+
 function WPI_listaClubs()
 {
     $listaC = WPI_consigueCitys();
 
     foreach ($listaC as $registro) {
-        echo '<h3 class="nombrePoblacion">' . $registro->option . '<h3>';
+
+        echo str_replace(":POBLACION",$registro->opcion ,CUBRE_POBLACION);
+
         $listaClubs = WPI_consigueClubsXCity($registro->id);
+        $contador=0;
         foreach ($listaClubs as $registro) {
+            $contador--;
+            if ($contador<=0) {         //se han presentado las filas o es la primera
+                echo PRE_ROW;
+                $contador=IMG_IN_ROW;
+            }
+            echo PRE_COL;
             echo '<div class="divImagen">';
-            echo '<a class="aImagen" href="' . $salto . '" >';
-            echo '<img class="paraImagen"  src="' . $registro->coverUrl . '"/>';
-            echo '</a>';
-            echo '<span class="nombreClub">' . $registro->clubName . '</span>';
+            //echo '<a class="aImagen" href="' . $salto . '" >';
+            //echo '<img class="paraImagen"  src="' . $registro->coverUrl . '"/>';
+            //echo '</a>';
+            echo str_replace(':HREF_IMAGEN',$salto,str_replace(':SRC_IMAGEN',$registro->coverUrl, CUBRE_IMAGEN));
+            echo str_replace(":NOMBRE_CLUB",$registro->clubName ,CUBRE_NOMBRE);
+            //echo '<span class="nombreClub">' . $registro->clubName . '</span>';
             echo '</div>';
+            echo POST_COL;
+            if ($contador ==1) {         //se han presentado las filas o es la primera
+                echo POST_ROW;
+            }
         }
+        if ($contador !=1 ) {         //se han presentado las filas o es la primera
+            echo POST_ROW;
+        }
+
     }
 }
 function WPI_consigueCitys()

@@ -5,7 +5,7 @@ const {
 } = require("../Constantes/ConstantesDataBase/ConstantesPaginacion");
 const Presenta = require("../servicios/Presenta");
 const FyleSystem = require('../modelos/FileSystem');
-const { URL, VERSION } = require('../Constantes/ConstantesRutas');
+const { URL, VERSION , NOPICTURE} = require('../Constantes/ConstantesRutas');
 const uniqid = require('uniqid');
 
 class ControladorBase {
@@ -76,7 +76,7 @@ class ControladorBase {
                             if (d[k]) {
                                 d[k] = `${URL}${VERSION}uploads/${CARPETA}/${d[campoId]}/${d[k]}`;
                             } else {
-                                d[k] = `${URL}${VERSION}uploads/nofile.jpg`;
+                                d[k] = `${URL}${VERSION}uploads/${NOPICTURE}`;
                             }
                             break;
                         }

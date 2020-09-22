@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const uniqid = require('uniqid');
-const { CARPETA_IMAGENES } = require('../Constantes/ConstantesRutas');
+const { CARPETA_IMAGENES, NOPICTURE } = require('../Constantes/ConstantesRutas');
 
 class FileSystem {
     constructor(config) {
@@ -105,17 +105,18 @@ class FileSystem {
 
 
     getFotoUrl(id,img){
-        const exist = false
+        let exist = false
+        let pathFoto="";
         console.log('Imagen => ',img)
         if (id != undefined && id !== null) {
-            const pathFoto = path.resolve(CARPETA_IMAGENES,this.config.CARPETA.CARPETA, id, img);
+            pathFoto = path.resolve(CARPETA_IMAGENES,this.config.CARPETA.CARPETA, id, img);
             exist = fs.existsSync(pathFoto);
         }
         if(!exist){
-            return path.resolve(CARPETA_IMAGENES,'nofile.JPG')
+            pathFoto = path.resolve(CARPETA_IMAGENES,NOPICTURE)
         }
 
-        
+        console.log("path:",pathFoto);
         return pathFoto;
     }
 
@@ -143,7 +144,7 @@ class FileSystem {
             let existFinalDirs = fs.existsSync(finalDirs);
             
             if(!existFinalDirs){
-                return path.resolve(CARPETA_IMAGENES,'nofile.JPG')
+                return path.resolve(CARPETA_IMAGENES,NOPICTURE)
             }
 
             let imagenes = fs.readdirSync(finalDirs);
