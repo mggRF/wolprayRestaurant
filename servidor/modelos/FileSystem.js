@@ -1,8 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const uniqid = require('uniqid');
-const { IMAGES } = require('../Constantes/ConstantesRutas');
-const { isNull } = require('util');
+const { CARPETA_IMAGENES } = require('../Constantes/ConstantesRutas');
 
 class FileSystem {
     constructor(config) {
@@ -25,9 +24,6 @@ class FileSystem {
             //Nombre archivo
             const nombreArchivo = this.generarNombreUnico( nombreUnico)
 
-            console.log('El nombre original del archivo es: ', file.name);
-            console.log('El nombre del achivo será: ', nombreArchivo);
-
             //Mover el archivo del temp a nuestra carpeta
             file.mv(`${pathFile}/${nombreArchivo}`, err => {
                 if (err) {
@@ -49,13 +45,10 @@ class FileSystem {
     crearCarpetaFinal(id) {
 
         //poniendo la ruta correcta
-        const rutaRaiz = path.resolve(__dirname, '../../uploads/', this.config.CARPETA.CARPETA);
+        const rutaRaiz = path.resolve(CARPETA_IMAGENES, this.config.CARPETA.CARPETA);
         
         const rutaFinal = rutaRaiz + '/' + id;
-        console.log('La ruta final será: ',rutaFinal);
-
-    
-
+     
         if (!fs.existsSync(rutaRaiz)) {
             fs.mkdirSync(rutaRaiz);
         }
@@ -73,8 +66,8 @@ class FileSystem {
     imagenesDeTempHaciaPrincipal(id){
 
         //TODO ?
-        const rutaTemp = path.resolve(__dirname, '../../uploads/', this.config.CARPETA.CARPETA, id, 'temp');
-        const rutaImages = path.resolve(__dirname, '../../uploads/', this.config.CARPETA.CARPETA, id, 'images');
+        const rutaTemp = path.resolve(CARPETA_IMAGENES, this.config.CARPETA.CARPETA, id, 'temp');
+        const rutaImages = path.resolve(CARPETA_IMAGENES, this.config.CARPETA.CARPETA, id, 'images');
 
         if(!fs.existsSync(rutaTemp)){
             return [];
@@ -99,7 +92,7 @@ class FileSystem {
 
 
     eliminarCarpetaDeImagenes(id){
-        const rutaImages = path.resolve(__dirname, '../../uploads/', this.config.CARPETA.CARPETA, id);
+        const rutaImages = path.resolve(CARPETA_IMAGENES, this.config.CARPETA.CARPETA, id);
 
         if(fs.existsSync(rutaImages)){
             fs.rmdirSync(rutaImages, {recursive: true});
@@ -115,11 +108,11 @@ class FileSystem {
         const exist = false
         console.log('Imagen => ',img)
         if (id != undefined && id !== null) {
-            const pathFoto = path.resolve(__dirname,'../../uploads',this.config.CARPETA.CARPETA, id, img);
+            const pathFoto = path.resolve(CARPETA_IMAGENES,this.config.CARPETA.CARPETA, id, img);
             exist = fs.existsSync(pathFoto);
         }
         if(!exist){
-            return path.resolve(__dirname,'../../uploads','nofile.JPG')
+            return path.resolve(CARPETA_IMAGENES,'nofile.JPG')
         }
 
         
@@ -137,7 +130,7 @@ class FileSystem {
 
 
     obtenerImagenes(id){
-        const pathId = path.resolve(__dirname,'../../uploads',this.config.CARPETA.CARPETA, id);
+        const pathId = path.resolve(CARPETA_IMAGENES,this.config.CARPETA.CARPETA, id);
         return fs.readdirSync(pathId);
     }
 
@@ -145,12 +138,12 @@ class FileSystem {
     
     getAllImagesInAId(opcion, id){
                 
-            let finalDirs = path.resolve(__dirname,'../../uploads/',opcion, id);
+            let finalDirs = path.resolve(CARPETA_IMAGENES,opcion, id);
             
             let existFinalDirs = fs.existsSync(finalDirs);
             
             if(!existFinalDirs){
-                return path.resolve(__dirname,'../../uploads','nofile.JPG')
+                return path.resolve(CARPETA_IMAGENES,'nofile.JPG')
             }
 
             let imagenes = fs.readdirSync(finalDirs);

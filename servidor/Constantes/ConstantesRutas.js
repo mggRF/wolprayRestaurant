@@ -37,5 +37,5 @@ module.exports = {
     PRODUCTS: '/' +  VERSION  + 'products',
     IMAGES: '/' +  VERSION  + 'images',
     UPLOADS: '/' +  VERSION  + 'uploads',
-    CARPETA_IMAGENES: carpeta_imagenes()
+    CARPETA_IMAGENES: carpeta_imagenes() + '/uploads/'
 }
