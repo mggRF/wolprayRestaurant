@@ -14,6 +14,7 @@ rutas.get('/citys',clubs.leerSelectCitys);
 rutas.get('/province',clubs.leerSelectProvinces); 
 rutas.get('/:id', clubs.leerUno);
 rutas.post('/', clubs.updateTable);
+rutas.post('/image', clubs.uploadImage);
 rutas.put('/:id', clubs.updateTable);
 rutas.delete('/:id', clubs.updateTable);
 // Exportamos la configuración

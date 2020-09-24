@@ -23,43 +23,44 @@ class ControladorClubs extends ControladorBase {
             campoId: 'clubid',
         }
         super(config);
-        this.updateTable=this.updateTable.bind(this);
+        // this.updateTable=this.updateTable.bind(this);
         this.leerSelectCitys=this.leerSelectCitys.bind(this);
         this.leerSelectProvinces=this.leerSelectProvinces.bind(this);
     }
 
-    async updateTable(req, res) {
-        const {
-            method
-        } = req.route.stack[0];
-        //       if (method.toLowerCase() === "put") { //<- luego, repetimos para insert y delete....
-        if (method.toLowerCase() === "put") {
+    // async updateTable(req, res) {
 
-            let id = req.params.id;
-            let sqlDelete = 'DELETE  FROM club_music WHERE clubid = ?';
-            let sqlInsert = 'INSERT INTO club_music (clubid, musicid) VALUES  '
-            let musicsUpdates = req.body.musicsUpdate.split(',');
-            super.sendDataToTable([id], sqlDelete)
-                .then(result1 => console.log("borrado", result1))
-                .then(() => {
-                    if (method.toLowerCase() !== "delete") {
-                        let salida = sqlInsert;
-                        musicsUpdates.map(value => {
-                            salida += "(" + id + "," + value + "),";
-                        });
-                        salida = salida.substring(0, salida.length - 1)
-                        console.log('sql: ', salida);
-                        super.sendDataToTable([], salida) //es promesa
-                            .then(result2 => console.log("ESTE ES EL INSERT", result2))
-                            .catch(err => console.error(err));
-                    }
-                })
+    //     const {
+    //         method
+    //     } = req.route.stack[0];
+    //     //       if (method.toLowerCase() === "put") { //<- luego, repetimos para insert y delete....
+    //     if (method.toLowerCase() === "put") {
+
+    //         let id = req.params.id;
+    //         let sqlDelete = 'DELETE  FROM club_music WHERE clubid = ?';
+    //         let sqlInsert = 'INSERT INTO club_music (clubid, musicid) VALUES  '
+    //         let musicsUpdates = req.body.musicsUpdate.split(',');
+    //         super.sendDataToTable([id], sqlDelete)
+    //             .then(result1 => console.log("borrado", result1))
+    //             .then(() => {
+    //                 if (method.toLowerCase() !== "delete") {
+    //                     let salida = sqlInsert;
+    //                     musicsUpdates.map(value => {
+    //                         salida += "(" + id + "," + value + "),";
+    //                     });
+    //                     salida = salida.substring(0, salida.length - 1)
+    //                     console.log('sql: ', salida);
+    //                     super.sendDataToTable([], salida) //es promesa
+    //                         .then(result2 => console.log("ESTE ES EL INSERT", result2))
+    //                         .catch(err => console.error(err));
+    //                 }
+    //             })
 
 
-            delete req.body['musicsUpdate'];
-        }
-        this.updateTable(req, res);
-    }
+    //         delete req.body['musicsUpdate'];
+    //     }
+        
+    // }
 
     /**GUARDAR musicsUpdate EN OTRO CAMPO Y QUITARLO DEL REQUEST QUE HA LLEGADO*/
     //   }

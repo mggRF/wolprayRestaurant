@@ -12,11 +12,12 @@ export default class  ControllerClub extends ControllerBase {
         super(props);
         this.TABLA = 'clubs';
         this.ID = 'clubid';
-        this.LISTADO = ListadoClubs
+        this.LISTADO = ListadoClubs;
+        this.campoFoto = 'coverUrl';
+        this.urlPost = 'http://localhost:3800/api_v00/clubs/image/';
         this.FORMULARIO = FormularioClub
         this.MODELO ={
-         musicsUpdate:"",
-         clubid : "",
+         clubid : 600,
          clubName : "",
          streetName : "",
          streetNumber : 0,

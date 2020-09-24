@@ -44,7 +44,7 @@ export default class FormularioClub extends Component {
                     <form className="formulario row">
                         <div className = "container">
                             {(!readonly) ?
-                                <SubirImagen /> : null
+                                <SubirImagen obj = {club} /> : null
 
                             }
                             <Imagen imageUrl={club.coverUrl} with={20} />
