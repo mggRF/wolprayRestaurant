@@ -25,7 +25,6 @@ export default class CtrlFormulario extends Component {
         let obj = this.state.obj;
         
         obj[e.target.name] = e.target.value;
-        console.log('Hay que ver la imagen:');
         this.setState({ obj: obj });
     }
     componentDidMount() {

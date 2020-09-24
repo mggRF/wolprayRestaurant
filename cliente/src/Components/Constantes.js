@@ -27,10 +27,10 @@ module.exports = {
     SLOTS:'slots',
     LPPAGINA: "5",                             //lineas por pagina
 
-    INS: "Añadir",
-    MOD: "Modificar",
-    DEL: "Delete",
-    VIE: "VER",
+    INS: "fas fa-plus",
+    MOD: "fas fa-edit",
+    DEL: "fas fa-trash-alt",
+    VIE: "fas fa-eye",
 
     CONVERSOR: {
         c_state: 'states',

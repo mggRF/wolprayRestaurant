@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { TextAreaComponent } from '../../Fragmentos/TextAreaComponent';
 import { InputComponent } from '../../Fragmentos/InputComponent';
 
 export default class FormularioRole extends Component {
@@ -30,7 +29,9 @@ export default class FormularioRole extends Component {
                             readOnly={readonly}
                             value={role.roleName}
                         />
-                        <TextAreaComponent name="roleDescription"
+                        <InputComponent
+                            type="textarea"
+                            name="roleDescription"
                             handleChange={this.props.funcion}
                             label="Descripción"
                             readOnly={readonly}

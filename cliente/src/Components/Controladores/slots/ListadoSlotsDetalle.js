@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { API_URL, SLOTS } from '../../Constantes';
 import AccesoAPI from '../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
+import BotonListado from '../../Fragmentos/BotonListados';
+import { INS } from '../../Constantes';
 
 import Paginacion from '../../../Servicios/Paginacion';
 import GestorListado from '../../../Servicios/GestorListado';
@@ -39,7 +41,6 @@ export default class ListadoSlotsDetalle extends Component {
 
         AccesoAPI.accederApi(this.gl.terminaURLlistado())
             .then(response => {
-                console.log(response);
                 if (response.Ok) {
                     this.setState({ datos: response.Datos })
                 }
@@ -82,7 +83,10 @@ export default class ListadoSlotsDetalle extends Component {
         return (
 
             <div className="container animate__animated animate__fadeIn">
-                <h1>Listado Slots </h1>
+                <div className='col-12 cabecera_controlador animate__animated animate__slideInUp'>
+                    <h1>Listado de horarios</h1>
+                    <BotonListado icon={INS} funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}></BotonListado>
+                </div>
                 <h3>{this.props.clubname}</h3>
                 <h3>{this.props.nombremes}</h3>
                 <table className="table">

@@ -21,7 +21,7 @@ export default class FormularioCity extends Component {
                 title = 'Información dela ciudad';
                 break;
         }
-        console.log("City=>", City);
+
         return (
             <div className="get_in_touch animate__animated animate__fadeIn">
                 {

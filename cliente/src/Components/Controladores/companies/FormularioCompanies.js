@@ -25,8 +25,8 @@ export default class FormularioCompanies extends Component {
                 title = 'Información sobre empresa';
                 break;
         }
-        console.log("Company=>", company);
-        console.log('El readonly es: ' + readonly)
+
+        
         return (
             <section className="get_in_touch animate__animated animate__fadeIn">
                 {

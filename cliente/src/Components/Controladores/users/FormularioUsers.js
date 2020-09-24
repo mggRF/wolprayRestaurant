@@ -6,7 +6,6 @@ export default class FormularioUsers extends Component {
     render() {
         let user = this.props.obj;
         let readonly = this.props.orden.includes(['D', 'V']) ? true : false
-        console.log("Desde formulario users esta es la fecha", user.birthdate.split('T')[0])
         return (
             <section className="get_in_touch animate__animated animate__fadeIn">
                 <h1 className="title">Usuario</h1>

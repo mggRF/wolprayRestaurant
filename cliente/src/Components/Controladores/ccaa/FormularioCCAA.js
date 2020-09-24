@@ -11,8 +11,9 @@ export default class FormularioCCAA extends Component {
     render() {
         let CCAA = this.props.obj;
         let readonly = false;
-        if (this.props.orden === 'D' || this.props.orden === 'V')
-            readonly = true
+        if (this.props.orden === 'D' || this.props.orden === 'V')  readonly = true;
+        
+
         let title = '';
         switch (this.props.orden) {
             case 'I':
@@ -25,9 +26,7 @@ export default class FormularioCCAA extends Component {
                 title = 'Información sobre empresa';
                 break;
         }
-        console.log("CCAA=>", CCAA);
-        console.log('El readonly es: ' + readonly)
-        console.log('Este es el objeto: ', CCAA)
+
         return (
             <section className="get_in_touch animate__animated animate__fadeIn">
                 {
@@ -36,7 +35,7 @@ export default class FormularioCCAA extends Component {
                         (<h1>{title}</h1>)
                 }
                 <br />
-                <div className = "container">
+                <div className="container">
                     <form className="formulario row" >
                         {
                             (CCAA.stateid) ?
@@ -66,7 +65,7 @@ export default class FormularioCCAA extends Component {
                                     readOnly={readonly}
                                     value={CCAA.countryName}
                                 />) : <Desplegable
-                                    label='Pais:'
+                                    label='Pais'
                                     readValue={this.props.funcion}
                                     table='c_country'
                                     value={CCAA.countryid}

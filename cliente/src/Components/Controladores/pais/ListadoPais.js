@@ -10,6 +10,7 @@ import BotonListado from '../../Fragmentos/BotonListados';
 import Paginacion from './../../../Servicios/Paginacion';
 import GestorListado from './../../../Servicios/GestorListado';
 import MontaCabecera from '../../Fragmentos/MontaCabecera';
+import { INS } from '../../Constantes';
 
 export default class ListadoPais extends Component {
 
@@ -27,7 +28,6 @@ export default class ListadoPais extends Component {
     leeTabla() {
         AccesoAPI.accederApi(this.gl.terminaURLlistado())
             .then(response => {
-                console.log(response);
                 if (response.Ok) {
                     this.setState({ datos: response.Datos })
                 }
@@ -48,9 +48,6 @@ export default class ListadoPais extends Component {
 
     render() {
 
-
-        console.log("RENDER=>", this.state.datos)
-
         let item = [];
 
         this.state.datos.forEach((valor, index) => item.push(
@@ -67,9 +64,9 @@ export default class ListadoPais extends Component {
         return (
 
             <div className="container animate__animated animate__fadeIn">
-                <div className = 'cabecera_controlador'>
+                <div className='col-12 cabecera_controlador  animate__animated animate__slideInUp'>
                     <h1>Listado de paises</h1>
-                    <BotonListado funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}>Añadir pais</BotonListado>
+                    <BotonListado icon={INS} funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}></BotonListado>
                 </div>
                 <table className="table">
                     <thead>

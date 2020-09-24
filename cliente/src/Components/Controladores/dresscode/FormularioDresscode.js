@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { TextAreaComponent } from '../../Fragmentos/TextAreaComponent';
 import { InputComponent } from '../../Fragmentos/InputComponent';
 
 
@@ -25,7 +24,7 @@ export default class FormularioDresscode extends Component {
                                     readOnly={true}
                                     value={dresscode.dressCodeId} /> : null
                         }
-                       
+
 
                         <InputComponent name="dressCodeName"
                             handleChange={this.props.funcion}
@@ -33,7 +32,9 @@ export default class FormularioDresscode extends Component {
                             readOnly={readonly}
                             value={dresscode.dressCodeName}
                         />
-                        <TextAreaComponent name="dressCodeDescription"
+                        <InputComponent
+                            type='textarea'
+                            name="dressCodeDescription"
                             handleChange={this.props.funcion}
                             label="Descripcion"
                             readOnly={readonly}

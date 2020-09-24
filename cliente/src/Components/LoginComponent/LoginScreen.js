@@ -4,7 +4,6 @@ import AccesoAPI from '../../Servicios/AccesoAPI';
 import themeLogo from '../Comun/images/logowolpray.png';
 import './login.css';
 import { Link } from "react-router-dom";
-import { checkUsuario } from '../../Servicios/funcionesSeguridad';
 import { Alerts } from '../Fragmentos/Alerts';
 
 export default class LoginScreen extends Component {

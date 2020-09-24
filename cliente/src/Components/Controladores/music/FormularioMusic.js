@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { TextAreaComponent } from '../../Fragmentos/TextAreaComponent';
 import { InputComponent } from '../../Fragmentos/InputComponent';
 
 export default class FormularioMusic extends Component {
@@ -28,7 +27,9 @@ export default class FormularioMusic extends Component {
                             readOnly={readonly}
                             value={music.musicName}
                         />
-                        <TextAreaComponent name="musicDescription"
+                        <InputComponent
+                            type='textarea'
+                            name="musicDescription"
                             handleChange={this.props.funcion}
                             label="Descripción"
                             readOnly={readonly}

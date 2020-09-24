@@ -15,7 +15,8 @@ import PropTypes from 'prop-types';
  * @param {*} handleChange     función onChange del input
  * @param {*} readOnly     determina si el input es solo para leer o no
  */
-export const InputComponent = ({ clase = 'input-text', tam = '', step = '', type = 'default', value = '', name = '', label = '', handleChange, readOnly = true }) => {
+export const InputComponent = ({ clase = 'input-text', tam = '', step = '', type = 'text', value = '', name = '', label = '', handleChange, read = true }) => {
+
 
     const onFocus = event => {
 
@@ -25,60 +26,71 @@ export const InputComponent = ({ clase = 'input-text', tam = '', step = '', type
 
     };
 
-    if(value === null || value === undefined){
+    if (value === null || value === undefined) {
         value = '';
     }
 
-    if (readOnly) {
+    if (type === 'textarea') {
         return (
             <div className="form-field col-lg-6">
-                <label className="label" htmlFor={name}><h3>{label}:</h3></label>
+                <label className="label" htmlFor={name}><h5>{label}:</h5></label>
 
                 {
-                    (name.length > 0) ?
-
-                        <input
-                            style={{ with: tam }}
+                    ((name.length === 0) && (!read)) ?
+                        <textarea name={name}
                             step={step}
-                            type={type}
+                            style={{ width: 250 , height: 70 , resize: 'none'}}
+                            autoComplete="off"
+                            value={value}
                             className={clase}
+                            placeholder={'Ingresa el ' + name}
+                            readOnly={read}
+                        /> :
+                        <textarea
+                            step={step}
+                            style={{ width: 250 , height: 70, resize: 'none'}}
                             name={name}
                             value={value}
                             onChange={handleChange}
                             autoComplete="off"
-                            // className="form-control"
-                            disabled={true} /> :
+                            onFocus={onFocus}
+                            className="form-control"
+                            readOnly={read}
+                        />
+                }
+            </div>
+        )
+
+    } else {
+        return (
+            <div className="form-field col-lg-6">
+                <label className="label" htmlFor={name}><h5>{label}:</h5></label>
+
+                {
+                    ((name.length === 0) && (!read)) ?
                         <input name={name}
-                            style={{ with: tam }}
+                            style={{ width: 250 }}
                             step={step}
                             type={type}
                             autoComplete="off"
                             value={value}
                             className={clase}
                             placeholder={'Ingresa el ' + name}
-                            disabled={true} />
+                            readOnly={read}
+                        /> :
+                        <input
+                            style={{ width: 250 }}
+                            step={step}
+                            type={type}
+                            name={name}
+                            value={value}
+                            onChange={handleChange}
+                            autoComplete="off"
+                            onFocus={onFocus}
+                            className="form-control"
+                            readOnly={read}
+                        />
                 }
-
-            </div>
-        )
-    } else {
-        return (
-            <div className="form-field col-lg-6">
-
-                <label
-                    className="label"
-                    htmlFor={name}><h3>{label}:</h3></label>
-
-                <input name={name}
-                    style={{ with: tam }}
-                    step={step}
-                    type={type}
-                    value={value}
-                    autoComplete="off"
-                    className={clase}
-                    onFocus={onFocus}
-                    onChange={handleChange}
-                    readOnly={readOnly} />
             </div>
         )
     }
