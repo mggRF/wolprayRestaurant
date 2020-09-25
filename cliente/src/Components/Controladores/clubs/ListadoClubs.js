@@ -9,6 +9,8 @@ import BotonListado from '../../Fragmentos/BotonListados';
 import Paginacion from './../../../Servicios/Paginacion';
 import GestorListado from './../../../Servicios/GestorListado';
 import MontaCabecera from '../../Fragmentos/MontaCabecera';
+import { INS } from '../../Constantes';
+
 
 export default class ListadoClubs extends Component {
 
@@ -26,7 +28,6 @@ export default class ListadoClubs extends Component {
     leeTabla() {
         AccesoAPI.accederApi(this.gl.terminaURLlistado())
             .then(response => {
-                console.log("RESPONDE DESDE LISTADOCLUB", response);
                 if (response.Ok) {
                     this.setState({ datos: response.Datos })
                 }
@@ -46,8 +47,6 @@ export default class ListadoClubs extends Component {
 
     render() {
 
-
-        console.log("RENDER=>", this.state.datos)
 
         let item = [];
 
@@ -73,9 +72,10 @@ export default class ListadoClubs extends Component {
                 <div className="row mb-5">
                     <div className="col-xl-10 col-lg-9 col-md-8 ml-auto">
                         <div className="row">
-                            <div className='col-12 cabecera_controlador'>
+                            <div className='col-12 cabecera_controlador animate__animated animate__slideInUp'>
                                 <h1>Listado Clubs</h1>
-                                <BotonListado funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}>Añadir club</BotonListado>
+                              
+                                <BotonListado icon={INS} funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}></BotonListado>
 
                             </div>
 

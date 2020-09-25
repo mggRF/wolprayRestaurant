@@ -8,9 +8,8 @@ export default class SubirImagen extends Component {
         };
     }
     fileSelectedHandler = event => {
-        this.setState({
-            selectedFile: event.target.files[0]
-        })
+        console.log(event.target.files[0]);
+        this.props.obj['coverUrl'] =  event.target.files[0]
     }
 
     render() {

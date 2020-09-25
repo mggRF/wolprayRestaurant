@@ -10,6 +10,7 @@ import BotonListado from '../../Fragmentos/BotonListados';
 import Paginacion from './../../../Servicios/Paginacion';
 import GestorListado from './../../../Servicios/GestorListado';
 import MontaCabecera from '../../Fragmentos/MontaCabecera';
+import { INS } from '../../Constantes';
 
 export default class ListadoCompanies extends Component {
 
@@ -24,27 +25,21 @@ export default class ListadoCompanies extends Component {
         this.gl = new GestorListado(API_URL + COMPANIES, this.leeTabla);
     }
     leeTabla() {
-        console.log('Voy a acceder a la api')
         AccesoAPI.accederApi(this.gl.terminaURLlistado())
             .then(response => {
-                console.log('Desde listado companies: ',response);
                 if (response.Ok) {
-                    console.log('La respuesta es ok')
                     this.setState({ datos: response.Datos })
                 }
                 else {
                     this.setState({ error: response.Datos });
                 }
 
-                console.log('El estate es: ', this.state)
-
             }).catch(err => {
-                console.log('Ha ocurrido un error: ', err);
+                console.log(err);
             })
     }
 
     componentDidMount() {
-        console.log('Did mount')
         this.leeTabla();
     }
 
@@ -53,9 +48,6 @@ export default class ListadoCompanies extends Component {
 
 
     render() {
-
-
-        console.log("RENDER=>", this.state.datos)
 
         let item = [];
 
@@ -78,10 +70,10 @@ export default class ListadoCompanies extends Component {
                 <div className="row mb-5">
                     <div className="col-xl-10 col-lg-9 col-md-8 ml-auto">
                         <div className="row">
-                            <div className="col-12 cabecera_controlador">
+                            <div className="col-12 cabecera_controlador animate__animated animate__slideInUp">
 
                                 <h1>Listado de mpresas</h1>
-                                <BotonListado funcion={this.props.insertar} clase="btn btn-info btn-sm" tipo="I" id={0}>Añadir compañía</BotonListado>
+                                <BotonListado icon={INS} funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}></BotonListado>
                             </div>
                             <table className="table table-striped bg-light table-hover">
                                 <thead>

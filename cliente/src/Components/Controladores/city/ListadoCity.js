@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 
-import { API_URL, CITYS, COLORES, LETRERO_BOTON } from '../../Constantes';
+import { API_URL, CITYS} from '../../Constantes';
 import AccesoAPI from './../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
 import BotonListado from '../../Fragmentos/BotonListados';
@@ -11,6 +11,7 @@ import BotonListado from '../../Fragmentos/BotonListados';
 import Paginacion from './../../../Servicios/Paginacion';
 import GestorListado from './../../../Servicios/GestorListado';
 import MontaCabecera from '../../Fragmentos/MontaCabecera';
+import { INS } from '../../Constantes';
 
 
 export default class ListadoCity extends Component {
@@ -45,7 +46,6 @@ export default class ListadoCity extends Component {
     render() {
 
 
-        console.log("RENDER=>", this.state.datos)
 
         let item = [];
 
@@ -65,14 +65,10 @@ export default class ListadoCity extends Component {
         return (
 
             <div className="container animate__animated animate__fadeIn">
-                <div className='cabecera_controlador'>
+                <div className='cabecera_controlador animate__animated animate__slideInUp'>
                     <h1>Listado de ciudades</h1>
-                    <BotonListado funcion={this.props.insertar}
-                        clase={COLORES.BTN_INSERT}
-                        tipo="I"
-                        id={0}>
-                        {LETRERO_BOTON.I}
-                    </BotonListado>
+                    <BotonListado icon={INS} funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}></BotonListado>
+                    
                 </div>
                 <table className="table">
                     <thead>

@@ -32,7 +32,7 @@ export default class Desplegable extends Component {
                     this.setState({ datos: response.Datos })
                 }
                 else {
-                    this.setState({ error: response.Respuesta });
+                    this.setState({ error: response.Message });
                 }
 
             })
@@ -45,8 +45,7 @@ export default class Desplegable extends Component {
     render() {
 
         let items = [];
-        items.push(<option key="0" value="0">Selecciona....</option>);
-        console.log(this.state.datos);
+        items.push(<option key="0" value= "0">Selecciona....</option>);
         if (this.state.datos.length > 0) {
             this.state.datos.forEach((valor, index) => {
                 items.push(<option key={index + 1} value={valor.id}>{valor.opcion}</option>);
@@ -60,7 +59,7 @@ export default class Desplegable extends Component {
                 <label htmlFor={nombreCampo}
                     className="label"
                 >
-                    {this.props.label+':'}
+                    {<h4>{`${this.props.label}:`}</h4>}
                 </label>
                 <select name={nombreCampo}
                     id={nombreCampo}

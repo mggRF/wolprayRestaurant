@@ -10,6 +10,7 @@ import BotonListado from '../../Fragmentos/BotonListados';
 import Paginacion from './../../../Servicios/Paginacion';
 import GestorListado from './../../../Servicios/GestorListado';
 import MontaCabecera from '../../Fragmentos/MontaCabecera';
+import { INS } from '../../Constantes';
 
 export default class ListadoCCAA extends Component {
 
@@ -48,9 +49,6 @@ export default class ListadoCCAA extends Component {
 
     render() {
 
-
-        console.log("RENDER=>", this.state.datos)
-
         let item = [];
 
         this.state.datos.forEach((valor, index) => item.push(
@@ -68,20 +66,20 @@ export default class ListadoCCAA extends Component {
         return (
 
             <div className="container animate__animated animate__fadeIn">
-                <div className = 'cabecera_controlador'>
+                <div className='cabecera_controlador  animate__animated animate__slideInUp'>
                     <h1>Listado de estados</h1>
-                    <BotonListado funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}>Añadir estado</BotonListado>
+                    <BotonListado icon={INS} funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}></BotonListado>
                 </div>
                 <table className="table">
                     <thead>
                         <tr>
-                        <MontaCabecera separador='th'
-                        funcion={this.gl.setSortedField}
-                        lista={[
-                            ['stateid', 'Identificador'],
-                            ['stateName', 'name']
-                        ]} />
-                        <th></th><th></th><th></th>
+                            <MontaCabecera separador='th'
+                                funcion={this.gl.setSortedField}
+                                lista={[
+                                    ['stateid', 'Identificador'],
+                                    ['stateName', 'name']
+                                ]} />
+                            <th></th><th></th><th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,7 +90,7 @@ export default class ListadoCCAA extends Component {
                 <Paginacion
                     pageHandler={this.gl.pageHandler}
                     tabla={STATES}>
-            </Paginacion>
+                </Paginacion>
             </div>
         )
     }

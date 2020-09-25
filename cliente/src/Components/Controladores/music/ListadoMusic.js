@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { API_URL, MUSIC, COLORES, LETRERO_BOTON } from '../../Constantes';
+import { API_URL, MUSIC } from '../../Constantes';
 import AccesoAPI from './../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
 import BotonListado from '../../Fragmentos/BotonListados';
@@ -9,6 +9,7 @@ import BotonListado from '../../Fragmentos/BotonListados';
 import Paginacion from './../../../Servicios/Paginacion';
 import GestorListado from './../../../Servicios/GestorListado';
 import MontaCabecera from '../../Fragmentos/MontaCabecera';
+import { INS } from '../../Constantes';
 
 
 export default class ListadoMusic extends Component {
@@ -25,7 +26,6 @@ export default class ListadoMusic extends Component {
     leeTabla() {
         AccesoAPI.accederApi(this.gl.terminaURLlistado())
             .then(response => {
-                console.log(response);
                 if (response.Ok) {
                     this.setState({ datos: response.Datos })
                 }
@@ -54,13 +54,10 @@ export default class ListadoMusic extends Component {
         ))
         return (
             <div className="container animate__animated animate__fadeIn">
-                <h1>Listado Music</h1>
-                <BotonListado funcion={this.props.insertar}
-                    clase={COLORES.BTN_INSERT}
-                    tipo="I"
-                    id={0}>
-                    {LETRERO_BOTON.I}
-                </BotonListado>
+                <div className='col-12 cabecera_controlador animate__animated animate__slideInUp'>
+                    <h1>Listado de música</h1>
+                    <BotonListado icon={INS} funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}></BotonListado>
+                </div>
                 <table className="table">
                     <thead>
                         <tr>

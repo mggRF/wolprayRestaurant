@@ -51,13 +51,10 @@ export default class ControllerBase extends Component {
                     if (res) {
 
                         this.setState({ estadoActualizacion: 2 })
-                        console.log('accionSolicitada=>', datos,
-                            this.getPropertyValue(datos, this.ID)
-                        )
+                       
                         let datosEnvio = this.montaDatos(datos);
                         AccesoAPI.enviarTodo(this.TABLA, METODO[orden], datosEnvio, datos[this.ID])
                             .then(response => {
-                                console.log('Este es el id ', datosEnvio[this.ID])
                                 this.setState({ estadoActualizacion: 0 });
                             }).catch(err => {
                                 console.log(err);
@@ -69,13 +66,15 @@ export default class ControllerBase extends Component {
         } else {
             this.setState({ estadoActualizacion: 0 });
             this.setState({ estadoActualizacion: 2 });
-                        console.log('accionSolicitada=>', datos,
-                            this.getPropertyValue(datos, this.ID)
-                        )
                         let datosEnvio = this.montaDatos(datos);
                         AccesoAPI.enviarTodo(this.TABLA, METODO[orden], datosEnvio, datos[this.ID])
                             .then(response => {
-                                console.log('Este es el id ', datosEnvio[this.ID])
+                                if(this.campoFoto){
+                                    AccesoAPI.enviarImagen(this.url, datos[this.campoFoto], this.campoFoto)
+                                                        .then(res => {
+                                                            console.log(res);
+                                                        }).catch(err => console.log('Error al subir imagen => ',err));
+                                }
                                 this.setState({ estadoActualizacion: 0 });
                             }).catch(err => {
                                 console.log(err);
@@ -84,15 +83,14 @@ export default class ControllerBase extends Component {
         }
     }
     montaDatos(datos) {
-        let salida = {};
-        console.log('Este es el modelo: ', this.MODELO);
+        let salida = {}
+
         for (let key in this.MODELO) {
             if (!(key === this.ID && datos[key] === null)) {
                 
                 salida[key] = datos[key];
             }
         }
-        console.log('Los datos recogidos: ', salida)
         return salida;
     }
 
@@ -107,7 +105,6 @@ export default class ControllerBase extends Component {
     render() {
         const LISTADO = this.LISTADO;
         const FORMULARIO = this.FORMULARIO;
-        console.log('RENDER=>', this.state)
         //
         // se debe sacar mensaje de error, si esta en state
         //
@@ -128,8 +125,6 @@ export default class ControllerBase extends Component {
 
                 {(this.state.estadoActualizacion === 2) ?
                     <h1>En proceso</h1> : ""}
-
-
             </div>
         )
 

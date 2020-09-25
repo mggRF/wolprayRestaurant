@@ -54,8 +54,8 @@
 
 body {
   min-height: 100vh;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  margin-right: 0;
   font-family: 'Montserrat', sans-serif;
   background-color: #eee;
   justify-content: center;
@@ -130,10 +130,6 @@ body {
   transform: translateY(-1px);
 }
 
-.section-container{
-  min-height: calc(100vh -100px-100px);
-}
-
 .footer-nav{
   position: -webkit-sticky;
   clear: both;
@@ -148,31 +144,20 @@ body {
 
 .cabecera_controlador{
   display: flex;
-  flex-direction: row;
   width: 100%;
-  justify-content: space-around;
-}
-
-.elementoFormularioClub{
-  float: left;
-  margin-left: 25%;
-  margin-right: auto;
-}
-
-
-.homepage{
-  text-align: center;
-  
-}
-.containermenu{
-  border: gray 2px solid;
+  justify-content: space-between;
+  background:white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top: solid 1px rgb(209, 207, 207);
+  border-left: solid 1px rgb(209, 207, 207);
+  border-right: solid 1px rgb(209, 207, 207);
 }
 
 .get_in_touch{
   max-width: 1000px;
-  margin: 20px auto;
   position: relative;
-  padding: 0px;
+  justify-content: center;
 }
 .get_in_touch .title{
   text-transform: uppercase;
@@ -189,7 +174,7 @@ body {
 
 .formulario .form-field{
   position: relative;
-  margin: 32px 0;
+  margin: 10px 0;
 }
 
 .formulario .input-text{
@@ -202,15 +187,19 @@ body {
   line-height: 26px;
   font-weight: 400;
 }
+button{
+  margin: 5px;
+}
+.container-fluid{
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
 
 
 .navbar-toggler{font-size: 40px;}
 .navbar-toggler:focus{outline:none}
-
-table{
-  top: 0;
-margin-right: 50px;
-}
 
 
 

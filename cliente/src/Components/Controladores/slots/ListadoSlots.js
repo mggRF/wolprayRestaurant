@@ -6,8 +6,10 @@ import AccesoAPI from './../../../Servicios/AccesoAPI';
 
 
 
+
 import GestorListado from './../../../Servicios/GestorListado';
 import ListadoSlotsDetalle from './ListadoSlotsDetalle';
+
 
 
 export default class ListadoSlots extends Component {
@@ -104,16 +106,10 @@ export default class ListadoSlots extends Component {
 
         let listado = false;
 
-        if (this.state.clubid != 0 && this.state.idmes != '') listado = true
+        if (this.state.clubid !== 0 && this.state.idmes !== '') listado = true
         return (
 
             <div className="container animate__animated animate__fadeIn">
-                <div className='cabecera_controlador'>
-                    <h1>Listado Slots</h1>
-
-                </div>
-
-
                 <div className='container'>
                     <select name='meses'
                         id='clubs'

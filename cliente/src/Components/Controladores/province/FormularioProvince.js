@@ -23,9 +23,8 @@ export default class FormularioProvince extends Component {
                 title = 'Información sobre el estado';
                 break;
         }
-        console.log("Province=>", Province);
-        console.log('El readonly es: ' + readonly)
-        console.log('Este es el objeto: ', Province)
+       
+        
         return (
             <section className="get_in_touch animate__animated animate__fadeIn">
                 {

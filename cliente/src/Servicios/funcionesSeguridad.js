@@ -3,7 +3,6 @@ import { AUTORIZAR } from "../Components/Constantes";
 export function checkUsuario(role) {
 
     let init = JSON.parse(localStorage.getItem('user')) || { logged: false };
-    console.log('El init: ', init)
     if (!AUTORIZAR) {
         init.role = 9;
         init.id = ''

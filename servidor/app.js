@@ -11,10 +11,13 @@ const bodyParser = require('body-parser');
 var morgan = require('morgan');
 const compression = require('compression');
 const helmet = require('helmet');
-const fileUpload = require('express-fileupload');
+// const fileUpload = require('express-fileupload');
+var multipart = require('connect-multiparty');
 const path = require('path');
 const rfs = require('rotating-file-stream') // version 2.x
 
+
+var multipartMiddleware = multipart({uploadDir: '../uploads'});
 const { UPLOADS, COMUNIDADES, PAISES, POBLACIONES, PROVINCIAS, MUSICA, CLUBS, DRESSCODE, EVENTS, USERS, SLOTS, ROLES, COMPANIES, PRODUCTS , IMAGES} = require('./Constantes/ConstantesRutas');
 
 
@@ -50,11 +53,11 @@ const Autorizado = require('./Autentificacion/middelAut');
 // app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
 //Subida de imagenes
-app.use(fileUpload({
-    useTempFiles: true
-}));
+// app.use(fileUpload({
+//     useTempFiles: true
+// }));
 
 
 // Cargamos las rutas
@@ -65,7 +68,7 @@ app.use(PAISES, Autorizado, rPais);
 app.use(POBLACIONES, Autorizado, rPoblacion);
 app.use(PROVINCIAS, Autorizado, rProvincia);
 app.use(MUSICA, Autorizado, rMusic);
-app.use(CLUBS, Autorizado, rClub);
+app.use(CLUBS, Autorizado,multipartMiddleware, rClub);
 app.use(EVENTS, Autorizado, rEvents);
 app.use(USERS, Autorizado, rUsers);
 app.use(SLOTS, Autorizado, rSlots);

@@ -6,7 +6,7 @@ import ListadoCompanies from './ListadoCompanies';
 
 
 
-export default class  ControllerCompanies extends ControllerBase {
+export default class ControllerCompanies extends ControllerBase {
     constructor(props) {
         super(props);
         this.TABLA = 'companies';
@@ -14,19 +14,26 @@ export default class  ControllerCompanies extends ControllerBase {
         this.LISTADO = ListadoCompanies;
         this.FORMULARIO = Formulario;
         this.MODELO = {
-            companyid:0,
-            companyName:"",
-            companyAddress:"",
+            companyid: 0,
+            companyName: "",
+            companyAddress: "",
             cityid: 0,
-            company_CIF:"",
+            cityName: "",
+            company_CIF: "",
+            provinceid: 0,
+            provinceName: "",
+            stateid: 0,
+            stateName: "",
+            countryId: 0,
+            countryName: "",
         }
         this.state = {
             estadoActualizacion: 0,
             orden: "",
-            id: "",
+            id: 0,
             estadoUsuario: checkUsuario(9)
         }
     }
 
-    
+
 }

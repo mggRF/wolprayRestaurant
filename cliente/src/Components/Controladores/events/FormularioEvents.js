@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { TextAreaComponent } from '../../Fragmentos/TextAreaComponent';
 import { InputComponent } from '../../Fragmentos/InputComponent';
 import SubirImagen from '../../Fragmentos/SubirImagen';
 import Imagen from '../../Fragmentos/Imagen';
@@ -19,7 +18,7 @@ export default class FormularioEvents extends Component {
                 <h1 className="title">ID Evento</h1>
                 <div className="container">
                     <form className="formulario row">
-                    <div className = "container">
+                        <div className="container">
                             {(!readonly) ?
                                 <SubirImagen /> : null
 
@@ -35,7 +34,7 @@ export default class FormularioEvents extends Component {
                                     readOnly={true}
                                     value={event.eventid} /> : null
                         }
-                       
+
 
                         <InputComponent name="eventName"
                             handleChange={this.props.funcion}
@@ -61,7 +60,9 @@ export default class FormularioEvents extends Component {
                                 value={event.event_minimunAge} />
 
                         }
-                        <TextAreaComponent name="eventDescription"
+                        <InputComponent
+                            type='textarea'
+                            name="eventDescription"
                             handleChange={this.props.funcion}
                             label="Descripción"
                             readOnly={readonly}
@@ -70,39 +71,39 @@ export default class FormularioEvents extends Component {
 
                         {/*FECHA DE INICIO (PRINCIPIO)*/
                             (event.event_initDate === null) ?
-                            <InputComponent name="event_initDate"
-                                handleChange={this.props.funcion}
-                                type='date'
-                                label="Sesion de apertura 1"
-                                readOnly={readonly}
-                            />
-                            :
-                            <InputComponent name="event_initDate"
-                                handleChange={this.props.funcion}
-                                type='date'
-                                label="Fecha de inicio"
-                                readOnly={readonly}
-                                value={event.event_initDate.split('T')[0]} />
+                                <InputComponent name="event_initDate"
+                                    handleChange={this.props.funcion}
+                                    type='date'
+                                    label="Sesion de apertura 1"
+                                    readOnly={readonly}
+                                />
+                                :
+                                <InputComponent name="event_initDate"
+                                    handleChange={this.props.funcion}
+                                    type='date'
+                                    label="Fecha de inicio"
+                                    readOnly={readonly}
+                                    value={event.event_initDate.split('T')[0]} />
                         }
 
                         {/*FECHA DE FIN (PRINCIPIO)*/
                             (event.event_endDate === null) ?
-                            <InputComponent name="event_endDate"
-                                handleChange={this.props.funcion}
-                                type='date'
-                                label="Sesion de apertura 1"
-                                readOnly={readonly}
-                            />
-                            :
-                            <InputComponent name="event_endDate"
-                                handleChange={this.props.funcion}
-                                type='date'
-                                label="Fecha de inicio"
-                                readOnly={readonly}
-                                value={event.event_endDate.split('T')[0]} />
+                                <InputComponent name="event_endDate"
+                                    handleChange={this.props.funcion}
+                                    type='date'
+                                    label="Sesion de apertura 1"
+                                    readOnly={readonly}
+                                />
+                                :
+                                <InputComponent name="event_endDate"
+                                    handleChange={this.props.funcion}
+                                    type='date'
+                                    label="Fecha de inicio"
+                                    readOnly={readonly}
+                                    value={event.event_endDate.split('T')[0]} />
                         }
 
-                        
+
 
 
                     </form>

@@ -22,6 +22,10 @@ export default class AccesoAPI {
   static async enviarTodo(tabla, metodo, datos, id = null) {
     let url2 = this.verificaTabla(tabla);
     let url = API_URL + url2;
+
+    if(datos['coverUrl'] ){
+      datos['coverUrl'] = null;
+    }
     switch (metodo) {
       case 'POST':
         return this.accederApi(url, metodo, datos);
@@ -35,6 +39,37 @@ export default class AccesoAPI {
         break;
     }
 
+  }
+
+  static async enviarImagen(url,file, campo) {
+    const cabeceras = new Headers();
+    cabeceras.append("Authorization", "Bearer my-token");
+    cabeceras.append("Cache-Control", "no-cache");
+
+    const formData = new FormData();
+
+    formData.append(campo, file);
+
+    let opciones = {         // opciones para GET y DELETE (no hay body)
+      method: 'POST',
+      headers: cabeceras
+    };
+    if (file !== null) {
+      opciones = {           // opciones para resto, con datos
+        method: 'POST',
+        headers: cabeceras,
+        body: formData
+      };
+    }
+
+    return await fetch(url, opciones)
+
+      .then(res => res.json())
+      .then(
+        results => {
+          return results;
+        }
+      )
   }
 
   /**
