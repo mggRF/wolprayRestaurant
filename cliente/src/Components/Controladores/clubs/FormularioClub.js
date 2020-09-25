@@ -202,9 +202,9 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                             <>
                                 <DesplegableDireccion
                                     funcion={funcion}
-                                    valorCCAA={stateid}
-                                    valorProv={provinceid}
-                                    valorPobl={cityid}
+                                    valorCCAA={Number(stateid)}
+                                    valorProv={Number(provinceid)}
+                                    valorPobl={Number(cityid)}
                                 />
                             </>
 

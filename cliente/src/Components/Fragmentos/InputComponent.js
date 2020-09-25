@@ -65,7 +65,6 @@ export const InputComponent = ({ clase = 'input-text', tam = '', step = '', type
         return (
             <div className="form-field col-lg-6">
                 <label className="label" htmlFor={name}><h5>{label}:</h5></label>
-
                 {
                     ((name.length === 0) && (!read)) ?
                         <input name={name}
