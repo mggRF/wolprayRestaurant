@@ -1,0 +1,393 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+p {
+    height: auto;
+}
+
+.nombre-discoteca {
+    width: 50%;
+    height: 180px;
+    display: block;
+    padding: 35px 30px 35px 30px;
+    background-color: #8900F2;
+    box-shadow: 5px 5px 0px 0px #ffffff;
+    margin: auto;
+    text-align: center;
+}
+
+.nombre-discoteca h1 {
+    color: #46E2FF;
+    font-family: "Poppins", Sans-serif;
+    font-size: 5em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: -1px 3px 14px #000000;
+}
+
+.container-data {
+    background-color: transparent;
+    background-image: linear-gradient(180deg, #000000 1%, #00000000 14%);
+    opacity: 1;
+    transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+    height: 100%;
+    width: 100%;
+    top: 80;
+    left: 0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+}
+
+.container-datos,
+.listas-gratuitas {
+    display: flex;
+    filter: brightness( 100%) contrast( 100%) saturate( 100%) blur( 0px) hue-rotate( 0deg);
+    background-color: transparent;
+    background-image: linear-gradient(140deg, #000000 0%, #00172d 0%);
+    opacity: 0.8;
+    transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+}
+
+.container-datos-club {
+    max-width: 1200px;
+    margin: 130px auto;
+    display: flex;
+}
+
+.cdc-imagen {
+    width: 50%;
+    height: 600px;
+    display: flex;
+    vertical-align: middle;
+    display: inline-block;
+    box-shadow: 8px 8px 0px 0px #00deff;
+    transition: background .3s, border .3s, border-radius .3s, box-shadow .3s, -webkit-border-radius .3s, -webkit-box-shadow .3s;
+    overflow: hidden;
+}
+
+.cdc-imagen img {
+    border-style: dashed;
+    border-width: 5px 5px 5px 5px;
+    border-color: #f92056;
+    width: 100%;
+}
+
+.cdc-datos {
+    padding: 35px;
+    display: block;
+}
+
+.cdc-datos-titulo {
+    margin: -80px 0px 020px -150px;
+    padding: 22px 30px 22px 30px;
+    background-color: #f92056;
+    box-shadow: 5px 5px 0px 0px #ffffff;
+    display: block;
+    height: 100px;
+    width: 600px;
+}
+
+.cdc-datos-titulo h2 {
+    color: #ffffff;
+    font-family: "Poppins", Sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 3px 0px #000000;
+    font-size: 59px;
+}
+
+.cdc-datos-musica,
+.cdc-datos-descripcion {
+    height: fit-content;
+    margin-top: 10px;
+}
+
+.cdc-datos-musica p {
+    color: #00deff;
+    font-family: "Poppins", Sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1em;
+    letter-spacing: 2px;
+}
+
+.cdc-datos-descripcion p {
+    color: #ffffff;
+    font-family: "Poppins", Sans-serif;
+    line-height: 1.8em;
+}
+
+.cdc-datos-acordeon {
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+
+/*** acordeon  ***/
+
+.accordion {
+    color: #00BFFA;
+    background-color: transparent;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 1.4s;
+    height: 50px;
+    margin: 0;
+    padding: 15px 20px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    border: 1px solid white;
+}
+
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+
+
+/*.active,
+.accordion:hover {
+    background-color: #ccc;
+}*/
+
+
+/* Style the accordion panel. Note: hidden by default */
+
+.panel {
+    padding: 0 18px;
+    background-color: transparent;
+    display: none;
+    overflow: hidden;
+    height: 50px;
+    border: 1px solid white;
+}
+
+.accordion:before {
+    content: '\02795';
+    /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: #777;
+    float: left;
+    margin-left: 5px;
+}
+
+.active:before {
+    content: "\2796";
+    /* Unicode character for "minus" sign (-) */
+}
+
+nav {
+    display: block;
+    float: left;
+    color: white;
+    margin: 20px 100px;
+}
+
+nav ul li {
+    float: left;
+    color: white;
+    margin-left: 100px;
+    list-style: none;
+}
+
+nav ul li a {
+    color: white;
+    font-family: "Archivo", Sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+header {
+    width: 100%;
+    height: 95px;
+    background: black;
+}
+
+.container-header {
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+    margin: auto;
+}
+
+.logo-title {
+    display: flex;
+    float: left;
+    margin: 10px;
+}
+
+.icon-menu {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.icon-menu img {
+    width: 50px;
+    height: 50px;
+}
+
+body {
+    color: #fff;
+    background: #0274be;
+    width: 100%;
+}
+
+::selection {
+    background-color: #0274be;
+    color: #ffffff;
+}
+
+.listas-gratuitas {
+    width: 100%;
+    text-align: center;
+    display: block;
+    clip-path: url(#wave);
+}
+
+.lg-titulo {
+    color: #ffffff;
+    font-family: "Work Sans", Sans-serif;
+    font-size: 2.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-style: normal;
+    line-height: 1.4em;
+    height: 80px;
+}
+
+.lg-listaClubs {
+    width: 50%;
+    height: 500px;
+    display: block;
+    background-color: #292929;
+    margin: auto;
+    padding-top: 2em;
+    position: relative;
+    top: 20px
+}
+
+.lglc-linea {
+    display: flex;
+}
+
+.lglc-columna {
+    width: 33%;
+}
+
+.contenedor {
+    background-color: #1678D5;
+    opacity: 0.36;
+    mix-blend-mode: lighten;
+    transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+.topsvg {
+    top: -100px;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    line-height: 0;
+    direction: ltr;
+}
+
+.bottomsvg {
+    bottom: -100px;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    line-height: 0;
+    direction: ltr;
+}
+
+.divsvg {
+    overflow: hidden;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+    direction: ltr;
+    height: 80px;
+    position: absolute;
+    top: -1px;
+}
+
+svg {
+    width: calc(126% + 1.3px);
+    display: block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+.shape-fill {
+    fill: #8E36FF;
+    transform-origin: center;
+    transform: rotateY(0deg);
+}
+
+.fase3,
+fase2 {
+    background-color: #8900F2;
+    margin: 0;
+}
+
+.comentarios {
+    margin: 100px auto;
+    width: 1200px;
+    height: auto;
+}
+
+
+/*    parallax     */
+
+.parallax {
+    /* The image used */
+    background-image: url("../images/marcela-laskoski-118684-unsplash-1.jpg");
+    /* Full height */
+    height: 100%;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+/*    parallax     */
+
+.parallax1 {
+    /* The image used */
+    background-image: url("../images/alexander-popov-566913-unsplash.jpg");
+    /* Full height */
+    height: 100%;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+    padding: 70px 0px 0150px 0px;
+    position: relative;
+    z-index: 100;
+}
