@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[[[Nombre del club]]]</title>
+    <title><?= $cabeTitulo; ?></title>
     <link rel="stylesheet" href="css/estilo.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -35,3 +35,15 @@
         </div>
 
     </header>
+    <div id="page">
+        <?php include DIR_ROOT . '/vistas/' . $tpl ?>
+    </div>
+    </div>
+    <div class="fase3">
+        <div class="comentarios">
+            <h3>Que dice la gente</h3>
+            <h2>Testimonios</h2>
+        </div>
+    </div>
+</body>
+</html>

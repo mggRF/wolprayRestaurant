@@ -1,4 +1,5 @@
 <?php
+
 namespace App\service;
 
 class Request
@@ -17,54 +18,65 @@ class Request
     private $urlParse;                       //url dividida
     private $user;                          //""
     private $password;                      //""
-    
-    
-   
+
+
+
 
     public function __construct()
     {
         if (!isset($_SERVER['HTTP_HOST'])) exit;  //Siempre debe existir
-        $this->host=$_SERVER['HTTP_HOST'];
+        $this->host = $_SERVER['HTTP_HOST'];
         $this->urlParse = $this->parseUrl($this->host);
-        $this->domain = isset($this->urlParse['domain']) ? $this->urlParse['domain']:"";
+        $this->domain = isset($this->urlParse['domain']) ? $this->urlParse['domain'] : "";
         $this->subdomain = isset($this->urlParse['subdomain']) ? $this->urlParse['subdomain'] : "";
-        $this->extension = isset($this->urlParse['domain']) ?$this->urlParse['extension'] : "";
+        $this->extension = isset($this->urlParse['domain']) ? $this->urlParse['extension'] : "";
         $this->port = isset($this->urlParse['port']) ? $this->urlParse['port'] : "";
 
-        $this->host=$_SERVER['HTTP_HOST'];
+        $this->host = $_SERVER['HTTP_HOST'];
         $this->path = explode('?', $_SERVER['REQUEST_URI'])[0];
         $this->ruta = explode('/', $this->path);
         $this->method = $_SERVER['REQUEST_METHOD'];
         $ssl   = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on';
         $proto = strtolower($_SERVER['SERVER_PROTOCOL']);
-        $this->proto = substr($proto, 0, strpos($proto, '/')) . ($ssl ? 's' : '' );
-        $this->params = array_merge($_POST, $_GET);  
-        
-        $this->user = isset($this->urlParse['login']) ? $this->urlParse['login'] :
-                        (isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : '');
-        $this->password = isset($this->urlParse['pass']) ? $this->urlParse['pass'] : 
-                        (isset( $_SERVER['PHP_AUTH_PW']) ?  $_SERVER['PHP_AUTH_PW']  : '') ;
-        
-        
+        $this->proto = substr($proto, 0, strpos($proto, '/')) . ($ssl ? 's' : '');
+        $this->params = array_merge($_POST, $_GET);
+
+        $this->user = isset($this->urlParse['login']) ? $this->urlParse['login'] : (isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : '');
+        $this->password = isset($this->urlParse['pass']) ? $this->urlParse['pass'] : (isset($_SERVER['PHP_AUTH_PW']) ?  $_SERVER['PHP_AUTH_PW']  : '');
     }
+    /**
+    devuelve el atributo indicado desde REQUEST
+     */
     public function getAttribute(string $name)
     {
         return $_REQUEST[$name] ?? null;
     }
-    public function setAttribute(string $name,$valor)
+    /**
+     * Deja en REQUEST el atributo indicado
+     */
+    public function setAttribute(string $name, $valor)
     {
         $_REQUEST[$name] = $valor;
     }
-    
+    /**
+     * Añade un parametro (temporal a PARAM)
+     */
     public function setParam(string $nombre, $valor)
     {
-        $this->params[$nombre]=$valor;
+        $this->params[$nombre] = $valor;
     }
+    /**
+     * Devuelve la URL completa de llamada
+     */
     public function getUrl(): string
     {
-        return  $this->proto . '://' .$this->host . "/";         $this->path;
+        return  $this->proto . '://' . $this->host . "/";
+        $this->path;
     }
 
+    /**
+     * Devuelve el nombre de host
+     */
     public function gethost(): string
     {
         return $this->host;
@@ -76,15 +88,16 @@ class Request
     {
         return $this->extension;
     }
-    
+
     /**
+     * retorna el puerto
      * @return mixed
      */
     public function getPort()
     {
         return $this->port;
     }
-    
+
     /**
      * @return array
      */
@@ -92,7 +105,7 @@ class Request
     {
         return $this->ruta;
     }
-    
+
     /**
      * @return mixed
      */
@@ -100,7 +113,7 @@ class Request
     {
         return $this->urlParse;
     }
-    
+
     /**
      * @return mixed
      */
@@ -108,7 +121,7 @@ class Request
     {
         return $this->user;
     }
-    
+
     /**
      * @return mixed
      */
@@ -116,13 +129,13 @@ class Request
     {
         return $this->password;
     }
-    
+
 
     public function getPath(): string
     {
         return $this->path;
     }
-    
+
     /**
      * @return string
      */
@@ -130,13 +143,17 @@ class Request
     {
         return $this->subdomain;
     }
-    
-       
+
+
     public function getParams(): array
     {
         return $this->params;
     }
-
+    /**
+     * Conseguir el valor de un parametro de la query
+     * @param string $name   Devuelve parametro indicado
+     * @return string  Devuelve el valor del parametro o null
+     */
     public function getParam(string $name)
     {
         return $this->params[$name] ?? null;
@@ -146,8 +163,8 @@ class Request
     {
         return $this->params[$name] ?? $default;
     }
-    
-    public function getParamSpace(string $name):string
+
+    public function getParamSpace(string $name): string
     {
         return $this->params[$name] ?? "";
     }
@@ -156,11 +173,11 @@ class Request
     {
         return $this->params[$name] ?? 0;
     }
-    public function getParamNumer(string $name):int
+    public function getParamNumer(string $name): int
     {
         return (int)($this->params[$name] ?? 0);
     }
-    public function getParamDouble(string $name):float
+    public function getParamDouble(string $name): float
     {
         return floatval(($this->params[$name] ?? 0));
         //return $this->params[$name] ?? "";
@@ -170,7 +187,7 @@ class Request
     {
         return isset($this->params[$name]);
     }
-    
+
     /**
      * @return mixed
      */
@@ -178,10 +195,11 @@ class Request
     {
         return $this->domain;
     }
-    
-    function parseUrl($url) {
+
+    function parseUrl($url)
+    {
         //$url = '@' . $url;
-        $r='';
+        $r = '';
         $r  = "^(?:(?P<scheme>\w+)://)?";
         $r .= "(?:(?P<login>\w+):(?P<pass>\w+)@)?";
         $r .= "(?P<host>(?:(?P<subdomain>[\w\.]+)\.)?" . "(?P<domain>\w+\.(?P<extension>\w+)))";
@@ -191,9 +209,9 @@ class Request
         $r .= "(?:#(?P<anchor>\w+))?";
         $r = "!$r!";                                                // Delimiters
         //$url = 'me:you@sub.site.org:29000/pear/validate.html?happy=me&sad=you#url';
-        preg_match ( $r, $url, $out );
-        if (!array_key_exists("dominio",$out)) 
-        return $out;
+        preg_match($r, $url, $out);
+        if (!array_key_exists("dominio", $out))
+            return $out;
     }
     /**
      * @return mixed
@@ -210,8 +228,4 @@ class Request
     {
         return $this->proto;
     }
-
-    
-
 }
-?>

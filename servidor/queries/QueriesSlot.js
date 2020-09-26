@@ -4,7 +4,8 @@ module.exports = {
                         :TABLA.*,
                         clubs.clubName
                     from :TABLA
-                    LEFT JOIN clubs ON :TABLA.slotid = clubs.clubid`,
+                    LEFT JOIN clubs ON :TABLA.clubid = clubs.clubid
+                    :WHERE`,
 
         SELECT_SELECT: `SELECT slotid  as id,clubid  as opcion FROM :TABLA WHERE clubid  = :id`,
         SELECT_UNO: `SELECT * FROM :TABLA WHERE slotid  = :id`,

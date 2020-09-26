@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(dirname(__FILE__)) . '/includes/constantes.php';
+require_once 'constantes.php';
 
 /**
  * para una llamada http://xxx:3800/<ruta>?<query>

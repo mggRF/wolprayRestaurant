@@ -13,4 +13,5 @@ if (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] == 'localhost') {
 } else {
     define('API_URL', API_BASE_PRODUCTION . VERSION_API . '/');
 }
+define('URL_PHP', 'https://wolpray.es/PHP_Externo/');
 define('LPPAGINA', 5);                             //lineas por pagina)

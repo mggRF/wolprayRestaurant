@@ -52,11 +52,8 @@ class ControladorBase {
                 Datos: objeto
             });
         } else {
-            res.status(status)
-                .send({
-                    Ok: false,
-                    Message: objeto
-                });
+            this.procesaErr(res,objeto,status);
+            
         }
     }
 
@@ -117,6 +114,7 @@ class ControladorBase {
     leerUno(req, res) {
         let id = req.params.id;
         if (id === "count") return this.leerCount(req, res);
+        if (id.trim().length==0) return this.leerAll(req, res);
         let sql = this.config.QUERIES.SELECT_UNO.replace(':id', id);
 
         this.connect.leerSql(sql.replace(/:TABLA/gi, this.config.TABLA))
@@ -125,11 +123,12 @@ class ControladorBase {
 
             })
             .catch(err => {
-                this.enviaDatos(res, "Error en Leer uno", err);
-
+                this.procesaErr(res,"Error en Leer uno",err);
             });
 
     }
+
+    
 
     /**
      * Lista lista objetos indexados de la base de datos en base a una referencia.
@@ -155,26 +154,21 @@ class ControladorBase {
                 this.enviaDatos(res, dat);
             })
             .catch(err => {
-                this.enviaDatos(res, "Error en leer SELECT", err);
-                throw new Error(err);
-
+                this.procesaErr(res,"Error en leer SELECT",err);
             });
-
     }
 
     leerALL(req, res) {
-
-
+        console.log('leerAll0');
         let sql = this.config.QUERIES.SELECT_ALL.replace(/:TABLA/gi, this.config.TABLA);
         sql = CompletaSQL.cSQL(req, sql);
-
-        Presenta.log("sql---------->", sql)
+        console.log('leerAll0',sql);
         this.connect.leerSql(sql)
             .then(dat => {
                 this.obtenerFotoUrl(res, dat);
             })
             .catch(err => {
-                this.enviaDatos(res, "Error en leer SELECT", err);
+                this.procesaErr(res,"Error en leerAll",err);
             });
 
     }
@@ -214,7 +208,7 @@ class ControladorBase {
                 this.hacerDelete(res, id, QUERIES.DELETE);
                 break;
             default:
-                this.enviaDatos(res, 'Esta acción no es válida', 400);
+                this.procesaErr(res, 'Esta acción no es válida', 400);
                 break;
         }
     }
@@ -261,8 +255,7 @@ class ControladorBase {
         if (result.Ok) {
             this.enviaDatos(res, result.Data);
         } else {
-
-            this.enviaDatos(res, result.Data, result.Status);
+            this.procesaErr(res, result.Data,result.Status);
         }
     }
 
@@ -322,13 +315,13 @@ class ControladorBase {
 
         switch (file) {
             case 0:
-                this.enviaDatos(res, 'Lo que intenta subir no es una imagen', 400);
+                this.procesaErr(res, 'Lo que intenta subir no es una imagen', 400);
                 break;
             case -1:
-                this.enviaDatos(res, 'Tienes un error en el nombre del campo, el nombre ha de ser: ' + CAMPO, 400);
+                this.procesaErr(res, 'Tienes un error en el nombre del campo, el nombre ha de ser: ' + CAMPO, 400);
                 break;
             case -2:
-                this.enviaDatos(res, 'Es obligatorio subir subir una imagen', 400);
+                this.procesaErr(res, 'Es obligatorio subir subir una imagen', 400);
                 break;
             default:
                 this.sendDataToTable([body], QUERIES.INSERT, file)
@@ -337,10 +330,10 @@ class ControladorBase {
                         if (result.Ok) {
                             this.enviaDatos(res, result.Data);
                         } else {
-                            this.enviaDatos(res, result.Data, result.Status);
+                            this.procesaErr(res, result.Data, result.Status);
                         }
                     }).catch(err => {
-                        this.enviaDatos(res, err.Data, err.Status);
+                        this.procesaErr(res, err.Data, err);
                     });
                 break;
         }
@@ -369,11 +362,11 @@ class ControladorBase {
         //res,data, sql, metodo, file = null
         this.sendDataToTable([body, id], QUERIES.UPDATE)
             .then(result => {
-                console.log(result)
+                
                 this.enviaDatos(res, result.Data);
             }).catch(err => {
-                console.log(err)
-                this.enviaDatos(res, err.Data, err.Status);
+               
+                this.procesaErr(res, err.Data, err);
             })
 
         /*if (result.Ok) {
@@ -397,7 +390,7 @@ class ControladorBase {
 
             res.sendFile(pathFoto);
         } else {
-            this.enviaDatos(res, 'Acción inválida', 403);
+            this.procesaErr(res, 'Acción inválida', 403);
         }
     }
 
@@ -437,6 +430,18 @@ class ControladorBase {
         });
 
         return result;
+    }
+
+    procesaErr(res,mensaje,err){
+        console.log('mensaje---->', mensaje);
+        console.log('error------>', err);
+        let numero =  (!isNaN(err) && err >=200 && err <=600) ? err : 500
+        res.status(numero)
+                .send({
+                    Ok: false,
+                    Message: mensaje + err
+                });
+        throw new Error(err);
     }
 }
 
