@@ -115,8 +115,8 @@ class ControladorBase {
         let id = req.params.id;
         if (id === "count") return this.leerCount(req, res);
         if (id.trim().length==0) return this.leerAll(req, res);
-        let sql = this.config.QUERIES.SELECT_UNO.replace(':id', id);
-
+        let sql = this.config.QUERIES.SELECT_UNO.replace(':id', decodeUriComponent(id));
+console.log(sql);
         this.connect.leerSql(sql.replace(/:TABLA/gi, this.config.TABLA))
             .then(dat => {
                 this.obtenerFotoUrl(res, dat);
@@ -159,10 +159,10 @@ class ControladorBase {
     }
 
     leerALL(req, res) {
-        console.log('leerAll0');
+        //console.log('leerAll0');
         let sql = this.config.QUERIES.SELECT_ALL.replace(/:TABLA/gi, this.config.TABLA);
         sql = CompletaSQL.cSQL(req, sql);
-        console.log('leerAll0',sql);
+        //console.log('leerAll0',sql);
         this.connect.leerSql(sql)
             .then(dat => {
                 this.obtenerFotoUrl(res, dat);

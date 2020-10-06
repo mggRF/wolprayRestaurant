@@ -32,7 +32,9 @@ function WPI_listaClubs()
             //echo '<img class="paraImagen"  src="' . $registro->coverUrl . '"/>';
             //echo '</a>';
             $salto = URL_PHP . 'listados/ListarUnClub.php?club=' . urlencode($registro->clubName);
-            echo str_replace(':HREF_IMAGEN', $salto, str_replace(':SRC_IMAGEN', $registro->coverUrl, CUBRE_IMAGEN));
+			$imagen= $registro->coverUrl; 
+			
+            echo str_replace(':HREF_IMAGEN', $salto, str_replace(':SRC_IMAGEN', $imagen, CUBRE_IMAGEN));
             echo str_replace(":NOMBRE_CLUB", $registro->clubName, CUBRE_NOMBRE);
             //echo '<span class="nombreClub">' . $registro->clubName . '</span>';
             echo '</div>';

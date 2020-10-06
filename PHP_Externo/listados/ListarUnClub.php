@@ -14,7 +14,7 @@ $req = new Request();
 $nombeClub = $req->getParam('club');
 $clave = urldecode($nombeClub);
 
-$club = datosClub($nombeClub);  //Consigo datos club
+$club = datosClub($clave);  //Consigo datos club
 $masDias = is_numeric($club['DiasAnticipacion']) ? $club['DiasAnticipacion'] : 5;
 $toTime = "+" . $masDias . " day";
 $fechaI = date("Y/m/d");
@@ -31,7 +31,7 @@ include DIR_ROOT . '/templates/formaWp.tpl.php';
  */
 function datosClub($nombre)
 {
-    return procesaEnvio('clubs/', 'clubname="' . $nombre . '"')[0];
+    return procesaEnvio('clubs/', 'clubname="' .urlencode($nombre) . '"')[0];
 }
 
 /**

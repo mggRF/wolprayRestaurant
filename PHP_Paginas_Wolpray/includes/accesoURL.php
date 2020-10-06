@@ -19,10 +19,16 @@ if (!function_exists('RFW_accederRemoto')) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE); 
+    curl_setopt($ch, CURLOPT_FAILONERROR, 1);          
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);    
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER,1); 
+    curl_setopt($ch, CURLOPT_TIMEOUT, 50); 
+//  curl_setopt($ch, CURLOPT_PORT, $port);          
         $contents = curl_exec($ch);
         if (!$contents) {
             $contents = curl_error($ch);
-            echo 'Error--->'  . $contents;
+            echo 'Para--->' . $url . 'Error--->' . $contents;
         }
         curl_close($ch);
         return $contents;
