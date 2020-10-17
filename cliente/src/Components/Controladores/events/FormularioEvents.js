@@ -11,7 +11,7 @@ import Imagen from '../../Fragmentos/Imagen';
 export default class FormularioEvents extends Component {
     render() {
         let event = this.props.obj;
-        let readonly = this.props.orden.includes(['D', 'V']) ? true : false
+        let readonly = ['D', 'V'].includes(this.props.orden) ? true : false;
 
         return (
             <section className="get_in_touch animate__animated animate__fadeIn">

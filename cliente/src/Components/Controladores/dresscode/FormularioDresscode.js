@@ -9,7 +9,7 @@ import { InputComponent } from '../../Fragmentos/InputComponent';
 export default class FormularioDresscode extends Component {
     render() {
         let dresscode = this.props.obj;
-        let readonly = this.props.orden.includes(['D', 'V']) ? true : false
+        let readonly = ['D', 'V'].includes(this.props.orden) ? true : false
 
         return (
             <section className="get_in_touch animate__animated animate__fadeIn">

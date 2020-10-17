@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
  * @param {*} handleChange     función onChange del input
  * @param {*} readOnly     determina si el input es solo para leer o no
  */
-export const InputComponent = ({ clase = 'input-text', tam = '', step = '', type = 'text', value = '', name = '', label = '', handleChange, read = true }) => {
+export const InputComponent = ({ clase = 'input-text', tam = '', step = '', type = 'text', value = '', name = '', label = '', handleChange, readOnly = true }) => {
 
 
     const onFocus = event => {
@@ -29,33 +29,35 @@ export const InputComponent = ({ clase = 'input-text', tam = '', step = '', type
     if (value === null || value === undefined) {
         value = '';
     }
-
+console.log(readOnly);
     if (type === 'textarea') {
         return (
             <div className="form-field col-lg-6">
                 <label className="label" htmlFor={name}><h5>{label}:</h5></label>
 
                 {
-                    ((name.length === 0) && (!read)) ?
+                    (!readOnly) ?
                         <textarea name={name}
                             step={step}
                             style={{ width: 250 , height: 70 , resize: 'none'}}
                             autoComplete="off"
                             value={value}
                             className={clase}
+                            readonly={readOnly}
+
+                            onChange={handleChange}
                             placeholder={'Ingresa el ' + name}
-                            readOnly={read}
                         /> :
                         <textarea
+                            name={name}
                             step={step}
                             style={{ width: 250 , height: 70, resize: 'none'}}
-                            name={name}
-                            value={value}
-                            onChange={handleChange}
                             autoComplete="off"
-                            onFocus={onFocus}
+                            value={value}
                             className="form-control"
-                            readOnly={read}
+                            readonly={readOnly}
+                            
+                            onFocus={onFocus}
                         />
                 }
             </div>
@@ -66,28 +68,31 @@ export const InputComponent = ({ clase = 'input-text', tam = '', step = '', type
             <div className="form-field col-lg-6">
                 <label className="label" htmlFor={name}><h5>{label}:</h5></label>
                 {
-                    ((name.length === 0) && (!read)) ?
-                        <input name={name}
+                    (!readOnly) ?
+                        <input 
+                            name={name}
                             style={{ width: 250 }}
                             step={step}
                             type={type}
                             autoComplete="off"
                             value={value}
                             className={clase}
+                            onChange={handleChange}
+
                             placeholder={'Ingresa el ' + name}
-                            readOnly={read}
+                            
                         /> :
                         <input
+                            name={name}
                             style={{ width: 250 }}
                             step={step}
                             type={type}
-                            name={name}
-                            value={value}
-                            onChange={handleChange}
                             autoComplete="off"
-                            onFocus={onFocus}
+                            value={value}
                             className="form-control"
-                            readOnly={read}
+                            readonly={readOnly}
+                           
+                            onFocus={onFocus}                            
                         />
                 }
             </div>

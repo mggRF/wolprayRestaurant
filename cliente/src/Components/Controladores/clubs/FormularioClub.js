@@ -39,7 +39,9 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
         Musica,
         accessAge,
         DiasAnticipacion,
-        maxPeople, } = obj;
+        maxPeople,
+        club_limit_por,
+        club_limit_mess } = obj;
     let readonly = false;
     let direccion = '';
 
@@ -238,6 +240,22 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                                 />
 
                         }
+                        <InputComponent
+                        type='number'
+                        value={club_limit_por}
+                        name='club_limit_por'
+                        label='% limite'
+                        handleChange={funcion}
+                        read={readonly}
+                    />
+                    <InputComponent
+                        type='text'
+                        value={club_limit_mess}
+                        name='club_limit_mess'
+                        label='Limite mensaje'
+                        handleChange={funcion}
+                        read={readonly}
+                    />
                 </form>
             </div>
         </section>

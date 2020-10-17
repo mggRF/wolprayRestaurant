@@ -5,18 +5,23 @@ module.exports = {
     QueriesClub: {
         SELECT_UNO: `select  
                         :TABLA.*, 
-
                         n_dresscode.dressCodeDescription,
-
                         companies.companyName,
-
                         c_city.cityName,
+                        c_city.city_limit_por,
+                        c_city.city_limit_mess,
                         c_provinces.provinceid,
+                        c_provinces.province_limit_por,
+                        c_provinces.province_limit_mess,
                         c_provinces.provinceName,
                         c_state.stateid,
+                        c_state.state_limit_por,
+                        c_state.state_limit_mess,
                         c_state.stateName,
                         c_country.countryId,
                         c_country.countryName,
+                        c_country.country_limit_por,
+                        c_country.country_limit_mess,
                         GROUP_CONCAT(n_music.musicName) as Musica
                     from :TABLA 
                         LEFT JOIN club_music ON club_music.clubid = :TABLA.clubid

@@ -8,9 +8,7 @@ export default class FormularioProvince extends Component {
 
     render() {
         let Province = this.props.obj;
-        let readonly = false;
-        if (this.props.orden === 'D' || this.props.orden === 'V')
-            readonly = true
+        let readonly = ['D', 'V'].includes(this.props.orden) ? true : false
         let title = '';
         switch (this.props.orden) {
             case 'I':
@@ -68,6 +66,22 @@ export default class FormularioProvince extends Component {
                                     name='stateid'
                                 />
                         }
+                        <InputComponent
+                            type="number"
+                            handleChange={this.props.funcion}
+                            name="province_limit_por"
+                            label="% limite"
+                            readOnly={readonly}
+                            value={Province.province_limit_por}
+                        />
+                        <InputComponent
+                            type="text"
+                            handleChange={this.props.funcion}
+                            name="province_limit_mess"
+                            label="Mensaje limite"
+                            readOnly={readonly}
+                            value={Province.province_limit_mess}
+                        />
                     </form>
                 </div>
             </section>

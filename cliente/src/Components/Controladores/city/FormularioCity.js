@@ -6,9 +6,7 @@ import Desplegable from '../../Fragmentos/desplegable';
 export default class FormularioCity extends Component {
     render() {
         let City = this.props.obj;
-        let readonly = false;
-        if (this.props.orden === 'D' || this.props.orden === 'V')
-            readonly = true
+        let readonly = ['D', 'V'].includes(this.props.orden) ? true : false;
         let title = '';
         switch (this.props.orden) {
             case 'I':
@@ -18,7 +16,7 @@ export default class FormularioCity extends Component {
                 title = 'modificar';
                 break;
             default:
-                title = 'Información dela ciudad';
+                title = 'Información de la ciudad';
                 break;
         }
 
@@ -74,6 +72,20 @@ export default class FormularioCity extends Component {
                                     name='stateid'
                                 />) : null
                         }
+                        <InputComponent
+                            handleChange={this.props.funcion}
+                            name="city_limit_por"
+                            label="% limite"
+                            readOnly={readonly}
+                            value={City.city_limit_por}
+                        />
+                        <InputComponent
+                            handleChange={this.props.funcion}
+                            name="city_limit_mess"
+                            label="Mensaje limite"
+                            readOnly={readonly}
+                            value={City.city_limit_mess}
+                        />
                     </form>
                 </div>
             </div>

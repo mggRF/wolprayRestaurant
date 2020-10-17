@@ -10,9 +10,7 @@ export default class FormularioCCAA extends Component {
 
     render() {
         let CCAA = this.props.obj;
-        let readonly = false;
-        if (this.props.orden === 'D' || this.props.orden === 'V')  readonly = true;
-        
+        let readonly = ['D', 'V'].includes(this.props.orden) ? true : false;
 
         let title = '';
         switch (this.props.orden) {
@@ -72,6 +70,20 @@ export default class FormularioCCAA extends Component {
                                     name='countryid'
                                 />
                         }
+                        <InputComponent
+                            handleChange={this.props.funcion}
+                            name="state_limit_por"
+                            label="% limite"
+                            readOnly={readonly}
+                            value={CCAA.state_limit_por}
+                        />
+                        <InputComponent
+                            handleChange={this.props.funcion}
+                            name="state_limit_mess"
+                            label="Texto limitacion"
+                            readOnly={readonly}
+                            value={CCAA.state_limit_mess}
+                        />
                     </form>
                 </div>
             </section>

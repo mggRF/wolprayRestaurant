@@ -10,9 +10,7 @@ export default class FormularioCompanies extends Component {
 
     render() {
         let company = this.props.obj;
-        let readonly = false;
-        if (this.props.orden === 'D' || this.props.orden === 'V')
-            readonly = true
+        let readonly = ['D', 'V'].includes(this.props.orden) ? true : false;
         let title = '';
         switch (this.props.orden) {
             case 'I':

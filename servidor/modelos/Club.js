@@ -2,7 +2,13 @@
 
 class Club {
    
-     constructor(clubid, clubName,streetName,streetNumber,postal_code,cityid,description, clubPhone,dressCodeid,coverUrl,latitude,longitude,howToGetThere,entryCost,openSeason1,closingSeason1,openSeason2,closingSeason2,openSeason3,closingSeason3,accessAge,DiasAnticipacion,companyid,maxPeople){
+     constructor(clubid, clubName,streetName,streetNumber,
+        postal_code,cityid,description, clubPhone,dressCodeid,coverUrl,
+        latitude,longitude,howToGetThere,entryCost,
+        openSeason1,closingSeason1,openSeason2,closingSeason2,openSeason3,closingSeason3,
+        accessAge,DiasAnticipacion,companyid,maxPeople,
+        club_limit_por,club_limit_mess
+        ){
          this.clubid = clubid;
          this.clubName = clubName;
          this.streetName = streetName;
@@ -27,6 +33,8 @@ class Club {
          this.DiasAnticipacion = DiasAnticipacion;
          this.companyid = companyid;
          this.maxPeople = maxPeople;
+         this.club_limit_por = club_limit_por;
+         this.club_limit_mess = club_limit_mess;
      }
 
 }

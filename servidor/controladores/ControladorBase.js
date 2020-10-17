@@ -115,7 +115,7 @@ class ControladorBase {
         let id = req.params.id;
         if (id === "count") return this.leerCount(req, res);
         if (id.trim().length==0) return this.leerAll(req, res);
-        let sql = this.config.QUERIES.SELECT_UNO.replace(':id', decodeUriComponent(id));
+        let sql = this.config.QUERIES.SELECT_UNO.replace(':id', decodeURIComponent(id));
 console.log(sql);
         this.connect.leerSql(sql.replace(/:TABLA/gi, this.config.TABLA))
             .then(dat => {

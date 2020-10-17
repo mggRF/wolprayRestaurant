@@ -5,7 +5,7 @@ import { InputComponent } from '../../Fragmentos/InputComponent';
 export default class FormularioSlots extends Component {
     render() {
         let slot = this.props.obj;
-        let readonly = false;
+        let readonly = ['D', 'V'].includes(this.props.orden) ? true : false
         
         let vip = false;
         if(slot.listaVip===1){
@@ -13,8 +13,7 @@ export default class FormularioSlots extends Component {
         }else{
             vip = false;
         }
-        if (this.props.orden === 'D' || this.props.orden === 'V')
-            readonly = true
+        
         return (
             <section className="get_in_touch animate__animated animate__fadeIn">
                 <h1 className="title">Slot</h1>

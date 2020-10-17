@@ -5,9 +5,7 @@ import { InputComponent } from '../../Fragmentos/InputComponent';
 export default class FormularioRole extends Component {
     render() {
         let role = this.props.obj;
-        let readonly = false;
-        if (this.props.orden === 'D' || this.props.orden === 'V')
-            readonly = true
+        let readonly = ['D', 'V'].includes(this.props.orden) ? true : false;
         return (
             <section className="get_in_touch animate__animated animate__fadeIn">
                 <h1 className="title">Rol</h1>

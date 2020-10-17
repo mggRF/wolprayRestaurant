@@ -17,7 +17,9 @@ export default class ControllerPais extends ControllerBase {
         this.FORMULARIO = Formulario;
         this.MODELO = {
             countryId:0,
-            countryName:""
+            countryName:"",
+            country_limit_por:0,
+            country_limit_mess:""
         }
         this.state = {
             estadoActualizacion: 0,

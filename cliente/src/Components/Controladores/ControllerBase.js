@@ -103,8 +103,10 @@ export default class ControllerBase extends Component {
     }
 
     render() {
+        
         const LISTADO = this.LISTADO;
         const FORMULARIO = this.FORMULARIO;
+        console.log("hola")
         //
         // se debe sacar mensaje de error, si esta en state
         //

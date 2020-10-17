@@ -5,7 +5,7 @@ import { InputComponent } from '../../Fragmentos/InputComponent';
 export default class FormularioPais extends Component {
     render() {
         let country = this.props.obj;
-        let readonly = this.props.orden.includes(['D', 'V']) ? true : false
+        let readonly = ['D', 'V'].includes(this.props.orden) ? true : false
 
         return (
             <section className="get_in_touch animate__animated animate__fadeIn">
@@ -21,11 +21,26 @@ export default class FormularioPais extends Component {
                                     readOnly={true}
                                     value={country.countryId} /> : null
                         }
+                      
                         <InputComponent name="countryName"
                             handleChange={this.props.funcion}
                             label="Nombre"
                             readOnly={readonly}
                             value={country.countryName}
+                        />
+                        <InputComponent name="country_limit_por"
+                            type="number"
+                            handleChange={this.props.funcion}
+                            label="% limite"
+                            readOnly={readonly}
+                            value={country.country_limit_por}
+                        />
+                        <InputComponent name="country_limit_mess"
+                            type="text"
+                            handleChange={this.props.funcion}
+                            label="Mensaje limite"
+                            readOnly={readonly}
+                            value={country.country_limit_mess}
                         />
                     </form>
 
