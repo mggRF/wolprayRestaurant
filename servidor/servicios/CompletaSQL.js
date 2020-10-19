@@ -72,7 +72,7 @@ class CompletaSQL {
         Object.keys(queryObject).forEach(key => {
             if (key.substr(0, 1) != "_") {
 
-                salida = CompletaSQL.adicionaAND(salida, key + "=" + queryObject[key]);
+                salida = CompletaSQL.adicionaAND(salida, key , "=" , queryObject[key]);
 
             }
         })
@@ -85,7 +85,7 @@ class CompletaSQL {
     }
 
     static montaEntre(req, salida) {
-        console.log("entre--__>", salida);
+        console.log("entre-->", salida);
         let entre = req.query._entre;
         if (!(entre !== undefined && entre !== "" && entre !== null)) {
             entre = "";
@@ -101,6 +101,7 @@ class CompletaSQL {
             salida = CompletaSQL.adicionaAND(salida, expresion);
 
         }
+        console.log("entre-->", salida);
         return salida;
     }
 
@@ -111,7 +112,7 @@ class CompletaSQL {
         }
         if (desde !== "") {
             let valor = desde.split(',');
-            salida = CompletaSQL.adicionaAND(salida, valor[0] + ' >= ' + valor[1]);
+            salida = CompletaSQL.adicionaAND(salida, valor[0] , ' >= ' , valor[1]);
         }
 
         let hasta = req.query._hasta;
@@ -120,7 +121,7 @@ class CompletaSQL {
         }
         if (hasta !== "") {
             let valor = hasta.split(',');
-            salida = CompletaSQL.adicionaAND(salida, valor[0] + ' >= ' + valor[1]);
+            salida = CompletaSQL.adicionaAND(salida, valor[0] , ' >= ' , valor[1]);
         }
         return salida;
     }
@@ -136,9 +137,14 @@ class CompletaSQL {
         return salida;
     }
 
-    static adicionaAND(salida, expresion) {
+    static adicionaAND(salida, clave, relacion="", valor="") {
         if (salida.length > 0) salida += ' AND ';
-        salida += expresion;
+        salida += clave + relacion ;
+        if (isNaN(valor) && valor.length>0) {
+            salida += "'" + valor + "'";
+        } else {
+            salida += valor;
+        }
         return salida;
     }
 

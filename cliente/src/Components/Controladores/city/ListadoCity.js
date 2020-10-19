@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 
-import { API_URL, CITYS} from '../../Constantes';
+import { API_URL, CITYS } from '../../Constantes';
 import AccesoAPI from './../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
 import BotonListado from '../../Fragmentos/BotonListados';
@@ -68,7 +68,7 @@ export default class ListadoCity extends Component {
                 <div className='cabecera_controlador animate__animated animate__slideInUp'>
                     <h1>Listado de ciudades</h1>
                     <BotonListado icon={INS} funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}></BotonListado>
-                    
+
                 </div>
                 <table className="table">
                     <thead>
@@ -85,11 +85,12 @@ export default class ListadoCity extends Component {
                     <tbody>
                         {item}
                     </tbody>
-                    <Paginacion
-                        pageHandler={this.gl.pageHandler}
-                        tabla={CITYS}>
-                    </Paginacion>
+
                 </table>
+                <Paginacion
+                    pageHandler={this.gl.pageHandler}
+                    tabla={CITYS}>
+                </Paginacion>
             </div>
         )
     }

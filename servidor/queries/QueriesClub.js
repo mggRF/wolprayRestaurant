@@ -5,7 +5,7 @@ module.exports = {
     QueriesClub: {
         SELECT_UNO: `select  
                         :TABLA.*, 
-                        n_dresscode.dressCodeDescription,
+                        n_dresscode.dressCodeName,
                         companies.companyName,
                         c_city.cityName,
                         c_city.city_limit_por,
@@ -32,9 +32,9 @@ module.exports = {
                         JOIN c_provinces ON c_provinces.provinceid = c_city.provinceid
                         JOIN c_state ON c_state.stateid = c_provinces.stateid
                         JOIN c_country on c_country.countryId = c_state.countryid
-                    WHERE :TABLA.clubid = :id
+                    :WHERE 
                     GROUP BY :TABLA.clubid`,
-
+        SELECT_BY_ID: `WHERE :TABLA.clubid = :id`,
         SELECT_ALL: `select  
                         :TABLA.*, 
                         n_dresscode.dressCodeName,

@@ -29,7 +29,7 @@ export const InputComponent = ({ clase = 'input-text', tam = '', step = '', type
     if (value === null || value === undefined) {
         value = '';
     }
-console.log(readOnly);
+
     if (type === 'textarea') {
         return (
             <div className="form-field col-lg-6">
@@ -41,24 +41,27 @@ console.log(readOnly);
                             step={step}
                             style={{ width: 250 , height: 70 , resize: 'none'}}
                             autoComplete="off"
-                            value={value}
                             className={clase}
                             readonly={readOnly}
 
                             onChange={handleChange}
                             placeholder={'Ingresa el ' + name}
-                        /> :
+                        >
+                        {value}
+                        </textarea>
+                        :
                         <textarea
                             name={name}
                             step={step}
                             style={{ width: 250 , height: 70, resize: 'none'}}
                             autoComplete="off"
-                            value={value}
                             className="form-control"
                             readonly={readOnly}
                             
                             onFocus={onFocus}
-                        />
+                        >
+                        {value}
+                        </textarea>
                 }
             </div>
         )

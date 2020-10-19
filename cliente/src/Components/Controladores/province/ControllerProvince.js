@@ -14,7 +14,9 @@ export default class ControllerProvince extends ControllerBase {
             provinceid:0,
             provinceName:"",
             stateid:0,
-            provinceCapital: ""
+            provinceCapital: "",
+            province_limit_por:0,
+            province_limit_mess:""
         }
         this.state = {
             estadoActualizacion: 0,

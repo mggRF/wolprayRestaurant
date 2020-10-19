@@ -64,7 +64,7 @@ export default class ListadoProvince extends Component {
 
             <div className="container animate__animated animate__fadeIn">
                 <div className='col-12 cabecera_controlador animate__animated animate__slideInUp'>
-                    <h1>Listado de estados</h1>
+                    <h1>Listado de Provincias</h1>
                     <BotonListado icon={INS} funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}></BotonListado>
                 </div>
                 <table className="table">

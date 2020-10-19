@@ -4,6 +4,7 @@ const {
     LPPAGINA
 } = require("../Constantes/ConstantesDataBase/ConstantesPaginacion");
 const Presenta = require("../servicios/Presenta");
+const MontaLimites = require("../servicios/MontaLimites");
 const FyleSystem = require('../modelos/FileSystem');
 const { URL, VERSION, NOPICTURE } = require('../Constantes/ConstantesRutas');
 const uniqid = require('uniqid');
@@ -33,6 +34,7 @@ class ControladorBase {
         this.leerSelectDir = this.leerSelectDir.bind(this);
 
 
+
     }
     /**
      * Enviar datos a puesto //salida API
@@ -52,12 +54,21 @@ class ControladorBase {
                 Datos: objeto
             });
         } else {
-            this.procesaErr(res,objeto,status);
-            
+            this.procesaErr(res, objeto, status);
+
         }
     }
 
+    //Procesos especiales que se deban hacer con datos, antes de enviar
+    //abstract procesaDatos(res, datos, status);
+
     obtenerFotoUrl(res, datos, status = null) {
+        console.log("obten:",datos, datos[0].city_limit_por, datos[0].province_limit_por)
+        if ((datos.length > 0) && 
+            datos[0].hasOwnProperty('city_limit_por') && 
+            datos[0].hasOwnProperty('province_limit_por')) {
+            datos = MontaLimites.procesaDatos(datos);
+        }
         if (this.config.CARPETA) {
             const { CAMPO } = this.config.CARPETA;
             const { CARPETA } = this.config.CARPETA;
@@ -68,9 +79,9 @@ class ControladorBase {
                     for (let k in d) {
                         if (k === CAMPO) {
 
-                            // console.log('Datos=> ', d);
-                            // console.log('Campo en el base=> ', k);
-                            // console.log('Campo recogido => ',d[k])
+                            // Presenta.log('Datos=> ', d);
+                            // Presenta.log('Campo en el base=> ', k);
+                            // Presenta.log('Campo recogido => ',d[k])
                             if (d[k]) {
                                 d[k] = `${URL}${VERSION}uploads/${CARPETA}/${d[campoId]}/${d[k]}`;
                             } else {
@@ -114,21 +125,27 @@ class ControladorBase {
     leerUno(req, res) {
         let id = req.params.id;
         if (id === "count") return this.leerCount(req, res);
-        if (id.trim().length==0) return this.leerAll(req, res);
-        let sql = this.config.QUERIES.SELECT_UNO.replace(':id', decodeURIComponent(id));
-console.log(sql);
+        console.log("trim",id)
+        let sql="";
+        if (id === "byName") {
+             sql = this.config.QUERIES.SELECT_UNO;
+            sql = CompletaSQL.cSQL(req, sql);
+        } else {           
+            sql = this.config.QUERIES.SELECT_UNO.replace(':WHERE', this.config.QUERIES.SELECT_BY_ID);
+            sql = sql.replace(':id', decodeURIComponent(id));           
+        }
         this.connect.leerSql(sql.replace(/:TABLA/gi, this.config.TABLA))
             .then(dat => {
                 this.obtenerFotoUrl(res, dat);
 
             })
             .catch(err => {
-                this.procesaErr(res,"Error en Leer uno",err);
+                this.procesaErr(res, "Error en Leer uno", err);
             });
 
     }
 
-    
+
 
     /**
      * Lista lista objetos indexados de la base de datos en base a una referencia.
@@ -147,28 +164,28 @@ console.log(sql);
         const role = req.session.role;
         sql = sql.replace(/:TABLA/gi, this.config.TABLA);
         sql = CompletaSQL.cSQL(req, sql);
-        console.log(sql);
+
         this.connect.leerSql(sql)
             .then(dat => {
-                //console.log("dat->", dat);
+                //Presenta.log("dat->", dat);
                 this.enviaDatos(res, dat);
             })
             .catch(err => {
-                this.procesaErr(res,"Error en leer SELECT",err);
+                this.procesaErr(res, "Error en leer SELECT", err);
             });
     }
 
     leerALL(req, res) {
-        //console.log('leerAll0');
+        //Presenta.log('leerAll0');
         let sql = this.config.QUERIES.SELECT_ALL.replace(/:TABLA/gi, this.config.TABLA);
         sql = CompletaSQL.cSQL(req, sql);
-        //console.log('leerAll0',sql);
+        //Presenta.log('leerAll0',sql);
         this.connect.leerSql(sql)
             .then(dat => {
                 this.obtenerFotoUrl(res, dat);
             })
             .catch(err => {
-                this.procesaErr(res,"Error en leerAll",err);
+                this.procesaErr(res, "Error en leerAll--->", err);
             });
 
     }
@@ -214,16 +231,16 @@ console.log(sql);
     }
 
     uploadImage(req, res) {
-        console.log('Imagen: ', req.files);
+        Presenta.log('Imagen: ', req.files);
         // this.fileSystem.guardarImagen(file, value.insertId, data[0][this.config.CARPETA.CAMPO])
         //                     .then(response => {
-        //                         console.log('OK => ', response)
+        //                         Presenta.log('OK => ', response)
         //                         resolve({
         //                             Ok: true,
         //                             Data: 'Se ha modificado correctamente la tabla en la base de datos. ' + response
         //                         })
         //                     }).catch(err => {
-        //                         console.log('Error=> ', err)
+        //                         Presenta.log('Error=> ', err)
         //                         reject({
         //                             Ok: false,
         //                             Data: err,
@@ -243,9 +260,9 @@ console.log(sql);
     hacerDelete(res, id, query) {
         if (this.config.CARPETA) {
             if (this.fileSystem.eliminarCarpetaDeImagenes(id)) {
-                console.log('Se eliminaron todas las imagenes de esta carpeta');
+                Presenta.log('Se eliminaron todas las imagenes de esta carpeta');
             } else {
-                console.log('Esta carpeta no contiene imágenes');
+                Presenta.log('Esta carpeta no contiene imágenes');
             }
         }
 
@@ -255,7 +272,7 @@ console.log(sql);
         if (result.Ok) {
             this.enviaDatos(res, result.Data);
         } else {
-            this.procesaErr(res, result.Data,result.Status);
+            this.procesaErr(res, result.Data, result.Status);
         }
     }
 
@@ -293,7 +310,7 @@ console.log(sql);
         // if (!file.mimetype.includes('image')) {
         //     return 0;
         // }
-        console.log('Imagen: ', req.files)
+        Presenta.log('Imagen: ', req.files)
 
 
         // return file;
@@ -362,18 +379,18 @@ console.log(sql);
         //res,data, sql, metodo, file = null
         this.sendDataToTable([body, id], QUERIES.UPDATE)
             .then(result => {
-                
+
                 this.enviaDatos(res, result.Data);
             }).catch(err => {
-               
+
                 this.procesaErr(res, err.Data, err);
             })
 
         /*if (result.Ok) {
-            console.log(result);
+            Presenta.log(result);
             this.enviaDatos(res, result.Data);
         } else {
-            console.log(result);
+            Presenta.log(result);
             this.enviaDatos(res, result.Data, result.Status);
         }*/
     }
@@ -420,7 +437,7 @@ console.log(sql);
                     })
 
                 }).catch(err => {
-                    console.log('ERROR => ', err);
+                    Presenta.log('ERROR => ', err);
                     reject({
                         OK: false,
                         Data: err,
@@ -432,15 +449,15 @@ console.log(sql);
         return result;
     }
 
-    procesaErr(res,mensaje,err){
-        console.log('mensaje---->', mensaje);
-        console.log('error------>', err);
-        let numero =  (!isNaN(err) && err >=200 && err <=600) ? err : 500
+    procesaErr(res, mensaje, err) {
+        Presenta.log('mensaje---->', mensaje);
+        Presenta.log('error------>', err);
+        let numero = (!isNaN(err) && err >= 200 && err <= 600) ? err : 500
         res.status(numero)
-                .send({
-                    Ok: false,
-                    Message: mensaje + err
-                });
+            .send({
+                Ok: false,
+                Message: mensaje + err
+            });
         throw new Error(err);
     }
 }

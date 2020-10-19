@@ -16,7 +16,9 @@ export default class  ControllerCCAA extends ControllerBase {
         this.MODELO = {
             stateid:0,
             stateName:"",
-            countryid:0
+            countryid:0,
+            state_limit_por:0,
+            state_limit_mess:""
         }
         this.state = {
             estadoActualizacion: 0,

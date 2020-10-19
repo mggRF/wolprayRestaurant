@@ -76,7 +76,7 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                                     name='coverUrl'
                                     label='Imagen principal'
                                     handleChange={funcion}
-                                    read={false}
+                                    readOnly={false}
                                 />
                                 :
                                 <img
@@ -95,7 +95,7 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                                 name='clubid'
                                 label='Club ID'
                                 handleChange={funcion}
-                                read={readonly}
+                                readOnly={readonly}
                             /> : null
                     }
                     <InputComponent
@@ -104,7 +104,7 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                         name='clubName'
                         label='Nombre'
                         handleChange={funcion}
-                        read={readonly}
+                        readOnly={readonly}
                     />
                     {
                         (!readonly) ?
@@ -122,7 +122,7 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                                 name='companyName'
                                 label='Empresa'
                                 handleChange={funcion}
-                                read={readonly}
+                                readOnly={readonly}
                             />
                     }
                     <InputComponent
@@ -131,7 +131,7 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                         name='clubPhone'
                         label='Teléfono'
                         handleChange={funcion}
-                        read={readonly}
+                        readOnly={readonly}
                     />
                     <InputComponent
                         type='textarea'
@@ -139,7 +139,7 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                         name='description'
                         label='Descripción'
                         handleChange={funcion}
-                        read={readonly}
+                        readOnly={readonly}
                     />
                     {
                         (!readonly) ?
@@ -157,7 +157,7 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                                 name='dressCodeDescription'
                                 label='Código de vestimenta'
                                 handleChange={funcion}
-                                read={readonly}
+                                readOnly={readonly}
                             />
                     }
                     <InputComponent
@@ -166,7 +166,7 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                         name='accessAge'
                         label='Edad de acceso'
                         handleChange={funcion}
-                        read={readonly}
+                        readOnly={readonly}
                     />
                     <InputComponent
                         type='number'
@@ -174,7 +174,7 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                         name='maxPeople'
                         label='Aforo máximo'
                         handleChange={funcion}
-                        read={readonly}
+                        readOnly={readonly}
                     />
                     <InputComponent
                         type='number'
@@ -182,7 +182,7 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                         name='entryCost'
                         label='Coste de entrada (€)'
                         handleChange={funcion}
-                        read={readonly}
+                        readOnly={readonly}
                     />
                     <InputComponent
                         type='number'
@@ -190,7 +190,7 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                         name='DiasAnticipacion'
                         label='Dias de anticipación para comprar entrada'
                         handleChange={funcion}
-                        read={readonly}
+                        readOnly={readonly}
                     />
                     {
                         (readonly) ?
@@ -217,7 +217,7 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                         name='howToGetThere'
                         label='Cómo llegar'
                         handleChange={funcion}
-                        read={readonly}
+                        readOnly={readonly}
                     />
 
 {
@@ -246,7 +246,7 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                         name='club_limit_por'
                         label='% limite'
                         handleChange={funcion}
-                        read={readonly}
+                        readOnly={readonly}
                     />
                     <InputComponent
                         type='text'
@@ -254,7 +254,7 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                         name='club_limit_mess'
                         label='Limite mensaje'
                         handleChange={funcion}
-                        read={readonly}
+                        readOnly={readonly}
                     />
                 </form>
             </div>

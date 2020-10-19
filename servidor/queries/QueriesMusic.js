@@ -1,6 +1,6 @@
 module.exports = {
     QueriesMusic: {
-        SELECT_ALL: `SELECT * FROM :TABLA WHERE musicid = :ids`,
+        SELECT_ALL: `SELECT * FROM :TABLA `,
         SELECT_SELECT: `SELECT musicid as id,musicName as opcion FROM :TABLA`,
         SELECT_UNO: `SELECT * FROM :TABLA WHERE musicid = :id`,
         INSERT: `INSERT INTO :TABLA SET ?`,

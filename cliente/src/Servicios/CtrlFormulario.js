@@ -23,7 +23,7 @@ export default class CtrlFormulario extends Component {
 
     recogeDatos = (e) => {
         let obj = this.state.obj;
-        console.log(e.target.name)
+
         obj[e.target.name] = e.target.value;
         this.setState({ obj: obj });
     }

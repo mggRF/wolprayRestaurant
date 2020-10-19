@@ -1,5 +1,3 @@
-
-
 class Presenta {
 
     static log(...datos){           //negro 

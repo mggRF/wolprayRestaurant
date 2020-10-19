@@ -2,6 +2,7 @@
  * Controlador para clubs
  * recibe llamadas para editar, añadir, listar y borrar clubs
  */
+const Presenta = require("../servicios/Presenta");
 const ControladorBase = require("./ControladorBase");
 const MODELO = require("../modelos/Club");
 const { QueriesClub } = require("../queries/QueriesClub");
@@ -41,7 +42,7 @@ class ControladorClubs extends ControladorBase {
     //         let sqlInsert = 'INSERT INTO club_music (clubid, musicid) VALUES  '
     //         let musicsUpdates = req.body.musicsUpdate.split(',');
     //         super.sendDataToTable([id], sqlDelete)
-    //             .then(result1 => console.log("borrado", result1))
+    //             .then(result1 => Presenta.log("borrado", result1))
     //             .then(() => {
     //                 if (method.toLowerCase() !== "delete") {
     //                     let salida = sqlInsert;
@@ -49,10 +50,10 @@ class ControladorClubs extends ControladorBase {
     //                         salida += "(" + id + "," + value + "),";
     //                     });
     //                     salida = salida.substring(0, salida.length - 1)
-    //                     console.log('sql: ', salida);
+    //                     Presenta.log('sql: ', salida);
     //                     super.sendDataToTable([], salida) //es promesa
-    //                         .then(result2 => console.log("ESTE ES EL INSERT", result2))
-    //                         .catch(err => console.error(err));
+    //                         .then(result2 => Presenta.log("ESTE ES EL INSERT", result2))
+    //                         .catch(err => Presenta.error(err));
     //                 }
     //             })
 
@@ -73,6 +74,7 @@ class ControladorClubs extends ControladorBase {
         let sql = QueriesClub.SELECT_SELECT_PROVINCES;
         this.leerSelectDir(req,res,sql);
     }
+    
     
 }
 

@@ -1,6 +1,6 @@
 {
     "name": "wolpray",
-    "version": "1.0.0",
+    "version": "0.2.0",
     "description": "Paquete de gestion de locales de ocio nocturno",
     "main": "index.js",
     "scripts": {

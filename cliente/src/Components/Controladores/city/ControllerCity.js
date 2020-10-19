@@ -15,7 +15,9 @@ export default class ControllerCity extends ControllerBase {
             provinceid:"",
             cityName:0,
             latitude: 0,
-            lonitude: 0
+            longitude: 0,
+            city_limit_por:0,
+            city_limit_mess:""
         }
         this.state = {
             estadoActualizacion: 0,
