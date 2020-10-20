@@ -14,7 +14,7 @@ export default class ControllerClub extends ControllerBase {
         this.ID = 'clubid';
         this.LISTADO = ListadoClubs;
         this.campoFoto = 'coverUrl';
-        this.urlPost = 'http://localhost:3800/api_v00/clubs/image/';
+ //       this.urlPost = 'http://localhost:3800/api_v00/clubs/image/';
         this.FORMULARIO = FormularioClub
         this.MODELO = {
             clubid: 0,

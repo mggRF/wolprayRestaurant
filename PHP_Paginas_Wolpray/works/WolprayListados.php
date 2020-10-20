@@ -6,7 +6,7 @@ require_once DIR_ROOT . '/includes/constantes.php';
 require_once DIR_ROOT . '/includes/accesoURL.php';
 require_once DIR_ROOT . '/assets/estilo.html';
 
-define('IMG_IN_ROW', 6); //Imagenes por fila
+define('IMG_IN_ROW', 5); //Imagenes por fila
 
 
 

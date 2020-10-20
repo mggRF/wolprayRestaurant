@@ -51,7 +51,7 @@
                 </div>
                 <button class="accordion">Restricciones de COVID-19</button>
                 <div class="panel">
-                    <p>[[[COVID-19]]]</p>
+                    <p><?= mensajeLimite($club); ?></p>
                 </div>
             </div>
         </div>

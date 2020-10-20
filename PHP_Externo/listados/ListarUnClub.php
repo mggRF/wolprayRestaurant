@@ -15,6 +15,7 @@ $nombeClub = $req->getParam('club');
 $clave = urldecode($nombeClub);
 
 $club = datosClub($clave);  //Consigo datos club
+
 $masDias = is_numeric($club['DiasAnticipacion']) ? $club['DiasAnticipacion'] : 5;
 $toTime = "+" . $masDias . " day";
 $fechaI = date("Y/m/d");
@@ -31,7 +32,7 @@ include DIR_ROOT . '/templates/formaWp.tpl.php';
  */
 function datosClub($nombre)
 {
-    return procesaEnvio('clubs/', 'clubname="' .urlencode($nombre) . '"')[0];
+    return procesaEnvio('clubs/byName', 'clubname=' .urlencode($nombre) )[0];
 }
 
 /**
@@ -86,4 +87,20 @@ function ajusta($desde, $hasta)
     if ($desde && $desde != '' && $hasta && $hasta != '') {
         return 'de ' . $desde . ' a ' . $hasta;
     }
+}
+
+function mensajeLimite($club)
+{
+
+    $salida="";
+    if ($club['limit_por'] > 0) {
+        $salida .='Aforo autorizado: ';
+        $salida .=$club['limit_val'];
+        $salida .=' - ';
+        $salida .=$club['limit_mess'];
+        $salida .=' (limite' . $club['limit_por'] . '%) ';
+    } else {
+        $salida = 'Sin limitaciones';
+    }
+    return $salida;
 }

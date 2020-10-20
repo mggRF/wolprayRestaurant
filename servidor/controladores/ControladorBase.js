@@ -63,7 +63,6 @@ class ControladorBase {
     //abstract procesaDatos(res, datos, status);
 
     obtenerFotoUrl(res, datos, status = null) {
-        console.log("obten:",datos, datos[0].city_limit_por, datos[0].province_limit_por)
         if ((datos.length > 0) && 
             datos[0].hasOwnProperty('city_limit_por') && 
             datos[0].hasOwnProperty('province_limit_por')) {

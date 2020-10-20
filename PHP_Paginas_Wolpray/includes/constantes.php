@@ -3,19 +3,25 @@
 /** 
  * ***** Area de control ******************* 
  */
-defined('API_BASE_DEVELOPPER') or define('API_BASE_DEVELOPPER', "http://localhost:3800/");   //direccion base
-defined('API_BASE_PRODUCTION') or define('API_BASE_PRODUCTION', "http://api.wolpray.es:3800/");   //direccion base
-defined('URL_PHP_DEVELOPPER') or define('URL_PHP_DEVELOPPER', 'http://localhost');
-defined('URL_PHP_PRODUCTION') or define('URL_PHP_PRODUCTION', 'http://wolpray.es');
+define('API_BASE_DEVELOPPER', "https://localhost:3800/");   //direccion base
+define('API_BASE_PRODUCTION', "https://api.wolpray.es:3800/");   //direccion base
 
-defined('VERSION_API') or define('VERSION_API', "api_v00");
-
-if (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] == 'localhostx') {
-    defined('API_URL') or define('API_URL', API_BASE_DEVELOPPER . VERSION_API . '/');
-    defined('URL_PHP') or define('URL_PHP',URL_PHP_DEVELOPPER . '/PHP_Externo/');
+if (!empty($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) == 'on' || $_SERVER['HTTPS'] == '1')) {
+    $scheme = 'https';
 } else {
-    defined('API_URL') or define('API_URL', API_BASE_PRODUCTION . VERSION_API . '/');
-    defined('URL_PHP') or define('URL_PHP',URL_PHP_PRODUCTION . '/PHP_Externo/');
+    $scheme = 'http';
+}
+ 
+define('VERSION_API', "api_v00");
+//define('API_URL', API_BASE_DEVELOPPER . VERSION_API . '/');
+if (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] == 'localhost') {
+    define('URL_PHP_DEVELOPPER',  $scheme . '://' . $_SERVER['HTTP_HOST'] );
+    define('API_URL', API_BASE_DEVELOPPER . VERSION_API . '/');
+    define('URL_PHP', URL_PHP_DEVELOPPER . '/PHP_Externo/');
+} else {
+    define('URL_PHP_PRODUCTION',  $scheme .'://' . $_SERVER['HTTP_HOST'] );
+    define('API_URL', API_BASE_PRODUCTION . VERSION_API . '/');
+    define('URL_PHP', URL_PHP_PRODUCTION . '/PHP_Externo/');
 }
 
-defined('LPPAGINA') or define('LPPAGINA', 5);                             //lineas por pagina)
+define('LPPAGINA', 5);      

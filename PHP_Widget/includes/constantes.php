@@ -3,14 +3,15 @@
 /** 
  * ***** Area de control ******************* 
  */
-define('API_BASE_DEVELOPPER', "http://localhost:3800/");   //direccion base
-define('API_BASE_PRODUCTION', "http://api.wolpray.es:3800/");   //direccion base
+defined('API_BASE_DEVELOPPER') or define('API_BASE_DEVELOPPER', "https://localhost:3800/");   //direccion base
+defined('API_BASE_PRODUCTION') or define('API_BASE_PRODUCTION', "https://api.wolpray.es:3800/");   //direccion base
 
-define('VERSION_API', "api_v00");
-define('API_URL', API_BASE_DEVELOPPER . VERSION_API . '/');
-if (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] = 'localhost') {
-    define('API_URL', API_BASE_DEVELOPPER . VERSION_API . '/');
+defined('VERSION_API') or define('VERSION_API', "api_v00");
+
+if (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] == 'localhost') {
+    defined('API_URL') or define('API_URL', API_BASE_DEVELOPPER . VERSION_API . '/');
 } else {
-    define('API_URL', API_BASE_PRODUCTION . VERSION_API . '/');
+    defined('API_URL') or define('API_URL', API_BASE_PRODUCTION . VERSION_API . '/');
 }
-define('LPPAGINA', 5);                             //lineas por pagina)
+defined('URL_PHP') or define('URL_PHP', 'http://localhost/PHP_Externo/');
+defined('LPPAGINA') or define('LPPAGINA', 5);                             //lineas por pagina)

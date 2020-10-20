@@ -19,7 +19,8 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "postbuild": "node ftp.js"
+        "postbuild": "node ftp.js",
+        "preparacion": "xcopy  D:\\Proyectos\\wolpray\\web\\cliente   D:\\Proyectos\\wolpray\\cliente-master  /s /y && cd  D:\\Proyectos\\wolpray\\cliente-master  && code . "
     },
     "eslintConfig": {
         "extends": "react-app"

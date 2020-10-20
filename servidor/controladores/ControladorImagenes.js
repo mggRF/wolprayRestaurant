@@ -1,29 +1,30 @@
 const ControladorBase = require("./ControladorBase");
+
 const { QueriesImages } = require("../queries/QueriesImages");
 
 const { URL, VERSION } = require('../Constantes/ConstantesRutas');
-let clubs = 'clubs';
-let products = 'products';
-let promotions = 'promotions';
-let events = 'events';
-let clubevents = 'clubevents';
+const CLUBS = 'clubs';
+const PRODUCTS = 'products';
+const PROMOTIONS = 'promotions';
+const EVENTS = 'events';
+const CLUBEVENTS = 'clubevents';
 class ControladorImagenes extends ControladorBase {
 
 
     constructor() {
         let config = {
             TABLAS: {
-                clubs,
-                products,
-                promotions,
-                events,
-                clubevents
+                CLUBS,
+                PRODUCTS,
+                PROMOTIONS,
+                EVENTS,
+                CLUBEVENTS
             },
-            OPCIONES: [clubs,
-                products,
-                promotions,
-                events,
-                clubevents]
+            OPCIONES: [CLUBS,
+                PRODUCTS,
+                PROMOTIONS,
+                EVENTS,
+                CLUBEVENTS]
         }
         super(config);
         this.getImagebyOption = this.getImagebyOption.bind(this);

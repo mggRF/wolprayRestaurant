@@ -1,6 +1,6 @@
 //******* Area de control *******************
-const API_BASE_DEVELOPPER = "http://localhost:3800/";   //direccion base
-const API_BASE_PRODUCTION = "http://api.wolpray.es:3800/";   //direccion base
+const API_BASE_DEVELOPPER = "https://localhost:3800/";   //direccion base
+const API_BASE_PRODUCTION = "https://api.wolpray.es:3800/";   //direccion base
 const VERSION_API = "api_v00"; 
 
 const variable_url = () => {

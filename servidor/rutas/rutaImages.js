@@ -7,10 +7,10 @@ let images = new ControladorImagenes();
 
 var rutas = express.Router();
 
-
-rutas.get('/', images.getImagebyOption);
-rutas.get('/:opcion', images.getImagebyOption);
-rutas.get('/:opcion/:id', images.getImagebyOption);
 rutas.get('/:opcion/:id/:ALL', images.getImagebyOption);
+rutas.get('/:opcion/:id', images.getImagebyOption);
+rutas.get('/:opcion', images.getImagebyOption);
+rutas.get('/', images.getImagebyOption);
+
 
 module.exports = rutas;

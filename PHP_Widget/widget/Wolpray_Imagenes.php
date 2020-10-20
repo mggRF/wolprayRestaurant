@@ -1,6 +1,5 @@
 <?php
 require_once dirname(dirname(__FILE__)) . '/funciones/accesoURL.php';
-require_once dirname(dirname(__FILE__)) . '/funciones/FuncionesHTML.php';
 /**
  * los datos recibidos son:
  * id: id de donde se saca la informacion
