@@ -10,7 +10,8 @@ module.exports = {
         SELECT_UNO: `SELECT * FROM :TABLA WHERE eventid   = :id`,
         
         SELECT_SELECT: `SELECT eventid as id,eventName  as opcion FROM :TABLA WHERE clubid  = :id`,
-        
+        SELECT_SELECT_ALL: `SELECT eventid as id,eventName  as opcion FROM :TABLA `,
+       
         INSERT: `INSERT INTO :TABLA SET ?`,
         
         UPDATE: `UPDATE :TABLA SET ? WHERE eventid = ?`,

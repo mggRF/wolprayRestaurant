@@ -21,7 +21,7 @@ module.exports = {
                     FROM :TABLA
                     LEFT JOIN c_city ON c_city.cityid = :TABLA.cityid`,
 
-        SELECT_SELECT: `SELECT :TABLA.companyid as id, companyName as opcion FROM :TABLA`,
+        SELECT_SELECT_ALL: `SELECT :TABLA.companyid as id, companyName as opcion FROM :TABLA`,
         INSERT: `INSERT INTO :TABLA SET ?`,
         UPDATE: `UPDATE :TABLA SET ? WHERE companyid = ?`,
         DELETE: `DELETE FROM :TABLA WHERE companyid = ?`

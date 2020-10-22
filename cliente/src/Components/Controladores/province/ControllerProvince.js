@@ -2,6 +2,8 @@ import Formulario from './FormularioProvince';
 import ControllerBase from './../ControllerBase';
 import { checkUsuario } from './../../../Servicios/funcionesSeguridad';
 import ListadoProvince from './ListadoProvince';
+import Provincia from '../../../modelos/Provincia';
+
 
 export default class ControllerProvince extends ControllerBase {
     constructor(props) {
@@ -10,14 +12,8 @@ export default class ControllerProvince extends ControllerBase {
         this.ID = 'provinceid';
         this.LISTADO = ListadoProvince;
         this.FORMULARIO = Formulario;
-        this.MODELO = {
-            provinceid:0,
-            provinceName:"",
-            stateid:0,
-            provinceCapital: "",
-            province_limit_por:0,
-            province_limit_mess:""
-        }
+        this.MODELO = new Provincia();
+       
         this.state = {
             estadoActualizacion: 0,
             orden: "",

@@ -3,6 +3,7 @@ import { FormularioClub } from './FormularioClub';
 import ControllerBase from './../ControllerBase';
 import { checkUsuario } from './../../../Servicios/funcionesSeguridad';
 import ListadoClubs from './ListadoClubs';
+import Club from '../../../modelos/Club';
 
 
 
@@ -16,42 +17,11 @@ export default class ControllerClub extends ControllerBase {
         this.campoFoto = 'coverUrl';
  //       this.urlPost = 'http://localhost:3800/api_v00/clubs/image/';
         this.FORMULARIO = FormularioClub
-        this.MODELO = {
-            clubid: 0,
-            clubName: "",
-            companyid: 0,
-            companyName: "",
-            cityName: "",
-            streetName: "",
-            streetNumber: 0,
-            postal_code: "",
-            cityid: 0,
-            provinceid: 0,
-            provinceName: "",
-            stateid: 0,
-            stateName: "",
-            countryId: 0,
-            countryName: "",
-            description: "",
-            clubPhone: "",
-            dressCodeid: 0,
-            dressCodeDescription: "",
-            coverUrl: "",
-            latitude: "",
-            longitude: "",
-            howToGetThere: "",
-            entryCost: "",
-            openSeason1: "",
-            closingSeason1: "",
-            openSeason2: "",
-            closingSeason2: "",
-            openSeason3: "",
-            closingSeason3: "",
-            accessAge: "",
-            DiasAnticipacion: "",
-            maxPeople: "",
-            Musica: ""
-        }
+        let ele = new Club()
+        ele.musicsUpdate='';           //aañado un campo mas que necesito enviar
+        this.MODELO = ele;
+        
+        console.log(ele);
         this.state = {
             estadoActualizacion: 0,
             orden: "",

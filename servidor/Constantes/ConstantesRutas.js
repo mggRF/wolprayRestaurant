@@ -14,10 +14,8 @@ const variable_url = () => {
 const carpeta_imagenes = () => {
     
     if (process.env.NODE_ENV.trim() === 'production') {
-        console.log('production', process.env.NODE_ENV);
         return RUTA_UPLOADS_PRODUCTION;
     } else {
-        console.log('development', process.env.NODE_ENV);
         return RUTA_UPLOADS_DEVELOPPER;
     }
 }

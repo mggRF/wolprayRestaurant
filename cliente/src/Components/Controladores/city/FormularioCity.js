@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InputComponent } from '../../Fragmentos/InputComponent';
 import Desplegable from '../../Fragmentos/desplegable';
+import { InputLimite } from './../../Fragmentos/InputLimite';
 
 export default class FormularioCity extends Component {
     render() {
@@ -62,29 +63,23 @@ export default class FormularioCity extends Component {
                             value={City.longitude}
                         />
 
+
                         {
                             (!readonly) ?
                                 (<Desplegable
-                                    label='Estado:'
+                                    label='Provincia'
                                     readValue={this.props.funcion}
-                                    table='c_procinces'
+                                    table='c_provinces'
                                     value={City.provinceid}
-                                    name='stateid'
+                                    name='provinceid'
                                 />) : null
                         }
-                        <InputComponent
+                        <InputLimite
                             handleChange={this.props.funcion}
-                            name="city_limit_por"
-                            label="% limite"
+                            name="city"
+                            label=""
                             readOnly={readonly}
-                            value={City.city_limit_por}
-                        />
-                        <InputComponent
-                            handleChange={this.props.funcion}
-                            name="city_limit_mess"
-                            label="Mensaje limite"
-                            readOnly={readonly}
-                            value={City.city_limit_mess}
+                            obj={City}
                         />
                     </form>
                 </div>

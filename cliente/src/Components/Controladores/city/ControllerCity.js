@@ -2,6 +2,7 @@ import Formulario from './FormularioCity';
 import ControllerBase from './../ControllerBase';
 import { checkUsuario } from './../../../Servicios/funcionesSeguridad';
 import ListadoCity from './ListadoCity';
+import Poblacion from '../../../modelos/Poblacion';
 
 export default class ControllerCity extends ControllerBase {
     constructor(props) {
@@ -10,15 +11,8 @@ export default class ControllerCity extends ControllerBase {
         this.ID = 'cityid';
         this.LISTADO = ListadoCity;
         this.FORMULARIO = Formulario;
-        this.MODELO = {
-            cityid:0,
-            provinceid:"",
-            cityName:0,
-            latitude: 0,
-            longitude: 0,
-            city_limit_por:0,
-            city_limit_mess:""
-        }
+        this.MODELO = new Poblacion();
+       
         this.state = {
             estadoActualizacion: 0,
             orden: "",

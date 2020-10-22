@@ -20,10 +20,13 @@ export default class Desplegable extends Component {
         this.monta();
     }
     monta() {
-        if (this.props.depend === this.state.id) {
+        
+        if (this.props.depend === this.state.id && this.props.depend !== "") {
             return
         }
-
+        if (this.props.depend === "" && this.state.dato !== "") {
+            return
+        }
         this.setState({ id: this.props.depend });
 
         AccesoAPI.leerDesplegables(this.props.table, this.props.depend)

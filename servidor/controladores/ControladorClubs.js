@@ -25,57 +25,55 @@ class ControladorClubs extends ControladorBase {
         }
         super(config);
         // this.updateTable=this.updateTable.bind(this);
-        this.leerSelectCitys=this.leerSelectCitys.bind(this);
-        this.leerSelectProvinces=this.leerSelectProvinces.bind(this);
+        this.leerSelectCitys = this.leerSelectCitys.bind(this);
+        this.leerSelectProvinces = this.leerSelectProvinces.bind(this);
     }
 
-    // async updateTable(req, res) {
+    async updateTable(req, res) {
 
-    //     const {
-    //         method
-    //     } = req.route.stack[0];
-    //     //       if (method.toLowerCase() === "put") { //<- luego, repetimos para insert y delete....
-    //     if (method.toLowerCase() === "put") {
+        const {
+            method
+        } = req.route.stack[0];
 
-    //         let id = req.params.id;
-    //         let sqlDelete = 'DELETE  FROM club_music WHERE clubid = ?';
-    //         let sqlInsert = 'INSERT INTO club_music (clubid, musicid) VALUES  '
-    //         let musicsUpdates = req.body.musicsUpdate.split(',');
-    //         super.sendDataToTable([id], sqlDelete)
-    //             .then(result1 => Presenta.log("borrado", result1))
-    //             .then(() => {
-    //                 if (method.toLowerCase() !== "delete") {
-    //                     let salida = sqlInsert;
-    //                     musicsUpdates.map(value => {
-    //                         salida += "(" + id + "," + value + "),";
-    //                     });
-    //                     salida = salida.substring(0, salida.length - 1)
-    //                     Presenta.log('sql: ', salida);
-    //                     super.sendDataToTable([], salida) //es promesa
-    //                         .then(result2 => Presenta.log("ESTE ES EL INSERT", result2))
-    //                         .catch(err => Presenta.error(err));
-    //                 }
-    //             })
+        if (method.toLowerCase() in ["put", "post", "delete"]) {
+            let id = req.params.id;
+            let sqlDelete = 'DELETE  FROM club_music WHERE clubid = ?';
+            let sqlInsert = 'INSERT INTO club_music (clubid, musicid) VALUES  '
+            let musicsUpdates = req.body.musicsUpdate.split(',');
+            super.sendDataToTable([id], sqlDelete)              // Se borran todas las musicas de ese club
+                .then(result1 => Presenta.log("borrado", result1))
+                .then(() => {
+                    if (method.toLowerCase() !== "delete") {
+                        let salida = sqlInsert;
+                        musicsUpdates.map(value => {
+                            salida += "(" + id + "," + value + "),";
+                        });
+                        salida = salida.substring(0, salida.length - 1)
+                        Presenta.log('sql: ', salida);
+                        super.sendDataToTable([], salida) //es promesa
+                            .then(result2 => Presenta.log("ESTE ES EL INSERT", result2))
+                            .catch(err => Presenta.error(err));
+                    }
+                })
+                .catch(err=>console.log(err))
 
+            /**GUARDAR musicsUpdate EN OTRO CAMPO Y QUITARLO DEL REQUEST QUE HA LLEGADO*/
+            delete req.body['musicsUpdate'];
+            /* ya puedo ceder el registro para actualizacion normal    *******/
+            updateTable(req, res);
+        }
+    }
 
-    //         delete req.body['musicsUpdate'];
-    //     }
-        
-    // }
-
-    /**GUARDAR musicsUpdate EN OTRO CAMPO Y QUITARLO DEL REQUEST QUE HA LLEGADO*/
-    //   }
-
-    leerSelectCitys(req,res){
+    leerSelectCitys(req, res) {
         let sql = QueriesClub.SELECT_SELECT_CITYS;
-        this.leerSelectDir(req,res,sql);
+        this.leerSelectDir(req, res, sql);
     }
-    leerSelectProvinces(req,res){
+    leerSelectProvinces(req, res) {
         let sql = QueriesClub.SELECT_SELECT_PROVINCES;
-        this.leerSelectDir(req,res,sql);
+        this.leerSelectDir(req, res, sql);
     }
-    
-    
+
+
 }
 
 

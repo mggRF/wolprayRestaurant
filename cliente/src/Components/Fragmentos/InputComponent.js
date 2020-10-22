@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { InputElement } from './InputElement';
 
 
 /**
@@ -14,8 +15,16 @@ import PropTypes from 'prop-types';
  * @param {*} label     texto del label
  * @param {*} handleChange     función onChange del input
  * @param {*} readOnly     determina si el input es solo para leer o no
+ * @param {*} claseDiv     clase para div de recubrimiento
  */
-export const InputComponent = ({ clase = 'input-text', tam = '', step = '', type = 'text', value = '', name = '', label = '', handleChange, readOnly = true }) => {
+export const InputComponent = ({
+    clase = 'input-text',
+    tam = '', step = '',
+    type = 'text', value = '',
+    name = '', label = '',
+    handleChange,
+    readOnly = true,
+    claseDiv = "col-lg-6" }) => {
 
 
     const onFocus = event => {
@@ -32,36 +41,33 @@ export const InputComponent = ({ clase = 'input-text', tam = '', step = '', type
 
     if (type === 'textarea') {
         return (
-            <div className="form-field col-lg-6">
+            <div className={"form-field " + claseDiv}>
                 <label className="label" htmlFor={name}><h5>{label}:</h5></label>
 
                 {
                     (!readOnly) ?
                         <textarea name={name}
                             step={step}
-                            style={{ width: 250 , height: 70 , resize: 'none'}}
+                            style={{ width: { tam }, height: 70, resize: 'none' }}
                             autoComplete="off"
                             className={clase}
-                            readonly={readOnly}
-
                             onChange={handleChange}
                             placeholder={'Ingresa el ' + name}
-                        >
-                        {value}
-                        </textarea>
+                            value={value}
+                        />
                         :
                         <textarea
                             name={name}
                             step={step}
-                            style={{ width: 250 , height: 70, resize: 'none'}}
+                            style={{ width: { tam }, height: 70, resize: 'none' }}
                             autoComplete="off"
                             className="form-control"
-                            readonly={readOnly}
-                            
+                            readOnly
                             onFocus={onFocus}
-                        >
-                        {value}
-                        </textarea>
+                            value={value}
+                        />
+                           
+                       
                 }
             </div>
         )
@@ -70,34 +76,16 @@ export const InputComponent = ({ clase = 'input-text', tam = '', step = '', type
         return (
             <div className="form-field col-lg-6">
                 <label className="label" htmlFor={name}><h5>{label}:</h5></label>
-                {
-                    (!readOnly) ?
-                        <input 
-                            name={name}
-                            style={{ width: 250 }}
-                            step={step}
-                            type={type}
-                            autoComplete="off"
-                            value={value}
-                            className={clase}
-                            onChange={handleChange}
-
-                            placeholder={'Ingresa el ' + name}
-                            
-                        /> :
-                        <input
-                            name={name}
-                            style={{ width: 250 }}
-                            step={step}
-                            type={type}
-                            autoComplete="off"
-                            value={value}
-                            className="form-control"
-                            readonly={readOnly}
-                           
-                            onFocus={onFocus}                            
-                        />
-                }
+                <InputElement
+                    name={name}
+                    tam={tam}
+                    step={step}
+                    type={type}
+                    value={value}
+                    clase={clase}
+                    handleChange={handleChange}
+                    readOnly={readOnly}
+                />
             </div>
         )
     }

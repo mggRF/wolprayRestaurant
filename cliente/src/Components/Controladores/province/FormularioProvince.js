@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InputComponent } from '../../Fragmentos/InputComponent';
 import Desplegable from '../../Fragmentos/desplegable';
+import { InputLimite } from './../../Fragmentos/InputLimite';
 
 export default class FormularioProvince extends Component {
 
@@ -59,28 +60,19 @@ export default class FormularioProvince extends Component {
                                     value={Province.provinceCapital}
                                 />) : <Desplegable
                                     depend='209'
-                                    label='Estado:'
+                                    label='Comunidad Autonoma'
                                     readValue={this.props.funcion}
                                     table='c_state'
                                     value={Province.stateid}
                                     name='stateid'
                                 />
                         }
-                        <InputComponent
-                            type="number"
+                        <InputLimite
                             handleChange={this.props.funcion}
-                            name="province_limit_por"
-                            label="% limite"
+                            name="province"
+                            label=""
                             readOnly={readonly}
-                            value={Province.province_limit_por}
-                        />
-                        <InputComponent
-                            type="text"
-                            handleChange={this.props.funcion}
-                            name="province_limit_mess"
-                            label="Mensaje limite"
-                            readOnly={readonly}
-                            value={Province.province_limit_mess}
+                            obj={Province}
                         />
                     </form>
                 </div>

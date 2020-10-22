@@ -6,35 +6,55 @@ class MontaLimites {
     static procesaDatos(dat) {
         //super.procesaDatos(res, datos, status);
         let datos = dat[0];
-        let limit_por = 0;
+        let limit_porInt = 0;
+        let limit_porExt = 0;
         let limit_mess = "";
         console.error('0');
-        if (datos.club_limit_por && datos.club_limit_por != 0) {
+        console.error(datos.state_limitClubs_porInt,
+            datos.state_limitClubs_porExt,
+            datos.state_limitClubs_porInt + datos.city_limitClubs_porExt)
+        if (datos.club_limit_porInt && 
+            datos.club_limit_porExt &&
+            (datos.club_limit_porInt+datos.club_limit_porExt) > 0) {
             console.error('a');
-            limit_por = datos.club_limit_por;
+            limit_porInt = datos.club_limit_porInt;
+            limit_porExt = datos.club_limit_porExt;
             limit_mess = datos.club_limit_mess;
-        } else if (datos.city_limit_por && datos.city_limit_por != 0) {
+        } else if (datos.city_limitClubs_porInt &&
+            datos.city_limitClubs_porExt &&
+            (datos.city_limitClubs_porInt + datos.city_limitClubs_porExt) != 0) {
             console.error('b');
-            limit_por = datos.city_limit_por;
-            limit_mess = datos.city_limit_mess;
-        } else if (datos.province_limit_por && datos.province_limit_por != 0) {
-            limit_por = datos.province_limit_por;
-            limit_mess = datos.province_limit_mess;
-        } else if (datos.state_limit_por && datos.state_limit_por != 0) {
+            limit_porInt = datos.city_limitClubs_porInt;
+            limit_porExt = datos.city_limitClubs_porExt;
+            limit_mess = datos.city_limitClubs_mess;          
+        } else if (datos.province_limitClubs_porInt &&
+            datos.province_limitClubs_porExt &&
+            (datos.province_limitClubs_porInt + datos.province_limitClubs_porExt) != 0) {
             console.error('c');
-            limit_por = datos.state_limit_por;
-            limit_mess = datos.state_limit_mess;
-        } else if (datos.country_limit_por && datos.country_limit_por != 0) {
+            limit_porInt = datos.province_limitClubs_porInt;
+            limit_porExt = datos.province_limitClubs_porExt;
+            limit_mess = datos.province_limitClubs_mess;  
+        } else if (datos.state_limitClubs_porInt &&
+            datos.state_limitClubs_porExt &&
+            (datos.state_limitClubs_porInt + datos.city_limitClubs_porExt) != 0) {
             console.error('d');
-            limit_por = datos.country_limit_por;
-            limit_mess = datos.country_limit_mess;
+            limit_porInt = datos.state_limitClubs_porInt;
+            limit_porExt = datos.state_limitClubs_porExt;
+            limit_mess = datos.state_limitClubs_mess;  
+        } else if (datos.country_limitClubs_porInt &&
+            datos.country_limitClubs_porExt &&
+            (datos.country_limitClubs_porInt + datos.country_limitClubs_porExt) != 0) {
+            console.error('b');
+            limit_porInt = datos.country_limitClubs_porInt;
+            limit_porExt = datos.country_limitClubs_porExt;
+            limit_mess = datos.country_limitClubs_mess;  
         }
-        Presenta.debug("limit_por:", limit_por);
-        if ((datos.maxPeople == null) || isNaN(datos.maxPeople)) datos.maxPeople = 0;
-        dat[0].limit_por = limit_por;
+        if ((datos.maxPeopleInt == null) || isNaN(datos.maxPeopleInt)) datos.maxPeopleInt = 0;
+        dat[0].limit_porInt = limit_porInt;
+        dat[0].limit_porExt = limit_porExt;
         dat[0].limit_mess = limit_mess;
-        dat[0].limit_val = datos.maxPeople - (datos.maxPeople * limit_por / 100);
-
+        dat[0].limit_valInt = datos.maxPeopleInt - (datos.maxPeopleInt * limit_porInt / 100);
+        dat[0].limit_valExt = datos.maxPeopleExt - (datos.maxPeopleExt * limit_porExt / 100);
 
         Presenta.log(dat);
         return dat;

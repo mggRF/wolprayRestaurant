@@ -2,6 +2,7 @@ import Formulario from './FormularioCCAA';
 import ControllerBase from './../ControllerBase';
 import { checkUsuario } from './../../../Servicios/funcionesSeguridad';
 import ListadoCCAA from './ListadoCCAA';
+import Comunidades from '../../../modelos/Comunidades';
 
 
 
@@ -13,13 +14,14 @@ export default class  ControllerCCAA extends ControllerBase {
         this.ID = 'stateid';
         this.LISTADO = ListadoCCAA;
         this.FORMULARIO = Formulario;
-        this.MODELO = {
-            stateid:0,
-            stateName:"",
-            countryid:0,
-            state_limit_por:0,
-            state_limit_mess:""
-        }
+        // this.MODELO = {
+        //     stateid:0,
+        //     stateName:"",
+        //     countryid:0,
+        //     state_limit_por:0,
+        //     state_limit_mess:""
+        // }
+        this.MODELO = new Comunidades();
         this.state = {
             estadoActualizacion: 0,
             orden: "",

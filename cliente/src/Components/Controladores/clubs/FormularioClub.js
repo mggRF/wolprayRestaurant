@@ -3,6 +3,7 @@ import { InputComponent } from '../../Fragmentos/InputComponent';
 import Desplegable from '../../Fragmentos/desplegable';
 import { DesplegableDireccion } from '../../Fragmentos/DesplegableDireccion';
 import ListaCheckBox from '../../Fragmentos/ListaCheckBox';
+import { InputLimite } from './../../Fragmentos/InputLimite';
 
 export const FormularioClub = ({ obj, orden, funcion }) => {
 
@@ -39,9 +40,9 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
         Musica,
         accessAge,
         DiasAnticipacion,
-        maxPeople,
-        club_limit_por,
-        club_limit_mess } = obj;
+        maxPeopleInt,
+        maxPeopleExt
+         } = obj;
     let readonly = false;
     let direccion = '';
 
@@ -170,9 +171,17 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                     />
                     <InputComponent
                         type='number'
-                        value={maxPeople}
-                        name='maxPeople'
-                        label='Aforo máximo'
+                        value={maxPeopleInt}
+                        name='maxPeopleInt'
+                        label='Aforo máximo interior'
+                        handleChange={funcion}
+                        readOnly={readonly}
+                    />
+                    <InputComponent
+                        type='number'
+                        value={maxPeopleExt}
+                        name='maxPeopleExt'
+                        label='Aforo máximo terrazas'
                         handleChange={funcion}
                         readOnly={readonly}
                     />
@@ -201,14 +210,14 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                                 label='Dirección'
                                 handleChange={funcion}
                             /> :
-                            <>
-                                <DesplegableDireccion
-                                    funcion={funcion}
-                                    valorCCAA={Number(stateid)}
-                                    valorProv={Number(provinceid)}
-                                    valorPobl={Number(cityid)}
-                                />
-                            </>
+
+                            <DesplegableDireccion
+                                funcion={funcion}
+                                valorCCAA={Number(stateid)}
+                                valorProv={Number(provinceid)}
+                                valorPobl={Number(cityid)}
+                            />
+
 
                     }
                     <InputComponent
@@ -220,42 +229,34 @@ export const FormularioClub = ({ obj, orden, funcion }) => {
                         readOnly={readonly}
                     />
 
-{
-                            (Musica) ?
+                    {
+                        (Musica) ?
 
-                                <ListaCheckBox name="Musica"
-                                    table='n_music'
-                                    readValue={anadirMusica}
-                                    label="Tipos de musica"
-                                    activos={Musica}
-                                />
+                            <ListaCheckBox name="Musica"
+                                table='n_music'
+                                readValue={anadirMusica}
+                                label="Tipos de musica"
+                                activos={Musica}
+                            />
 
-                                :
+                            :
 
-                                <ListaCheckBox name="Musica"
-                                    table='n_music'
-                                    readValue={anadirMusica}
-                                    label="Tipos de musica"
-                                    activos=""
-                                />
+                            <ListaCheckBox name="Musica"
+                                table='n_music'
+                                readValue={anadirMusica}
+                                label="Tipos de musica"
+                                activos=""
+                            />
 
-                        }
-                        <InputComponent
-                        type='number'
-                        value={club_limit_por}
-                        name='club_limit_por'
-                        label='% limite'
-                        handleChange={funcion}
-                        readOnly={readonly}
-                    />
-                    <InputComponent
-                        type='text'
-                        value={club_limit_mess}
-                        name='club_limit_mess'
-                        label='Limite mensaje'
-                        handleChange={funcion}
-                        readOnly={readonly}
-                    />
+                    }
+                    <InputLimite
+                            handleChange={funcion}
+                            name="club"
+                            label=""
+                            readOnly={readonly}
+                            obj={obj}
+                            esClub={true}
+                        />
                 </form>
             </div>
         </section>

@@ -4,6 +4,7 @@ import Listado from './ListadoMusic';
 import Formulario from './FormularioMusic';
 import ControllerBase from './../ControllerBase';
 import { checkUsuario } from './../../../Servicios/funcionesSeguridad';
+import Nmusic from './../../../modelos/Nmusic';
 
 
 export default class ControllerMusic extends ControllerBase {
@@ -15,11 +16,8 @@ export default class ControllerMusic extends ControllerBase {
         this.ID = 'musicid';
         this.LISTADO = Listado
         this.FORMULARIO = Formulario
-        this.MODELO = {
-            musicid:'',
-            musicName:"",
-            musicDescription:""
-        }
+        this.MODELO = new Nmusic();
+        
         this.state = {
             estadoActualizacion: 0,
             orden: "",

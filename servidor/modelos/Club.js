@@ -6,8 +6,8 @@ class Club {
         postal_code,cityid,description, clubPhone,dressCodeid,coverUrl,
         latitude,longitude,howToGetThere,entryCost,
         openSeason1,closingSeason1,openSeason2,closingSeason2,openSeason3,closingSeason3,
-        accessAge,DiasAnticipacion,companyid,maxPeople,
-        club_limit_por,club_limit_mess
+        accessAge,DiasAnticipacion,companyid,maxPeopleInt,maxPeopleExt,
+        club_limit_porInt,club_limit_porExt,club_limit_mess
         ){
          this.clubid = clubid;
          this.clubName = clubName;
@@ -32,8 +32,10 @@ class Club {
          this.accessAge = accessAge;
          this.DiasAnticipacion = DiasAnticipacion;
          this.companyid = companyid;
-         this.maxPeople = maxPeople;
-         this.club_limit_por = club_limit_por;
+         this.maxPeopleInt = maxPeopleInt;
+         this.maxPeopleExt = maxPeopleExt;
+         this.club_limit_porInt = club_limit_porInt;
+         this.club_limit_porExt = club_limit_porExt;
          this.club_limit_mess = club_limit_mess;
      }
 

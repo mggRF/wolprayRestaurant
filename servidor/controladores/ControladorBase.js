@@ -63,9 +63,9 @@ class ControladorBase {
     //abstract procesaDatos(res, datos, status);
 
     obtenerFotoUrl(res, datos, status = null) {
-        if ((datos.length > 0) && 
-            datos[0].hasOwnProperty('city_limit_por') && 
-            datos[0].hasOwnProperty('province_limit_por')) {
+        if ((datos.length > 0) &&
+            datos[0].hasOwnProperty('city_limitClubs_porInt') &&
+            datos[0].hasOwnProperty('province_limitClubs_porInt')) {
             datos = MontaLimites.procesaDatos(datos);
         }
         if (this.config.CARPETA) {
@@ -124,14 +124,13 @@ class ControladorBase {
     leerUno(req, res) {
         let id = req.params.id;
         if (id === "count") return this.leerCount(req, res);
-        console.log("trim",id)
-        let sql="";
+        let sql = "";
         if (id === "byName") {
-             sql = this.config.QUERIES.SELECT_UNO;
+            sql = this.config.QUERIES.SELECT_UNO;
             sql = CompletaSQL.cSQL(req, sql);
-        } else {           
+        } else {
             sql = this.config.QUERIES.SELECT_UNO.replace(':WHERE', this.config.QUERIES.SELECT_BY_ID);
-            sql = sql.replace(':id', decodeURIComponent(id));           
+            sql = sql.replace(':id', decodeURIComponent(id));
         }
         this.connect.leerSql(sql.replace(/:TABLA/gi, this.config.TABLA))
             .then(dat => {
@@ -154,7 +153,13 @@ class ControladorBase {
      */
     leerSelect(req, res) {
         let id = req.params.id;
-        let sql = this.config.QUERIES.SELECT_SELECT.replace(':id', id);
+        let sql ;
+        console.log("-------------------------->",id)
+        if (id == null || id == undefined) {
+            sql = this.config.QUERIES.SELECT_SELECT_ALL;
+        } else {
+            sql = this.config.QUERIES.SELECT_SELECT.replace(':id', id);
+        }
         this.leerSelectDir(req, res, sql)
 
     }
@@ -432,7 +437,7 @@ class ControladorBase {
                     resolve({
                         Ok: true,
                         Data: 'Se ha modificado correctamente la tabla en la base de datos',
-                        status: 500
+                        status: 200
                     })
 
                 }).catch(err => {

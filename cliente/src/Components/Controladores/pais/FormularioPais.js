@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InputComponent } from '../../Fragmentos/InputComponent';
+import { InputLimite } from './../../Fragmentos/InputLimite';
 
 export default class FormularioPais extends Component {
     render() {
@@ -28,19 +29,12 @@ export default class FormularioPais extends Component {
                             readOnly={readonly}
                             value={country.countryName}
                         />
-                        <InputComponent name="country_limit_por"
-                            type="number"
+                        <InputLimite
                             handleChange={this.props.funcion}
-                            label="% limite"
+                            name="country"
+                            label=""
                             readOnly={readonly}
-                            value={country.country_limit_por}
-                        />
-                        <InputComponent name="country_limit_mess"
-                            type="text"
-                            handleChange={this.props.funcion}
-                            label="Mensaje limite"
-                            readOnly={readonly}
-                            value={country.country_limit_mess}
+                            obj={country}
                         />
                     </form>
 

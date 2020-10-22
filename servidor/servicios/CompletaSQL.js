@@ -33,7 +33,6 @@ class CompletaSQL {
         if (!(clasi !== undefined && clasi !== "" && clasi !== null)) {
             clasi = req.query._class;
         }
-        Presenta.log("complementos", size, clasi)
 
         if (clasi !== undefined && clasi !== "" && clasi !== null) {
             salida += " ORDER BY " + clasi.split(',').join(" ");
@@ -85,7 +84,6 @@ class CompletaSQL {
     }
 
     static montaEntre(req, salida) {
-        console.log("entre-->", salida);
         let entre = req.query._entre;
         if (!(entre !== undefined && entre !== "" && entre !== null)) {
             entre = "";
@@ -101,7 +99,6 @@ class CompletaSQL {
             salida = CompletaSQL.adicionaAND(salida, expresion);
 
         }
-        console.log("entre-->", salida);
         return salida;
     }
 
@@ -167,7 +164,6 @@ class CompletaSQL {
             where = ' WHERE ' + where;
             sql = sql.replace(':WHERE', where);
         }
-        console.log('completaSQL---->', sql);
         return sql;
 
     }

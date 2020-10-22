@@ -13,6 +13,7 @@ module.exports = {
                     `,
 
         SELECT_SELECT: `SELECT stateid as id,stateName as opcion FROM :TABLA WHERE countryid = :id`,
+        SELECT_SELECT_ALL: `SELECT stateid as id,stateName as opcion FROM :TABLA `,
 
         INSERT: `INSERT INTO :TABLA SET ?`,
         UPDATE: `UPDATE :TABLA SET ? WHERE stateid = ?`,
