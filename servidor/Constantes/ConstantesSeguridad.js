@@ -1,7 +1,10 @@
 const Presenta = require("../servicios/Presenta");
+const path = require('path');
 
-const FS_CERTIFICADO_DEVELOPPER = 'D:\\Proyectos\\wolpray\\instalacionLocal\\localhost.pem';
-const FS_KEY_DEVELOPPER = 'D:\\Proyectos\\wolpray\\instalacionLocal\\localhost-key.pem';
+//const FS_CERTIFICADO_DEVELOPPER = 'D:\\Proyectos\\wolpray\\instalacionLocal\\localhost.pem';
+//const FS_KEY_DEVELOPPER = 'D:\\Proyectos\\wolpray\\instalacionLocal\\localhost-key.pem';
+const FS_CERTIFICADO_DEVELOPPER = path.join(__dirname, '../../../instalacionLocal/localhost.pem');
+const FS_KEY_DEVELOPPER = path.join(__dirname,'../../../instalacionLocal/localhost-key.pem');
 const FS_CERTIFICADO_PRODUCTION = '/etc/webmin/letsencrypt-cert.pem';
 const FS_KEY_PRODUCTION = '/etc/webmin/letsencrypt-key.pem';
 
