@@ -154,7 +154,6 @@ class ControladorBase {
     leerSelect(req, res) {
         let id = req.params.id;
         let sql ;
-        console.log("-------------------------->",id)
         if (id == null || id == undefined) {
             sql = this.config.QUERIES.SELECT_SELECT_ALL;
         } else {

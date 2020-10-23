@@ -34,8 +34,8 @@ class ControladorClubs extends ControladorBase {
         const {
             method
         } = req.route.stack[0];
-
-        if (method.toLowerCase() in ["put", "post", "delete"]) {
+console.log("metodo", method.toLowerCase())
+        if ( ["put", "post", "delete"].indexOf(method.toLowerCase())>=0) {
             let id = req.params.id;
             let sqlDelete = 'DELETE  FROM club_music WHERE clubid = ?';
             let sqlInsert = 'INSERT INTO club_music (clubid, musicid) VALUES  '
@@ -49,9 +49,9 @@ class ControladorClubs extends ControladorBase {
                             salida += "(" + id + "," + value + "),";
                         });
                         salida = salida.substring(0, salida.length - 1)
-                        Presenta.log('sql: ', salida);
+                        //Presenta.log('sql: ', salida);
                         super.sendDataToTable([], salida) //es promesa
-                            .then(result2 => Presenta.log("ESTE ES EL INSERT", result2))
+    //            .then(result2 =>/* Presenta.log("ESTE ES EL INSERT", result2)*/)
                             .catch(err => Presenta.error(err));
                     }
                 })
@@ -60,7 +60,7 @@ class ControladorClubs extends ControladorBase {
             /**GUARDAR musicsUpdate EN OTRO CAMPO Y QUITARLO DEL REQUEST QUE HA LLEGADO*/
             delete req.body['musicsUpdate'];
             /* ya puedo ceder el registro para actualizacion normal    *******/
-            updateTable(req, res);
+            super.updateTable(req, res);
         }
     }
 
