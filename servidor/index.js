@@ -1,9 +1,9 @@
 // Utilizar funcionalidades del Ecmascript 6
 'use strict'
-const {FS_CERTIFICADO, FS_KEY } = require ('./Constantes/ConstantesSeguridad.js');
+const {FS_CERTIFICADO, FS_KEY, IT_IS_SECURE } = require ('./Constantes/ConstantesSeguridad.js');
 
 const express = require('express');
-const https = require('https');
+const protocol = IT_IS_SECURE ? require('https') : require('http');
 const fs = require('fs');
 // *Cargamos el fichero app.js con la configuración de Express
 const app = require('./app');
@@ -23,7 +23,8 @@ var options = {
 // app.listen(port, () => {
 //     console.log("servidor corriendo en http://localhost:3800");
 // });
-var server = https.createServer(options, app);
+// var server = https.createServer(options, app);
+var server = protocol.createServer(app);
 
 server.listen(port, () => {
   console.log("server starting on port : " + port)
