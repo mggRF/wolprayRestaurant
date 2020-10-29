@@ -4,7 +4,7 @@
  * ***** Area de control ******************* 
  */
 define('API_BASE_DEVELOPPER', "https://localhost:3800/");   //direccion base
-define('API_BASE_PRODUCTION', "https://api.wolpray.es:3800/");   //direccion base
+define('API_BASE_PRODUCTION', "https://api.wolpray.es/");   //direccion base
 
 if (!empty($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) == 'on' || $_SERVER['HTTPS'] == '1')) {
     $scheme = 'https';

@@ -7,4 +7,4 @@ class DressCode {
      }
 
 }
-module.exports = DressCode;
+export default DressCode;

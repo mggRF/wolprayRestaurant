@@ -23,8 +23,8 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `wolpraydb` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `wolpraydb`;
 
--- CREATE USER IF NOT EXISTS 'wolprayusr'@'localhost' IDENTIFIED BY  'UsrWolpray';
--- GRANT ALL PRIVILEGES ON `wolpraydb`.* TO 'wolprayusr'@'localhost';-- --------------------------------------------------------
+CREATE USER IF NOT EXISTS 'wolprayusr'@'localhost' IDENTIFIED BY  'UsrWolpray';
+GRANT ALL PRIVILEGES ON `wolpraydb`.* TO 'wolprayusr'@'localhost';-- --------------------------------------------------------
 
 -- --------------------------------------------------------
 

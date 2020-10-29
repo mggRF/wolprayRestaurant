@@ -1,8 +1,8 @@
 const path = require('path');
 const API_BASE_DEVELOPPER = "http://localhost:3800/";   //direccion base
-const API_BASE_PRODUCTION = "http://api.wolpray.es:3800/";   //direccion base
+const API_BASE_PRODUCTION = "http://api.wolpray.es/";   //direccion base
 const RUTA_UPLOADS_DEVELOPPER = path.dirname(path.dirname(__dirname)) + '/uploads/';
-const RUTA_UPLOADS_PRODUCTION = "/home/wolpraynode/uploads/";
+const RUTA_UPLOADS_PRODUCTION = "/home/api/uploads/";
 
 const variable_url = () => {
     if (process.env.NODE_ENV === 'production') {

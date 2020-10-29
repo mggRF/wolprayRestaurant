@@ -15,4 +15,4 @@ class Slot {
      }
 
 }
-module.exports = Slot;
+export default Slot;

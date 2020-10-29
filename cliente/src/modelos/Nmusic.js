@@ -9,4 +9,4 @@ class Nmusic {
      }
 
 }
-module.exports = Nmusic;
+export default Nmusic;

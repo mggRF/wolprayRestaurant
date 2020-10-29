@@ -22,4 +22,4 @@ class Comunidades {
     }
 
 }
-module.exports = Comunidades;
+export default Comunidades;

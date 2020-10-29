@@ -64,4 +64,4 @@ class Club {
 
 }
 
-module.exports = Club;
+export default Club;

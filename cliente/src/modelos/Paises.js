@@ -18,4 +18,4 @@ class Pais {
     }
 
 }
-module.exports = Pais;
+export default Pais;
