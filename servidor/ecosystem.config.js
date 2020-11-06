@@ -23,17 +23,17 @@ module.exports = {
 
   deploy: {
     production: {
-      user: 'wolpray',
+      user: 'centos',
       host: '51.210.241.194',
-      port:"3872",
+      port:"8222",
       ref: 'origin/master',
-      repo: 'https://github.com/mggRF/servidor.git',
-      path: '/home/wolpraynode/servidor',
-      key: "D:\Proyectos\wolpray\SSH_PRIVATE.ppk",
-      ssh_options: ["ForwardAgent=yes","Port=3872"],
-      "post-deploy": " npm install && pm2 startOrRestart ecosystem.config.js --env production",
+      repo: 'git@github.com:mggRF/servidor.git',
+      path: '/home/api/servidor',
+      key: "C:\\Users\\migarcia\\.ssh\\id_rsaCentos.pub",
+      ssh_options: ["ForwardAgent=yes","Port=8222","StrictHostKeyChecking=no"],
+      "post-deploy": " npm install ; pm2 startOrRestart ecosystem.config.js --env production",
       "env": {
-        //DB_HOST: process.env.DB_HOST,
+        NODE_ENV:"production",
         //DB_PASS: process.env.DB_PASS,
       }
       // staging : {

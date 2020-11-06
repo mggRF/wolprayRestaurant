@@ -1,5 +1,5 @@
 module.exports = CONFIGDB = {
-    connectionLimit: 10,
+    connectionLimit: 1000,
     host: 'localhost',
     user: 'wolprayusr',//TODO
     password: 'UsrWolpray',//TODO
