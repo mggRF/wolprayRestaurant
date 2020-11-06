@@ -16,11 +16,11 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts build",
+        "buildEsp": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "postbuild": "node ftp.js",
-        "preparacion": "xcopy  D:\\Proyectos\\wolpray\\web\\cliente   D:\\Proyectos\\wolpray\\cliente-master  /s /y && cd  D:\\Proyectos\\wolpray\\cliente-master  && code . "
+        "preparacion": "xcopy  D:\\Proyectos\\wolpray\\webnode\\cliente   D:\\Proyectos\\wolpray\\cliente-master  /s /y && cd  D:\\Proyectos\\wolpray\\cliente-master  && code . "
     },
     "eslintConfig": {
         "extends": "react-app"
