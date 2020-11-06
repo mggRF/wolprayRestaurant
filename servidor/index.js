@@ -11,13 +11,13 @@ const app = require('./app');
 const port = 3800;
  
 /**Seguridad */
-console.log(FS_KEY, '><',FS_CERTIFICADO )
-var key = fs.readFileSync(FS_KEY);
-var cert = fs.readFileSync(FS_CERTIFICADO);
-var options = {
-  key: key,
-  cert: cert
-};
+// console.log(FS_KEY, '><',FS_CERTIFICADO )
+// var key = fs.readFileSync(FS_KEY);
+// var cert = fs.readFileSync(FS_CERTIFICADO);
+// var options = {
+//   key: key,
+//   cert: cert
+// };
 
 // CREAR EL SERVIDOR WEB CON NODEJS
 // app.listen(port, () => {
