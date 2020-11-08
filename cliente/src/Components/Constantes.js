@@ -4,7 +4,7 @@ const API_BASE_PRODUCTION = "https://api.wolpray.es/";   //direccion base
 const VERSION_API = "api_v00"; 
 
 const variable_url = () => {
-    if (process.env.NODE_ENV === 'production') {
+    if (window.location.hostname === 'api.wolpray.es') {
         return API_BASE_PRODUCTION;
     } else {
         return API_BASE_DEVELOPPER;

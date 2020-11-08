@@ -79,15 +79,15 @@ app.use(DRESSCODE, Autorizado, rDressCode);
 app.use(PRODUCTS, Autorizado, rProducts);
 app.use(IMAGES, Autorizado, rImages);
 
-if (process.env.NODE_ENV == 'production') {
+if (process.env.NODE_ENV && process.env.NODE_ENV == 'production') {
     // create a rotating write stream
     var accessLogStream = rfs.createStream('access.log', {
         interval: '1d', // rotate daily
         path: path.join(__dirname, 'log')
     })
-    app.use(morgan('combined', { stream: accessLogStream }))
+    app.use(morgan('combined',{ skip: function(req, res) { return res.statusCode < 400 },  stream: accessLogStream }))
 } else {
-    app.use(morgan('combined'));
+    app.use(morgan('dev'));
 }
 
 // Enable reverse proxy support in Express. This causes the
