@@ -5,7 +5,7 @@
 const ControladorBase = require("./ControladorBase");
 
 const MODELO = require("../modelos/Product");
-const { QuerieProduct } = require("../queries/QueriesProduct");
+const { QuerieProduct } = require("../Constantes/ConstantesDataBase/queries/QueriesProduct");
 const TABLA = 'products';
 const CARPETA = 'products';
 const CAMPO = 'imageUrl';
@@ -24,7 +24,7 @@ class ControladorProducts extends ControladorBase {
             TABLA: TABLA,
             QUERIES: QuerieProduct,
             MODELO: MODELO,
-            campoId: 'productid',
+            campoId: 'idProduct',
         }
         super(config);
     }

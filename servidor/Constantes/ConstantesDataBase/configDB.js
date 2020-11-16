@@ -3,6 +3,6 @@ module.exports = CONFIGDB = {
     host: 'localhost',
     user: 'wolprayusr',//TODO
     password: 'UsrWolpray',//TODO
-    database: 'wolpraydb',
+    database: 'wolprayrestaurant',
     //debug: true
 }

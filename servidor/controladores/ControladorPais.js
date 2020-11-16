@@ -5,7 +5,7 @@
 const ControladorBase = require("./ControladorBase");
 
 const MODELO = require("../modelos/Paises");
-const {QueriesPais} = require("../queries/QueriesPais");
+const {QueriesPais} = require("../Constantes/ConstantesDataBase/queries/QueriesPais");
 const TABLA = 'c_country';
 
 

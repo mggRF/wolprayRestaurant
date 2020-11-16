@@ -7,7 +7,7 @@ const ControladorBase = require("./ControladorBase");
 
 
 const MODELO = require("../modelos/Comunidades");
-const { QueriesCCAA } = require("../queries/QueriesCCA");
+const { QueriesCCAA } = require("../Constantes/ConstantesDataBase/queries/QueriesCCA");
 const TABLA = 'c_state';
 
 class ControladorCCAA extends ControladorBase {

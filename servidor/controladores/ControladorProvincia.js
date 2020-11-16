@@ -5,7 +5,7 @@
 const ControladorBase = require("./ControladorBase");
 
 const MODELO = require("../modelos/Poblacion");
-const {QueriesProvincia} = require("../queries/QueriesProvincia");
+const {QueriesProvincia} = require("../Constantes/ConstantesDataBase/queries/QueriesProvincia");
 const TABLA = 'c_provinces';
 
 

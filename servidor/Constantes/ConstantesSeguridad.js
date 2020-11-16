@@ -10,7 +10,7 @@ const FS_KEY_PRODUCTION = '/etc/webmin/letsencrypt-key.pem';
 const IT_IS_SECURE = false;  //True si se quiere activar el protocolo https, false para http.
 module.exports = {
     AUTORIZAR: false,        //false no comprueba autorizacion
-    TOKEN_SECRET: process.env.TOKEN_SECRET || "elSecretoDeWolprayEsMisterioso",
+    TOKEN_SECRET: process.env.TOKEN_SECRET || "elSecretoDeWolprayRestaurantEsMasMisterioso",
 
     FS_CERTIFICADO: Presenta.isProd() ? FS_CERTIFICADO_PRODUCTION : FS_CERTIFICADO_DEVELOPPER,
     FS_KEY: Presenta.isProd() ? FS_KEY_PRODUCTION : FS_KEY_DEVELOPPER,

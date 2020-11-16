@@ -5,7 +5,7 @@
 const ControladorBase = require("./ControladorBase");
 
 const MODELO = require("../modelos/Role");
-const {QueriesRole} = require("../queries/QueriesRole");
+const {QueriesRole} = require("../Constantes/ConstantesDataBase/queries/QueriesRole");
 const TABLA = 'roles';
 
 class ControladorRoles extends ControladorBase {

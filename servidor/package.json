@@ -8,7 +8,7 @@
         "start": "set NODE_ENV='development' && nodemon index",
 
         "startProd": "export NODE_ENV=production && node index",
-        "preparacion": "xcopy  D:\\Proyectos\\wolpray\\webnode\\servidor   D:\\Proyectos\\wolpray\\servidor  /s /y && cd  D:\\Proyectos\\wolpray\\servidor  && code . ",
+        "preparacion": "xcopy  D:\\Proyectos\\wolpray\\webapi_restaurant\\servidor   D:\\Proyectos\\wolpray\\servidorRestaurant  /s /y && cd  D:\\Proyectos\\wolpray\\servidorRestaurant  && code . ",
         "deploy-production": "pm2 deploy ecosystem.config.js production --force",
         "reload-production": "pm2 deploy ecosystem.config.js production exec 'pm2 reload all'"
     },

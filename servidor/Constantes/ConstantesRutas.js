@@ -1,8 +1,8 @@
 const path = require('path');
-const API_BASE_DEVELOPPER = "http://localhost:3800/";   //direccion base
-const API_BASE_PRODUCTION = "http://api.wolpray.es/";   //direccion base
+const API_BASE_DEVELOPPER = "http://localhost:3900/";   //direccion base
+const API_BASE_PRODUCTION = "http://api.gastronomundo.com/";   //direccion base
 const RUTA_UPLOADS_DEVELOPPER = path.dirname(path.dirname(__dirname)) + '/uploads/';
-const RUTA_UPLOADS_PRODUCTION = "/home/api/uploads/";
+const RUTA_UPLOADS_PRODUCTION = "/home/api/uploadsRestaurant/";
 
 const variable_url = () => {
     if (process.env.NODE_ENV === 'production') {
@@ -27,16 +27,14 @@ module.exports = {
     PAISES: '/' +  VERSION  + 'countrys',
     PROVINCIAS: '/' +  VERSION  + 'provinces',
     POBLACIONES: '/' +  VERSION  + 'citys',
-    MUSICA: '/' +  VERSION  + 'musics',
-    CLUBS: '/' +  VERSION  + 'clubs',
-    DRESSCODE: '/' +  VERSION  + 'dresscode',
+    
+    
     USERS: '/' +  VERSION  + 'users',
-    EVENTS: '/' +  VERSION  + 'events',
-    SLOTS: '/' +  VERSION  + 'slots',
+    
     ROLES: '/' +  VERSION  + 'roles',
     COMPANIES: '/' +  VERSION  + 'companies',
     PRODUCTS: '/' +  VERSION  + 'products',
-    IMAGES: '/' +  VERSION  + 'images',
+  
     UPLOADS: '/' +  VERSION  + 'uploads',
     CARPETA_IMAGENES: carpeta_imagenes(),
     NOPICTURE: 'nofile.jpg'

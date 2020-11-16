@@ -34,17 +34,13 @@ const rComunidades = require('./rutas/rutaComunidades');
 const rPais = require('./rutas/rutaPaises');
 const rPoblacion = require('./rutas/rutaPoblacion');
 const rProvincia = require('./rutas/rutaProvincias');
-const rMusic = require('./rutas/rutaMusic');
-const rClub = require('./rutas/rutaClubs');
-const rEvents = require('./rutas/rutaEvents');
+
 const rUsers = require('./rutas/rutaUsers');
-const rSlots = require('./rutas/rutaSlots');
+
 const rRoles = require('./rutas/rutaRoles');
 const rCompanies = require('./rutas/rutaCompanies');
-const rDressCode = require('./rutas/rutaDressCode');
+
 const rProducts = require('./rutas/rutaProducts');
-const rImages = require('./rutas/rutaImages');
-const rImagenes = require('./rutas/rutaImagenes');
 
 const Autorizado = require('./Autentificacion/middelAut');
 
@@ -63,21 +59,21 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 // Cargamos las rutas
 app.use('/', rGlobal);
-app.use(UPLOADS,rImagenes)
+//app.use(UPLOADS,rImagenes)
 app.use(COMUNIDADES, Autorizado, rComunidades);
 app.use(PAISES, Autorizado, rPais);
 app.use(POBLACIONES, Autorizado, rPoblacion);
 app.use(PROVINCIAS, Autorizado, rProvincia);
-app.use(MUSICA, Autorizado, rMusic);
-app.use(CLUBS, Autorizado,multipartMiddleware, rClub);
-app.use(EVENTS, Autorizado, rEvents);
+//app.use(MUSICA, Autorizado, rMusic);
+////app.use(CLUBS, Autorizado,multipartMiddleware, rClub);
+//app.use(EVENTS, Autorizado, rEvents);
 app.use(USERS, Autorizado, rUsers);
-app.use(SLOTS, Autorizado, rSlots);
+//app.use(SLOTS, Autorizado, rSlots);
 app.use(ROLES, Autorizado, rRoles);
 app.use(COMPANIES, Autorizado, rCompanies);
-app.use(DRESSCODE, Autorizado, rDressCode);
+//app.use(DRESSCODE, Autorizado, rDressCode);
 app.use(PRODUCTS, Autorizado, rProducts);
-app.use(IMAGES, Autorizado, rImages);
+//app.use(IMAGES, Autorizado, rImages);
 
 if (process.env.NODE_ENV && process.env.NODE_ENV == 'production') {
     // create a rotating write stream

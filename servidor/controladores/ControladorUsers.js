@@ -5,7 +5,7 @@
 const ControladorBase = require("./ControladorBase");
 const Presenta = require('../servicios/Presenta');
 const MODELO = require("../modelos/Users");
-const {QueriesUser} = require("../queries/QueriesUser");
+const {QueriesUser} = require("../Constantes/ConstantesDataBase/queries/QueriesUser");
 const TABLA = 'users';
 
 

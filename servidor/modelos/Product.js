@@ -1,14 +1,15 @@
 class Product{
 
 
-    constructor(productid, clubid, productName, description, price, imageUrl, categoryid, status){
-        this.productid = productid;
-        this.clubid = clubid;
+    constructor(idProduct, idLocal, productName, productDescri, productPrice,
+         productImage, idGrupo, status){
+        this.idProduct = idProduct;
+        this.idLocal = idLocal;
         this.productName = productName;
-        this.description = description;
-        this.price = price;
-        this.imageUrl = imageUrl;
-        this.categoryid = categoryid;
+        this.productDescri = productDescri;    
+        this.productPrice = productPrice;
+        this.productImage = productImage;
+        this.idGrupo = idGrupo;
         this.status = status;
     }
 
