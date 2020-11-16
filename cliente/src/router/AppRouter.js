@@ -8,6 +8,7 @@ export const AppRouter = () => {
     return (
         <Router>
             <div>
+            <h1>pruebas</h1>
                 <Switch>
                     <Route exact path='/login' component={LoginScreen} />
                     <Route exact path='/register' component={RegisterComponent} />

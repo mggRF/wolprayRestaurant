@@ -179,7 +179,7 @@ class ControladorBase {
     }
 
     leerALL(req, res) {
-        //Presenta.log('leerAll0');
+        Presenta.log('leerAll0');
         let sql = this.config.QUERIES.SELECT_ALL.replace(/:TABLA/gi, this.config.TABLA);
         sql = CompletaSQL.cSQL(req, sql);
         //Presenta.log('leerAll0',sql);

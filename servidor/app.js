@@ -8,7 +8,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-var morgan = require('morgan');
+const morgan = require('morgan');
 const compression = require('compression');
 const helmet = require('helmet');
 // const fileUpload = require('express-fileupload');
@@ -24,7 +24,7 @@ const { UPLOADS, COMUNIDADES, PAISES, POBLACIONES, PROVINCIAS, MUSICA, CLUBS, DR
 
 const app = express();
 app.use(helmet());
-app.use(cors());
+app.use(cors({origin: true}));
 app.use(compression()); //Compress all routes
 
 
@@ -85,9 +85,11 @@ if (process.env.NODE_ENV && process.env.NODE_ENV == 'production') {
         interval: '1d', // rotate daily
         path: path.join(__dirname, 'log')
     })
-    app.use(morgan('combined',{ skip: function(req, res) { return res.statusCode < 400 },  stream: accessLogStream }))
+    console.log("Produccion");
+    app.use(morgan('combined',{stream: accessLogStream }));
 } else {
-    app.use(morgan('dev'));
+    console.log("desarrollo");
+    app.use(morgan('combined'));
 }
 
 // Enable reverse proxy support in Express. This causes the
@@ -99,27 +101,27 @@ app.enable('trust proxy');
 // Add a handler to inspect the req.secure flag (see 
 // http://expressjs.com/api#req.secure). This allows us 
 // to know whether the request was via http or https.
-app.use(function (req, res, next) {
+// app.use(function (req, res, next) {
     
-    if (IS_IT_SECURE && !req.secure){
-        res.redirect('https://' + req.headers.host + req.url);
-    }
-    else if (!IS_IT_SECURE && req.secure ){
-        res.redirect('http://' + req.headers.host + req.url);
+//     if (IS_IT_SECURE && !req.secure){
+//         res.redirect('https://' + req.headers.host + req.url);
+//     }
+//     else if (!IS_IT_SECURE && req.secure ){
+//         res.redirect('http://' + req.headers.host + req.url);
 
-    }
-    else{
-        next();
-    }
-    /*if (req.secure && IT_IS_SECURE) {
-        console.log('https');
-        // request was via https, so do no special handling
-        next();
-    } else {
-        console.log('http',req.headers.host);
-        // request was via http, so redirect to https
-       // res.redirect('https://' + req.headers.host + req.url);
-       next();
-    }*/
-});
+//     }
+//     else{
+//         next();
+//     }
+//     /*if (req.secure && IT_IS_SECURE) {
+//         console.log('https');
+//         // request was via https, so do no special handling
+//         next();
+//     } else {
+//         console.log('http',req.headers.host);
+//         // request was via http, so redirect to https
+//        // res.redirect('https://' + req.headers.host + req.url);
+//        next();
+//     }*/
+// });
 module.exports = app;
