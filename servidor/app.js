@@ -19,7 +19,7 @@ const rfs = require('rotating-file-stream') // version 2.x
 const {IT_IS_SECURE} = require('./Constantes/ConstantesSeguridad');
 
 var multipartMiddleware = multipart({uploadDir: '../uploads'});
-const { UPLOADS, COMUNIDADES, PAISES, POBLACIONES, PROVINCIAS, MUSICA, CLUBS, DRESSCODE, EVENTS, USERS, SLOTS, ROLES, COMPANIES, PRODUCTS , IMAGES} = require('./Constantes/ConstantesRutas');
+const { UPLOADS, COMUNIDADES, PAISES, POBLACIONES, PROVINCIAS, USERS, ROLES, COMPANIES, PRODUCTS , LOCALS, MENU, GRUPOS, LOCALCITY} = require('./Constantes/ConstantesRutas');
 
 
 const app = express();
@@ -34,6 +34,11 @@ const rComunidades = require('./rutas/rutaComunidades');
 const rPais = require('./rutas/rutaPaises');
 const rPoblacion = require('./rutas/rutaPoblacion');
 const rProvincia = require('./rutas/rutaProvincias');
+const rLocals = require('./rutas/rutaLocals');
+const rMenu = require('./rutas/rutaMenu');
+const rGrupos = require('./rutas/rutaGrupos');
+const rLocalCity = require('./rutas/rutaLocalCity');
+
 
 const rUsers = require('./rutas/rutaUsers');
 
@@ -64,11 +69,11 @@ app.use(COMUNIDADES, Autorizado, rComunidades);
 app.use(PAISES, Autorizado, rPais);
 app.use(POBLACIONES, Autorizado, rPoblacion);
 app.use(PROVINCIAS, Autorizado, rProvincia);
-//app.use(MUSICA, Autorizado, rMusic);
-////app.use(CLUBS, Autorizado,multipartMiddleware, rClub);
-//app.use(EVENTS, Autorizado, rEvents);
+app.use(LOCALS, Autorizado, rLocals);
+app.use(MENU, Autorizado, rMenu);
+app.use(GRUPOS, Autorizado, rGrupos);
 app.use(USERS, Autorizado, rUsers);
-//app.use(SLOTS, Autorizado, rSlots);
+app.use(LOCALCITY, Autorizado, rLocalCity);
 app.use(ROLES, Autorizado, rRoles);
 app.use(COMPANIES, Autorizado, rCompanies);
 //app.use(DRESSCODE, Autorizado, rDressCode);

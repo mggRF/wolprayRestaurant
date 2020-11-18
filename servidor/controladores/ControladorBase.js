@@ -22,14 +22,19 @@ class ControladorBase {
 
 
         this.leerUno = this.leerUno.bind(this);
-        this.leerSelect = this.leerSelect.bind(this);
+       
+        this.leerSelect= this.leerSelect.bind(this);
+        
         this.updateTable = this.updateTable.bind(this);
+        
         this.sendDataToTable = this.sendDataToTable.bind(this);
         this.enviaDatos = this.enviaDatos.bind(this);
         this.leerCount = this.leerCount.bind(this);
+        
         this.limite = LPPAGINA;
         this.getFoto = this.getFoto.bind(this);
         this.leerALL = this.leerALL.bind(this);
+        this.leerTokem = this.leerTokem.bind(this);
         this.hacerPost = this.hacerPost.bind(this);
         this.leerSelectDir = this.leerSelectDir.bind(this);
 
@@ -99,12 +104,10 @@ class ControladorBase {
     }
 
 
-
-
-
     leerCount(req, res) {
         //Atencion el sql ha de pasar por el sistema de añadir empresa/manager
         let sql = `SELECT COUNT(*) as contador FROM ${this.config.TABLA}`;
+        sql = sql.replace(':local',this.leerTokem(req,res))
         return this.connect.leerSql(sql)
             .then(dat => {
                 this.enviaDatos(res, dat[0]);
@@ -115,6 +118,7 @@ class ControladorBase {
 
     }
 
+   
     /**
      * Lista datos del objeto indexado.
      * 
@@ -132,6 +136,7 @@ class ControladorBase {
             sql = this.config.QUERIES.SELECT_UNO.replace(':WHERE', this.config.QUERIES.SELECT_BY_ID);
             sql = sql.replace(':id', decodeURIComponent(id));
         }
+        sql = sql.replace(':local',this.leerTokem(req,res));
         this.connect.leerSql(sql.replace(/:TABLA/gi, this.config.TABLA))
             .then(dat => {
                 this.obtenerFotoUrl(res, dat);
@@ -144,7 +149,7 @@ class ControladorBase {
     }
 
 
-
+   
     /**
      * Lista lista objetos indexados de la base de datos en base a una referencia.
      * 
@@ -167,7 +172,7 @@ class ControladorBase {
         const role = req.session.role;
         sql = sql.replace(/:TABLA/gi, this.config.TABLA);
         sql = CompletaSQL.cSQL(req, sql);
-
+        sql = sql.replace(':local',this.leerTokem(req,res))
         this.connect.leerSql(sql)
             .then(dat => {
                 //Presenta.log("dat->", dat);
@@ -179,10 +184,11 @@ class ControladorBase {
     }
 
     leerALL(req, res) {
-        Presenta.log('leerAll0');
+        //Presenta.log('leerAll0');
         let sql = this.config.QUERIES.SELECT_ALL.replace(/:TABLA/gi, this.config.TABLA);
         sql = CompletaSQL.cSQL(req, sql);
-        //Presenta.log('leerAll0',sql);
+        sql = sql.replace(':local',this.leerTokem(req,res))
+        Presenta.log('leerAll0',sql);
         this.connect.leerSql(sql)
             .then(dat => {
                 this.obtenerFotoUrl(res, dat);
@@ -193,7 +199,7 @@ class ControladorBase {
 
     }
 
-
+    
     /**
      * Actualiza tablas en la base de datos.
      * 
@@ -425,12 +431,14 @@ class ControladorBase {
      * 
      */
     async sendDataToTable(data, sql, file = null) {
+        sql = sql.replace(':local',this.leerTokem(req,res))
         if (file !== null && file !== undefined) {
             const nombreUnico = uniqid();
             data[0][this.config.CARPETA.CAMPO] = nombreUnico + this.extension;
         }
 
         const result = await new Promise((resolve, reject) => {
+            
             this.connect.modifyTable(sql.replace(/:TABLA/gi, this.config.TABLA), data)
                 .then(value => {
                     resolve({
@@ -463,7 +471,12 @@ class ControladorBase {
             });
         throw new Error(err);
     }
+
+    leerTokem(req,res){
+        return 1;
+    }
 }
 
 
 module.exports = ControladorBase
+

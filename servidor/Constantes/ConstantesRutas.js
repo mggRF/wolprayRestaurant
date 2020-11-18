@@ -24,11 +24,16 @@ module.exports = {
     VERSION,
     URL:variable_url(),
     COMUNIDADES :'/' +  VERSION + 'states',
+    LOCALS:'/' +  VERSION  + 'locals',
+    LOCALCITY:'/' +  VERSION  + 'localcity',
+    MENU: '/' + VERSION + 'menu',
+    GRUPOS: '/' + VERSION + 'grupos',
     PAISES: '/' +  VERSION  + 'countrys',
     PROVINCIAS: '/' +  VERSION  + 'provinces',
     POBLACIONES: '/' +  VERSION  + 'citys',
+    PRODUCTS: '/' +  VERSION  + 'products',
     
-    
+   
     USERS: '/' +  VERSION  + 'users',
     
     ROLES: '/' +  VERSION  + 'roles',

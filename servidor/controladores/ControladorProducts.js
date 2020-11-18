@@ -16,11 +16,11 @@ class ControladorProducts extends ControladorBase {
    
     constructor(){
         let config = {
-            CARPETA: {
-                CARPETA,
-                CAMPO,
-                nombreFoto: 'principal.jpg'
-            },
+            // CARPETA: {
+            //     CARPETA,
+            //     CAMPO,
+            //     nombreFoto: 'principal.jpg'
+            // },
             TABLA: TABLA,
             QUERIES: QuerieProduct,
             MODELO: MODELO,
