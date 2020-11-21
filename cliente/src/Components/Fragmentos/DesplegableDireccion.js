@@ -1,8 +1,13 @@
 import React from 'react'
-import Desplegable from './desplegable'
+import Desplegable from './Desplegable'
 import PropTypes from 'prop-types'
 
-export const DesplegableDireccion = ({ funcion = 0, valorCCAA = 0, valorProv = 0, valorPobl = 0, dependCountry = '209' }) => {
+export const DesplegableDireccion = ({ 
+        funcion = 0, 
+        valorCCAA = 0, 
+        valorProv = 0, 
+        valorPobl = 0, 
+        dependCountry = '209' }) => {
 
     return (
         <>

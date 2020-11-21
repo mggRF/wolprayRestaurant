@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import Desplegable from '../Components/Fragmentos/desplegable';
+import Desplegable from '../Components/Fragmentos/Desplegable';
 
 
 

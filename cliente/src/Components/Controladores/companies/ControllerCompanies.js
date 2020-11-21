@@ -10,7 +10,7 @@ export default class ControllerCompanies extends ControllerBase {
     constructor(props) {
         super(props);
         this.TABLA = 'companies';
-        this.ID = 'companyid';
+        this.ID = 'idCompany';
         this.LISTADO = ListadoCompanies;
         this.FORMULARIO = Formulario;
         this.MODELO = {

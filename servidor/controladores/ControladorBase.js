@@ -7,7 +7,11 @@ const Presenta = require("../servicios/Presenta");
 const MontaLimites = require("../servicios/MontaLimites");
 const FyleSystem = require('../servicios/FileSystem');
 const { URL, VERSION, NOPICTURE } = require('../Constantes/ConstantesRutas');
+const GestionTokemTda = require('../servicios/GestionTokemTda');
+
 const uniqid = require('uniqid');
+
+
 
 class ControladorBase {
 
@@ -22,19 +26,19 @@ class ControladorBase {
 
 
         this.leerUno = this.leerUno.bind(this);
-       
-        this.leerSelect= this.leerSelect.bind(this);
-        
+
+        this.leerSelect = this.leerSelect.bind(this);
+
         this.updateTable = this.updateTable.bind(this);
-        
+
         this.sendDataToTable = this.sendDataToTable.bind(this);
         this.enviaDatos = this.enviaDatos.bind(this);
         this.leerCount = this.leerCount.bind(this);
-        
+
         this.limite = LPPAGINA;
         this.getFoto = this.getFoto.bind(this);
         this.leerALL = this.leerALL.bind(this);
-        this.leerTokem = this.leerTokem.bind(this);
+        this.leerTokemTda = this.leerTokemTda.bind(this);
         this.hacerPost = this.hacerPost.bind(this);
         this.leerSelectDir = this.leerSelectDir.bind(this);
 
@@ -104,28 +108,31 @@ class ControladorBase {
     }
 
 
-    leerCount(req, res) {
+    async leerCount(req, res) {
         //Atencion el sql ha de pasar por el sistema de añadir empresa/manager
         let sql = `SELECT COUNT(*) as contador FROM ${this.config.TABLA}`;
-        sql = sql.replace(':local',this.leerTokem(req,res))
-        return this.connect.leerSql(sql)
-            .then(dat => {
-                this.enviaDatos(res, dat[0]);
+        this.leerTokemTda(req, res, sql)
+            .then(sql => {
+                console.error(sql)
+                return this.connect.leerSql(sql)
+                    .then(dat => {
+                        this.enviaDatos(res, dat[0]);
+                    })
+                    .catch(err => {
+                        Presenta.log("Error en Contador", err);
+                    });
             })
-            .catch(err => {
-                Presenta.log("Error en Contador", err);
-            });
 
     }
 
-   
+
     /**
      * Lista datos del objeto indexado.
      * 
      * @param {} req : objeto request.
      * @param {} res : objeto response.
      */
-    leerUno(req, res) {
+    async leerUno(req, res) {
         let id = req.params.id;
         if (id === "count") return this.leerCount(req, res);
         let sql = "";
@@ -136,20 +143,26 @@ class ControladorBase {
             sql = this.config.QUERIES.SELECT_UNO.replace(':WHERE', this.config.QUERIES.SELECT_BY_ID);
             sql = sql.replace(':id', decodeURIComponent(id));
         }
-        sql = sql.replace(':local',this.leerTokem(req,res));
-        this.connect.leerSql(sql.replace(/:TABLA/gi, this.config.TABLA))
-            .then(dat => {
-                this.obtenerFotoUrl(res, dat);
+        this.leerTokemTda(req, res, sql)
+            .then(sql => {
+                this.connect.leerSql(sql.replace(/:TABLA/gi, this.config.TABLA))
+                    .then(dat => {
+                        this.obtenerFotoUrl(res, dat);
 
+                    })
+                    .catch(err => {
+                        this.procesaErr(res, "Error en Leer uno", err);
+                    });
             })
             .catch(err => {
-                this.procesaErr(res, "Error en Leer uno", err);
+                this.procesaErr(res, "Error en tokem", err);
+
             });
 
     }
 
 
-   
+
     /**
      * Lista lista objetos indexados de la base de datos en base a una referencia.
      * 
@@ -158,7 +171,7 @@ class ControladorBase {
      */
     leerSelect(req, res) {
         let id = req.params.id;
-        let sql ;
+        let sql;
         if (id == null || id == undefined) {
             sql = this.config.QUERIES.SELECT_SELECT_ALL;
         } else {
@@ -172,14 +185,19 @@ class ControladorBase {
         const role = req.session.role;
         sql = sql.replace(/:TABLA/gi, this.config.TABLA);
         sql = CompletaSQL.cSQL(req, sql);
-        sql = sql.replace(':local',this.leerTokem(req,res))
-        this.connect.leerSql(sql)
-            .then(dat => {
-                //Presenta.log("dat->", dat);
-                this.enviaDatos(res, dat);
+        this.leerTokemTda(req, res, sql)
+            .then(sql => {
+                this.connect.leerSql(sql)
+                    .then(dat => {
+                        //Presenta.log("dat->", dat);
+                        this.enviaDatos(res, dat);
+                    })
+                    .catch(err => {
+                        this.procesaErr(res, "Error en leer SELECT", err);
+                    });
             })
             .catch(err => {
-                this.procesaErr(res, "Error en leer SELECT", err);
+                this.procesaErr(res, "Error en leer tokem SELECT", err);
             });
     }
 
@@ -187,11 +205,16 @@ class ControladorBase {
         //Presenta.log('leerAll0');
         let sql = this.config.QUERIES.SELECT_ALL.replace(/:TABLA/gi, this.config.TABLA);
         sql = CompletaSQL.cSQL(req, sql);
-        sql = sql.replace(':local',this.leerTokem(req,res))
-        Presenta.log('leerAll0',sql);
-        this.connect.leerSql(sql)
-            .then(dat => {
-                this.obtenerFotoUrl(res, dat);
+        this.leerTokemTda(req, res, sql)
+            .then(sql => {
+                Presenta.log('leerAll0', sql);
+                this.connect.leerSql(sql)
+                    .then(dat => {
+                        this.obtenerFotoUrl(res, dat);
+                    })
+                    .catch(err => {
+                        this.procesaErr(res, "Error en leerAll--->", err);
+                    });
             })
             .catch(err => {
                 this.procesaErr(res, "Error en leerAll--->", err);
@@ -199,7 +222,7 @@ class ControladorBase {
 
     }
 
-    
+
     /**
      * Actualiza tablas en la base de datos.
      * 
@@ -431,14 +454,14 @@ class ControladorBase {
      * 
      */
     async sendDataToTable(data, sql, file = null) {
-        sql = sql.replace(':local',this.leerTokem(req,res))
+
         if (file !== null && file !== undefined) {
             const nombreUnico = uniqid();
             data[0][this.config.CARPETA.CAMPO] = nombreUnico + this.extension;
         }
 
         const result = await new Promise((resolve, reject) => {
-            
+
             this.connect.modifyTable(sql.replace(/:TABLA/gi, this.config.TABLA), data)
                 .then(value => {
                     resolve({
@@ -460,23 +483,31 @@ class ControladorBase {
         return result;
     }
 
-    procesaErr(res, mensaje, err) {
+    procesaErr(res, mensaje, err = null) {
         Presenta.log('mensaje---->', mensaje);
         Presenta.log('error------>', err);
         let numero = (!isNaN(err) && err >= 200 && err <= 600) ? err : 500
         res.status(numero)
             .send({
                 Ok: false,
-                Message: mensaje + err
+                Message: mensaje + " Error: " + err
             });
         throw new Error(err);
     }
 
-    leerTokem(req,res){
-        return 1;
+
+
+    async leerTokemTda(req, res, sql) {
+        let tokemTda = req.header("WPRA_Tienda")
+        if (sql && sql.includes(':local')) {
+            if (tokemTda !== undefined && tokemTda.length > 0) {
+                let vtk = await  GestionTokemTda.tokemTda2Local(this, tokemTda, res)                   
+                return sql.replace(":local",  vtk)
+            }
+        }
+        return Promise.resolve(sql)
     }
 }
-
 
 module.exports = ControladorBase
 

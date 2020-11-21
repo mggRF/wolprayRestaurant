@@ -7,24 +7,20 @@ const paths = {
 
     },
     
-    EVENTS : {
-        title: 'Eventos',
-        path: CARPETA + '/events',
+    GRUPOS : {
+        title: 'Grupos',
+        path: CARPETA + '/grupos',
         icon: 'fas fa-calendar-week'
     },
-    COUNTRIES : {
-        title: 'Paises',
-        path: CARPETA + '/countries',
-        icon: 'fas fa-globe-europe'
-    },
-    MUSICA : {
-        title: 'Música',
-        path: CARPETA + '/music',
+   
+    LOCALS : {
+        title: 'Locales',
+        path: CARPETA + '/locals',
         icon: 'fas fa-compact-disc'
     },
-    CLUBS : {
-        title: 'Clubs',
-        path: CARPETA + '/clubs',
+    MENU : {
+        title: 'menus',
+        path: CARPETA + '/menu',
         icon: 'fas fa-drum'
     },
     COMPANIES : {
@@ -32,16 +28,12 @@ const paths = {
         path: CARPETA + "/companies",
         icon: 'fas fa-building'
     },
-    SLOTS : {
-        title: 'Slots',
-        path: CARPETA + '/slots',
+    ZONAS: {
+        title: 'zonas servicio',
+        path: CARPETA + '/zonas',
         icon: 'fas fa-calendar-week'
     },
-    DRESSCODE : {
-        title: 'Vestimenta',
-        path: CARPETA + '/dresscode',
-        icon: 'fas fa-user-tie'
-    },
+    
     USERS : {
         title: 'Usuarios',
         path: CARPETA + '/users',
@@ -52,21 +44,13 @@ const paths = {
         path: CARPETA + '/role',
         icon: 'fas fa-users-cog'
     },
-    CCAA : {
-        title: 'Estados',
-        path: CARPETA + '/states',
-        icon: 'fas fa-map-marker-alt'
-    },
-    PROVINCE : {
-        title: 'Provincias',
-        path: CARPETA + '/provinces',
+    
+    PRODUCTS : {
+        title: 'Productos',
+        path: CARPETA + '/productes',
         icon: 'fas fa-map-marker'
     },
-    CITY : {
-        title: 'Ciudades',
-        path: CARPETA + '/cities',
-        icon: 'fas fa-map-marker'
-    },
+   
 };
 
 module.exports = paths;

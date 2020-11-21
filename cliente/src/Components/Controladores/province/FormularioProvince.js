@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InputComponent } from '../../Fragmentos/InputComponent';
-import Desplegable from '../../Fragmentos/desplegable';
 import { InputLimite } from './../../Fragmentos/InputLimite';
+import DesplegableAut from './../../Fragmentos/DesplegableAut';
 
 export default class FormularioProvince extends Component {
 
@@ -22,8 +22,8 @@ export default class FormularioProvince extends Component {
                 title = 'Información sobre el estado';
                 break;
         }
-       
-        
+
+
         return (
             <section className="get_in_touch animate__animated animate__fadeIn">
                 {
@@ -50,22 +50,17 @@ export default class FormularioProvince extends Component {
                             value={Province.provinceName}
                         />
 
-                        {
-                            (readonly) ?
-                                (<InputComponent
-                                    handleChange={this.props.funcion}
-                                    namecountryName
-                                    label="Estado"
-                                    readOnly={readonly}
-                                    value={Province.provinceCapital}
-                                />) : <Desplegable
-                                    depend='209'
-                                    label='Comunidad Autonoma'
-                                    readValue={this.props.funcion}
-                                    table='c_state'
-                                    value={Province.stateid}
-                                    name='stateid'
-                                />
+
+
+                        <DesplegableAut
+                            depend='209'
+                            label='Comunidad Autonoma'
+                            readValue={this.props.funcion}
+                            table='c_state'
+                            idvalue={Province.stateid}
+                            value={Province.provinceCapital}
+                            name='stateid'
+                        />
                         }
                         <InputLimite
                             handleChange={this.props.funcion}

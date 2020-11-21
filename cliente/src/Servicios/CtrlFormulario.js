@@ -15,6 +15,7 @@ export default class CtrlFormulario extends Component {
         };
     }
     enSubmit = () => {
+        console.log(this.state.obj)
         this.props.trabajo(this.state.obj);
     }
     enCancel = () => {
@@ -26,9 +27,9 @@ export default class CtrlFormulario extends Component {
 
         obj[e.target.name] = e.target.value;
         this.setState({ obj: obj });
+        console.log(this.state.obj)
     }
     componentDidMount() {
-        console.log(this.props.obj)
         this.setState(this.props.obj);
     }
 

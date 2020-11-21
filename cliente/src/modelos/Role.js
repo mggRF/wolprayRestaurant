@@ -10,4 +10,4 @@ class Role {
      }
 
 }
-export default Role;
+module.exports = Role;

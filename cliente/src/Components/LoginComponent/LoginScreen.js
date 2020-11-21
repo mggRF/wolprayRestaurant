@@ -26,7 +26,8 @@ export default class LoginScreen extends Component {
                     let user = {
                         id: response.Datos.id,
                         role: response.Datos.role,
-                        token: response.Datos.token
+                        token: response.Datos.token,
+                        tokemTda: response.Datos.tokemTda
                     }
                     localStorage.setItem('user', JSON.stringify(user));
 
@@ -36,6 +37,16 @@ export default class LoginScreen extends Component {
                 }
 
             }).catch(err => console.log('Error: ', err));
+    }
+
+    static datosLogin() {
+        let user = {
+            id: 1,
+            role: 9,
+            token: 1234,
+            tokemTda: 'abcdefghijklmnopqrstuvxz1234567890ABCDEFGHIJKLMNOP'
+        }
+        return user;
     }
 
     handleInputChange = ({ target }) => {

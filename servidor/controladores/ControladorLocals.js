@@ -8,6 +8,8 @@ const MODELO = require("../modelos/Locals");
 const {QueriesLocals} = require("../Constantes/ConstantesDataBase/queries/QueriesLocals");
 const TABLA = 'locals';
 
+
+
 class ControladorLocals extends ControladorBase {
    
     constructor(){
@@ -19,6 +21,9 @@ class ControladorLocals extends ControladorBase {
         }
         super(config);
     }
+
+    
+    
 }
 
 

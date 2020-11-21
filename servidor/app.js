@@ -15,6 +15,7 @@ const helmet = require('helmet');
 var multipart = require('connect-multiparty');
 const path = require('path');
 const rfs = require('rotating-file-stream') // version 2.x
+const express_logger = require('express-logger-unique-req-id');
 
 const {IT_IS_SECURE} = require('./Constantes/ConstantesSeguridad');
 
@@ -38,15 +39,10 @@ const rLocals = require('./rutas/rutaLocals');
 const rMenu = require('./rutas/rutaMenu');
 const rGrupos = require('./rutas/rutaGrupos');
 const rLocalCity = require('./rutas/rutaLocalCity');
-
-
 const rUsers = require('./rutas/rutaUsers');
-
 const rRoles = require('./rutas/rutaRoles');
 const rCompanies = require('./rutas/rutaCompanies');
-
 const rProducts = require('./rutas/rutaProducts');
-
 const Autorizado = require('./Autentificacion/middelAut');
 
 
@@ -92,6 +88,32 @@ if (process.env.NODE_ENV && process.env.NODE_ENV == 'production') {
     console.log("desarrollo");
     app.use(morgan('combined'));
 }
+//****************************Loggers */
+//logger configuration
+const fileConf = {
+    level: 'debug',
+    filename: './logs.log',
+    handleExceptions: true,
+    json: true,
+    maxsize: 5242880, // 5MB
+    maxFiles: 5,
+    colorize: false,
+    timestamp: true
+};
+
+const consoleConf = {
+    level: 'debug',
+    handleExceptions: true,
+    json: false,
+    colorize: true,
+    timestamp: true
+};
+
+express_logger.initializeLogger(app, fileConf, consoleConf);
+let logger = express_logger.getLogger();
+
+
+logger.debug('First message');
 
 // Enable reverse proxy support in Express. This causes the
 // the "X-Forwarded-Proto" header field to be trusted so its

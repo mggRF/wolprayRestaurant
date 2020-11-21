@@ -1,16 +1,18 @@
 
 class Company {
-    //  coa_id;cp
-    //  cpcoa_nombre;
-    //  cpcoa_pais;
+    
 
-     constructor(companyid ,companyName,companyAddress,countryid ,company_CIF ){
-         this.companyid = companyid;
+     constructor(idCompany ,companyName,companyAddress,idCity ,company_CIF, companyTlfo,companyMail, companyContact, companyWeb ){
+         this.idCompany = idCompany;
          this.companyName = companyName;
          this.companyAddress = companyAddress;
-         this.countryid = countryid;
+         this.idCity = idCity;
          this.company_CIF = company_CIF;
+         this.companyTlfo = companyTlfo;
+         this.companyMail = companyMail;
+         this.companyContact = companyContact;
+         this.companyWeb = companyWeb;
      }
 
 }
-export default Company;
+module.exports = Company;

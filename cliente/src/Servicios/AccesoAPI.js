@@ -1,5 +1,7 @@
 import { API_URL, CONVERSOR } from "../Components/Constantes";
 
+import LoginScreen from './../Components/LoginComponent/LoginScreen';
+
 
 
 export default class AccesoAPI {
@@ -23,7 +25,7 @@ export default class AccesoAPI {
     let url2 = this.verificaTabla(tabla);
     let url = API_URL + url2;
 
-    if(datos['coverUrl'] ){
+    if (datos['coverUrl']) {
       datos['coverUrl'] = null;
     }
     switch (metodo) {
@@ -41,7 +43,7 @@ export default class AccesoAPI {
 
   }
 
-  static async enviarImagen(url,file, campo) {
+  static async enviarImagen(url, file, campo) {
     const cabeceras = new Headers();
     cabeceras.append("Authorization", "Bearer my-token");
     cabeceras.append("Cache-Control", "no-cache");
@@ -93,11 +95,12 @@ export default class AccesoAPI {
   *  Metodo de acceso a la API. Comun......
   */
   static async accederApi(url, metodo = "GET", datos = null) {
+    let tokemTda = LoginScreen.datosLogin().tokemTda;
     const cabeceras = new Headers();
     cabeceras.append("Content-Type", "application/json");
     cabeceras.append("Authorization", "Bearer my-token");
     cabeceras.append("Cache-Control", "no-cache");
-
+    cabeceras.append("WPRA_Tienda", tokemTda);
     let opciones = {         // opciones para GET y DELETE (no hay body)
       method: metodo,
       headers: cabeceras
@@ -109,7 +112,7 @@ export default class AccesoAPI {
         body: JSON.stringify(datos)
       };
     }
-
+console.log("AccesoApi",url)
     return await fetch(url, opciones)
 
       .then(res => res.json())

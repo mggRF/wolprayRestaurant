@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InputComponent } from '../../Fragmentos/InputComponent';
-import Desplegable from '../../Fragmentos/desplegable';
+
 import { InputLimite } from '../../Fragmentos/InputLimite';
+import DesplegableAut from './../../Fragmentos/DesplegableAut';
 
 
 export default class FormularioCCAA extends Component {
@@ -44,7 +45,7 @@ export default class FormularioCCAA extends Component {
                                     value={CCAA.stateid.toString()}
                                 /></>) : null
                         }
- 
+
                         <InputComponent
                             handleChange={this.props.funcion}
                             name="stateName"
@@ -53,23 +54,16 @@ export default class FormularioCCAA extends Component {
                             value={CCAA.stateName}
                         />
 
-                        {
-                            (readonly) ?
-                                (<InputComponent
-                                    handleChange={this.props.funcion}
-                                    name='countryName'
-                                    label="Pais"
-                                    readOnly={readonly}
-                                    value={CCAA.countryName}
-                                />) : 
-                                <Desplegable
-                                    label='Pais'
-                                    readValue={this.props.funcion}
-                                    table='c_country'
-                                    value={CCAA.countryid}
-                                    name='countryid'
-                                />
-                        }
+
+                        <DesplegableAut
+                            label='Pais'
+                            readValue={this.props.funcion}
+                            table='c_country'
+                            value={CCAA.countryid}
+                            idvalue={CCAA.countryName}
+                            name='countryid'
+                            readOnly={readonly}
+                        />
                         <InputLimite
                             handleChange={this.props.funcion}
                             name="state"

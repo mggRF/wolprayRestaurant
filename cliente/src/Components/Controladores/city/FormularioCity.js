@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InputComponent } from '../../Fragmentos/InputComponent';
-import Desplegable from '../../Fragmentos/desplegable';
 import { InputLimite } from './../../Fragmentos/InputLimite';
+import DesplegableAut from './../../Fragmentos/DesplegableAut';
 
 export default class FormularioCity extends Component {
     render() {
@@ -64,16 +64,17 @@ export default class FormularioCity extends Component {
                         />
 
 
-                        {
-                            (!readonly) ?
-                                (<Desplegable
-                                    label='Provincia'
-                                    readValue={this.props.funcion}
-                                    table='c_provinces'
-                                    value={City.provinceid}
-                                    name='provinceid'
-                                />) : null
-                        }
+
+                        <DesplegableAut
+                            label='Provincia'
+                            readValue={this.props.funcion}
+                            table='c_provinces'
+                            idvalue={City.provinceid}
+                            value={City.provinceName}
+                            name='provinceid'
+                            readOnly={readonly}
+                        />
+
                         <InputLimite
                             handleChange={this.props.funcion}
                             name="city"

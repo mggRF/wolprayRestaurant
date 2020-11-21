@@ -85,7 +85,7 @@ export default class FormularioCompanies extends Component {
                                                     funcion={this.props.funcion}
                                                     valorCCAA={company.stateid}
                                                     valorProv={company.provinceid}
-                                                    valorPobl={company.cityid}
+                                                    valorPobl={company.idCity}
                                                 />
                                             </>)
                                     }

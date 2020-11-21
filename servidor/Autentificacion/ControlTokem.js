@@ -2,7 +2,7 @@ var ControladorUsers = require('../controladores/ControladorUsers');
 const createToken = require('./service');
 let usersController = new ControladorUsers();
 
-class ControlTokem {
+class ControlTokemTda {
 
     login(req, res) {
         const email = req.body.email;
@@ -53,4 +53,4 @@ class ControlTokem {
     }
 }
 
-module.exports = ControlTokem
+module.exports = ControlTokemTda

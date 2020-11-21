@@ -1,45 +1,37 @@
 import React from 'react';
 
 import { Route, Switch, Redirect } from "react-router-dom";
-import ControllerMusic from '../Controladores/music/ControllerMusic';
-import ControllerClub from '../Controladores/clubs/ControllerClub';
+import ControllerMenu from '../Controladores/menu/ControllerMenu';
+import ControllerLocal from '../Controladores/local/ControllerLocal';
 import Home from '../Paginas/Home';
 import ControllerCompanies from '../Controladores/companies/ControllerCompanies';
-import ControllerDresscode from '../Controladores/dresscode/ControllerDresscode';
+import ControllerGroup from '../Controladores/group/ControllerGroup';
 import ControllerRole from '../Controladores/roles/ControllerRole';
 import ControllerUsers from '../Controladores/users/ControllerUsers';
-import ControllerCCAA from '../Controladores/ccaa/ControllerCCAA';
-import ControllerProvince from '../Controladores/province/ControllerProvince';
-import ControllerCity from '../Controladores/city/ControllerCity';
-import ControllerEvents from '../Controladores/events/ControllerEvents';
+import ControllerLocalCity from '../Controladores/localcity/ControllerLocalCity';
+import ControllerProducts from '../Controladores/products/ControllerProducts';
 
-import paths from './Paths';
-import ControllerPais from '../Controladores/pais/ControllerPais';
-import ControllerSlots from '../Controladores/slots/ControllerSlots';
+
+import { GRUPOS, MENU, PRODUCTS,HOME, COMPANIES, ROLES, USERS, LOCALS,ZONAS } from './Paths';
+
 
 
 export const DashboardRoutes = () => {
-
-
-    const { MUSICA, HOME, CCAA, CLUBS, COMPANIES, DRESSCODE, ROLES, USERS , PROVINCE, CITY, EVENTS,COUNTRIES, SLOTS} = paths;
 
     return (
         <>
             <Switch>
                 <Route exact path={HOME.path} component={Home} />
-                <Route exact path={MUSICA.path} component={ControllerMusic} />
-                <Route exact path={CLUBS.path} component={ControllerClub} />
                 <Route exact path={COMPANIES.path} component={ControllerCompanies} />
-                <Route exact path={DRESSCODE.path} component={ControllerDresscode} />
+                <Route exact path={GRUPOS.path} component={ControllerGroup} />
+                <Route exact path={LOCALS.path} component={ControllerLocal} />
+                <Route exact path={MENU.path} component={ControllerMenu} />
+                <Route exact path={ZONAS.path} component={ControllerLocalCity} />
+                <Route exact path={PRODUCTS.path} component={ControllerProducts} />
                 <Route exact path={ROLES.path} component={ControllerRole} />
                 <Route exact path={USERS.path} component={ControllerUsers} />
-                <Route exact path={CCAA.path} component={ControllerCCAA} />
-                <Route exact path={PROVINCE.path} component={ControllerProvince} />
-                <Route exact path={CITY.path} component={ControllerCity} />
-                <Route exact path={EVENTS.path} component={ControllerEvents} />
-                <Route exact path={COUNTRIES.path} component={ControllerPais} />
-                <Route exact path={SLOTS.path} component={ControllerSlots} />
-
+               
+                
                 <Redirect to={HOME.path} />
             </Switch>
         </>

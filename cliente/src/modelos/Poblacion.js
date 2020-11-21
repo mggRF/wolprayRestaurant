@@ -25,4 +25,4 @@ class Poblacion {
         this.city_limitOthers_mess=city_limitOthers_mess;
     }
 }
-export default Poblacion;
+module.exports = Poblacion;

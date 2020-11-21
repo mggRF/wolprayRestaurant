@@ -8,13 +8,14 @@ const MODELO = require("../modelos/Company");
 const {QueriesCompany} = require("../Constantes/ConstantesDataBase/queries/QueriesCompany");
 const TABLA = 'companies';
 
+
 class ControladorCompanies extends ControladorBase {
    
     constructor(){
         let config = {
             TABLA: TABLA,
             QUERIES: QueriesCompany,
-            MODELO: MODELO,
+            MODELO: new MODELO(),
             campoId: 'companyid',
         }
         super(config);

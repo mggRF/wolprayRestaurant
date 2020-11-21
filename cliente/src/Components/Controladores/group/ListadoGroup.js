@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { API_URL, MUSIC } from '../../Constantes';
-import AccesoAPI from './../../../Servicios/AccesoAPI';
+import { API_URL, GRUPOS } from '../../Constantes';
+import AccesoAPI from '../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
 import BotonListado from '../../Fragmentos/BotonListados';
 
-import Paginacion from './../../../Servicios/Paginacion';
-import GestorListado from './../../../Servicios/GestorListado';
+import Paginacion from '../../../Servicios/Paginacion';
+import GestorListado from '../../../Servicios/GestorListado';
 import MontaCabecera from '../../Fragmentos/MontaCabecera';
 import { INS } from '../../Constantes';
 
+export default class ListadoGroup extends Component {
 
-export default class ListadoMusic extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             datos: [],
-            error: "",
+            error: ""
         }
         this.leeTabla = this.leeTabla.bind(this);
-        this.gl = new GestorListado(API_URL + MUSIC, this.leeTabla);
+        this.gl = new GestorListado(API_URL + GRUPOS, this.leeTabla);
     }
     leeTabla() {
         AccesoAPI.accederApi(this.gl.terminaURLlistado())
@@ -36,26 +36,33 @@ export default class ListadoMusic extends Component {
             })
     }
 
-
     componentDidMount() {
         this.leeTabla();
     }
 
+
+
+
     render() {
         let item = [];
+
         this.state.datos.forEach((valor, index) => item.push(
             <tr key={index}>
-                <td key={index} >{valor.musicid}</td>
-                <td>{valor.musicName}</td>
+                <td key={index} >{valor.idGrupo}</td>
+                <td>{valor.idLocal}</td>
+                <td>{valor.grupName}</td>
                 <TresBotonesListado funcion={this.props.trabajo}
-                    id={valor.musicid} />
+                    id={valor.idGrupo} />
             </tr>
 
         ))
+
+
         return (
+
             <div className="container animate__animated animate__fadeIn">
                 <div className='col-12 cabecera_controlador animate__animated animate__slideInUp'>
-                    <h1>Listado de música</h1>
+                    <h1>Listado de Grupos</h1>
                     <BotonListado icon={INS} funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}></BotonListado>
                 </div>
                 <table className="table">
@@ -64,10 +71,10 @@ export default class ListadoMusic extends Component {
                             <MontaCabecera separador='th'
                                 funcion={this.gl.setSortedField}
                                 lista={[
-                                    ['musicid', 'Identificador'],
-                                    ['musicName', 'name']
+                                    ['idGrupo', 'Identificador'],
+                                    ['idLocal', 'Local'],
+                                    ['grupName', 'Nombre']
                                 ]} />
-
                             <th></th><th></th><th></th>
                         </tr>
                     </thead>
@@ -77,14 +84,14 @@ export default class ListadoMusic extends Component {
                 </table>
                 <Paginacion
                     pageHandler={this.gl.pageHandler}
-                    tabla={MUSIC}>
+                    tabla={GRUPOS}>
                 </Paginacion>
             </div>
         )
     }
+
 }
-ListadoMusic.propTypes = {
+ListadoGroup.propTypes = {
     usuario: PropTypes.object,
-    trabajo: PropTypes.func,
-    insertar: PropTypes.func
+    trabajo: PropTypes.func
 }

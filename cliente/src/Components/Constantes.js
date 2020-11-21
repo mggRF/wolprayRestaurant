@@ -1,10 +1,10 @@
 //******* Area de control *******************
-const API_BASE_DEVELOPPER = "http://localhost:3800/";   //direccion base
-const API_BASE_PRODUCTION = "https://api.wolpray.es/";   //direccion base
-const VERSION_API = "api_v00"; 
+const API_BASE_DEVELOPPER = "http://localhost:3900/";   //direccion base
+const API_BASE_PRODUCTION = "https://api.gastronomundo.com/";   //direccion base
+const VERSION_API = "api_v00";
 
 const variable_url = () => {
-    if (window.location.hostname === 'api.wolpray.es') {
+    if (version_OS() === 'Linux OS') {
         console.log("Arranca produccion->" + window.location.hostname)
         return API_BASE_PRODUCTION;
     } else {
@@ -12,21 +12,34 @@ const variable_url = () => {
         return API_BASE_DEVELOPPER;
     }
 }
+
+const version_OS = () => {
+    let Name = "Not known";
+    if (navigator.appVersion.indexOf("Win") !== -1) Name =
+        "Windows OS";
+    if (navigator.appVersion.indexOf("Mac") !== -1) Name =
+        "MacOS";
+    if (navigator.appVersion.indexOf("X11") !== -1) Name =
+        "UNIX OS";
+    if (navigator.appVersion.indexOf("Linux") !== -1) Name =
+        "Linux OS";
+    return Name;
+}
 module.exports = {
-    AUTORIZAR:false,
+    AUTORIZAR: false,
     API_URL: variable_url() + VERSION_API + '/',
-    CLUBS: 'clubs',
-    EVENTS: 'events',
+    LOCALS: 'locals',
+    MENU: 'menu',
     STATES: 'states',
     PROVINCES: 'provinces',
-    MUSIC: 'musics',
+    GRUPOS: 'grupos',
     COMPANIES: 'companies',
-    DRESSCODE: 'dresscode',
+    ZONAS: 'localcity',
     ROLE: 'roles',
     USERS: 'users',
     CITYS: 'citys',
-    COUNTRIES:'countrys',
-    SLOTS:'slots',
+    COUNTRIES: 'countrys',
+    PRODUCTS: 'products',
     LPPAGINA: "5",                             //lineas por pagina
 
     INS: "fas fa-plus",
@@ -39,11 +52,10 @@ module.exports = {
         c_city: 'citys',
         c_country: 'countrys',
         c_provinces: 'provinces',
-        n_categories: 'categories',
-        n_dresscode: 'dresscode',
-        n_music: 'musics',
-        LOGIN: variable_url()+'login',
-        LOGOUT: variable_url()+ 'logout',
+        n_grupos: 'grupos',
+        n_localcity: 'localcity',
+        LOGIN: variable_url() + 'login',
+        LOGOUT: variable_url() + 'logout',
 
     },
     METODO: {

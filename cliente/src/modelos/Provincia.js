@@ -28,4 +28,4 @@ class Provincia {
         this.province_limitOthers_mess = province_limitOthers_mess;
     }
 }
-export default Provincia;
+module.exports = Provincia;

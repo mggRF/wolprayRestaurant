@@ -6,7 +6,6 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "set NODE_ENV='development' && nodemon index",
-
         "startProd": "export NODE_ENV=production && node index",
         "preparacion": "xcopy  D:\\Proyectos\\wolpray\\webapi_restaurant\\servidor   D:\\Proyectos\\wolpray\\servidorRestaurant  /s /y && cd  D:\\Proyectos\\wolpray\\servidorRestaurant  && code . ",
         "deploy-production": "pm2 deploy ecosystem.config.js production --force",
@@ -20,6 +19,7 @@
         "cors": "^2.8.5",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
+        "express-logger-unique-req-id": "^1.0.4",
         "express-parser": "^1.0.0",
         "express-session": "^1.17.1",
         "helmet": "^4.1.0",

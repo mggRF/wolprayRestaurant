@@ -17,11 +17,11 @@ let paginaActual = 0                                    //pagina actual
  * @param {} respuesta  Resultado de la llamada con la extension count (xmysql)
  */
 function obtenDatos(respuesta) {
-    pa = document.getElementById(TAG_PAGINACION);
-    ppa = document.createElement("div");
+    let pa = document.getElementById(TAG_PAGINACION);
+    let ppa = document.createElement("div");
     var registros = respuesta[0].no_of_rows;
     console.log(registros);
-    cant = registros / LPPAGINA;
+    let cant = registros / LPPAGINA;
     for (a = 1; a < cant; a++) {
         ea = document.createElement("a");
         ea.setAttribute("href", "#");

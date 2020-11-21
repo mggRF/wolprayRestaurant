@@ -53,12 +53,12 @@ export default class ListadoCompanies extends Component {
 
         this.state.datos.forEach((valor, index) => item.push(
             <tr key={index}>
-                <td key={index} >{valor.companyid}</td>
+                <td key={index} >{valor.idCompany}</td>
                 <td>{valor.companyName}</td>
                 <td>{valor.companyAddress}</td>
-                <td>{valor.cityid}</td>
+                <td>{valor.cityName}</td>
                 <TresBotonesListado funcion={this.props.trabajo}
-                    id={valor.companyid} />
+                    id={valor.idCompany} />
             </tr>
 
         ))
@@ -72,7 +72,7 @@ export default class ListadoCompanies extends Component {
                         <div className="row">
                             <div className="col-12 cabecera_controlador animate__animated animate__slideInUp">
 
-                                <h1>Listado de mpresas</h1>
+                                <h1>Listado de Empresas</h1>
                                 <BotonListado icon={INS} funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}></BotonListado>
                             </div>
                             <table className="table table-striped bg-light table-hover">

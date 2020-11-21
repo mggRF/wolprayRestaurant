@@ -1,13 +1,13 @@
 
-import Listado from './ListadoMusic';
+import Listado from './ListadoMenu';
 
-import Formulario from './FormularioMusic';
-import ControllerBase from './../ControllerBase';
-import { checkUsuario } from './../../../Servicios/funcionesSeguridad';
-import Nmusic from './../../../modelos/Nmusic';
+import Formulario from './FormularioMenu';
+import ControllerBase from '../ControllerBase';
+import { checkUsuario } from '../../../Servicios/funcionesSeguridad';
+import Menu from '../../../modelos/Menu';
 
 
-export default class ControllerMusic extends ControllerBase {
+export default class ControllerMenu extends ControllerBase {
 
 
     constructor(props) {
@@ -16,7 +16,7 @@ export default class ControllerMusic extends ControllerBase {
         this.ID = 'musicid';
         this.LISTADO = Listado
         this.FORMULARIO = Formulario
-        this.MODELO = new Nmusic();
+        this.MODELO = new Menu();
         
         this.state = {
             estadoActualizacion: 0,
