@@ -1,0 +1,399 @@
+.textCenter {
+    text-align: center;
+}
+
+.textLeft {
+    text-align: left;
+}
+
+.textFlex {
+    
+    text-align: center;
+}
+
+.contenedor {
+    text-align: center;
+}
+
+.ancho {
+    width: 20%;
+    min-width: 20em;
+    display: block;
+    margin: auto;
+}
+.dnone{
+    display:none;
+}
+.boxM {
+    border: 1px solid #000;
+    border-radius: 4px 4px 4px 4px;
+}
+
+.letraNormal {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333;
+}
+
+.menu {
+    composes: ancho boxM letraNormal;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.menuH3{
+    color: #fff;
+    font-family: roboto,Sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1em;
+    letter-spacing: .5px;
+    margin-right:0px;
+}
+.menuH3::after{
+    content:"";
+    clear:both;
+    display:table;
+}
+.botonera {
+    composes: ancho;
+    width: 25em;
+}
+
+.cabeceraMenu {
+    background-color: #777777;
+    padding: 20px 24px 20px 24px;
+    color: #ffffff;
+    font-family: "Roboto", Sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1em;
+    letter-spacing: 0.5px;
+}
+
+.cuerpoMenu {}
+
+.precio {
+    background-color: #ffffff;
+    font-family: "Roboto", Sans-serif;
+    font-size: 3.75rem;
+    font-weight: 500;
+    letter-spacing: -1.5px;
+}
+
+.precio:before {
+    content: "€";
+    font-size: calc(50em/100);
+    align-self: top;
+    
+}
+
+.grupo {
+    margin-top: 20px;
+}
+.smallMenu{
+    font-family: roboto,Sans-serif;
+    font-size: .75rem;
+    font-weight: 400;
+    line-height: 1.617em;
+    letter-spacing: .15px;
+}
+.titGrupo {
+    margin: 1em auto;
+    font-family: "Roboto", Sans-serif;
+    font-size: 1.1em;
+    font-weight: 400;
+    line-height: 1.4em;
+    text-transform: uppercase;
+}
+
+.titGrupo::after {
+    
+}
+
+.titGrupo::before {
+    
+}
+
+.letraPlato {
+    font-family: "Roboto", Sans-serif;
+    font-weight: 400;
+    line-height: 1.6em;
+    font-size: 1.1em;
+}
+
+.plato {
+    composes: letraPlato;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.boton {
+    margin: 15px auto;
+    margin-right: 30px !important;
+    padding: 15px 30px;
+    color: #ffffff;
+    font-family: "Roboto", Sans-serif;
+    font-size: 1em;
+    background-color: #cc9955;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: #cc9955;
+    border-radius: 24px 24px 24px 24px;
+}
+
+.letraPequena {
+    font-family: "Roboto", Sans-serif;
+    font-weight: 400;
+    line-height: 1.6em;
+    font-size: 1.1em;
+}
+
+.comentario {
+    composes: letraPequena;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.letraFormu {
+    font-family: "Roboto", Sans-serif;
+    font-weight: 400;
+    line-height: 1.6em;
+    font-size: 1.1em;
+}
+
+.formControl {
+    composes: letraFormu;
+    margin: 1em auto;
+}
+
+.d-inline {}
+
+.number {
+    width: 40px;
+}
+
+.checkOrder {
+    margin-left: 20px;
+}
+
+.line {
+    margin-top: 20px;
+}
+
+
+.subtotal {
+    margin-top: 15px;
+}
+
+.lineaCarta {
+    
+}
+
+.precioUnit {
+    float: right;
+    font-weight: 500;
+}
+
+.precioUnit::after {
+    content: €;
+}
+
+.boxUnit {
+    width: 3em;
+    float: right;
+}
+
+.titlePlato {
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: inherit;
+    overflow: hidden;
+    font-size: 20px;
+    margin-left: 20px;
+    ;
+}
+
+.containerProducts_h3 {
+    border-left: 4px solid coral;
+    padding-left: 20px;
+}
+
+
+.floatRight {
+    float: right;
+}
+
+.floatLeft {
+    float: left;
+}
+
+.clearRight {
+    clear: right;
+}
+
+.subtotal {
+    margin-left: 5%;
+}
+
+.notas {
+    margin-left: 2.4em;
+    margin-bottom: 20px;
+}
+
+
+
+.lineaPedido {
+    composes: letraFormu;
+    font-size: 2em;
+}
+
+.cartaBox{
+    display:flex;
+    flex-direction:row;
+}
+.lineaCarta{
+    display: block;
+    margin:auto;
+    flex-shrink: 0;
+    flex-grow: 1;
+    padding-left:10px;
+    padding-right:10px;
+    border-bottom-width: 2px;
+    border-bottom-color: coral;
+
+}
+.colorHR{
+   height: 2px;
+   background-color: coral;
+   border:none;
+}
+.checkmark{
+    display:inline-block;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border:1px solid #aaa;
+}
+.checkmarkSelected{
+    display:inline-block;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    background-color: coral;
+    border:1px solid #aaa;
+    background-clip: content-box; /* <---- */
+    box-shadow: inset 0 0 0 4px white; 
+    padding:2px;
+}
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.rightCarta{
+    margin-left:auto;
+}
+/*
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+    .containerProducts{
+        width:40%;
+        display: inline-block;
+        margin-right: 5%;
+        padding-left:2.5%;
+        vertical-align: text-top;
+    }
+    .wrap_products {
+        padding-top: 20px;
+        display: block;
+        position: relative;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+        width:80%;
+        left:50%;
+        transform: translateX(-50%);
+        padding:20px;
+    }
+    
+}
+
+
+/* 
+    ##Device = Laptops, Desktops
+    ##Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    
+}
+
+
+/* 
+    ##Device = Tablets, Ipads (portrait)
+    ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* CSS */
+    
+}
+
+
+/* 
+    ##Device = Tablets, Ipads (landscape)
+    ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    /* CSS */
+}
+
+
+/* 
+    ##Device = Low Resolution Tablets, Mobiles (Landscape)
+    ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+    /* CSS */
+}
+
+
+/* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+    /* CSS */
+}
+@media (min-width: 320px)  and (max-width: 1280px){
+    .containerProducts{
+        width:97%;
+        display: inline-block;
+        
+        padding-left:2.5%;
+        vertical-align: text-top;
+    }
+}

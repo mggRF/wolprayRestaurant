@@ -1,6 +1,6 @@
 {
     "name": "widgets_gastronomundo",
-    "homepage": "/wp-content/plugins/wolprayRestaurant/widget/build",
+
     "version": "0.1.0",
     "private": true,
     "dependencies": {
