@@ -48,7 +48,8 @@ export default class Datos extends Component{
                         onKeyUp={e => this.changeValue(e)} 
                         name="hora" 
                         placeholder="Hora de entrega" />
-                    
+                    <br/>
+                    <br/>
                     <button 
                         type="button" 
                         className="botonDatos" 

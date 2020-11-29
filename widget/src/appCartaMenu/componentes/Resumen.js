@@ -8,25 +8,27 @@ import Carta from './Carta/Carta.js';
 import Botonera from './Botonera.js';
 import Datos from './Compra/Compra.js';
 import swal from 'sweetalert';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import json from './Carta/Data/json.js';
 import { VISTAS } from '../Constantes/Constantes.js';
-
+import Estilos from './MenuCarta.module.css'
 // import {Pedidos} from './Pedidos.js';
+import MenuListaGrande from './MenuListaGrande';
 
 export default class Resumen extends Component {
     static defaultProps = {
-        iniciar: VISTAS.RESUMEN.CMD
+        iniciar: VISTAS.MEN_LISTA_GRANDE.CMD
     }
 
     constructor(props) {
         super(props);
 
         this.state = {
-            mostrando: this.props.iniciar || VISTAS.RESUMEN.CMD,
-            pedidos: [],
+            mostrando: VISTAS.RESUMEN.CMD,//this.props.iniciar ,
+            pedidos: [],        //todos los pedidos hechos
             menu: [],
-            menuSeleccionado: [],
-            ordenMenu: [],
+            menuSeleccionado: [],   // Toda la informacion del menu/carta seleccionado
+            ordenMenu: [],   //es al pedir:receptor, CoM, menu, precio
             datos: {
                 nombre: '',
                 direccion: '',
@@ -35,12 +37,14 @@ export default class Resumen extends Component {
                 poblacion: ''
             },
             cartaBase: [],              //carta original nula
+            idMant: 0,                  //numero de elemento en modificacion
             pedido: []
         };
     }
     componentDidMount() {
         this.leerMenu();
         this.leerCarta();
+        // this.cambiarVista(this.props.iniciar);
     }
 
     leerMenu = () => {
@@ -58,14 +62,15 @@ export default class Resumen extends Component {
                     name: platou.name,
                     notas: platou.notas,
                     precio: platou.precio,
-                    cantidad:0
+                    cantidad: 0
                 }
             })
             elem.plato = sale
             return elem;
 
         })
-        this.setState({ cartaBase: comple });
+        this.setState({ cartaBase: comple },);
+
     }
 
     cancelar = _ => {
@@ -82,7 +87,7 @@ export default class Resumen extends Component {
                 hora: '',
                 poblacion: ''
             },
-
+            idMant: 0,
             pedido: []
         })
         swal({
@@ -113,17 +118,57 @@ export default class Resumen extends Component {
     }
 
     cambiarVista = vista => {
+       
+        if (vista === VISTAS.CAR_DET.CMD) {        //salto a carta detalle
+            this.leerCarta()
+            this.setState({ menuSeleccionado: Array.from(this.state.cartaBase),
+                            pedido:'C' });
+        }
+        if (vista === VISTAS.MEN_LISTA || vista === VISTAS.MEN_LISTA_GRANDE) {
+            if (this.props.iniciar  === VISTAS.MEN_LISTA_GRANDE.CMD) {
+                vista = VISTAS.MEN_LISTA_GRANDE
+            }
+            this.setState({ pedido: menu });
+        } 
         this.setState({ mostrando: vista });
     }
 
     cambiarMenuSeleccionado = menu => {
-        this.setState({ menuSeleccionado: menu });
-    }
-    ordenarMenu = menu => {
         this.setState({
-            ordenMenu: [...this.state.ordenMenu, menu]
+            menuSeleccionado: menu,
+            pedido: []
         });
     }
+
+
+    // Anota la compra en la lista
+    /**
+     * Llega un objeto con 
+     *      receptor - el nombre del receptor
+     *      pedido  - C - es carta, M es Menu
+     *      menu    -   la lista de platos, con la marca de solicitados
+     *      precio  - importe de la comanda
+     * 
+     * se añade a ordenar menu
+     * @param {*} menu 
+     */
+    ordenarMenu = menu => {
+        if (this.state.idMant  === 0) {
+            this.setState({
+                ordenMenu: [...this.state.ordenMenu, menu]
+            });
+        } else {
+            let om = this.state.ordenMenu
+            om[this.state.idMant] = menu;
+            this.setState({
+                idMant: 0,
+                ordenMenu: om
+            });
+
+        }
+
+    }
+
     eliminarMenu = index => {
         let title = `
             Va a proceder a eliminar el menú para ${this.state.ordenMenu[index].receptor}
@@ -143,18 +188,29 @@ export default class Resumen extends Component {
         });
 
     }
-    editarPedido = pedido => {
+
+    editarPedido = (pedido, index) => {
+        console.log(pedido);
         this.setState({
-            menuSeleccionado: pedido.menu
+            menuSeleccionado: pedido.menu,
+            pedido: pedido.pedido,
+            idMant: index
         });
-        this.cambiarVista('Menu_Detalle');
+        console.log('va a edicion',pedido, index)
+        if (pedido.pedido === 'C' ) {
+            this.cambiarVista(VISTAS.CAR_DET.CMD);
+        } else {
+            this.cambiarVista(VISTAS.MEN_DET.CMD);
+        }
     }
 
     render() {
-        console.log('mostrar', this.state.mostrando);
-        console.log(this.state.cartaBase)
+        if (this.state.menu === []) this.leerMenu();          //para inicios con
+        if (this.state.cartaBase === []) this.leerCarta();    //salto directo
+        //if (this.state.pedido === []) this.setState({pedido :Array.from(this.state.cartaBase)});
+        
         return (
-            <div >
+            <div className={Estilos.textCenter}>
                 <div>
                     {/* {JSON.stringify(this.state.ordenMenu)} */}
                 </div>
@@ -162,9 +218,10 @@ export default class Resumen extends Component {
                     (this.state.mostrando === VISTAS.RESUMEN.CMD) ?
                         <>
                             <Pedidos
-                                menu={this.state.ordenMenu}
+                                ordenMenu={this.state.ordenMenu}
                                 editarPedido={this.editarPedido}
                                 eliminarMenu={this.eliminarMenu}
+
                             />
                             <Botonera
                                 cambiarVista={this.cambiarVista}
@@ -184,12 +241,21 @@ export default class Resumen extends Component {
                         : null
                 }
                 {
-                    (this.state.mostrando === VISTAS.CAR_DET.CMD) ?
+                    (this.state.mostrando === VISTAS.MEN_LISTA_GRANDE.CMD) ?
+                        <MenuListaGrande
+                            cambiarVista={this.cambiarVista}
+                            menu={menu}
+                            cambiarMenuSeleccionado={this.cambiarMenuSeleccionado}
+                        />
+                        : null
+                }
+                {
+                    (this.state.mostrando === VISTAS.CAR_DET.CMD && this.state.menuSeleccionado.length>0) ?
                         <Carta
                             cambiarVista={this.cambiarVista}
                             setCarta={this.setCarta}
-                            pedido={this.state.carta}
-                            carta={this.state.cartaBase.slice()}
+                            carta={this.state.menuSeleccionado}
+                            ordenarMenu={this.ordenarMenu}
                         />
                         : null
                 }
@@ -202,8 +268,9 @@ export default class Resumen extends Component {
                                 cambiarVista={this.cambiarVista}
                                 cancelar={this.cancelar}
                             />
+                            
                             <Pedidos
-                                menu={this.state.ordenMenu}
+                                ordenMenu={this.state.ordenMenu}
                                 editarPedido={this.editarPedido}
                                 eliminarMenu={this.eliminarMenu}
                             />
@@ -216,6 +283,7 @@ export default class Resumen extends Component {
                             menu={this.state.menuSeleccionado}
                             cambiarVista={this.cambiarVista}
                             ordenarMenu={this.ordenarMenu}
+                            pedido={this.state.pedido}
                         />
                         : null
                 }

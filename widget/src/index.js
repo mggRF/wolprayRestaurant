@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import AppMenu from './AppMenu';
 import AppCarta from './AppCarta';
 import reportWebVitals from './reportWebVitals';
 
 const targetMenu = document.getElementById('WPWR_menu');
 const targetCarta = document.getElementById('WPWR_carta');
-console.log("Empezamos");
-console.log(targetMenu);
+
 if (targetMenu) {
   ReactDOM.render(
     <React.StrictMode>
