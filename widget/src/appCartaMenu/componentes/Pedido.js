@@ -6,7 +6,7 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 export default class Pedido extends Component {
     menuCarta(control) {
         if (control && control.length > 0) {
-            return '-*  Menú para';
+            return '-*  Menú para ';
         } else {
             return '-* Carta  para '
         }
@@ -20,7 +20,7 @@ export default class Pedido extends Component {
                         {this.menuCarta(this.props.pedido.pedido)}
                         {this.props.pedido.receptor} ...&nbsp;{this.props.pedido.precio}&euro;&nbsp;&nbsp;
                         <span 
-                            className="iconAccion"
+                            className="iconAccion"  
                             onClick={e => this.props.editarPedido(this.props.pedido, this.props.index)}>
                             <FontAwesomeIcon icon={faEdit} />
 

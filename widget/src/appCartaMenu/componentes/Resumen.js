@@ -12,10 +12,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import json from './Carta/Data/json.js';
 import { VISTAS } from '../Constantes/Constantes.js';
 import Estilos from './MenuCarta.module.css'
-<<<<<<< HEAD
-=======
-
->>>>>>> 2bd16f213b4154c523564b61d0215a6b88145411
 // import {Pedidos} from './Pedidos.js';
 import MenuListaGrande from './MenuListaGrande';
 
@@ -28,11 +24,7 @@ export default class Resumen extends Component {
         super(props);
 
         this.state = {
-<<<<<<< HEAD
             mostrando: VISTAS.RESUMEN.CMD,//this.props.iniciar ,
-=======
-            mostrando: this.props.iniciar ,
->>>>>>> 2bd16f213b4154c523564b61d0215a6b88145411
             pedidos: [],        //todos los pedidos hechos
             menu: [],
             menuSeleccionado: [],   // Toda la informacion del menu/carta seleccionado
@@ -45,18 +37,14 @@ export default class Resumen extends Component {
                 poblacion: ''
             },
             cartaBase: [],              //carta original nula
-            idMant: 0,                  //numero de elemento en modificacion
+            idMant: null,                  //numero de elemento en modificacion
             pedido: []
         };
     }
     componentDidMount() {
         this.leerMenu();
         this.leerCarta();
-<<<<<<< HEAD
         // this.cambiarVista(this.props.iniciar);
-=======
-        this.cambiarVista(this.props.iniciar);
->>>>>>> 2bd16f213b4154c523564b61d0215a6b88145411
     }
 
     leerMenu = () => {
@@ -165,7 +153,9 @@ export default class Resumen extends Component {
      * @param {*} menu 
      */
     ordenarMenu = menu => {
-        if (this.state.idMant  === 0) {
+        
+
+        if (this.state.idMant  === null) {
             this.setState({
                 ordenMenu: [...this.state.ordenMenu, menu]
             });
@@ -173,7 +163,7 @@ export default class Resumen extends Component {
             let om = this.state.ordenMenu
             om[this.state.idMant] = menu;
             this.setState({
-                idMant: 0,
+                idMant: null,
                 ordenMenu: om
             });
 
@@ -202,10 +192,7 @@ export default class Resumen extends Component {
     }
 
     editarPedido = (pedido, index) => {
-<<<<<<< HEAD
         console.log(pedido);
-=======
->>>>>>> 2bd16f213b4154c523564b61d0215a6b88145411
         this.setState({
             menuSeleccionado: pedido.menu,
             pedido: pedido.pedido,

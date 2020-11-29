@@ -24,12 +24,12 @@ export default class MenuDetalle extends Component {
     checked = idPlato => {
         let selected = false;
         this.props.pedido.forEach(e => {
-            if (e.idPlato === idPlato) {
+            if (e.idPlato == idPlato) {
                 selected = true;
             }
         });
         this.state.seleccionados.forEach(e => {
-            if (e.idPlato === idPlato) {
+            if (e.idPlato == idPlato) {
                 selected = true;
             }
         });
@@ -57,7 +57,7 @@ export default class MenuDetalle extends Component {
 
     }
     componentDidMount(props) {
-        this.changeCheckboxes();
+        this.setState({seleccionados:this.props.pedido})
     }
     abandonar = async vista => {
         if (this.state.modificado) {
@@ -158,10 +158,11 @@ export default class MenuDetalle extends Component {
     pedir = _ => {
         this.props.ordenarMenu({
             receptor: this.state.receptor,
-            pedido: 'M',
-            menu: this.state.seleccionados,
+            pedido: this.state.seleccionados,
+            menu: this.props.menu,
             precio: this.props.menu.precio
         });
+        
         this.props.cambiarVista(VISTAS.RESUMEN.CMD);
     }
     contar(lista) {
