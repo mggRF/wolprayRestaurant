@@ -24,7 +24,7 @@ export default class Resumen extends Component {
         super(props);
 
         this.state = {
-            mostrando: VISTAS.RESUMEN.CMD,//this.props.iniciar ,
+            mostrando: this.props.iniciar,
             pedidos: [],        //todos los pedidos hechos
             menu: [],
             menuSeleccionado: [],   // Toda la informacion del menu/carta seleccionado
@@ -118,18 +118,20 @@ export default class Resumen extends Component {
     }
 
     cambiarVista = vista => {
-       
+
         if (vista === VISTAS.CAR_DET.CMD) {        //salto a carta detalle
             this.leerCarta()
-            this.setState({ menuSeleccionado: Array.from(this.state.cartaBase),
-                            pedido:'C' });
+            this.setState({
+                menuSeleccionado: Array.from(this.state.cartaBase),
+                pedido: 'C'
+            });
         }
         if (vista === VISTAS.MEN_LISTA || vista === VISTAS.MEN_LISTA_GRANDE) {
-            if (this.props.iniciar  === VISTAS.MEN_LISTA_GRANDE.CMD) {
-                vista = VISTAS.MEN_LISTA_GRANDE
+            if (this.props.iniciar === VISTAS.MEN_LISTA_GRANDE.CMD) {
+                vista = VISTAS.MEN_LISTA_GRANDE.CMD
             }
             this.setState({ pedido: menu });
-        } 
+        }
         this.setState({ mostrando: vista });
     }
 
@@ -153,9 +155,9 @@ export default class Resumen extends Component {
      * @param {*} menu 
      */
     ordenarMenu = menu => {
-        
 
-        if (this.state.idMant  === null) {
+
+        if (this.state.idMant === null) {
             this.setState({
                 ordenMenu: [...this.state.ordenMenu, menu]
             });
@@ -198,8 +200,8 @@ export default class Resumen extends Component {
             pedido: pedido.pedido,
             idMant: index
         });
-        console.log('va a edicion',pedido, index)
-        if (pedido.pedido === 'C' ) {
+        console.log('va a edicion', pedido, index)
+        if (pedido.pedido === 'C') {
             this.cambiarVista(VISTAS.CAR_DET.CMD);
         } else {
             this.cambiarVista(VISTAS.MEN_DET.CMD);
@@ -207,10 +209,51 @@ export default class Resumen extends Component {
     }
 
     render() {
+        console.log('mostrar', this.state.mostrando)
+        if (this.state.mostrando === VISTAS.RESUMEN.CMD) {
+            swal({
+                text: "En esta pantalla puedes escoger entre ver la carta, ver el menu, ir a encargar lo que hayas seleccionado, o cancelar toda la operacion\n  Si ya has encargado algo, te aparecera en la lista superior... que tambien puedes modificar",
+                title: "Presentación",
+                icon: 'info',
+                buttons: ["Continuar"],
+                position: "top-start"
+
+            })
+        }
+        if (this.state.mostrando === VISTAS.MEN_LISTA.CMD || this.state.mostrando === VISTAS.MEN_LISTA_GRANDE.CMD) {
+            swal({
+                text: "Aquí puedes hacer una selección acerca del menu que quieres elegir, a continuación te pediremos que indiques los platos",
+                title: "Presentación",
+                icon: 'info',
+                buttons: ["Continuar"],
+                position: "top-end"
+
+            })
+        }
+        if (this.state.mostrando === VISTAS.MEN_DET.CMD) {
+            swal({
+                text: "Ha llegado el momento de elegir los platos que deseas comer; de cada grupo puedes elegir uno (y solo uno); al finalizar, puedes indicar tu nombre para que sepamos para quien es el menu",
+                title: "Presentación",
+                icon: 'info',
+                buttons: ["Continuar"],
+                position: "top-end"
+
+            })
+        }
+        if (this.state.mostrando === VISTAS.CAR_DET.CMD && this.state.menuSeleccionado.length > 0){
+            swal({
+                text: "Si has decidido pedir la comida a la carta, ahora puedes ir señalando los platos que deseas y el total se ira acumulando en la parte superior\n Cuando termines, no te olvides indicar parta quien es el encargo. Ah! si quieres mas de un plato, a la derecha encontraras la posibilidad de marcar todos los que quieras",
+                title: "Presentación",
+                icon: 'info',
+                buttons: ["Continuar"],
+                position: "botton-end"
+
+            })
+        }
         if (this.state.menu === []) this.leerMenu();          //para inicios con
         if (this.state.cartaBase === []) this.leerCarta();    //salto directo
         //if (this.state.pedido === []) this.setState({pedido :Array.from(this.state.cartaBase)});
-        
+
         return (
             <div className={Estilos.textCenter}>
                 <div>
@@ -252,7 +295,7 @@ export default class Resumen extends Component {
                         : null
                 }
                 {
-                    (this.state.mostrando === VISTAS.CAR_DET.CMD && this.state.menuSeleccionado.length>0) ?
+                    (this.state.mostrando === VISTAS.CAR_DET.CMD && this.state.menuSeleccionado.length > 0) ?
                         <Carta
                             cambiarVista={this.cambiarVista}
                             setCarta={this.setCarta}
@@ -270,7 +313,7 @@ export default class Resumen extends Component {
                                 cambiarVista={this.cambiarVista}
                                 cancelar={this.cancelar}
                             />
-                            
+
                             <Pedidos
                                 ordenMenu={this.state.ordenMenu}
                                 editarPedido={this.editarPedido}

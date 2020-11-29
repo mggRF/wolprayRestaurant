@@ -5,7 +5,7 @@ import { VISTAS } from './appCartaMenu/Constantes/Constantes.js';
 function AppMenu() {
   return (
     <div>
-      <Resumen iniciar = {VISTAS.RESUMEN.CMD} />
+      <Resumen iniciar = {VISTAS.MEN_LISTA_GRANDE.CMD} />
     </div>
   );
 }
