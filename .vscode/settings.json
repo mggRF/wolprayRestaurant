@@ -1,3 +1,15 @@
 {
+<<<<<<< HEAD
     "git.ignoreLimitWarning": true
+=======
+    "bracket-pair-colorizer-2.colors": [
+    "#fafafa",
+    "#9F51B6",
+    "#F7C244",
+    "#F07850",
+    "#9CDD29",
+    "#C497D4"
+]
+    ]
+>>>>>>> 273499164d8de5f131ef1c3d1dbe8e949b4bfdf6
 }

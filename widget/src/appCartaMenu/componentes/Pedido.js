@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Estilos from './MenuCarta.module.css';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
+
 export default class Pedido extends Component {
     menuCarta(control) {
         if (control && control.length > 0) {
@@ -25,7 +26,7 @@ export default class Pedido extends Component {
 
                         </span>
                         <span
-                            className="iconAccion fa fa-trash"
+                            className="iconAccion"
                             onClick={e => this.props.eliminarMenu(this.props.index)}
                         >
                         <FontAwesomeIcon icon={faTrash} />
