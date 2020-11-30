@@ -210,9 +210,12 @@ export default class Resumen extends Component {
 
     render() {
         console.log('mostrar', this.state.mostrando)
+        if (this.state.menu === []) this.leerMenu();          //para inicios con
+        if (this.state.cartaBase === []) this.leerCarta();    //salto directo
+
         if (this.state.mostrando === VISTAS.RESUMEN.CMD) {
             swal({
-                text: "En esta pantalla puedes escoger entre ver la carta, ver el menu, ir a encargar lo que hayas seleccionado, o cancelar toda la operacion\n  Si ya has encargado algo, te aparecera en la lista superior... que tambien puedes modificar",
+                text: "En esta pantalla puedes escoger entre ver la carta, ver el menu, ir a encargar lo que hayas seleccionado, o cancelar toda la operacion\n  Si ya has encargado algo, te aparecera en la lista superior... que también te permitirá borrar el pedido o cambiar los patos solicitados",
                 title: "Presentación",
                 icon: 'info',
                 buttons: ["Continuar"],
@@ -240,25 +243,31 @@ export default class Resumen extends Component {
 
             })
         }
-        if (this.state.mostrando === VISTAS.CAR_DET.CMD && this.state.menuSeleccionado.length > 0){
-            swal({
-                text: "Si has decidido pedir la comida a la carta, ahora puedes ir señalando los platos que deseas y el total se ira acumulando en la parte superior\n Cuando termines, no te olvides indicar parta quien es el encargo. Ah! si quieres mas de un plato, a la derecha encontraras la posibilidad de marcar todos los que quieras",
-                title: "Presentación",
-                icon: 'info',
-                buttons: ["Continuar"],
-                position: "botton-end"
+        if (this.state.mostrando === VISTAS.CAR_DET.CMD) {
+            if (this.state.menuSeleccionado.length === 0) {
+                this.setState({ menuSeleccionado: Array.from(this.state.cartaBase) })
+            }
+            if (this.state.menuSeleccionado.length > 0) {
+                swal({
+                    text: "Si has decidido pedir la comida a la carta, ahora puedes ir señalando los platos que deseas y el total se ira acumulando en la parte superior\n Cuando termines, no te olvides indicar para quien es el encargo. Ah! si quieres mas de un plato, a la derecha encontraras la posibilidad de marcar todos los que quieras",
+                    title: "Presentación",
+                    icon: 'info',
+                    buttons: ["Continuar"],
+                    position: "botton-end"
 
-            })
+                })
+            }
         }
-        if (this.state.menu === []) this.leerMenu();          //para inicios con
-        if (this.state.cartaBase === []) this.leerCarta();    //salto directo
-        //if (this.state.pedido === []) this.setState({pedido :Array.from(this.state.cartaBase)});
+
+
 
         return (
-            <div className={Estilos.textCenter}>
+
+            <div className={Estilos.textCenter} >
                 <div>
                     {/* {JSON.stringify(this.state.ordenMenu)} */}
                 </div>
+
                 {
                     (this.state.mostrando === VISTAS.RESUMEN.CMD) ?
                         <>
@@ -266,7 +275,6 @@ export default class Resumen extends Component {
                                 ordenMenu={this.state.ordenMenu}
                                 editarPedido={this.editarPedido}
                                 eliminarMenu={this.eliminarMenu}
-
                             />
                             <Botonera
                                 cambiarVista={this.cambiarVista}
@@ -333,7 +341,7 @@ export default class Resumen extends Component {
                         : null
                 }
 
-            </div>
+            </div >
         );
     }
 }
