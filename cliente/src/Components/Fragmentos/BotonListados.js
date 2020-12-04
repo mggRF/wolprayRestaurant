@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+/**
+ * Llama a la rutina prevista, pasandole lo que haya recibido en 
+ * tipo = normalmente I;D;M;V
+ * id   = registro a recuperar
+ * datosAux = cualquier objeto a traspasar al siguiente nivel
+ */
 export default class BotonListado extends Component {
 
     render() {
@@ -10,7 +16,7 @@ export default class BotonListado extends Component {
         return (
             <button type="button"
                 className={clase + ' animate__animated animate__zoomIn'}
-                onClick={() => this.props.funcion(this.props.tipo, this.props.id)}
+                onClick={() => this.props.funcion(this.props.tipo, this.props.id, this.props.datosAux)}
             >
                 <i className = {icon}></i>
             </button>

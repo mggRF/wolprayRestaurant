@@ -12,8 +12,8 @@ export default class ControllerMenu extends ControllerBase {
 
     constructor(props) {
         super(props);
-        this.TABLA = 'n_music';
-        this.ID = 'musicid';
+        this.TABLA = 'menu';
+        this.ID = 'idmenu';
         this.LISTADO = Listado
         this.FORMULARIO = Formulario
         this.MODELO = new Menu();

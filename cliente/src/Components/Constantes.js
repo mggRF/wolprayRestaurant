@@ -30,6 +30,7 @@ module.exports = {
     API_URL: variable_url() + VERSION_API + '/',
     LOCALS: 'locals',
     MENU: 'menu',
+    MENU_PLATOS: 'menu_platos',
     STATES: 'states',
     PROVINCES: 'provinces',
     GRUPOS: 'grupos',

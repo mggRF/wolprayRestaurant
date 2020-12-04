@@ -20,7 +20,7 @@ const express_logger = require('express-logger-unique-req-id');
 const {IT_IS_SECURE} = require('./Constantes/ConstantesSeguridad');
 
 var multipartMiddleware = multipart({uploadDir: '../uploads'});
-const { UPLOADS, COMUNIDADES, PAISES, POBLACIONES, PROVINCIAS, USERS, ROLES, COMPANIES, PRODUCTS , LOCALS, MENU, GRUPOS, LOCALCITY} = require('./Constantes/ConstantesRutas');
+const { UPLOADS, COMUNIDADES, PAISES, POBLACIONES, PROVINCIAS, USERS, ROLES, COMPANIES, PRODUCTS , LOCALS, MENU, MENU_PLATOS, GRUPOS, LOCALCITY, IVA} = require('./Constantes/ConstantesRutas');
 
 
 const app = express();
@@ -37,12 +37,14 @@ const rPoblacion = require('./rutas/rutaPoblacion');
 const rProvincia = require('./rutas/rutaProvincias');
 const rLocals = require('./rutas/rutaLocals');
 const rMenu = require('./rutas/rutaMenu');
+const rMenuPlatos = require('./rutas/rutaMenuPlatos');
 const rGrupos = require('./rutas/rutaGrupos');
 const rLocalCity = require('./rutas/rutaLocalCity');
 const rUsers = require('./rutas/rutaUsers');
 const rRoles = require('./rutas/rutaRoles');
 const rCompanies = require('./rutas/rutaCompanies');
 const rProducts = require('./rutas/rutaProducts');
+const rIva = require('./rutas/rutaIva');
 const Autorizado = require('./Autentificacion/middelAut');
 
 
@@ -67,12 +69,13 @@ app.use(POBLACIONES, Autorizado, rPoblacion);
 app.use(PROVINCIAS, Autorizado, rProvincia);
 app.use(LOCALS, Autorizado, rLocals);
 app.use(MENU, Autorizado, rMenu);
+app.use(MENU_PLATOS, Autorizado, rMenuPlatos);
 app.use(GRUPOS, Autorizado, rGrupos);
 app.use(USERS, Autorizado, rUsers);
 app.use(LOCALCITY, Autorizado, rLocalCity);
 app.use(ROLES, Autorizado, rRoles);
 app.use(COMPANIES, Autorizado, rCompanies);
-//app.use(DRESSCODE, Autorizado, rDressCode);
+app.use(IVA, Autorizado, rIva);
 app.use(PRODUCTS, Autorizado, rProducts);
 //app.use(IMAGES, Autorizado, rImages);
 

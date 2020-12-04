@@ -38,7 +38,7 @@ class ControladorBase {
         this.limite = LPPAGINA;
         this.getFoto = this.getFoto.bind(this);
         this.leerALL = this.leerALL.bind(this);
-        this.leerTokemTda = this.leerTokemTda.bind(this);
+        
         this.hacerPost = this.hacerPost.bind(this);
         this.leerSelectDir = this.leerSelectDir.bind(this);
 
@@ -111,7 +111,7 @@ class ControladorBase {
     async leerCount(req, res) {
         //Atencion el sql ha de pasar por el sistema de añadir empresa/manager
         let sql = `SELECT COUNT(*) as contador FROM ${this.config.TABLA}`;
-        this.leerTokemTda(req, res, sql)
+        GestionTokemTda.leerTokemTda(req, res, sql)
             .then(sql => {
                 console.error(sql)
                 return this.connect.leerSql(sql)
@@ -143,7 +143,7 @@ class ControladorBase {
             sql = this.config.QUERIES.SELECT_UNO.replace(':WHERE', this.config.QUERIES.SELECT_BY_ID);
             sql = sql.replace(':id', decodeURIComponent(id));
         }
-        this.leerTokemTda(req, res, sql)
+        GestionTokemTda.leerTokemTda(req, res, sql)
             .then(sql => {
                 this.connect.leerSql(sql.replace(/:TABLA/gi, this.config.TABLA))
                     .then(dat => {
@@ -164,7 +164,9 @@ class ControladorBase {
 
 
     /**
-     * Lista lista objetos indexados de la base de datos en base a una referencia.
+     * Lista lista objetos indexados de la base de datos en 
+     * base a una referencia.
+     * Para cuadros de desplegables
      * 
      * @param {} req : objeto request.
      * @param {} res : objeto response.
@@ -185,7 +187,7 @@ class ControladorBase {
         const role = req.session.role;
         sql = sql.replace(/:TABLA/gi, this.config.TABLA);
         sql = CompletaSQL.cSQL(req, sql);
-        this.leerTokemTda(req, res, sql)
+        GestionTokemTda.leerTokemTda(req, res, sql)
             .then(sql => {
                 this.connect.leerSql(sql)
                     .then(dat => {
@@ -205,7 +207,7 @@ class ControladorBase {
         //Presenta.log('leerAll0');
         let sql = this.config.QUERIES.SELECT_ALL.replace(/:TABLA/gi, this.config.TABLA);
         sql = CompletaSQL.cSQL(req, sql);
-        this.leerTokemTda(req, res, sql)
+        GestionTokemTda.leerTokemTda(req, res, sql)
             .then(sql => {
                 Presenta.log('leerAll0', sql);
                 this.connect.leerSql(sql)
@@ -497,16 +499,7 @@ class ControladorBase {
 
 
 
-    async leerTokemTda(req, res, sql) {
-        let tokemTda = req.header("WPRA_Tienda")
-        if (sql && sql.includes(':local')) {
-            if (tokemTda !== undefined && tokemTda.length > 0) {
-                let vtk = await  GestionTokemTda.tokemTda2Local(this, tokemTda, res)                   
-                return sql.replace(":local",  vtk)
-            }
-        }
-        return Promise.resolve(sql)
-    }
+    
 }
 
 module.exports = ControladorBase

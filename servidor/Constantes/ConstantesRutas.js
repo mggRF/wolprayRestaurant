@@ -27,15 +27,14 @@ module.exports = {
     LOCALS:'/' +  VERSION  + 'locals',
     LOCALCITY:'/' +  VERSION  + 'localcity',
     MENU: '/' + VERSION + 'menu',
+    MENU_PLATOS: '/' + VERSION + 'menu_platos',
     GRUPOS: '/' + VERSION + 'grupos',
     PAISES: '/' +  VERSION  + 'countrys',
     PROVINCIAS: '/' +  VERSION  + 'provinces',
     POBLACIONES: '/' +  VERSION  + 'citys',
     PRODUCTS: '/' +  VERSION  + 'products',
-    
-   
     USERS: '/' +  VERSION  + 'users',
-    
+    IVA:'/' +  VERSION  + 'iva',
     ROLES: '/' +  VERSION  + 'roles',
     COMPANIES: '/' +  VERSION  + 'companies',
     PRODUCTS: '/' +  VERSION  + 'products',

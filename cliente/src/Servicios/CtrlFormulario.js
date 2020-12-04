@@ -40,7 +40,11 @@ export default class CtrlFormulario extends Component {
         return (
             <>
                 {React.cloneElement(this.props.formulario,
-                    { orden: orden, obj: obj, funcion: this.recogeDatos })}
+                    { orden: orden, 
+                      obj: obj, 
+                      funcion: this.recogeDatos,
+                      datosAux: this.props.datosAux
+                    })}
                 <div className = "container mt-5">
                     <button type="button"
                         className="btn btn-primary"

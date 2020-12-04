@@ -10,17 +10,19 @@ import CtrlFormulario from './../../Servicios/CtrlFormulario';
 export default class ControllerBase extends Component {
 
 
-    insertSolicitado = () => {
+    insertSolicitado = (orden = 'I', id=null, datosAux="") => {
+        console.log("Entro en Insert", datosAux);
         this.setState({
             estadoActualizacion: 1,       //pongo modo formulario
             orden: "I",               //pongo lo que ha de hacer
             id: null,                      //pongo sobre quien lo ha de hacer
-            objeto: Object.assign({}, this.MODELO)
+            objeto: Object.assign({}, this.MODELO),
+            datosAux:datosAux
         });
     }
 
-    trabajoSolicitado = (orden, id) => {
-        //console.log("Controller, orden y id=>",orden,id)
+    trabajoSolicitado = (orden, id, datosAux="") => {
+        console.log("Controller, orden y id=>",orden,id)
         AccesoAPI.leerUNO(this.TABLA, id)
             .then(response => {
                 //console.log("RespuestaUNO=>", response);
@@ -29,7 +31,8 @@ export default class ControllerBase extends Component {
                             estadoActualizacion: 1,       //pongo modo formulario
                             orden: orden,               //pongo lo que ha de hacer
                             id: id,                      //pongo sobre quien lo ha de hacer
-                            objeto: response.Datos[0]
+                            objeto: response.Datos[0],
+                            datosAux:datosAux
                         });
                     } else {
                         this.setState({
@@ -106,7 +109,7 @@ export default class ControllerBase extends Component {
         
         const LISTADO = this.LISTADO;
         const FORMULARIO = this.FORMULARIO;
-      
+      console.log('Controller', this.state.datosAux)
         //
         // se debe sacar mensaje de error, si esta en state
         //
@@ -122,6 +125,7 @@ export default class ControllerBase extends Component {
                         obj={this.state.objeto}
                         trabajo={this.accionSolicitada}
                         formulario={<FORMULARIO />}
+                        datosAux= {this.state.datosAux}
                     />
                     : ""}
 

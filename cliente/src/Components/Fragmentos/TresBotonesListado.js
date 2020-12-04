@@ -16,21 +16,24 @@ export default class TresBotonesListado extends Component {
                         clase={COLORES.BTN_VER}
                         tipo="V"
                         icon={VIE}
-                        id={this.props.id}>
+                        id={this.props.id}
+                        datosAux={this.props.datosAux}>
                     </BotonListado>
                 </td><td>
                     <BotonListado funcion={funcion}
                         clase={COLORES.BTN_EDIT}
                         tipo="E"
                         icon={MOD}
-                        id={this.props.id}>
+                        id={this.props.id}
+                        datosAux={this.props.datosAux}>
                     </BotonListado>
                 </td><td>
                     <BotonListado funcion={funcion}
                         clase={COLORES.BTN_DEL}
                         icon={DEL}
                         tipo="D"
-                        id={this.props.id}>
+                        id={this.props.id}
+                        datosAux={this.props.datosAux}>
                     </BotonListado>
                 </td>
 

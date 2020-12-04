@@ -23,13 +23,18 @@ const paths = {
         path: CARPETA + '/menu',
         icon: 'fas fa-drum'
     },
+    MENU_PLATOS : {
+        title: 'Platos menu',
+        path: CARPETA + '/menuplatos',
+        icon: 'fas fa-drum'
+    },
     COMPANIES : {
         title: 'Compañías',
         path: CARPETA + "/companies",
         icon: 'fas fa-building'
     },
     ZONAS: {
-        title: 'zonas servicio',
+        title: 'Zonas servicio',
         path: CARPETA + '/zonas',
         icon: 'fas fa-calendar-week'
     },

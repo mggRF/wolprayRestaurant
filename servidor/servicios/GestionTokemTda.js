@@ -13,17 +13,27 @@ class GestionTokemTda {
     constructor() {
 
     }
+    static async leerTokemTda(req, res, sql) {
+        let tokemTda = req.header("WPRA_Tienda")
+        if (sql && sql.includes(':local')) {
+            if (tokemTda !== undefined && tokemTda.length > 0) {
+                let vtk = await  GestionTokemTda.tokemTda2Local(this, tokemTda, res)                   
+                return sql.replace(":local",  vtk)
+            }
+        }
+        return Promise.resolve(sql)
+    }
 
     static tokemTda2Local(controller, tokem, res) {
         let connect = new Conexion();
         let query = QueriesLocals.CONVER_TOKEM2NUMERO;
         let sql = query.replace(/:TABLA/gi, TABLA)
         sql = sql.replace(':tokemLocal', "'" + tokem + "'");
-        console.log("sqlTokem",sql)
+        //console.log("sqlTokem",sql)
         return connect.leerSql(sql)
             .then(vtk => {
                 if (vtk.length > 0) {
-                    console.log('vtk',vtk)
+                    //console.log('vtk',vtk)
                     return Promise.resolve(vtk[0].id)
                 } else {
                     controller.procesaErr(res, "Problema en acceso a tokem", 404)
@@ -46,7 +56,7 @@ class GestionTokemTda {
         do {
             let tokem = crypto.randomBytes(64).toString("hex");
             sql = sql.replace(':tokemLocal', "'" + tokem + "'");
-            console.log(tokem);
+            //console.log(tokem);
             connect.leerSql(sql)
                 .then(vtk => {
                     if (vtk.lengt > 0) {

@@ -11,8 +11,6 @@ var api = express.Router();
 api.get('/', cPais.leerALL);
 api.get('/select/',cPais.leerSelect)
 api.get('/:id', cPais.leerUno);
-api.post('/', cPais.updateTable);
-api.put('/:id', cPais.updateTable);
-api.delete('/:id', cPais.updateTable);
+
 // Exportamos la configuración
 module.exports = api;
