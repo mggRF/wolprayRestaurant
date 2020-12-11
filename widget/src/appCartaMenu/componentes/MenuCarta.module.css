@@ -1,0 +1,404 @@
+.textCenter {
+    text-align: center !important;
+}
+
+.textLeft {
+    text-align: left !important;
+}
+
+.textFlex {
+    
+    text-align: center !important;
+}
+
+.contenedor {
+    text-align: center !important;
+}
+
+.ancho {
+    width: 20%  !important;
+    min-width: 20em  !important;
+    display: block  !important;
+    margin: auto  !important;
+}
+.dnone{
+    display:none  !important;
+}
+.boxM {
+    border: 1px solid #000  !important;
+    border-radius: 4px 4px 4px 4px  !important;
+}
+
+.letraNormal {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif  !important;
+    font-size: 1rem  !important;
+    font-weight: 400  !important;
+    line-height: 1.5  !important;
+    color: #333  !important;
+}
+
+.menu {
+    composes: ancho boxM letraNormal;
+    text-align: center  !important;
+    margin-bottom: 20px  !important;
+}
+.menuH3{
+    color: #fff  !important;
+    font-family: roboto,Sans-serif  !important;
+    font-size: 1.5rem  !important;
+    font-weight: 500  !important;
+    line-height: 1em  !important;
+    letter-spacing: .5px  !important;
+    margin-right:0px  !important;
+}
+.menuH3::after{
+    content:""  !important;
+    clear:both  !important;
+    display:table  !important;
+}
+.botonera {
+    composes: ancho;
+    width: 25em  !important;
+}
+
+.cabeceraMenu {
+    background-color: #777777  !important;
+    padding: 20px 24px 20px 24px  !important;
+    color: #ffffff  !important;
+    font-family: "Roboto", Sans-serif  !important;
+    font-size: 1.5rem  !important;
+    font-weight: 500  !important;
+    line-height: 1em  !important;
+    letter-spacing: 0.5px  !important;
+}
+
+.cuerpoMenu {}
+
+.precio {
+    background-color: #ffffff  !important;
+    font-family: "Roboto", Sans-serif  !important;
+    font-size: 3.75rem  !important;
+    font-weight: 500  !important;
+    letter-spacing: -1.5px  !important;
+}
+
+.precio:before {
+    content: "€"  !important;
+    font-size: calc(50em/100)  !important;
+    align-self: top  !important;
+    
+}
+
+.grupo {
+    margin-top: 20px  !important;
+}
+.smallMenu{
+    font-family: roboto,Sans-serif  !important;
+    font-size: .75rem  !important;
+    font-weight: 400  !important;
+    line-height: 1.617em  !important;
+    letter-spacing: .15px  !important;
+}
+.titGrupo {
+    margin: 1em auto  !important;
+    font-family: "Roboto", Sans-serif  !important;
+    font-size: 1.1em  !important;
+    font-weight: 400  !important;
+    line-height: 1.4em  !important;
+    text-transform: uppercase  !important;
+}
+
+.titGrupo::after {
+    
+}
+
+.titGrupo::before {
+    
+}
+
+.letraPlato {
+    font-family: "Roboto", Sans-serif  !important;
+    font-weight: 400  !important;
+    line-height: 1.6em  !important;
+    font-size: 1.1em  !important;
+}
+
+.plato {
+    composes: letraPlato;
+    margin-left: 15px  !important;
+    margin-right: 15px  !important;
+}
+
+.boton {
+    margin: 15px auto;
+    margin-right: 30px !important;
+    padding: 15px 30px  !important;
+    color: #ffffff  !important;
+    font-family: "Roboto", Sans-serif  !important;
+    font-size: 1em  !important;
+    background-color: #cc9955  !important;
+    border-style: solid  !important;
+    border-width: 1px 1px 1px 1px  !important;
+    border-color: #cc9955  !important;
+    border-radius: 24px 24px 24px 24px  !important;
+}
+
+.letraPequena {
+    font-family: "Roboto", Sans-serif  !important;
+    font-weight: 400  !important;
+    line-height: 1.6em  !important;
+    font-size: 1.1em  !important;
+}
+
+.comentario {
+    composes: letraPequena;
+    margin-left: 15px  !important;
+    margin-right: 15px  !important;
+}
+
+.letraFormu {
+    font-family: "Roboto", Sans-serif  !important;
+    font-weight: 400  !important;
+    line-height: 1.6em  !important;
+    font-size: 1.1em  !important;
+}
+
+.formControl {
+    composes: letraFormu;
+    margin: 1em auto  !important;
+}
+
+.d-inline {}
+
+.number {
+    width: 40px  !important;
+}
+
+.checkOrder {
+    margin-left: 20px  !important;
+}
+
+.line {
+    margin-top: 20px  !important;
+}
+
+
+.subtotal {
+    margin-top: 15px  !important;
+}
+
+.lineaCarta {
+    
+}
+
+.precioUnit {
+    float: right  !important;
+    font-weight: 500  !important;
+}
+
+.precioUnit::after {
+    content: €  !important;
+}
+
+.boxUnit {
+    width: 3em  !important;
+    float: right  !important;
+}
+
+.titlePlato {
+    display: inline-block  !important;
+    white-space: nowrap  !important;
+    text-overflow: inherit  !important;
+    overflow: hidden  !important;
+    font-size: 20px  !important;
+    margin-left: 20px  !important;
+    ;
+}
+
+.containerProducts_h3 {
+    border-left: 4px solid coral  !important;
+    padding-left: 20px  !important;
+}
+
+
+.floatRight {
+    float: right  !important;
+}
+
+.floatLeft {
+    float: left  !important;
+}
+
+.clearRight {
+    clear: right  !important;
+}
+
+.subtotal {
+    margin-left: 5%  !important;
+}
+
+.notas {
+    margin-left: 2.4em  !important;
+    margin-bottom: 20px  !important;
+}
+
+
+
+.lineaPedido {
+    composes: letraFormu;
+    font-size: 2em  !important;
+}
+
+.cartaBox{
+    display:flex  !important;
+    flex-direction:row  !important;
+}
+.lineaCarta{
+    display: block  !important;
+    margin:auto  !important;
+    flex-shrink: 0  !important;
+    flex-grow: 1  !important;
+    padding-left:10px  !important;
+    padding-right:10px  !important;
+    border-bottom-width: 2px  !important;
+    border-bottom-color: coral  !important;
+
+}
+.colorHR{
+   height: 2px  !important;
+   background-color: coral  !important;
+   border:none  !important;
+}
+.checkmark{
+    display:inline-block  !important;
+    top: 0  !important;
+    left: 0  !important;
+    height: 20px  !important;
+    width: 20px  !important;
+    background-color: #fff  !important;
+    border:1px solid #aaa  !important;
+}
+.checkmarkSelected{
+    display:inline-block  !important;
+    top: 0  !important;
+    left: 0  !important;
+    height: 16px  !important;
+    width: 16px  !important;
+    background-color: coral  !important;
+    border:1px solid #aaa  !important;
+    background-clip: content-box  !important;
+    box-shadow: inset 0 0 0 4px white  !important; 
+    padding:2px  !important;
+}
+.checkmark:after {
+    content: ""  !important;
+    position: absolute  !important;
+    display: none  !important;
+}
+.container input:checked ~ .checkmark:after {
+    display: block  !important;
+}
+.container .checkmark:after {
+    left: 9px  !important;
+    top: 5px  !important;
+    width: 5px  !important;
+    height: 10px  !important;
+    border: solid white  !important;
+    border-width: 0 3px 3px 0  !important;
+    -webkit-transform: rotate(45deg)  !important;
+    -ms-transform: rotate(45deg)  !important;
+    transform: rotate(45deg)  !important;
+}
+.rightCarta{
+    margin-left:auto  !important;
+}
+/*
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+    /*.containerProducts{
+        width:40%  !important;
+        display: inline-block  !important;
+        margin-right: 5%  !important;
+        padding-left:2.5%  !important;
+        vertical-align: text-top  !important;
+    }
+    .wrap_products {
+        padding-top: 20px  !important;
+        display: block  !important;
+        position: relative  !important;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2)  !important;
+        width:80%  !important;
+        left:50%  !important;
+        transform: translateX(-50%)  !important;
+        padding:20px  !important;
+    }*/
+    
+}
+
+
+/* 
+    ##Device = Laptops, Desktops
+    ##Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    
+}
+
+
+/* 
+    ##Device = Tablets, Ipads (portrait)
+    ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* CSS */
+    
+}
+
+
+/* 
+    ##Device = Tablets, Ipads (landscape)
+    ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    /* CSS */
+}
+
+
+/* 
+    ##Device = Low Resolution Tablets, Mobiles (Landscape)
+    ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+    /* CSS */
+}
+
+
+/* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+    /* CSS */
+}
+@media (min-width: 320px)  and (max-width: 1280px){
+    /*.containerProducts{
+        width:97%  !important;
+        display: inline-block  !important;
+        padding-left:2.5%  !important;
+        vertical-align: text-top  !important;
+    }*/
+}
+.containerProducts{
+    width:97%  !important;
+    display: inline-block  !important;
+    padding-left:2.5%  !important;
+    vertical-align: text-top  !important;
+}
