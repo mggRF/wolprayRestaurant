@@ -33,19 +33,32 @@ export default class CtrlFormulario extends Component {
         this.setState(this.props.obj);
     }
 
+
     render() {
 
         let orden = this.props.orden;
         let obj = this.state.obj;
+        
+        let estilo={display:"contents"};
+        if (this.props.delayed) {
+            estilo={
+                display:"blocks",
+                border:"3px solid black",
+                margin:" 1em 0 1em 0"
+            }
+        }
         return (
-            <>
+
+            <fieldset style={ estilo }>
                 {React.cloneElement(this.props.formulario,
-                    { orden: orden, 
-                      obj: obj, 
-                      funcion: this.recogeDatos,
-                      datosAux: this.props.datosAux
+                    {
+                        orden: orden,
+                        obj: obj,
+                        funcion: this.recogeDatos,
+                        datosAux: this.props.datosAux.Component,
+                        delayed: this.props.delayed
                     })}
-                <div className = "container mt-5">
+                <div className="container mt-5">
                     <button type="button"
                         className="btn btn-primary"
                         onClick={this.enSubmit}
@@ -61,7 +74,7 @@ export default class CtrlFormulario extends Component {
                 </button>
                 </div>
 
-            </>
+            </fieldset>
         )
     }
 }

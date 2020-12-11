@@ -3,7 +3,8 @@ class MenuPlatos {
     //  cpcoa_nombre;
     //  cpcoa_pais;
 
-     constructor(idmenu_platos, idMenu , mpGrupo, mpPlato, mpPlatoName, mpPlatoDescri){
+     constructor(idmenu_platos, idMenu , mpGrupo, mpPlato, 
+                    mpPlatoName, mpPlatoDescri){
          this.idmenu_platos = idmenu_platos;
          this.idMenu = idMenu;
          this.mpGrupo = mpGrupo;

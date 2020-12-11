@@ -26,7 +26,7 @@ const version_OS = () => {
     return Name;
 }
 module.exports = {
-    AUTORIZAR: false,
+    AUTORIZAR: true,
     API_URL: variable_url() + VERSION_API + '/',
     LOCALS: 'locals',
     MENU: 'menu',

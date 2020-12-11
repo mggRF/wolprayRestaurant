@@ -6,7 +6,7 @@ module.exports = {
             LEFT JOIN menu ON :TABLA.idMenu = menu.idMenu
             LEFT JOIN n_grupos as grupo ON :TABLA.mpGrupo = grupo.idGrupo 
             WHERE :TABLA.idmenu = :menu
-            ORDER BY grupo.grupName  `,
+            ORDER BY :TABLA.mpGrupo  `,
 
         SELECT_UNO:
             `SELECT :TABLA.*, menu.menuName,grupo.grupName,products.productName 

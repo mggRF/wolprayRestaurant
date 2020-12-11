@@ -24,6 +24,14 @@ class GestionTokemTda {
         return Promise.resolve(sql)
     }
 
+    static  tda2tokem(tda){
+        let connect = new Conexion();
+        let sql = QueriesLocals.SELECT_TOKEM.replace(/:TABLA/gi, 'locals');
+        sql = sql.replace(':id', tda)
+        console.log(sql)
+        return connect.leerSql(sql)                
+    }
+
     static tokemTda2Local(controller, tokem, res) {
         let connect = new Conexion();
         let query = QueriesLocals.CONVER_TOKEM2NUMERO;

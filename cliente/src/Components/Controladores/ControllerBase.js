@@ -67,7 +67,7 @@ export default class ControllerBase extends Component {
                 });
 
         } else {
-            this.setState({ estadoActualizacion: 0 });
+            //this.setState({ estadoActualizacion: 0 });
             this.setState({ estadoActualizacion: 2 });
                         let datosEnvio = this.montaDatos(datos);
                         AccesoAPI.enviarTodo(this.TABLA, METODO[orden], datosEnvio, datos[this.ID])
@@ -109,6 +109,7 @@ export default class ControllerBase extends Component {
         
         const LISTADO = this.LISTADO;
         const FORMULARIO = this.FORMULARIO;
+        const DELAYED = this.DELAYED;
       console.log('Controller', this.state.datosAux)
         //
         // se debe sacar mensaje de error, si esta en state
@@ -118,7 +119,8 @@ export default class ControllerBase extends Component {
                 {(this.state.estadoActualizacion === 0) ?
                     <LISTADO usuario={this.state.usuario}
                         trabajo={this.trabajoSolicitado}
-                        insertar={this.insertSolicitado} />
+                        insertar={this.insertSolicitado} 
+                        delayed ={DELAYED}/>
                     : ""}
                 {(this.state.estadoActualizacion === 1) ?
                     <CtrlFormulario orden={this.state.orden}
@@ -126,6 +128,7 @@ export default class ControllerBase extends Component {
                         trabajo={this.accionSolicitada}
                         formulario={<FORMULARIO />}
                         datosAux= {this.state.datosAux}
+                        delayed ={DELAYED}
                     />
                     : ""}
 

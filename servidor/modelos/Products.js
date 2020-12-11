@@ -1,4 +1,4 @@
-class Products{
+class Product{
 
 
     constructor(idProduct, idLocal, productName, productDescri, productPrice,
@@ -16,6 +16,6 @@ class Products{
 
 }
 
-module.exports = Products;
+module.exports = Product;
 
 

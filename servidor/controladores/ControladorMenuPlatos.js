@@ -15,7 +15,7 @@ class ControladorMenuPlatos extends ControladorBase {
             TABLA: TABLA,
             QUERIES: QueriesMenuPlatos,
             MODELO: MODELO,
-            campoId: 'idmenu'
+            campoId: 'idMenu_platos'
         }
         super(config);
     }

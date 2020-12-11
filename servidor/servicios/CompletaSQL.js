@@ -146,6 +146,10 @@ class CompletaSQL {
     }
 
     static cSQL(req, sql) {
+        if (sql.indexOf(':menu')>=0){
+            let menu = req.params.menu;
+            sql = sql.replace(':menu', menu)
+        }
         sql = CompletaSQL.cSeguridad(req, sql);
         sql += CompletaSQL.cClasYPag(req);
         let where = "";

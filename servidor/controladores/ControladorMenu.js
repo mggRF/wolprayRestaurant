@@ -1,5 +1,5 @@
 /**
- * Controlador para clubs
+ * Controlador para menus
  * recibe llamadas para editar, añadir, listar y borrar clubs
  */
 const ControladorBase = require("./ControladorBase");
@@ -8,9 +8,7 @@ const MODELO = require("../modelos/Menu");
 const { QueriesMenu } = require("../Constantes/ConstantesDataBase/queries/QueriesMenu");
 const { QueriesMenuPlatos } = require("../Constantes/ConstantesDataBase/queries/QueriesMenuPlatos");
 const GestionTokemTda = require("../servicios/GestionTokemTda");
-const CompletaSQL = require("../servicios/CompletaSQL");
-const Presenta = require("../servicios/Presenta");
-const { procesaDatos } = require("../servicios/MontaLimites");
+
 const TABLA = 'menu';
 
 class ControladorMenu extends ControladorBase {
@@ -20,11 +18,10 @@ class ControladorMenu extends ControladorBase {
             TABLA: TABLA,
             QUERIES: QueriesMenu,
             MODELO: MODELO,
-            campoId: 'idmenu',
+            campoId: 'idMenu',
         }
         super(config);
         this.todosMenuCompleto = this.todosMenuCompleto.bind(this);
-        this.decideVision = this.decideVision.bind(this);
         this.montaPlatos = this.montaPlatos.bind(this);
         this.procesaDatos = this.procesaDatos.bind(this);
         this.decideVision = this.decideVision.bind(this);
@@ -67,6 +64,7 @@ class ControladorMenu extends ControladorBase {
             console.log('Elemento', elem)
             if (this.decideVision(elem)) {
                 const dat = await this.montaPlatos(elem)
+                console.log("--------------------",dat)
                 salida[conta] = elem;
                 salida[conta].plato = dat;
                 conta++;
@@ -81,21 +79,32 @@ class ControladorMenu extends ControladorBase {
      */
     decideVision(elem) {
         const fecha = new Date();
-        const diaSem = dia[fecha.getDay()]
+        const diaSem = fecha[fecha.getDay()]
         let unico = ''
         let mediodia = ''
         let noche = ''
         let ver = false;
         let hora = fecha.getHours();
-        let ident = trim(elem.menuSeq);
-        const rango = ident.split('/')
-        if (rango.length && rango.length === 0) {
+        let ident = elem.menuSeq.trim();
+        if (Array.isArray(ident)) ident = ident.join(',');
+        let rango = ident;
+        if (ident && ident.indexOf("/")> 0) {
+            console.log(">" + ident + "<")
+            rango = ident.split('/');
+
+            console.log("a", rango)
+            if (!rango.length || (rango.length && rango.length === 0)) {
+                unico = ident
+            }
+        }
+        else {
             unico = ident
         }
-        for (lista of rango) {
-            if (lista.substring(0, 2) = 'M-') mediodia = lista.substring(2)
-            if (lista.substring(0, 2) = 'N-') noche = lista.substring(2)
+        for (let lista of rango) {
+            if (lista.substring(0, 2) === 'M-') mediodia = lista.substring(2)
+            if (lista.substring(0, 2) === 'N-') noche = lista.substring(2)
         }
+        console.log(mediodia, '/', noche, '/', unico, '/', rango)
         ver = this.verPorDia(unico);
         if (!ver) {
             if (hora >= 15) {
@@ -114,11 +123,14 @@ class ControladorMenu extends ControladorBase {
 
 
         if (!lista || lista === "" || lista === '*') { // si no hay condicion, se visualiza siempre
+            console.log('pasa *', lista)
             return true;
         }
-        if (lista.include(diaSem)) {
+        if (lista.indexOf(diaSem)>0) {
+            console.log('pasa diaSem', diaSem)
             return true
         }
+        console.log('no pasa ', lista)
         return false;
 
     }

@@ -1,6 +1,5 @@
 
 import Listado from './ListadoMenu';
-
 import Formulario from './FormularioMenu';
 import ControllerBase from '../ControllerBase';
 import { checkUsuario } from '../../../Servicios/funcionesSeguridad';
@@ -13,7 +12,7 @@ export default class ControllerMenu extends ControllerBase {
     constructor(props) {
         super(props);
         this.TABLA = 'menu';
-        this.ID = 'idmenu';
+        this.ID = 'idMenu';
         this.LISTADO = Listado
         this.FORMULARIO = Formulario
         this.MODELO = new Menu();

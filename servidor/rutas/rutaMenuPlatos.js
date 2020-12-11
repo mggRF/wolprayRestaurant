@@ -11,7 +11,7 @@ var rutas = express.Router();
 rutas.get('/', menuPlatos.leerALL);
 rutas.get('/select/:id',menuPlatos.leerSelect)
 rutas.get('/:id', menuPlatos.leerUno);
-rutas.get('/BYMENU/:id', menuPlatos.leerALL);
+rutas.get('/BYMENU/:menu', menuPlatos.leerALL);
 rutas.post('/', menuPlatos.updateTable);
 rutas.put('/:id', menuPlatos.updateTable);
 rutas.delete('/:id', menuPlatos.updateTable);

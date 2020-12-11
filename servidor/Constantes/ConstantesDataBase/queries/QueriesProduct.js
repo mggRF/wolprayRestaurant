@@ -1,5 +1,5 @@
 module.exports = {
-    QuerieProduct: {
+    QueriesProduct: {
         SELECT_ALL: `SELECT 
                         :TABLA.*,
                         locals.locName,
@@ -24,12 +24,18 @@ module.exports = {
         SELECT_SELECT: `SELECT idProduct as id,productName as opcion 
                 FROM :TABLA 
                 WHERE idLocal = :local`,
+
         SELECT_SELECT_ALL: `SELECT idProduct as id,productName as opcion 
                 FROM :TABLA 
                 WHERE idLocal = :local`,
 
         INSERT: `INSERT INTO :TABLA SET ?`,
         UPDATE: `UPDATE :TABLA SET ? WHERE idProduct = ?`,
-        DELETE: `DELETE FROM :TABLA WHERE idProduct = ?`
+        DELETE: `DELETE FROM :TABLA WHERE idProduct = ?`,
+        
+        SELECT_GRUPOS: `SELECT 
+                    :TABLA.*                    
+                FROM :TABLA
+                WHERE  :TABLA.idGrupo = :grupo `
     }
 }

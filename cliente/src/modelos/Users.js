@@ -4,7 +4,7 @@ class Users {
     //  cpcoa_nombre;
     //  cpcoa_pais;
 
-     constructor(userid , userName , mail ,password,userPhone,birthdate,roleid ,companyid){
+     constructor(userid , userName , mail ,password,userPhone,birthdate,roleid ,companyid,tiendaId){
          this.userid = userid;
          this.userName = userName;
          this.mail = mail;
@@ -13,6 +13,7 @@ class Users {
          this.birthdate = birthdate;
          this.roleid = roleid;
          this.companyid = companyid;
+         this.tiendaId = tiendaId
      }
 
 }

@@ -37,6 +37,8 @@ module.exports = {
         DELETE: `DELETE FROM :TABLA WHERE idLocals = ?`,
 
         CONVER_TOKEM2NUMERO:
-            `SELECT idLocals as id FROM :TABLA WHERE locTokem = :tokemLocal`
+            `SELECT idLocals as id FROM :TABLA WHERE locTokem = :tokemLocal`,
+        SELECT_TOKEM:
+            `SELECT locTokem as id FROM :TABLA WHERE idLocals = :id`
     }
 }
