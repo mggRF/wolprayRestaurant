@@ -26,7 +26,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 0,
     '@typescript-eslint/explicit-function-return-type': 'off',
     // inhabilita la regla para todos los archivos 
-    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/explicit-module-boundary-types": 0,
 
     'no-unreachable': 'off',
     'no-console': 'off',
@@ -36,15 +36,7 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
-    "overrides": [
-      {
-        // habilita la regla específicamente para archivos TypeScript 
-        " files ": [" * .ts ", " * .tsx "],
-        " rules ": {
-          "@typecript-eslint/explicit-module-boundary-types": "off"
-        },
-      }
-    ]
+    
   },
 
 

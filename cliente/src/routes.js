@@ -40,7 +40,7 @@ import ControllerLocal from './Componentes/Controladores/local/ControllerLocal'
 import ControllerRole from './Componentes/Controladores/roles/ControllerRole';
 import ControllerCompanies from './Componentes/Controladores/companies/ControllerCompanies';
 
-const CARPETA = ''
+const CARPETA = 'interno'
 
 const dashboardRoutes = [
   {
