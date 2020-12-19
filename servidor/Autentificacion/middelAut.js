@@ -27,7 +27,7 @@ Autorizado.use((req, res, next) => {
             req.session.destroy();
             return res.status(401).send({Message: 'El token ha expirado'});
           }
-          if(req.session.userid !== payload.sub){
+          if(req.session && req.session.userid !== payload.sub){
             return res.status(401).send({Message: 'Tiene que iniciar sesión para realizar esta petición'});
           }
 

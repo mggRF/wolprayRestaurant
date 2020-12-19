@@ -19,6 +19,7 @@ rutas.use(session({
 // Creamos una ruta para los métodos que tenemos en nuestros controladores
 rutas.put('/login', cTokem.login);
 rutas.put('/logout',cTokem.logout)
+
 //rutas.get('/', Home);
 
 // Exportamos la configuración

@@ -1,4 +1,4 @@
-const { MOD, DEL, VIE } = require("../Components/Constantes");
+const { MOD, DEL, VIE } = require("../Componentes/Constantes");
 
 export function montaBoton(funcion, tipo, id, clase, texto) {
     <button type="button"

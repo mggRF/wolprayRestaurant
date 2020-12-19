@@ -1,4 +1,4 @@
-import { LPPAGINA } from "../Components/Constantes";
+import { LPPAGINA } from "../Componentes/Constantes";
 
 
 

@@ -1,0 +1,58 @@
+.colorOscuro {
+    background-color: #FB7F7F
+}
+
+.scrollable-element {
+    scrollbar-color: #cc9955 #FB7F7F;
+}
+
+.titulo {
+    color: #cc9955;
+    font-size: 1.5em;
+    width: 60%;
+    float: left;
+}
+
+.hora {
+    composes: titulo;
+    float: right;
+    width: 30%
+}
+
+.barraSuperior {
+    composes: colorOscuro;
+    height: 150px;
+    padding: 1em;
+    width: 80%;
+    display: block;
+}
+
+.navbar {
+    composes: colorOscuro;
+    width: 80%;
+    color: white;
+    margin: 1em 0 0 1em;
+    display: block;
+}
+
+.menuNavbar {
+    composes: navbar;
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.5;
+}
+
+.active {
+    background-color: #f44336;
+    border-radius: 7px;
+    box-shadow: 2px 5px 10px #111;
+    transition: all .3s;
+    display: block;
+}
+
+.active:hover {
+    background-color: #f66436;
+    border-radius: 7px;
+    box-shadow: 2px 5px 20px #111;
+    transform: translateY(-1px);
+}

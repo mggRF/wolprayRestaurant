@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { LETRERO_BOTON } from '../Components/Constantes';
+import { LETRERO_BOTON } from '../Componentes/Constantes';
 
 
 

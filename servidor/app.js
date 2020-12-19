@@ -20,7 +20,7 @@ const express_logger = require('express-logger-unique-req-id');
 const {IT_IS_SECURE} = require('./Constantes/ConstantesSeguridad');
 
 var multipartMiddleware = multipart({uploadDir: '../uploads'});
-const { UPLOADS, COMUNIDADES, PAISES, POBLACIONES, PROVINCIAS, USERS, ROLES, COMPANIES, PRODUCTS , LOCALS, MENU, MENU_PLATOS, GRUPOS, LOCALCITY, IVA} = require('./Constantes/ConstantesRutas');
+const { UPLOADS, COMUNIDADES, PAISES, POBLACIONES, PROVINCIAS, USERS, ROLES, COMPANIES, PRODUCTS , LOCALS, MENU, MENU_PLATOS, GRUPOS, LOCALCITY, IVA, VERSION} = require('./Constantes/ConstantesRutas');
 
 
 const app = express();
@@ -61,7 +61,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 
 // Cargamos las rutas
-app.use('/', rGlobal);
+
 //app.use(UPLOADS,rImagenes)
 app.use(COMUNIDADES, Autorizado, rComunidades);
 app.use(PAISES, Autorizado, rPais);
@@ -78,6 +78,10 @@ app.use(COMPANIES, Autorizado, rCompanies);
 app.use(IVA, Autorizado, rIva);
 app.use(PRODUCTS, Autorizado, rProducts);
 //app.use(IMAGES, Autorizado, rImages);
+
+app.use('/' + VERSION, rGlobal);
+
+console.log('entra',VERSION,PRODUCTS)
 
 if (process.env.NODE_ENV && process.env.NODE_ENV == 'production') {
     // create a rotating write stream

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { LPPAGINA, API_URL } from "../Components/Constantes";
+import { LPPAGINA, API_URL } from "../Componentes/Constantes";
 import AccesoAPI from './AccesoAPI';
 
 export default class Paginacion extends Component {
