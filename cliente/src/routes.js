@@ -48,7 +48,7 @@ const dashboardRoutes = [
     name: 'Dashboard',
     icon: Dashboard,
     component: DashboardPage,
-    layout: '/admin',
+    layout: '',
     level: 5,
   },
   {
@@ -56,7 +56,7 @@ const dashboardRoutes = [
     name: 'Grupos',
     icon: 'LibraryBooks',
     component: ControllerGrupo,
-    layout: '/admin',
+    layout: '',
     level: 5,
   },
   {
@@ -64,7 +64,7 @@ const dashboardRoutes = [
     name: 'Menu',
     icon: 'content_paste',
     component: ControllerMenu,
-    layout: '/admin',
+    layout: '',
     level: 5,
   },
   {
@@ -72,7 +72,7 @@ const dashboardRoutes = [
     name: 'Platos del menu',
     icon: 'content_paste',
     component: ControllerMenuPlatos,
-    layout: '/admin',
+    layout: '',
     level: 9,
   },
   {
@@ -80,7 +80,7 @@ const dashboardRoutes = [
     name: 'Zonas servicio',
     icon: 'content_paste',
     component: ControllerLocalCity,
-    layout: '/admin',
+    layout: '',
     level: 5,
   },
   {
@@ -88,7 +88,7 @@ const dashboardRoutes = [
     name: 'Locales',
     icon: 'content_paste',
     component: ControllerLocal,
-    layout: '/admin',
+    layout: '',
     level: 5,
   },
   {
@@ -96,7 +96,7 @@ const dashboardRoutes = [
     name: 'Compañias',
     icon: 'content_paste',
     component: ControllerCompanies,
-    layout: '/admin',
+    layout: '',
     level: 5,
   },
   {
@@ -104,7 +104,7 @@ const dashboardRoutes = [
     name: 'Roles',
     icon: 'content_paste',
     component: ControllerRole,
-    layout: '/admin',
+    layout: '',
     level: 5,
   },
   
@@ -113,7 +113,7 @@ const dashboardRoutes = [
     name: 'User Profile',
     icon: Person,
     component: UserProfile,
-    layout: '/admin',
+    layout: '',
     level: 99,
   },
   {
@@ -122,7 +122,7 @@ const dashboardRoutes = [
 
     icon: 'content_paste',
     component: TableList,
-    layout: '/admin',
+    layout: '',
     level: 99,
   },
   {
@@ -131,7 +131,7 @@ const dashboardRoutes = [
 
     icon: LibraryBooks,
     component: Typography,
-    layout: '/admin',
+    layout: '',
     level: 99,
   },
   {
@@ -140,7 +140,7 @@ const dashboardRoutes = [
 
     icon: BubbleChart,
     component: Icons,
-    layout: '/admin',
+    layout: '',
     level: 99,
   },
   {
@@ -148,7 +148,7 @@ const dashboardRoutes = [
     name: 'Maps',
     icon: LocationOn,
     component: Maps,
-    layout: '/admin',
+    layout: '',
     level: 99,
   },
   {
@@ -156,7 +156,7 @@ const dashboardRoutes = [
     name: 'Notifications',
     icon: Notifications,
     component: NotificationsPage,
-    layout: '/admin',
+    layout: '',
     level: 99,
   },
 ]

@@ -37,9 +37,7 @@ ReactDOM.render(
       <Route exact path='/login' component={LoginScreen} />
       <Route exact path='/logout' component={Logout} />
       <Route exact path='/register' component={RegisterComponent} />
-      <Route path="/admin" component={Admin} />
-
-      <Redirect from="/" to="/admin" />
+      <Route path="/" component={Admin} />
     </Switch>
   </Router>,
   document.getElementById("root")

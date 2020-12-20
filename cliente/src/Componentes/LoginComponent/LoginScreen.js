@@ -32,7 +32,7 @@ export default class LoginScreen extends Component {
           }
           localStorage.setItem('userWPR_TDA', JSON.stringify(user))
 
-          this.props.history.push('/admin')
+          this.props.history.push('/')
         } else {
           Alerts.errorMessage(response.Message)
         }
