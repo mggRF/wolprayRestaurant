@@ -1,10 +1,7 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import AccesoAPI from '../../Servicios/AccesoAPI'
-import themeLogo from '../Comun/images/Gastromundo-1-1024x875.png'
 import './login.css'
-import { Link, Redirect } from 'react-router-dom'
 import { Alerts } from '../Fragmentos/Alerts'
-import { AUTORIZAR } from '../Constantes'
 
 export default class Logout extends Component {
   constructor(props) {

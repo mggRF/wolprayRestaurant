@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 // @material-ui/core
 
@@ -15,28 +15,32 @@ import GridControlPlatos from "./GridControlPlatos";
 import GridNotasImportantes from "./GridNotasImportantes";
 import { checkUsuario } from './../../Servicios/funcionesSeguridad';
 
+export default class Dashboard extends React.Component{
+ 
+  constructor(props) {
+    super(props);
+    checkUsuario(3);
+  }
 
-
-export default function Dashboard() {
-  const [estadoUsuario, setEstadoUsuario] = useState(checkUsuario(3))
-  
-  return (
-    <div>
-      <GridContainer>
-        <GridVentasRealizadas />
-        <GridValorVentas />
-        <GridAbandonosCesta />
-        <GridRegistrados />
-      </GridContainer>
-      <GridContainer>
-        <GridPrimeraVisita />
-        <GridPrimeraVisitaConCompra />
-        <GridTotalVisitasWeb />
-      </GridContainer>
-      <GridContainer>
-        <GridControlPlatos />
-        <GridNotasImportantes />
-      </GridContainer>
-    </div>
-  );
+  render(){
+    return (
+      <div>
+        <GridContainer>
+          <GridVentasRealizadas />
+          <GridValorVentas />
+          <GridAbandonosCesta />
+          <GridRegistrados />
+        </GridContainer>
+        <GridContainer>
+          <GridPrimeraVisita />
+          <GridPrimeraVisitaConCompra />
+          <GridTotalVisitasWeb />
+        </GridContainer>
+        <GridContainer>
+          <GridControlPlatos />
+          <GridNotasImportantes />
+        </GridContainer>
+      </div>
+    );
+  }
 }

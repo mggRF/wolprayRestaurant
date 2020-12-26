@@ -16,6 +16,7 @@ var multipart = require('connect-multiparty');
 const path = require('path');
 const rfs = require('rotating-file-stream') // version 2.x
 const express_logger = require('express-logger-unique-req-id');
+const session = require('express-session'); 
 
 const {IT_IS_SECURE} = require('./Constantes/ConstantesSeguridad');
 
@@ -27,7 +28,11 @@ const app = express();
 app.use(helmet());
 app.use(cors({origin: true}));
 app.use(compression()); //Compress all routes
-
+app.use(session({
+    secret: '2C44-4D44-WppQ38S',
+    resave: true,
+    saveUninitialized: true
+}));
 
 // Importamos las rutas
 const rGlobal = require('./rutas/rutaGlobal');
@@ -54,6 +59,7 @@ const Autorizado = require('./Autentificacion/middelAut');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+
 //Subida de imagenes
 // app.use(fileUpload({
 //     useTempFiles: true
@@ -81,7 +87,6 @@ app.use(PRODUCTS, Autorizado, rProducts);
 
 app.use('/' + VERSION, rGlobal);
 
-console.log('entra',VERSION,PRODUCTS)
 
 if (process.env.NODE_ENV && process.env.NODE_ENV == 'production') {
     // create a rotating write stream
@@ -99,7 +104,7 @@ if (process.env.NODE_ENV && process.env.NODE_ENV == 'production') {
 //logger configuration
 const fileConf = {
     level: 'debug',
-    filename: './logs.log',
+    filename: '../logs.log',
     handleExceptions: true,
     json: true,
     maxsize: 5242880, // 5MB
@@ -128,30 +133,5 @@ logger.debug('First message');
 // http://expressjs.com/api#app-settings for more details.
 app.enable('trust proxy');
 
-// Add a handler to inspect the req.secure flag (see 
-// http://expressjs.com/api#req.secure). This allows us 
-// to know whether the request was via http or https.
-// app.use(function (req, res, next) {
-    
-//     if (IS_IT_SECURE && !req.secure){
-//         res.redirect('https://' + req.headers.host + req.url);
-//     }
-//     else if (!IS_IT_SECURE && req.secure ){
-//         res.redirect('http://' + req.headers.host + req.url);
 
-//     }
-//     else{
-//         next();
-//     }
-//     /*if (req.secure && IT_IS_SECURE) {
-//         console.log('https');
-//         // request was via https, so do no special handling
-//         next();
-//     } else {
-//         console.log('http',req.headers.host);
-//         // request was via http, so redirect to https
-//        // res.redirect('https://' + req.headers.host + req.url);
-//        next();
-//     }*/
-// });
 module.exports = app;

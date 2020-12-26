@@ -1,13 +1,13 @@
 {
     "name": "wolprayRestaurant_v00",
     "version": "0.1.0",
-    "homepage": ".",
+    "homepage": "/interno",
     "description": "Sistema de mantenimiento para wolpray restaurant",
     "private": false,
     "main": "dist/index.js",
     "dependencies": {
         "@material-ui/core": "4.10.0",
-        "@material-ui/icons": "4.9.1",
+        "@material-ui/icons": "^4.9.1",
         "@testing-library/jest-dom": "^4.2.4",
         "@testing-library/react": "^9.5.0",
         "@testing-library/user-event": "^7.2.1",
@@ -27,6 +27,7 @@
         "sweetalert": "^2.1.2"
     },
     "scripts": {
+        "startRARO": "NODE_PATH=./src react-scripts start",
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test --env=jsdom",

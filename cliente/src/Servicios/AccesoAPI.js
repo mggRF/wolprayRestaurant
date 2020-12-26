@@ -1,4 +1,4 @@
-import { API_URL, CONVERSOR } from '../Componentes/Constantes'
+import { API_URL, AUTORIZAR, CONVERSOR } from '../Componentes/Constantes'
 
 import LoginScreen from './../Componentes/LoginComponent/LoginScreen'
 
@@ -92,9 +92,9 @@ export default class AccesoAPI {
     let user = LoginScreen.datosLogin()
     const cabeceras = new Headers()
     cabeceras.append('Content-Type', 'application/json')
-    cabeceras.append('Authorization', 'Bearer ' + user.token)
     cabeceras.append('Cache-Control', 'no-cache')
-    cabeceras.append('WPRA_Tienda', user.tokemTda)
+    if (user && user.token) cabeceras.append('Authorization', 'Bearer ' + user.token)
+    if (user && user.tokemTda) cabeceras.append('WPRA_Tienda', user.tokemTda)
     let opciones = {
       // opciones para GET y DELETE (no hay body)
       method: metodo,
@@ -115,7 +115,9 @@ export default class AccesoAPI {
         console.log('results', results)
         if (results.Message) {
           console.log('results.Message', results.Message)
-          if (results.Message.indexOf('TokenExpiredError') > 0) {
+          if ((results.Message.indexOf('TokenExpiredError') > 0 ||
+              results.Message.indexOf('JsonWebTokenError') > 0 )
+              && AUTORIZAR) {
             localStorage.clear()
           }
         }

@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import { API_URL, GRUPOS } from '../../Constantes';
 import AccesoAPI from '../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
-import BotonListado from '../../Fragmentos/BotonListados';
 
 import Paginacion from '../../../Servicios/Paginacion';
 import GestorListado from '../../../Servicios/GestorListado';
 import MontaCabecera from '../../Fragmentos/MontaCabecera';
-import { INS } from '../../Constantes';
+import BotonInsertar from '../../Fragmentos/BotonInsertar';
+import Typography from '@material-ui/core/Typography'
 
 export default class ListadoGroup extends Component {
 
@@ -62,8 +62,16 @@ export default class ListadoGroup extends Component {
 
             <div className="container animate__animated animate__fadeIn">
                 <div className='col-12 cabecera_controlador animate__animated animate__slideInUp'>
-                    <h1>Listado de Grupos</h1>
-                    <BotonListado icon={INS} funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}></BotonListado>
+                    <Typography variant="h3" color="primary">
+                     Listado de Grupos
+                    <BotonInsertar
+                        funcion={() =>
+                            this.props.insertar("I", 0,
+                                this.props.datosAux)}
+                    />
+                    </Typography>
+                        
+                  
                 </div>
                 <table className="table">
                     <thead>

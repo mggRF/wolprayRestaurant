@@ -8,7 +8,7 @@ var config = {
     password: process.env.PASS_FTP, 
     port    : 21, 
     localRoot   : __dirname + '/build', 
-    remoteRoot  : '/home/man/public_html/interno/', 
+    remoteRoot  : '/public_html/interno/', 
     include     : ['*'], 
     deleteRemote: true 
 }

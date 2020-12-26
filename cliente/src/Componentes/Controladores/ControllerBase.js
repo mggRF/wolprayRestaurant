@@ -8,11 +8,13 @@ import CtrlFormulario from './../../Servicios/CtrlFormulario'
 
 export default class ControllerBase extends Component {
   insertSolicitado = (orden = 'I', id = null, datosAux = '') => {
-    console.log('Entro en Insert', datosAux)
+    //console.log('Entro en Insert', datosAux)
+    orden='I';  //en insert ha de ser asi
+    id=null;    //en insert ha de ser asi
     this.setState({
       estadoActualizacion: 1, //pongo modo formulario
-      orden: 'I', //pongo lo que ha de hacer
-      id: null, //pongo sobre quien lo ha de hacer
+      orden: orden , //pongo lo que ha de hacer
+      id: id, //pongo sobre quien lo ha de hacer
       objeto: Object.assign({}, this.MODELO),
       datosAux: datosAux,
     })
@@ -50,7 +52,7 @@ export default class ControllerBase extends Component {
 
           let datosEnvio = this.montaDatos(datos)
           AccesoAPI.enviarTodo(this.TABLA, METODO[orden], datosEnvio, datos[this.ID])
-            .then((response) => {
+            .then(() => {
               this.setState({ estadoActualizacion: 0 })
             })
             .catch((err) => {
@@ -64,7 +66,7 @@ export default class ControllerBase extends Component {
       this.setState({ estadoActualizacion: 2 })
       let datosEnvio = this.montaDatos(datos)
       AccesoAPI.enviarTodo(this.TABLA, METODO[orden], datosEnvio, datos[this.ID])
-        .then((response) => {
+        .then(() => {
           if (this.campoFoto) {
             AccesoAPI.enviarImagen(this.url, datos[this.campoFoto], this.campoFoto)
               .then((res) => {

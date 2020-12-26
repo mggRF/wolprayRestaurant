@@ -183,8 +183,7 @@ class ControladorBase {
 
     }
     leerSelectDir(req, res, sql) {
-        const ids = req.session.userid;
-        const role = req.session.role;
+
         sql = sql.replace(/:TABLA/gi, this.config.TABLA);
         sql = CompletaSQL.cSQL(req, sql);
         GestionTokemTda.leerTokemTda(req, res, sql)

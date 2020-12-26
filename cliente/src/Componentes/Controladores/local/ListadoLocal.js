@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 import { API_URL, LOCALS } from '../../Constantes';
 import AccesoAPI from '../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
-import BotonListado from '../../Fragmentos/BotonListados';
 
 import Paginacion from '../../../Servicios/Paginacion';
 import GestorListado from '../../../Servicios/GestorListado';
 import MontaCabecera from '../../Fragmentos/MontaCabecera';
-import { INS } from '../../Constantes';
+import BotonInsertar from './../../Fragmentos/BotonInsertar';
 
 
 export default class ListadoLocal extends Component {
@@ -54,11 +53,11 @@ export default class ListadoLocal extends Component {
         this.state.datos.forEach((valor, index) => item.push(
             <tr key={index}>
                 <td key={index} >{valor.idLocals}</td>
-                <td>{valor.companyName}</td>               
+                <td>{valor.companyName}</td>
                 <td>{valor.locName}</td>
                 <td>{valor.locStreet}, {valor.locNumber}</td>
                 <td>{valor.cityName}({valor.locPostal})</td>
-                
+
                 <TresBotonesListado funcion={this.props.trabajo}
                     id={valor.idLocals} />
             </tr>
@@ -69,8 +68,12 @@ export default class ListadoLocal extends Component {
                     <div className="col-xl-10 col-lg-9 col-md-8 ml-auto">
                         <div className="row">
                             <div className='col-12 cabecera_controlador animate__animated animate__slideInUp'>
-                                <h1>Listado Locales</h1>
-                                <BotonListado icon={INS} funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}></BotonListado>
+                                <h2>Listado Locales
+                                <BotonInsertar
+                                        funcion={() =>
+                                            this.props.insertar("I", 0,
+                                                this.props.datosAux)}
+                                    /></h2>
                             </div>
                             <table className="table table-striped bg-light table-hover">
                                 <thead>
@@ -83,7 +86,7 @@ export default class ListadoLocal extends Component {
                                                 ['locName', 'Nombre local'],
                                                 ['locStreet', 'Dirección'],
                                                 ['cityName', 'Ciudad'],
-                                                
+
                                             ]} />
                                         <th></th><th></th><th></th>
                                     </tr>

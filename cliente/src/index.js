@@ -18,27 +18,37 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 
 // core components
 import Admin from "layouts/Admin.js";
-
+import p404 from "components/p404";
 
 import "assets/css/material-dashboard-react.css?v=1.9.0";
+import "assets/css/cssMio.css";
+import { ThemeProvider } from '@material-ui/core/styles';
+
 import LoginScreen from './Componentes/LoginComponent/LoginScreen';
 import RegisterComponent from "Componentes/RegisterComponent/RegisterComponent";
 import Logout from './Componentes/LoginComponent/Logout';
-
+import { CARPETA } from 'Componentes/Constantes';
+import { Redirect } from 'react-router-dom';
+import TemaConfig from './assets/TemaConfig'
 const hist = createBrowserHistory();
 //<Router history={hist}>
 ReactDOM.render(
-  <Router history={hist}>
-    <Switch>
-      <Route exact path='/login' component={LoginScreen} />
-      <Route exact path='/logout' component={Logout} />
-      <Route exact path='/register' component={RegisterComponent} />
-      <Route path="/" component={Admin} />
-    </Switch>
-  </Router>,
+  <ThemeProvider theme={TemaConfig}>
+    <Router history={hist}>
+      <Switch>
+        <Route exact path={CARPETA + '/login'} component={LoginScreen} />
+        <Route exact path={CARPETA + '/logout'} component={Logout} />
+        <Route exact path={CARPETA + '/register'} component={RegisterComponent} />
+
+        <Route path={CARPETA} component={Admin} />
+        <Redirect exact path="/" to={CARPETA} />
+        <Route component={p404} />
+      </Switch>
+    </Router>
+  </ThemeProvider>,
   document.getElementById("root")
 );

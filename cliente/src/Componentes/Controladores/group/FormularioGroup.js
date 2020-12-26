@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InputComponent } from '../../Fragmentos/InputComponent';
 import DesplegableAut from './../../Fragmentos/DesplegableAut';
+import LoginScreen from './../../LoginComponent/LoginScreen';
 
 
 
 
 export default class FormularioGroup extends Component {
+    
     render() {
         let datGrupo = this.props.obj;
         let readonly = ['D', 'V'].includes(this.props.orden) ? true : false
-
+        let user = LoginScreen.datosLogin()
         return (
             <section className="get_in_touch animate__animated animate__fadeIn">
                 <h1 className="title">Identificador Grupo</h1>
@@ -32,8 +34,10 @@ export default class FormularioGroup extends Component {
                             readValue={this.props.funcion}
                             idvalue={datGrupo.idLocal}
                             value={datGrupo.locName}
-                            readOnly={readonly}
+                            readOnly= {user.role<9}
                             orden = {this.props.orden}
+                            fuerzaId = {user.localId}
+                            fuerzaNombre = {user.local}
                         /> 
                     
 

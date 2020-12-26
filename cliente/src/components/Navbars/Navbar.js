@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 // @material-ui/core components
@@ -12,43 +12,43 @@ import Menu from '@material-ui/icons/Menu'
 // core components
 import AdminNavbarLinks from './AdminNavbarLinks.js'
 
-import Button from 'components/CustomButtons/Button.js'
-
 import styles from 'assets/jss/material-dashboard-react/components/headerStyle.js'
 import LoginScreen from './../../Componentes/LoginComponent/LoginScreen';
-import { number } from 'prop-types'
+
+import NavbarHora from './NavbarHora';
+import { checkUsuario } from './../../Servicios/funcionesSeguridad';
+
 
 const useStyles = makeStyles(styles)
 
 export default function Header(props) {
+  checkUsuario(3)
+  const [user, actUser] = useState()
   const classes = useStyles()
-  function makeBrand() {
-    var name
-    let user = LoginScreen.datosLogin();
-    props.routes.map((prop) => {
-      
-      if (Number(prop.level) <= Number(user.role)){
-        if (window.location.href.indexOf(prop.layout + prop.path) !== -1) {
-          name = prop.name
-        }
-      }
-      return null
-    })
-    return name
+  let userA = LoginScreen.datosLogin()
+ 
+    if (!(userA && userA.NotLogedd)) {
+      if (user===undefined || user.id != userA.id) actUser(userA)
   }
   const { color } = props
   const appBarClasses = classNames({
     [' ' + classes[color]]: color,
   })
+
+  // if (user === null || (user.NotLogged && user.NotLogged == true)) {
+  //   console.log(userA)
+  //   alert('finNavbar')
+  //   window.location.href = CARPETA + '/login'
+  //   return (<Redirect to={CARPETA + '/login'} />)
+  // }
+  //
+
   return (
     <AppBar className={classes.appBar + appBarClasses}>
       <Toolbar className={classes.container}>
-        <div className={classes.flex}>
-          {/* Here we create navbar brand, based on route name */}
-          <Button color="transparent" href="#" className={classes.title}>
-            {makeBrand()}
-          </Button>
-        </div>
+
+        {/* Here we create navbar brand, based on route name */}
+        <NavbarHora user={user} classes={classes} routes={props.routes} />
         <Hidden smDown implementation="css">
           <AdminNavbarLinks />
         </Hidden>
@@ -60,6 +60,7 @@ export default function Header(props) {
       </Toolbar>
     </AppBar>
   )
+
 }
 
 Header.propTypes = {

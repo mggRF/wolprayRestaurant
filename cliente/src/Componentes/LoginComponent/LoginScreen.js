@@ -3,10 +3,13 @@ import ButtonComponent from '../Comun/buttonComponent/ButtonComponent'
 import AccesoAPI from '../../Servicios/AccesoAPI'
 import themeLogo from '../Comun/images/Gastromundo-1-1024x875.png'
 import './login.css'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Alerts } from '../Fragmentos/Alerts'
-import { AUTORIZAR } from '../Constantes'
+import { AUTORIZAR} from '../Constantes'
 
+const INICIAL = {
+  NotLogged: true
+}
 
 export default class LoginScreen extends Component {
   constructor(props) {
@@ -20,38 +23,45 @@ export default class LoginScreen extends Component {
 
   onSubmitInput = (e) => {
     e.preventDefault()
-    console.log('State: ', this.state)
-    AccesoAPI.verificaUsuario(this.TABLA,  this.state)
+    AccesoAPI.verificaUsuario(this.TABLA, this.state)
       .then((response) => {
+
         if (response.Ok) {
           let user = {
             id: response.Datos.id,
             role: response.Datos.role,
             token: response.Datos.token,
             tokemTda: response.Datos.tokemTda,
+            userName: response.Datos.userName,
+            local:response.Datos.local
           }
           localStorage.setItem('userWPR_TDA', JSON.stringify(user))
 
-          this.props.history.push('/')
+          window.location.href = '/interno'
         } else {
           Alerts.errorMessage(response.Message)
         }
       })
       .catch((err) => console.log('Error: ', err))
   }
-
-  static datosLogin() {
-    let init = JSON.parse(localStorage.getItem('userWPR_TDA')) || { logged: false }
+  static initLogin() {
+    return INICIAL
+  }
+  static  datosLogin() {
+    let datos=localStorage.getItem('userWPR_TDA')
+    let init =  JSON.parse( datos) 
     if (!AUTORIZAR) {
       init.role = 9
       init.id = ''
       init.token = ''
       init.tokemTda = 'abcdefghijklmnopqrstuvxz1234567890ABCDEFGHIJKLMNOP'
+      init.userName = "Pruebas"
+      init.local = "pruebas/Barconfinao)"
     }
     return init
   }
 
-  
+
   handleInputChange = ({ target }) => {
     this.setState({
       ...this.state,

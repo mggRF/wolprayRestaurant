@@ -1,0 +1,30 @@
+.letraTitulo {
+    font-weight: 800;
+}
+
+.letraValor {
+    font-weight: 400;
+    margin-right: 2em;
+    white-space: nowrap;
+}
+
+.letraHora {
+    float: right;
+    padding-top: 15px;
+    padding-right: 1em
+}
+
+.divConjunto {
+    display: flex;
+    float: left;
+}
+
+.datosOper {
+    width: 100%;
+    display: block;
+    float: left;
+}
+
+.posicion {
+    padding: 12px 30px;
+}

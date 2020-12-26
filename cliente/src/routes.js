@@ -22,8 +22,16 @@ import LibraryBooks from '@material-ui/icons/LibraryBooks'
 import BubbleChart from '@material-ui/icons/BubbleChart'
 import LocationOn from '@material-ui/icons/LocationOn'
 import Notifications from '@material-ui/icons/Notifications'
-import Unarchive from '@material-ui/icons/Unarchive'
-import Language from '@material-ui/icons/Language'
+import GroupWorkIcon from '@material-ui/icons/GroupWork';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import MenuOpenIcon from '@material-ui/icons/MenuOpen';
+import PlayForWorkIcon from '@material-ui/icons/PlayForWork';
+import LocationCityIcon from '@material-ui/icons/LocationCity';
+import LocalDiningIcon from '@material-ui/icons/LocalDining';
+import HomeWorkIcon from '@material-ui/icons/HomeWork';
+import SecurityIcon from '@material-ui/icons/Security';
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
+
 // core components/views for Admin layout
 import DashboardPage from 'views/Dashboard/Dashboard.js'
 import UserProfile from 'views/UserProfile/UserProfile.js'
@@ -39,8 +47,11 @@ import ControllerLocalCity from './Componentes/Controladores/localcity/Controlle
 import ControllerLocal from './Componentes/Controladores/local/ControllerLocal'
 import ControllerRole from './Componentes/Controladores/roles/ControllerRole';
 import ControllerCompanies from './Componentes/Controladores/companies/ControllerCompanies';
+import ControllerProducts from './Componentes/Controladores/products/ControllerProducts';
+import { CARPETA } from 'Componentes/Constantes'
+import ControllerUsers from './Componentes/Controladores/users/ControllerUsers';
 
-const CARPETA = ''
+
 
 const dashboardRoutes = [
   {
@@ -48,72 +59,87 @@ const dashboardRoutes = [
     name: 'Dashboard',
     icon: Dashboard,
     component: DashboardPage,
-    layout: '',
+    layout: CARPETA ,
     level: 5,
   },
   {
-    path: CARPETA + '/grupos',
+    path: '/grupos',
     name: 'Grupos',
-    icon: 'LibraryBooks',
+    icon: GroupWorkIcon,
     component: ControllerGrupo,
-    layout: '',
+    layout: CARPETA ,
     level: 5,
   },
   {
-    path: CARPETA + '/menu',
+    path: '/menu',
     name: 'Menu',
-    icon: 'content_paste',
+    icon: MenuBookIcon,
     component: ControllerMenu,
-    layout: '',
+    layout: CARPETA ,
     level: 5,
   },
   {
-    path: CARPETA + '/menuplatos',
+    path: '/menuplatos',
     name: 'Platos del menu',
-    icon: 'content_paste',
+    icon: MenuOpenIcon,
     component: ControllerMenuPlatos,
-    layout: '',
+    layout: CARPETA ,
     level: 9,
   },
   {
-    path: CARPETA + '/zonas',
+    path: '/carta',
+    name: 'Carta',
+    icon: PlayForWorkIcon,
+    component: ControllerProducts,
+    layout: CARPETA ,
+    level: 5,
+  },
+  {
+    path: '/zonas',
     name: 'Zonas servicio',
-    icon: 'content_paste',
+    icon: LocationCityIcon,
     component: ControllerLocalCity,
-    layout: '',
+    layout: CARPETA ,
     level: 5,
   },
   {
-    path: CARPETA + '/locals',
+    path: '/locals',
     name: 'Locales',
-    icon: 'content_paste',
+    icon: LocalDiningIcon,
     component: ControllerLocal,
-    layout: '',
+    layout: CARPETA ,
     level: 5,
   },
   {
-    path: CARPETA + '/companies',
+    path: '/companies',
     name: 'Compañias',
-    icon: 'content_paste',
+    icon: HomeWorkIcon,
     component: ControllerCompanies,
-    layout: '',
+    layout: CARPETA ,
     level: 5,
   },
   {
-    path: CARPETA + '/role',
+    path: '/role',
     name: 'Roles',
-    icon: 'content_paste',
+    icon: SecurityIcon,
     component: ControllerRole,
-    layout: '',
+    layout: CARPETA ,
     level: 5,
   },
-  
+  {
+    path: '/usuarios',
+    name: 'Usuarios',
+    icon: SupervisedUserCircleIcon,
+    component: ControllerUsers,
+    layout: CARPETA ,
+    level:9,
+  },
   {
     path: '/user',
     name: 'User Profile',
     icon: Person,
     component: UserProfile,
-    layout: '',
+    layout: CARPETA ,
     level: 99,
   },
   {
@@ -122,7 +148,7 @@ const dashboardRoutes = [
 
     icon: 'content_paste',
     component: TableList,
-    layout: '',
+    layout: CARPETA ,
     level: 99,
   },
   {
@@ -131,7 +157,7 @@ const dashboardRoutes = [
 
     icon: LibraryBooks,
     component: Typography,
-    layout: '',
+    layout: CARPETA ,
     level: 99,
   },
   {
@@ -140,7 +166,7 @@ const dashboardRoutes = [
 
     icon: BubbleChart,
     component: Icons,
-    layout: '',
+    layout: CARPETA ,
     level: 99,
   },
   {
@@ -148,7 +174,7 @@ const dashboardRoutes = [
     name: 'Maps',
     icon: LocationOn,
     component: Maps,
-    layout: '',
+    layout: CARPETA ,
     level: 99,
   },
   {
@@ -156,7 +182,7 @@ const dashboardRoutes = [
     name: 'Notifications',
     icon: Notifications,
     component: NotificationsPage,
-    layout: '',
+    layout: CARPETA ,
     level: 99,
   },
 ]

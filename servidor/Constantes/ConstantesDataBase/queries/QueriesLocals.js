@@ -39,6 +39,6 @@ module.exports = {
         CONVER_TOKEM2NUMERO:
             `SELECT idLocals as id FROM :TABLA WHERE locTokem = :tokemLocal`,
         SELECT_TOKEM:
-            `SELECT locTokem as id FROM :TABLA WHERE idLocals = :id`
+            `SELECT locTokem as id,locName FROM :TABLA WHERE idLocals = :id`
     }
 }

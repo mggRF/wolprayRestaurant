@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { LETRERO_BOTON } from '../Componentes/Constantes';
+import Button from '@material-ui/core/Button'
 
 
 
@@ -37,19 +38,20 @@ export default class CtrlFormulario extends Component {
     render() {
 
         let orden = this.props.orden;
+        console.log('ctrl', orden)
         let obj = this.state.obj;
-        
-        let estilo={display:"contents"};
+
+        let estilo = { display: "contents" };
         if (this.props.delayed) {
-            estilo={
-                display:"blocks",
-                border:"3px solid black",
-                margin:" 1em 0 1em 0"
+            estilo = {
+                display: "blocks",
+                border: "3px solid black",
+                margin: " 1em 0 1em 0"
             }
         }
         return (
 
-            <fieldset style={ estilo }>
+            <fieldset style={estilo}>
                 {React.cloneElement(this.props.formulario,
                     {
                         orden: orden,
@@ -59,19 +61,22 @@ export default class CtrlFormulario extends Component {
                         delayed: this.props.delayed
                     })}
                 <div className="container mt-5">
-                    <button type="button"
-                        className="btn btn-primary"
+                    <Button
+                        variant="outlined"
+                        color="primary"
                         onClick={this.enSubmit}
                     >
                         {LETRERO_BOTON[this.props.orden]}
-                    </button>
-
-                    <button type="button"
-                        className="btn btn-secondary"
+                    </Button>
+                    &nbsp;
+                    <Button
+                        variant="contained"
+                        color="secondary"
                         onClick={this.enCancel}
                     >
                         Cancelar
-                </button>
+                    </Button>
+
                 </div>
 
             </fieldset>

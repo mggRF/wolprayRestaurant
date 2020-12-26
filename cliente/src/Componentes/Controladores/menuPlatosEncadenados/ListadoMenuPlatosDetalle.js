@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { API_URL, MENU_PLATOS } from '../../Constantes';
 import AccesoAPI from '../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
-import BotonListado from '../../Fragmentos/BotonListados';
+import BotonInsertar from '../../Fragmentos/BotonInsertar';
 import { INS } from '../../Constantes';
 
 import Paginacion from '../../../Servicios/Paginacion';
@@ -71,9 +71,13 @@ export default class ListadoMenuPlatosDetalle extends Component {
 
             <div className="container animate__animated animate__fadeIn">
                 <div className='col-12 cabecera_controlador animate__animated animate__slideInUp'>
-                    <h3>Listado de Platos</h3>
-                    <BotonListado icon={INS} funcion={this.props.insertar} clase="btn-success" tipo="I" id={0} datosAux={datosAux}></BotonListado>
-                </div>
+                    <h3>Listado de Platos
+                    <BotonInsertar
+                        funcion={() =>
+                            this.props.insertar("I", 0,
+                                this.props.datosAux)}
+                    /></h3>
+                    </div>
                 
                 <table className="table">
                     <thead>

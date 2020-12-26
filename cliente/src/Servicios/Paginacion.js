@@ -134,7 +134,7 @@ export default class Paginacion extends Component {
                             className="page-link pu-2 px-3"
                             onClick={this.nextHandler}
                         >
-                            Siguiente
+                            Siguiente({totalPaginas})
                          </button>
                     </li>
                 </ul>

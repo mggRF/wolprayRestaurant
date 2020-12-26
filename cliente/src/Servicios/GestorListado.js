@@ -5,7 +5,7 @@ import { LPPAGINA } from "../Componentes/Constantes";
 
 export default class GestorListado {
 
-    constructor(ruta,lector) {
+    constructor(ruta, lector) {
         this.offset = "?_size=" + LPPAGINA;   //lineas por página
         this.clasificador = "";              //columna por la que se desea clasificar
         this.clasSen = 1;                   //sentido clasificacion 1 ascendente -1 descendente
@@ -27,7 +27,8 @@ export default class GestorListado {
          * en una columna clasificada, se invierte el signo de clasificacion
          * @param {nombre del campo por el que se quiere clasificar} clasi 
          */
-    setClasificador = (clasi) => {
+    setClasificador = (clasi = null) => {
+        
         if (this.clasificador === clasi) {     //invierte orden clasificacion
             this.clasSen = -this.clasSen
         } else {
@@ -45,7 +46,14 @@ export default class GestorListado {
     //     this.offset = ajuste;
 
     // }
-    setSortedField = (clasi) => {
+    setSortedField = (clasi = null) => {
+        if (clasi === undefined || clasi === null) {
+            console.log('por nulo')
+            return {
+                sentido: this.clasSen || 0,
+                campo: this.clasificador || ""
+            }
+        }
         this.setClasificador(clasi.nombre);
         this.lector();
     }

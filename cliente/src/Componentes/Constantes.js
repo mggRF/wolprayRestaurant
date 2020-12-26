@@ -2,6 +2,7 @@
 //******* Area de control *******************
 const API_BASE_DEVELOPPER = 'http://localhost:3900/' //direccion base
 const API_BASE_PRODUCTION = 'https://api.gastronomundo.com/' //direccion base
+
 const VERSION_API = 'api_v00'
 
 const variable_url = () => {
@@ -25,6 +26,7 @@ const version_OS = () => {
 module.exports = {
   AUTORIZAR: true,
   API_URL: variable_url() + VERSION_API + '/',
+  MAN_URL: window.location.protocol + '//' + window.location.hostname,
   LOCALS: 'locals',
   MENU: 'menu',
   MENU_PLATOS: 'menu_platos',
@@ -39,6 +41,7 @@ module.exports = {
   COUNTRIES: 'countrys',
   PRODUCTS: 'products',
   LPPAGINA: '20', //lineas por pagina
+  CARPETA: '/interno',     //carpeta para subdirectorios
 
   INS: 'fas fa-plus',
   MOD: 'fas fa-edit',

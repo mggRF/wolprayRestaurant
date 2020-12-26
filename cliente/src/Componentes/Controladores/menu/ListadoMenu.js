@@ -4,13 +4,12 @@ import PropTypes from 'prop-types';
 import { API_URL, MENU } from '../../Constantes';
 import AccesoAPI from '../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
-import BotonListado from '../../Fragmentos/BotonListados';
 
 import Paginacion from '../../../Servicios/Paginacion';
 import GestorListado from '../../../Servicios/GestorListado';
 import MontaCabecera from '../../Fragmentos/MontaCabecera';
-import { INS } from '../../Constantes';
-
+import BotonInsertar from './../../Fragmentos/BotonInsertar';
+ 
 
 export default class ListadoMenu extends Component {
 
@@ -46,7 +45,7 @@ export default class ListadoMenu extends Component {
         this.state.datos.forEach((valor, index) => item.push(
             <tr key={index}>
                 <td key={index} >{valor.idMenu}</td>
-               
+
                 <td>{valor.locName}</td>
                 <td>{valor.menuName}</td>
                 <td>{valor.menuPrecio}</td>
@@ -59,13 +58,14 @@ export default class ListadoMenu extends Component {
         return (
             <div className="container animate__animated animate__fadeIn">
                 <div className='col-12 cabecera_controlador animate__animated animate__slideInUp'>
-                    <h1>Listado de Menús</h1>
-                    <BotonListado icon={INS}
-                        funcion={this.props.insertar}
-                        clase="btn-success"
-                        tipo="I" id={0}>
-                    </BotonListado>
+                    <h2>Listado de Menús
+                    <BotonInsertar 
+                            funcion={() =>
+                                this.props.insertar("I", 0,
+                                    this.props.datosAux)}
+                        /></h2>
                 </div>
+
                 <table className="table">
                     <thead>
                         <tr>

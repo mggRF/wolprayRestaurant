@@ -1,40 +1,53 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import BotonListado from './BotonListados'
-import { VIE, MOD, DEL, COLORES } from '../Constantes';
+
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import UpdateIcon from '@material-ui/icons/Update';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton'
 
 
 export default class TresBotonesListado extends Component {
 
 
     render() {
-        let funcion = this.props.funcion;
+
         return (
             <>
                 <td>
-                    <BotonListado funcion={funcion}
-                        clase={COLORES.BTN_VER}
-                        tipo="V"
-                        icon={VIE}
-                        id={this.props.id}
-                        datosAux={this.props.datosAux}>
-                    </BotonListado>
+                    <IconButton
+                        aria-label="visibility"
+                        onClick={() =>
+                            this.props.funcion("V", this.props.id,
+                                this.props.datosAux)}
+                    > 
+                        <VisibilityIcon
+                            color="info"
+                        />
+                    </IconButton>
+
                 </td><td>
-                    <BotonListado funcion={funcion}
-                        clase={COLORES.BTN_EDIT}
-                        tipo="E"
-                        icon={MOD}
-                        id={this.props.id}
-                        datosAux={this.props.datosAux}>
-                    </BotonListado>
+                    <IconButton
+                        aria-label="Update"
+                        onClick={() =>
+                            this.props.funcion("E", this.props.id,
+                                this.props.datosAux)}
+                    >
+                        <UpdateIcon
+                            color="primary"
+                        />
+                    </IconButton>
                 </td><td>
-                    <BotonListado funcion={funcion}
-                        clase={COLORES.BTN_DEL}
-                        icon={DEL}
-                        tipo="D"
-                        id={this.props.id}
-                        datosAux={this.props.datosAux}>
-                    </BotonListado>
+                    <IconButton
+                        aria-label="Delete"
+                        onClick={() =>
+                            this.props.funcion("D", this.props.id,
+                                this.props.datosAux)}
+                    >
+                        <DeleteIcon
+                            color="secondary"
+                        />
+                    </IconButton>
                 </td>
 
             </>

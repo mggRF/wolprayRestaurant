@@ -1,20 +1,19 @@
-import { AUTORIZAR } from '../Componentes/Constantes'
+
 import LoginScreen from './../Componentes/LoginComponent/LoginScreen'
+ 
 
 export function checkUsuario(role) {
   let init = LoginScreen.datosLogin()
-
-  if (role <= init.role) {
-    return {
-      id: init.id,
-      role: init.role,
-      token: init.token,
-      tokemTda: init.tokemTda,
-    }
+  if (init === null) {
+    return init
   } else {
-    //******************    window.history.back();    //solucion 1
-    window.location.href = '/login/'
-    return
+    if (role <= init.role) {
+      return init
+    } else {
+      window.history.back();    //solucion 1
+    
+      return "Not Logon"
+    }
   }
 }
 

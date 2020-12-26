@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { API_URL, COUNTRIES } from '../../Constantes';
 import AccesoAPI from './../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
-import BotonListado from '../../Fragmentos/BotonListados';
+import BotonInsertar from '../../Fragmentos/BotonInsertar';
 
 import Paginacion from './../../../Servicios/Paginacion';
 import GestorListado from './../../../Servicios/GestorListado';
@@ -65,19 +65,23 @@ export default class ListadoPais extends Component {
 
             <div className="container animate__animated animate__fadeIn">
                 <div className='col-12 cabecera_controlador  animate__animated animate__slideInUp'>
-                    <h1>Listado de paises</h1>
-                    <BotonListado icon={INS} funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}></BotonListado>
+                    <h2>Listado de paises
+                    <BotonInsertar
+                            funcion={() =>
+                                this.props.insertar("I", 0,
+                                    this.props.datosAux)}
+                        /></h2>
                 </div>
                 <table className="table">
                     <thead>
                         <tr>
-                        <MontaCabecera separador='th'
-                        funcion={this.gl.setSortedField}
-                        lista={[
-                            ['countryId', 'Identificador'],
-                            ['countryName', 'name']
-                        ]} />
-                        <th></th><th></th><th></th>
+                            <MontaCabecera separador='th'
+                                funcion={this.gl.setSortedField}
+                                lista={[
+                                    ['countryId', 'Identificador'],
+                                    ['countryName', 'name']
+                                ]} />
+                            <th></th><th></th><th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,7 +92,7 @@ export default class ListadoPais extends Component {
                 <Paginacion
                     pageHandler={this.gl.pageHandler}
                     tabla={COUNTRIES}>
-            </Paginacion>
+                </Paginacion>
             </div>
         )
     }

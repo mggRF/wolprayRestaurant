@@ -9,7 +9,7 @@ export default class FormularioMenuPlatos extends Component {
     render() {
         let mplatos = this.props.obj;
         let readonly = ['D', 'V'].includes(this.props.orden) ? true : false
-        let datosAux = this.props.datosAux;
+        //let datosAux = this.props.datosAux;
         let delayed = this.props.delayed;
         if (!mplatos.idMenu) mplatos.idMenu = delayed.menu;
 

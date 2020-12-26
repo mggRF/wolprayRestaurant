@@ -20,10 +20,10 @@ export const InputElement = ({ clase = 'input-text',
     type = 'text',
     value = '',
     name = '',
-    label = '',
+   // label = '',
     handleChange,
     readOnly = true }) => {
-    
+        
         const onFocus = event => {
 
         if (event.target.autocomplete) {
@@ -31,7 +31,7 @@ export const InputElement = ({ clase = 'input-text',
         }
 
     };
-
+   
     return (
         (!readOnly) ?
             <input

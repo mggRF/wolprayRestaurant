@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { API_URL, PRODUCTS } from '../../Constantes';
 import AccesoAPI from '../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
-import BotonListado from '../../Fragmentos/BotonListados';
+import BotonInsertar from '../../Fragmentos/BotonInsertar';
 
 import Paginacion from '../../../Servicios/Paginacion';
 import GestorListado from '../../../Servicios/GestorListado';
@@ -64,9 +64,13 @@ export default class ListadoProducts extends Component {
 
             <div className="container animate__animated animate__fadeIn">
                 <div className='col-12 cabecera_controlador animate__animated animate__slideInUp'>
-                    <h1>Listado de Productos</h1>
-                    <BotonListado icon={INS} funcion={this.props.insertar} clase="btn-success" tipo="I" id={0}></BotonListado>
-                </div>
+                    <h2>Listado de Productos
+                    <BotonInsertar
+                        funcion={() =>
+                            this.props.insertar("I", 0,
+                                this.props.datosAux)}
+                    /></h2>
+                     </div>
                 <table className="table">
                     <thead>
                         <tr>

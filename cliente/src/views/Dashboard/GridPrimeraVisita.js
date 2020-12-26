@@ -12,9 +12,7 @@ import CardBody from "components/Card/CardBody.js";
 import ChartistGraph from "react-chartist";
 import AccessTime from "@material-ui/icons/AccessTime";
 import {
-    dailySalesChart,
-    emailsSubscriptionChart,
-    completedTasksChart
+    dailySalesChart
   } from "variables/charts.js";
 
   

@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import { API_URL, MENU_PLATOS } from '../../Constantes';
 import AccesoAPI from '../../../Servicios/AccesoAPI';
 import TresBotonesListado from '../../Fragmentos/TresBotonesListado';
-import BotonListado from '../../Fragmentos/BotonListados';
-import { INS } from '../../Constantes';
+import BotonInsertar from '../../Fragmentos/BotonInsertar';
 
 import Paginacion from '../../../Servicios/Paginacion';
 import GestorListado from '../../../Servicios/GestorListado';
@@ -22,7 +21,7 @@ export default class ListadoMenuPlatosDetalle extends Component {
             clubid: 0,
             mes: 0
         }
-        
+
         this.gl = new GestorListado(API_URL + MENU_PLATOS + "/BYMENU/" + this.props.menu, this.leeTabla);
 
         this.leeTabla = this.leeTabla.bind(this);
@@ -44,15 +43,17 @@ export default class ListadoMenuPlatosDetalle extends Component {
         this.leeTabla();
     }
     componentDidUpdate(prevState, prevProps) {
-        if(prevProps.menu != this.state.menu) {
+        if (prevProps.menu != this.state.menu) {
             this.leeTabla();
         }
     }
     render() {
         let item = [];
-        let datosAux = { local:this.props.local,
-                        menu: this.props.menu}
-        console.log("MenuDetalle",datosAux);
+        let datosAux = {
+            local: this.props.local,
+            menu: this.props.menu
+        }
+        console.log("MenuDetalle", datosAux);
         this.state.datos.forEach((valor, index) => item.push(
 
             <tr key={index}>
@@ -61,7 +62,7 @@ export default class ListadoMenuPlatosDetalle extends Component {
                 <td>{valor.grupName}</td>
                 <td>{valor.mpPlato}</td>
                 <td>{valor.mpPlatoName}</td>
-                <td> {valor.mpPlatoDescri.substr(0,20)}...</td>
+                <td> {valor.mpPlatoDescri.substr(0, 20)}...</td>
                 <TresBotonesListado funcion={this.props.trabajo}
                     id={valor.idmenu_platos} datosAux={datosAux} />
             </tr>
@@ -72,10 +73,15 @@ export default class ListadoMenuPlatosDetalle extends Component {
 
             <div className="container animate__animated animate__fadeIn">
                 <div className='col-12 cabecera_controlador animate__animated animate__slideInUp'>
-                    <h1>Listado de Platos</h1>
-                    <BotonListado icon={INS} funcion={this.props.insertar} clase="btn-success" tipo="I" id={0} datosAux={datosAux}></BotonListado>
+                    <h2>Listado de Platos
+                    <BotonInsertar
+                            funcion={() =>
+                                this.props.insertar("I", 0,
+                                    this.props.datosAux)}
+                        /></h2>
                 </div>
-                
+
+
                 <table className="table">
                     <thead>
                         <tr>
@@ -108,5 +114,5 @@ export default class ListadoMenuPlatosDetalle extends Component {
 ListadoMenuPlatosDetalle.propTypes = {
     usuario: PropTypes.object,
     trabajo: PropTypes.func,
-    
+
 }

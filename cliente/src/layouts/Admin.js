@@ -16,42 +16,42 @@ import styles from 'assets/jss/material-dashboard-react/layouts/adminStyle.js'
 
 import bgImage from 'assets/img/sidebar-2.jpg'
 import logo from 'assets/img/Gastromundo.png'
-import { checkUsuario } from './../Servicios/funcionesSeguridad'
+import { checkUsuario } from '../Servicios/funcionesSeguridad'
+import { CARPETA } from 'Componentes/Constantes';
 
 let ps
 
 const switchRoutes = (
+
   <Switch>
-    
+
     {routes.map((prop, key) => {
-      if (prop.layout === '/') {
+      if (prop.layout === CARPETA) {
+
         return <Route path={prop.layout + prop.path} component={prop.component} key={key} />
       }
       return null
     })}
-    <Redirect from="/" to="/dashboard" />
+    <Redirect from="/" to={CARPETA + "/dashboard"} />
   </Switch>
 )
 
 const useStyles = makeStyles(styles)
 
 export default function Admin({ ...rest }) {
-  checkUsuario(3)
-  // styles
+
+  // styles 
   const classes = useStyles()
   // ref to help us initialize PerfectScrollbar on windows devices
   const mainPanel = React.createRef()
   // states and functions
-  const [image, setImage] = React.useState(bgImage)
-  const [color, setColor] = React.useState('blue')
-  const [fixedClasses, setFixedClasses] = React.useState('dropdown show')
+  const [image] = React.useState(bgImage)
+  const [color] = React.useState('blue')
+  //const [fixedClasses, setFixedClasses] = React.useState('dropdown show')
   const [mobileOpen, setMobileOpen] = React.useState(false)
-  
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
-  }
-  const getRoute = () => {
-    return window.location.pathname !== '/maps'
   }
   const resizeFunction = () => {
     if (window.innerWidth >= 960) {
@@ -60,6 +60,10 @@ export default function Admin({ ...rest }) {
   }
   // initialize and destroy the PerfectScrollbar plugin
   React.useEffect(() => {
+    let init = checkUsuario(3)
+  if (init === null) {
+    return 
+  }
     if (navigator.platform.indexOf('Win') > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
@@ -76,6 +80,11 @@ export default function Admin({ ...rest }) {
       window.removeEventListener('resize', resizeFunction)
     }
   }, [mainPanel])
+ //---------------------------------------------------------
+  let init = checkUsuario(3)
+  if (init === null) {
+    return (<Redirect to={CARPETA + '/login'} />)
+  }
   return (
     <div className={classes.wrapper}>
       <Sidebar
@@ -91,14 +100,12 @@ export default function Admin({ ...rest }) {
       <div className={classes.mainPanel} ref={mainPanel}>
         <Navbar routes={routes} handleDrawerToggle={handleDrawerToggle} {...rest} />
         {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
-        {getRoute() ? (
-          <div className={classes.content}>
-            <div className={classes.container}>{switchRoutes}</div>
-          </div>
-        ) : (
-          <div className={classes.map}>{switchRoutes}</div>
-        )}
-        {getRoute() ? <Footer /> : null}
+
+        <div className={classes.content}>
+          <div className={classes.container}>{switchRoutes}</div>
+        </div>
+
+        <Footer />
       </div>
     </div>
   )

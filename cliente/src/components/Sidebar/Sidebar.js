@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -22,15 +22,15 @@ import LoginScreen from './../../Componentes/LoginComponent/LoginScreen';
 const useStyles = makeStyles(styles);
 
 export default function Sidebar(props) {
-  const [estadoUsuario, setEstadoUsuario] = useState(checkUsuario(3))
-  console.log("Sidebar", estadoUsuario)
+
+  
   const classes = useStyles();
   // verifies if routeName is the one active (in browser input)
   function activeRoute(routeName) {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
   }
   const { color, logo, image, logoText, routes } = props;
-  let user = LoginScreen.datosLogin();
+  let user = checkUsuario(3);
   var links = (
     <List className={classes.list}>
       {routes.map((prop, key) => {
@@ -55,9 +55,7 @@ export default function Sidebar(props) {
               <ListItem button className={classes.itemLink + listItemClasses}>
                 {typeof prop.icon === "string" ? (
                   <Icon
-                    className={classNames(classes.itemIcon, whiteFontClasses, {
-                      [classes.itemIconRTL]: props.rtlActive
-                    })}
+                    className={classNames(classes.itemIcon, whiteFontClasses)}
                   >
                     {prop.icon}
                   </Icon>
@@ -92,6 +90,10 @@ export default function Sidebar(props) {
       </a>
     </div>
   );
+  
+  if (user===null){
+    return (<Redirect to="interno/login" />)
+  }
   return (
     <div>
       <Hidden mdUp implementation="css">
